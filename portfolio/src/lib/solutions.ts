@@ -53,6 +53,9 @@ function getCategoryLabel(category: string): string {
   if (category.toLowerCase() === "leetcode") {
     return "LeetCode";
   }
+  if (category.toLowerCase() === "casestudies") {
+    return "Case Studies";
+  }
   return category;
 }
 

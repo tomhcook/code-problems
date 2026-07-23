@@ -26,7 +26,7 @@ export default function CVClient({ solutions, cvSkills }: CVClientProps) {
 
   const triggerHighlight = (category: string) => {
     setHighlightedCategory(category);
-    
+
     // Find the first target element and scroll it into view
     const element = document.querySelector(`.skill-target-${category}`);
     if (element) {
@@ -39,22 +39,34 @@ export default function CVClient({ solutions, cvSkills }: CVClientProps) {
     }, 3000);
   };
 
+  React.useEffect(() => {
+    if (typeof window !== "undefined") {
+      const params = new URLSearchParams(window.location.search);
+      const highlight = params.get("highlight");
+      if (highlight) {
+        setTimeout(() => {
+          triggerHighlight(highlight);
+        }, 300);
+      }
+    }
+  }, []);
+
   return (
     <div className="container">
       {/* Action Buttons Header */}
       <div className="cv-actions" style={{ display: "flex", gap: "8px", justifyContent: "flex-end", marginBottom: "16px" }}>
-        <a 
+        <a
           href="/Thomas_Cook_CV.pdf"
           target="_blank"
           rel="noopener noreferrer"
-          className="profile-edit-btn" 
-          style={{ 
-            width: "auto", 
-            margin: 0, 
-            display: "inline-flex", 
-            alignItems: "center", 
+          className="profile-edit-btn"
+          style={{
+            width: "auto",
+            margin: 0,
+            display: "inline-flex",
+            alignItems: "center",
             gap: "6px",
-            textDecoration: "none" 
+            textDecoration: "none"
           }}
         >
           <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
@@ -89,7 +101,7 @@ export default function CVClient({ solutions, cvSkills }: CVClientProps) {
       </div>
 
       <div className="profile-layout">
-        
+
         {/* Left Sidebar: GitHub Profile Info & Achievements */}
         <aside className="profile-sidebar">
           <div className="profile-avatar-container">
@@ -102,7 +114,7 @@ export default function CVClient({ solutions, cvSkills }: CVClientProps) {
           <div className="profile-bio" style={{ fontSize: "13px", marginBottom: "16px" }}>
             Fast-track Software Engineer &amp; Full Stack Developer. Building scalable .NET backend architectures, mobile Android products, and interactive web applications.
           </div>
-          
+
           <button className="profile-edit-btn" onClick={() => window.open("https://github.com/tomhcook", "_blank")}>
             Follow
           </button>
@@ -118,7 +130,7 @@ export default function CVClient({ solutions, cvSkills }: CVClientProps) {
               <svg aria-hidden="true" height="16" viewBox="0 0 16 16" version="1.1" width="16">
                 <path d="M7.775 3.275a.75.75 0 0 0 1.06 1.06l1.25-1.25a3.5 3.5 0 1 1 4.95 4.95l-2.5 2.5a3.5 3.5 0 0 1-4.95 0 .75.75 0 0 0-1.06 1.06 5 5 0 0 0 7.07 0l2.5-2.5a5 5 0 0 0-7.07-7.07l-1.25 1.25zm-4.2 4.2a.75.75 0 0 0-1.06-1.06l-1.25 1.25a5 5 0 0 0 7.07 7.07l2.5-2.5a5 5 0 0 0-7.07-7.07l-1.25 1.25a.75.75 0 1 0 1.06 1.06l1.25-1.25a3.5 3.5 0 1 1 4.95 4.95l-2.5 2.5a3.5 3.5 0 0 1-4.95 0z"></path>
               </svg>
-              <a href="https://linkedin.com/in/thomas-cook-dev" target="_blank" rel="noopener noreferrer">linkedin.com/in/thomas-cook-dev</a>
+              <a href="https://www.linkedin.com/in/thomas-cook-44b553172/" target="_blank" rel="noopener noreferrer">linkedin.com/in/thomas-cook-44b553172</a>
             </li>
             <li className="profile-detail-item">
               <svg aria-hidden="true" height="16" viewBox="0 0 16 16" version="1.1" width="16">
@@ -150,7 +162,7 @@ export default function CVClient({ solutions, cvSkills }: CVClientProps) {
 
         {/* Right Section: GitHub Profile Repositories & Activity */}
         <main className="profile-main">
-          
+
           {/* README Profile Box */}
           <section className="markdown-card" style={{ marginBottom: "24px" }}>
             <div className="markdown-card-header">
@@ -195,7 +207,7 @@ export default function CVClient({ solutions, cvSkills }: CVClientProps) {
                 lang = "csharp";
                 category = "mobile";
               }
-              
+
               const langColorClass = getLanguageColorClass(lang);
               const displayLang = lang === "csharp" ? "C#" : lang === "typescript" ? "TypeScript" : "SQL";
 
@@ -206,8 +218,8 @@ export default function CVClient({ solutions, cvSkills }: CVClientProps) {
               else if (skill.name.includes("Mobile")) desc = "Shipping cross-platform mobile apps for Android devices via .NET MAUI integrated with core backends.";
 
               return (
-                <div 
-                  key={skill.name} 
+                <div
+                  key={skill.name}
                   className="pinned-card"
                   style={{ cursor: "pointer" }}
                   onClick={() => triggerHighlight(category)}
@@ -232,11 +244,11 @@ export default function CVClient({ solutions, cvSkills }: CVClientProps) {
           {/* Professional Work Experience Timeline */}
           <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: "12px", borderBottom: "1px solid var(--border-color)", paddingBottom: "8px" }}>
             <h2 style={{ fontSize: "16px", fontWeight: "600" }}>Professional Experience</h2>
-            
+
             {/* Hats filtering */}
             <div className="hats-toggle cv-actions" style={{ display: "flex", gap: "6px" }}>
-              <select 
-                value={activeHat} 
+              <select
+                value={activeHat}
                 onChange={(e) => setActiveHat(e.target.value)}
                 className="gh-filter-select"
                 style={{ padding: "2px 8px", fontSize: "12px" }}
@@ -252,7 +264,7 @@ export default function CVClient({ solutions, cvSkills }: CVClientProps) {
           </div>
 
           <section className="timeline">
-            
+
             {/* HWM Global */}
             <div className="timeline-item active">
               <div className="timeline-item-header">

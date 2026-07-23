@@ -334,6 +334,7 @@ body {
 .lang-color-python { background-color: #3572A5; }
 .lang-color-javascript { background-color: #f1e05a; }
 .lang-color-typescript { background-color: #3178c6; }
+.lang-color-ruby { background-color: #701516; }
 .lang-color-default { background-color: #8b949e; }
 
 /* Filter Panel Section */
@@ -813,6 +814,19 @@ code {
   margin-top: 8px;
   font-size: 12px;
   color: var(--text-secondary);
+}
+
+
+/* GitHub Issue grid layout */
+.issue-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 24px;
+}
+@media (min-width: 992px) {
+  .issue-grid {
+    grid-template-columns: 3fr 1fr;
+  }
 }
 
 /* Pinned Repository Cards */
