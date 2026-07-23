@@ -1,8 +1,10 @@
 "use client";
 
-import React from "react";
+import React, { useState } from "react";
 
 export default function CVPage() {
+  const [activeHat, setActiveHat] = useState("all");
+
   const handlePrint = () => {
     window.print();
   };
@@ -92,15 +94,40 @@ export default function CVPage() {
             </div>
             <span className="cv-item-date">Jun 2025 — Present</span>
           </div>
+          {/* Hats Filter selector (visible on web, hidden on print) */}
+          <div className="hats-toggle cv-actions" style={{ display: "flex", gap: "0.5rem", flexWrap: "wrap", margin: "1rem 0" }}>
+            <button className={`filter-btn ${activeHat === "all" ? "active" : ""}`} onClick={() => setActiveHat("all")}>All Roles</button>
+            <button className={`filter-btn ${activeHat === "maui" ? "active" : ""}`} onClick={() => setActiveHat("maui")}>📱 Android & .NET MAUI</button>
+            <button className={`filter-btn ${activeHat === "backend" ? "active" : ""}`} onClick={() => setActiveHat("backend")}>⚙️ Backend & DB</button>
+            <button className={`filter-btn ${activeHat === "cloud" ? "active" : ""}`} onClick={() => setActiveHat("cloud")}>☁️ Cloud & CI/CD</button>
+            <button className={`filter-btn ${activeHat === "lead" ? "active" : ""}`} onClick={() => setActiveHat("lead")}>👥 Team Lead</button>
+          </div>
+
           <ul className="cv-item-desc" style={{ paddingLeft: "1.2rem", color: "var(--text-secondary)", listStyleType: "disc" }}>
-            <li>Built backend services and web APIs using ASP.NET Core and MSSQL, supporting production systems and data-driven workflows.</li>
-            <li>Delivered front end and back end work across React web applications and app development, working end to end from feature design through release.</li>
-            <li>Made technical decisions on languages and technologies used across the platform, helping shape implementation choices and delivery approach.</li>
-            <li>Reduced API response times by 60% through targeted optimisation work, improving performance and user experience.</li>
-            <li>Developed and expanded AI and LLM-driven backend features in the platform to improve automated data processing and user-facing intelligence.</li>
-            <li>Managed code integration, deployment environments, and automated pipelines using Azure DevOps.</li>
-            <li>Integrated Microsoft Clarity across web platforms to diagnose usability issues and improve user experience.</li>
-            <li>Stepped in as temporary Team Lead to coordinate the engineering backlog and keep daily sprints on schedule.</li>
+            {(activeHat === "all" || activeHat === "backend") && (
+              <li><strong>[Backend & DB]</strong> Built backend services and web APIs using ASP.NET Core and MSSQL, supporting production systems and data-driven workflows.</li>
+            )}
+            {(activeHat === "all" || activeHat === "maui") && (
+              <li><strong>[Android & .NET MAUI]</strong> Delivered front end and back end work across React web applications and Android app development using <strong>.NET MAUI</strong>, working end to end from feature design through release.</li>
+            )}
+            {(activeHat === "all" || activeHat === "backend") && (
+              <li><strong>[Backend & DB]</strong> Made technical decisions on languages and technologies used across the platform, helping shape implementation choices and delivery approach.</li>
+            )}
+            {(activeHat === "all" || activeHat === "backend") && (
+              <li><strong>[Backend & DB]</strong> Reduced API response times by 60% through targeted optimisation work, improving performance and user experience.</li>
+            )}
+            {(activeHat === "all" || activeHat === "backend") && (
+              <li><strong>[Backend & DB]</strong> Developed and expanded AI and LLM-driven backend features in the platform to improve automated data processing and user-facing intelligence.</li>
+            )}
+            {(activeHat === "all" || activeHat === "cloud") && (
+              <li><strong>[Cloud & CI/CD]</strong> Managed code integration, deployment environments, and automated pipelines using Azure DevOps.</li>
+            )}
+            {(activeHat === "all" || activeHat === "cloud") && (
+              <li><strong>[Cloud & CI/CD]</strong> Integrated Microsoft Clarity across web platforms to diagnose usability issues and improve user experience.</li>
+            )}
+            {(activeHat === "all" || activeHat === "lead") && (
+              <li><strong>[Team Lead]</strong> Stepped in as temporary Team Lead to coordinate the engineering backlog and keep daily sprints on schedule.</li>
+            )}
           </ul>
         </div>
 

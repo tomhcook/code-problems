@@ -18,14 +18,16 @@ Software Engineer and Full Stack Developer with commercial experience across C# 
 
 ### **HWM Global** — *Software Engineer*
 *Jun 2025 – Present*
-* Built backend services and web APIs using ASP.NET Core and MSSQL, supporting production systems and data-driven workflows.
-* Delivered front end and back end work across React web applications and app development, working end to end from feature design through release.
-* Made technical decisions on languages and technologies used across the platform, helping shape implementation choices and delivery approach.
-* Reduced API response times by 60% through targeted optimisation work, improving performance and user experience.
-* Developed and expanded AI and LLM-driven backend features in the platform to improve automated data processing and user-facing intelligence.
-* Managed code integration, deployment environments, and automated pipelines using Azure DevOps.
-* Integrated Microsoft Clarity across web platforms to diagnose usability issues and improve user experience.
-* Stepped in as temporary Team Lead to coordinate the engineering backlog and keep daily sprints on schedule.
+* **Android & .NET MAUI App Development:** Delivered front end and back end work across React web applications and Android mobile app development using **.NET MAUI**, working end to end from feature design through release.
+* **Backend & DB Engineering:**
+  * Built backend services and web APIs using ASP.NET Core and MSSQL, supporting production systems and data-driven workflows.
+  * Made technical decisions on languages and technologies used across the platform, helping shape implementation choices and delivery approach.
+  * Reduced API response times by 60% through targeted optimisation work, improving performance and user experience.
+  * Developed and expanded AI and LLM-driven backend features in the platform to improve automated data processing and user-facing intelligence.
+* **Cloud & DevOps:**
+  * Managed code integration, deployment environments, and automated pipelines using Azure DevOps.
+  * Integrated Microsoft Clarity across web platforms to diagnose usability issues and improve user experience.
+* **Leadership:** Stepped in as temporary Team Lead to coordinate the engineering backlog and keep daily sprints on schedule.
 
 ### **Digital Genius** — *Solutions Engineer*
 *Oct 2024 – Jun 2025*

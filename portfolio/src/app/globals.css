@@ -698,7 +698,7 @@ code {
   opacity: 0.9;
 }
 @media print {
-  .navbar, .print-btn {
+  .navbar, .print-btn, .cv-actions, .hats-toggle {
     display: none !important;
   }
   body {
