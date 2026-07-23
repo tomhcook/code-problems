@@ -16,6 +16,7 @@ export interface Solution {
   readme: string;
   summary: string;
   files: SolutionFile[];
+  date: string;
 }
 
 const SOLUTIONS_DIR = path.join(process.cwd(), "../Solutions");
@@ -71,7 +72,8 @@ export function getAllSolutions(): Solution[] {
     const folders = fs.readdirSync(categoryPath);
     for (const folder of folders) {
       const folderPath = path.join(categoryPath, folder);
-      if (!fs.statSync(folderPath).isDirectory()) continue;
+      const folderStat = fs.statSync(folderPath);
+      if (!folderStat.isDirectory()) continue;
 
       const files = fs.readdirSync(folderPath);
       let readmeContent = "";
@@ -133,6 +135,7 @@ export function getAllSolutions(): Solution[] {
         readme: readmeContent || "No description provided.",
         summary: summary || "View solutions for this challenge.",
         files: codeFiles,
+        date: folderStat.mtime.toISOString(),
       });
     }
   }

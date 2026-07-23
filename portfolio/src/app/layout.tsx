@@ -30,15 +30,36 @@ export default function RootLayout({
       suppressHydrationWarning
     >
       <body className="min-h-full flex flex-col" suppressHydrationWarning>
-        <header className="navbar glass-card">
+        <header className="navbar">
           <div className="navbar-container">
-            <Link href="/" className="nav-logo">
-              <span className="logo-icon">&lt;/&gt;</span>
-              <span className="logo-text">Tom<span className="gradient-text">.dev</span></span>
-            </Link>
+            <div style={{ display: "flex", alignItems: "center", gap: "16px" }}>
+              <Link href="/cv" className="nav-logo">
+                <svg
+                  height="24"
+                  viewBox="0 0 24 24"
+                  width="24"
+                  style={{ stroke: "#f0f6fc", fill: "none" }}
+                >
+                  <rect x="2" y="2" width="20" height="20" rx="4" strokeWidth="2" />
+                  <polyline points="9 16 5 12 9 8" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+                  <polyline points="15 8 19 12 15 16" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+                  <line x1="14" y1="6" x2="10" y2="18" strokeWidth="2" strokeLinecap="round" />
+                </svg>
+                <span className="logo-text">Thomas_Cook</span>
+              </Link>
+
+              <div className="nav-search-mock">
+                <span>Type <kbd style={{ background: "#21262d", padding: "1px 4px", borderRadius: "3px", fontSize: "10px" }}>/</kbd> to search</span>
+              </div>
+            </div>
+
             <nav className="nav-links">
-              <Link href="/" className="nav-link">Dashboard</Link>
-              <Link href="/cv" className="nav-link">My CV</Link>
+              <Link href="/" className="nav-link">
+                Dashboard
+              </Link>
+              <Link href="/cv" className="nav-link">
+                My CV
+              </Link>
             </nav>
           </div>
         </header>

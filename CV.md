@@ -49,3 +49,15 @@ Software Engineer and Full Stack Developer with commercial experience across C# 
 ### **University of Lincoln** — *BSc Games Computing Science, 2:1*
 *2019 – 2022*
 * Dissertation used machine learning models to optimise engine power outputs and reduce physical test costs.
+
+---
+
+## Skills
+* **Backend Dev (C# / .NET)**: Advanced (95%)
+* **Full Stack Web (React / TS)**: Advanced (90%)
+* **Databases (MSSQL)**: Advanced (90%)
+* **Mobile Dev (.NET MAUI)**: Intermediate (80%)
+* **Cloud & DevOps (Azure / AWS)**: Intermediate (75%)
+* **AI & LLM Integrations**: Intermediate (75%)
+* **Python Engineering**: Advanced (85%)
+
