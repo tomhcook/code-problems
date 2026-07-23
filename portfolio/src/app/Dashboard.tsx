@@ -207,7 +207,7 @@ export default function Dashboard({ solutions, cvSkills }: DashboardProps) {
             <div className="markdown-card-body markdown-body" style={{ display: "flex", flexDirection: "column", gap: "16px" }}>
               <div>
                 <h2 style={{ marginTop: 0, fontSize: "20px", display: "flex", alignItems: "center", gap: "8px" }}>
-                  Hi, I'm Thomas Cook 👋
+                  Hi, I'm Thomas Cook <span className="wave-emoji">👋</span>
                 </h2>
                 <p style={{ fontSize: "14px", lineHeight: "1.6", color: "var(--text-primary)", margin: "8px 0 16px 0" }}>
                   A highly accomplished, fast-track Software Engineer &amp; Full Stack Developer. I build core backend service architectures in <strong>C# / .NET Core</strong>, cross-platform mobile systems with <strong>.NET MAUI</strong>, and interactive responsive web applications using <strong>React, TypeScript, Angular, and Node.js</strong>.
