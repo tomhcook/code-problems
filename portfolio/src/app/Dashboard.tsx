@@ -13,6 +13,48 @@ export default function Dashboard({ solutions }: DashboardProps) {
   const [categoryFilter, setCategoryFilter] = useState("all");
   const [languageFilter, setLanguageFilter] = useState("all");
 
+  // Terminal state
+  const [terminalInput, setTerminalInput] = useState("");
+  const [terminalHistory, setTerminalHistory] = useState<string[]>([
+    "Welcome to Tom's Interactive CLI v1.0.0",
+    "Type 'help' to see available commands.",
+    ""
+  ]);
+
+  const handleTerminalSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+    const cmd = terminalInput.trim().toLowerCase();
+    if (!cmd) return;
+
+    let response = "";
+    switch (cmd) {
+      case "help":
+        response = "Available commands:\n  help    - Show this message\n  cv      - View a summary of my CV/resume\n  skills  - List my top technical skills\n  clear   - Clear terminal screen\n  nerd    - Run a diagnostic check on developer status\n  stats   - Show coding challenge statistics";
+        break;
+      case "cv":
+        response = "Name: Thomas Cook\nRole: Software Engineer | C# / .NET Developer | Full Stack Developer\nStatus: Currently Software Engineer at HWM Global\nEducation: BSc Games Computing Science (2:1) from University of Lincoln\nLinkedIn: linkedin.com/in/thomas-cook-dev\nType 'skills' or visit the 'My CV' tab for the complete resume!";
+        break;
+      case "skills":
+        response = "Top Technical Skills:\n  - C# / .NET & ASP.NET Core (Advanced / Professional)\n  - MSSQL & Database Design (Advanced)\n  - React, TypeScript, Angular (Advanced / Professional)\n  - AWS (Lambda, cloud integrations) & Azure DevOps\n  - AI & LLM integration features";
+        break;
+      case "clear":
+        setTerminalHistory([]);
+        setTerminalInput("");
+        return;
+      case "nerd":
+        response = "NERD DIAGNOSTIC CHECK:\n[+] Coffee level: 85%\n[+] Operating System: Linux / Windows\n[+] Favourite IDE theme: Dracula (obviously)\n[+] Algorithm status: Searching for O(1) space solutions\n[+] Nerd status: 100% verified nerd. Ready to code.";
+        break;
+      case "stats":
+        response = `Portfolio Diagnostics:\n  - Total problems solved: ${solutions.length}\n  - Categories: LeetCode & Daily Coding Problems`;
+        break;
+      default:
+        response = `Command not recognized: '${cmd}'. Type 'help' for available commands.`;
+    }
+
+    setTerminalHistory((prev) => [...prev, `tom-dev-env$ ${terminalInput}`, response, ""]);
+    setTerminalInput("");
+  };
+
   // Calculate statistics
   const stats = useMemo(() => {
     const total = solutions.length;
@@ -77,6 +119,36 @@ export default function Dashboard({ solutions }: DashboardProps) {
           A curated collection of my algorithmic problem solutions, design patterns, and programming challenges.
         </p>
       </header>
+
+      {/* Interactive Nerdy Terminal */}
+      <section className="glass-card terminal-window">
+        <div className="terminal-header">
+          <div className="terminal-buttons">
+            <span className="terminal-btn term-red"></span>
+            <span className="terminal-btn term-yellow"></span>
+            <span className="terminal-btn term-green"></span>
+          </div>
+          <div className="terminal-title">tom-dev-env (~/portfolio)</div>
+          <div style={{ width: "48px" }}></div>
+        </div>
+        <div className="terminal-body">
+          <div className="terminal-output">
+            {terminalHistory.map((line, index) => (
+              <div key={index}>{line}</div>
+            ))}
+          </div>
+          <form onSubmit={handleTerminalSubmit} className="terminal-prompt-row">
+            <span className="terminal-prompt">tom-dev-env$</span>
+            <input
+              type="text"
+              className="terminal-input"
+              value={terminalInput}
+              onChange={(e) => setTerminalInput(e.target.value)}
+              placeholder="type 'help', 'cv', 'skills', 'nerd'..."
+            />
+          </form>
+        </div>
+      </section>
 
       {/* Statistics Section */}
       <section className="stats-grid">

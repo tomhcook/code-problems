@@ -441,3 +441,286 @@ code {
   color: var(--text-secondary);
 }
 
+/* Navbar Styles */
+.navbar {
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  border-radius: 0 0 16px 16px;
+  border-top: none;
+  border-left: none;
+  border-right: none;
+  background: rgba(10, 8, 20, 0.75);
+}
+.navbar-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 1rem 1.5rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.nav-logo {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  text-decoration: none;
+}
+.logo-icon {
+  font-family: var(--font-mono);
+  font-weight: 700;
+  color: var(--accent-secondary);
+}
+.logo-text {
+  font-weight: 800;
+  font-size: 1.25rem;
+  color: #ffffff;
+}
+.nav-links {
+  display: flex;
+  gap: 1.5rem;
+}
+.nav-link {
+  text-decoration: none;
+  color: var(--text-secondary);
+  font-size: 0.95rem;
+  font-weight: 500;
+  transition: color 0.2s ease;
+}
+.nav-link:hover {
+  color: #ffffff;
+}
+
+/* Terminal / Interactive CLI Section */
+.terminal-window {
+  margin-bottom: 3.5rem;
+  overflow: hidden;
+  border-radius: 12px;
+}
+.terminal-header {
+  background: rgba(30, 27, 46, 0.8);
+  padding: 0.75rem 1rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border-bottom: 1px solid var(--border-color);
+}
+.terminal-buttons {
+  display: flex;
+  gap: 0.5rem;
+}
+.terminal-btn {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+}
+.term-red { background: #ef4444; }
+.term-yellow { background: #f59e0b; }
+.term-green { background: #10b981; }
+.terminal-title {
+  font-family: var(--font-mono);
+  font-size: 0.8rem;
+  color: var(--text-muted);
+}
+.terminal-body {
+  padding: 1.5rem;
+  font-family: var(--font-mono);
+  font-size: 0.9rem;
+  color: #38bdf8; /* Light cyan/blue terminal text */
+  min-height: 250px;
+  max-height: 400px;
+  overflow-y: auto;
+  background: rgba(5, 4, 10, 0.95);
+}
+.terminal-output {
+  margin-bottom: 1rem;
+  white-space: pre-wrap;
+  color: #f3f4f6;
+  line-height: 1.5;
+}
+.terminal-prompt-row {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+.terminal-prompt {
+  color: var(--accent-secondary);
+}
+.terminal-input {
+  background: transparent;
+  border: none;
+  outline: none;
+  color: #22c55e; /* Green typed command */
+  font-family: var(--font-mono);
+  font-size: 0.9rem;
+  flex: 1;
+}
+
+/* CV Page Styles */
+.cv-container {
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 3rem 1.5rem;
+}
+.cv-header {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  margin-bottom: 3rem;
+  padding-bottom: 2rem;
+  border-bottom: 1px solid var(--border-color);
+}
+.cv-avatar {
+  font-size: 4rem;
+  margin-bottom: 1rem;
+  background: var(--bg-tertiary);
+  width: 100px;
+  height: 100px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  border: 2px solid var(--accent-secondary);
+}
+.cv-name {
+  font-size: 2.5rem;
+  font-weight: 800;
+  color: #ffffff;
+  margin-bottom: 0.5rem;
+}
+.cv-title {
+  font-size: 1.25rem;
+  color: var(--accent-secondary);
+  font-weight: 600;
+  margin-bottom: 1rem;
+}
+.cv-contacts {
+  display: flex;
+  gap: 1.5rem;
+  flex-wrap: wrap;
+  justify-content: center;
+  color: var(--text-secondary);
+  font-size: 0.9rem;
+}
+.cv-contacts a {
+  color: var(--text-primary);
+  text-decoration: none;
+  transition: color 0.2s;
+}
+.cv-contacts a:hover {
+  color: var(--accent-secondary);
+}
+.cv-section {
+  margin-bottom: 3rem;
+}
+.cv-section-title {
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: #ffffff;
+  margin-bottom: 1.5rem;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+.cv-section-title::after {
+  content: "";
+  flex: 1;
+  height: 1px;
+  background: var(--border-color);
+}
+.cv-item {
+  margin-bottom: 2rem;
+}
+.cv-item-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: 0.5rem;
+}
+.cv-item-title {
+  font-size: 1.15rem;
+  font-weight: 700;
+  color: #ffffff;
+}
+.cv-item-org {
+  color: var(--accent-primary);
+  font-weight: 600;
+  font-size: 0.95rem;
+}
+.cv-item-date {
+  color: var(--text-muted);
+  font-size: 0.85rem;
+  font-family: var(--font-mono);
+}
+.cv-item-desc {
+  color: var(--text-secondary);
+  font-size: 0.95rem;
+}
+.cv-skills-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+  gap: 1rem;
+}
+.cv-skill-card {
+  padding: 1rem;
+  text-align: center;
+  background: var(--bg-tertiary);
+  border: 1px solid var(--border-color);
+  border-radius: 8px;
+}
+.cv-skill-name {
+  font-weight: 600;
+  color: #ffffff;
+  margin-bottom: 0.25rem;
+  font-size: 0.95rem;
+}
+.cv-skill-level {
+  font-size: 0.75rem;
+  color: var(--accent-secondary);
+  font-family: var(--font-mono);
+}
+.print-btn {
+  padding: 0.75rem 1.5rem;
+  background: var(--accent-gradient);
+  border: none;
+  border-radius: 8px;
+  color: #ffffff;
+  font-weight: 600;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  transition: opacity 0.2s;
+  margin-bottom: 2rem;
+}
+.print-btn:hover {
+  opacity: 0.9;
+}
+@media print {
+  .navbar, .print-btn {
+    display: none !important;
+  }
+  body {
+    background: #ffffff !important;
+    color: #000000 !important;
+  }
+  .glass-card {
+    background: none !important;
+    backdrop-filter: none !important;
+    box-shadow: none !important;
+    border: none !important;
+  }
+  .cv-skill-card {
+    background: none !important;
+    border: 1px solid #ddd !important;
+  }
+  .cv-name, .cv-item-title, .cv-section-title, .cv-skill-name {
+    color: #000000 !important;
+  }
+  .cv-item-org, .cv-title, .cv-skill-level {
+    color: #333333 !important;
+  }
+}
+
+

@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
+import Link from "next/link";
 import "./globals.css";
 
 const geistSans = Geist({
@@ -29,7 +30,19 @@ export default function RootLayout({
       suppressHydrationWarning
     >
       <body className="min-h-full flex flex-col" suppressHydrationWarning>
-        {children}
+        <header className="navbar glass-card">
+          <div className="navbar-container">
+            <Link href="/" className="nav-logo">
+              <span className="logo-icon">&lt;/&gt;</span>
+              <span className="logo-text">Tom<span className="gradient-text">.dev</span></span>
+            </Link>
+            <nav className="nav-links">
+              <Link href="/" className="nav-link">Dashboard</Link>
+              <Link href="/cv" className="nav-link">My CV</Link>
+            </nav>
+          </div>
+        </header>
+        <div style={{ flex: 1 }}>{children}</div>
       </body>
     </html>
   );
