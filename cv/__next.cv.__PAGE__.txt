@@ -1,0 +1,80 @@
+1:"$Sreact.fragment"
+2:I[12796,["/code-problems/_next/static/chunks/3rdqn8rx95pw7.js","/code-problems/_next/static/chunks/14mrh2-p_w84d.js","/code-problems/_next/static/chunks/0ip_hu7t_ndmi.js"],"default"]
+8:I[97367,["/code-problems/_next/static/chunks/3rdqn8rx95pw7.js","/code-problems/_next/static/chunks/14mrh2-p_w84d.js"],"OutletBoundary"]
+9:"$Sreact.suspense"
+3:T7dc,# Proprietary Internal Product Development
+
+A highly successful, proprietary business solution designed, architected, and built from the ground up to streamline operations and generate new revenue streams.
+
+## Technical Showcase
+* **Role**: Lead Architect & Developer (End-to-End Delivery)
+* **Architecture**: Ruby Web API & Services
+* **Backend & Infrastructure**: Ruby, Docker, SQL, Azure MSSQL
+* **Hosting & CI/CD**: Azure DevOps pipelines & cloud hosting environment
+
+---
+
+## 1. The Challenge
+The business identified a key operational bottleneck and revenue opportunity that off-the-shelf software could not address. The objective was to plan, design, and implement a custom internal product to:
+1. Handle complex workflows and state transitions.
+2. Integrate securely with core legacy business databases and third-party services.
+3. Scale efficiently without exponential infrastructure costs.
+4. Support offline-first or low-connectivity client states.
+
+---
+
+## 2. Technical Implementation & Design decisions
+* **API Architecture**: Designed a clean, RESTful Ruby-based API with separation of concerns and robust routing models.
+* **Database Tuning**: Designed database schemas with Azure MSSQL, utilizing query optimization, tailored indices, and transactional guarantees to support high-concurrency usage.
+* **Containerization & Environment**: Built consistent development and deployment flows using Docker containers.
+* **CI/CD Pipeline**: Configured build and release pipelines in Azure DevOps for automated integration, testing, and continuous deployment to ensure zero-downtime rolling updates.
+
+---
+
+## 3. Results & Business Impact
+* **Revenue Generation**: The product is actively used in production and is successfully earning significant new revenue/savings for the business.
+* **Adoption**: 100% internal adoption within the target division, replacing multiple disjointed spreadsheet-based workflows.
+* **Performance**: Optimized SQL query paths and state caching to keep page loads under 200ms.
+4:T46f,# Balanced Parentheses with Minimum Edits
+
+This problem was asked by Facebook.
+
+Given a string of parentheses, find the balanced string that can be produced from it using the minimum number of insertions and deletions. If there are multiple solutions, return any of them. 
+
+For example, given `"(()"`, you could return `"(())"`. Given `"))()("`, you could return `"()()()()"`.
+
+## How the Solution Works
+
+We can construct a balanced string with the minimum number of edits by tracking unmatched open parentheses:
+* We traverse the string from left to right.
+* If a closing parenthesis `)` is encountered and there is no unmatched open parenthesis `(`, we insert a `(` directly before it.
+* If there is an unmatched `(`, we match it with the `)` and decrement our unmatched open counter.
+* At the end of the string, if any unmatched open parentheses `(` remain, we append the corresponding number of closing parentheses `)` to the end.
+
+## Complexity
+
+- **Time Complexity:** $O(N)$ where $N$ is the length of the string, as we process each character exactly once.
+- **Space Complexity:** $O(N)$ to build and return the balanced string.
+5:T440,# Two Sum
+
+Given an array of integers `nums` and an integer `target`, return indices of the two numbers such that they add up to `target`.
+
+You may assume that each input would have exactly one solution, and you may not use the same element twice. You can return the answer in any order.
+
+## How the Solution Works
+
+We can solve this problem in $O(N)$ time by using a hash map to keep track of numbers we have already seen along with their indices:
+* We traverse the array from left to right.
+* For each number, we calculate the `remaining` complement needed to reach the `target` (`target - num`).
+* We check if this complement exists in our hash map:
+  * If it does, we return the indices of the complement and the current number.
+  * If it does not, we add the current number and its index to the hash map.
+
+## Complexity
+
+- **Time Complexity:** $O(N)$ where $N$ is the number of elements in the array, as we traverse the list of numbers only once and hash map lookups take $O(1)$ time on average.
+- **Space Complexity:** $O(N)$ to store the numbers and their indices in the hash map.
+0:{"rsc":["$","$1","c",{"children":[["$","$L2",null,{"solutions":[{"id":"casestudies-internal-product-suite","slug":"internal-product-suite","title":"Proprietary Internal Product Development","category":"casestudies","categoryLabel":"Case Studies","readme":"$3","summary":"A highly successful, proprietary business solution designed, architected, and built from the ground up to streamline ...","files":[],"date":"2026-07-23T20:27:24.571Z"},{"id":"dailycodingproblems-dcp-1288","slug":"dcp-1288","title":"Balanced Parentheses with Minimum Edits","category":"dailycodingproblems","categoryLabel":"Daily Coding Problems","readme":"$4","summary":"This problem was asked by Facebook.","files":[{"name":"Solution.cs","code":"using System;\nusing System.Text;\n\nclass Program\n{\n    public static string Balance(string s)\n    {\n        var res = new StringBuilder();\n        int openCount = 0;\n\n        foreach (char ch in s)\n        {\n            if (ch == '(')\n            {\n                openCount++;\n                res.Append(ch);\n            }\n            else if (ch == ')')\n            {\n                if (openCount > 0)\n                {\n                    openCount--;\n                }\n                else\n                {\n                    res.Append('(');\n                }\n                res.Append(ch);\n            }\n            else\n            {\n                res.Append(ch);\n            }\n        }\n\n        // Append remaining closing parentheses for any unmatched opening ones\n        res.Append(')', openCount);\n\n        return res.ToString();\n    }\n\n    static void Main()\n    {\n        Console.WriteLine(Balance(\"(()\"));     // Output: (())\n        Console.WriteLine(Balance(\"))()(\"));   // Output: ()()()()\n    }\n}","language":"csharp"},{"name":"Solution.py","code":"def balance(s: str) -> str:\n    res, open_count = [], 0\n    for char in s:\n        if char == '(':\n            open_count += 1\n            res.append(char)\n        elif char == ')':\n            if open_count > 0:\n                open_count -= 1\n            else:\n                res.append('(')\n            res.append(char)\n    return \"\".join(res) + \")\" * open_count\n\nif __name__ == \"__main__\":\n    print(balance(\"(()\"))     # Output: (())\n    print(balance(\"))()(\"))   # Output: ()()()()\n","language":"python"}],"date":"2026-07-23T20:27:24.571Z"},{"id":"leetcode-0001-twosum","slug":"0001-twosum","title":"Two Sum","category":"leetcode","categoryLabel":"LeetCode","readme":"$5","summary":"Given an array of integers `nums` and an integer `target`, return indices of the two numbers such that they add up to...","files":[{"name":"Solution.cs","code":"using System.Collections.Generic;\n\npublic class Solution {\n    public int[] TwoSum(int[] nums, int target) {\n        Dictionary<int, int> seen = new Dictionary<int, int>();\n        for (int i = 0; i < nums.Length; i++) {\n            int remaining = target - nums[i];\n            if (seen.ContainsKey(remaining)) {\n                return new int[] { seen[remaining], i };\n            }\n            seen[nums[i]] = i;\n        }\n        return new int[0];\n    }\n}\n","language":"csharp"},{"name":"Solution.py","code":"class Solution:\n    def twoSum(self, nums: list[int], target: int) -> list[int]:\n        seen = {}\n        for i, num in enumerate(nums):\n            remaining = target - num\n            if remaining in seen:\n                return [seen[remaining], i]\n            seen[num] = i\n        return []","language":"python"}],"date":"2026-07-23T20:27:24.572Z"}],"cvSkills":[{"name":"Backend Dev (C# / .NET)","level":"Advanced","percentage":95},{"name":"Full Stack Web (React / TS)","level":"Advanced","percentage":90},{"name":"Databases (MSSQL)","level":"Advanced","percentage":90},{"name":"Mobile Dev (.NET MAUI)","level":"Intermediate","percentage":80},{"name":"Cloud & DevOps (Azure / AWS)","level":"Intermediate","percentage":75},{"name":"AI & LLM Integrations","level":"Intermediate","percentage":75},{"name":"Python Engineering","level":"Advanced","percentage":85}]}],["$L6"],"$L7"]}],"isPartial":false,"staleTime":300,"varyParams":null,"buildId":"DS6MO_4Q9vIX478YAWKXN"}
+6:["$","script","script-0",{"src":"/code-problems/_next/static/chunks/0ip_hu7t_ndmi.js","async":true}]
+7:["$","$L8",null,{"children":["$","$9",null,{"name":"Next.MetadataOutlet","children":"$@a"}]}]
+a:null

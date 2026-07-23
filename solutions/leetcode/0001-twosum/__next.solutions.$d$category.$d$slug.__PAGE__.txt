@@ -1,0 +1,42 @@
+1:"$Sreact.fragment"
+2:I[6404,["/code-problems/_next/static/chunks/3rdqn8rx95pw7.js","/code-problems/_next/static/chunks/14mrh2-p_w84d.js","/code-problems/_next/static/chunks/16znsrhbbncbl.js"],"default"]
+7:I[97367,["/code-problems/_next/static/chunks/3rdqn8rx95pw7.js","/code-problems/_next/static/chunks/14mrh2-p_w84d.js"],"OutletBoundary"]
+8:"$Sreact.suspense"
+3:T50c,<h1>Two Sum</h1>
+<p>Given an array of integers <code>nums</code> and an integer <code>target</code>, return indices of the two numbers such that they add up to <code>target</code>.</p>
+<p>You may assume that each input would have exactly one solution, and you may not use the same element twice. You can return the answer in any order.</p>
+<h2>How the Solution Works</h2>
+<p>We can solve this problem in $O(N)$ time by using a hash map to keep track of numbers we have already seen along with their indices:</p>
+<ul>
+<li>We traverse the array from left to right.</li>
+<li>For each number, we calculate the <code>remaining</code> complement needed to reach the <code>target</code> (<code>target - num</code>).</li>
+<li>We check if this complement exists in our hash map:<ul>
+<li>If it does, we return the indices of the complement and the current number.</li>
+<li>If it does not, we add the current number and its index to the hash map.</li>
+</ul>
+</li>
+</ul>
+<h2>Complexity</h2>
+<ul>
+<li><strong>Time Complexity:</strong> $O(N)$ where $N$ is the number of elements in the array, as we traverse the list of numbers only once and hash map lookups take $O(1)$ time on average.</li>
+<li><strong>Space Complexity:</strong> $O(N)$ to store the numbers and their indices in the hash map.</li>
+</ul>
+4:T599,<span class="hljs-keyword">using</span> System.Collections.Generic;
+
+<span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title">Solution</span> {
+    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-built_in">int</span>[] <span class="hljs-title">TwoSum</span>(<span class="hljs-params"><span class="hljs-built_in">int</span>[] nums, <span class="hljs-built_in">int</span> target</span>)</span> {
+        Dictionary&lt;<span class="hljs-built_in">int</span>, <span class="hljs-built_in">int</span>&gt; seen = <span class="hljs-keyword">new</span> Dictionary&lt;<span class="hljs-built_in">int</span>, <span class="hljs-built_in">int</span>&gt;();
+        <span class="hljs-keyword">for</span> (<span class="hljs-built_in">int</span> i = <span class="hljs-number">0</span>; i &lt; nums.Length; i++) {
+            <span class="hljs-built_in">int</span> remaining = target - nums[i];
+            <span class="hljs-keyword">if</span> (seen.ContainsKey(remaining)) {
+                <span class="hljs-keyword">return</span> <span class="hljs-keyword">new</span> <span class="hljs-built_in">int</span>[] { seen[remaining], i };
+            }
+            seen[nums[i]] = i;
+        }
+        <span class="hljs-keyword">return</span> <span class="hljs-keyword">new</span> <span class="hljs-built_in">int</span>[<span class="hljs-number">0</span>];
+    }
+}
+0:{"rsc":["$","$1","c",{"children":[["$","$L2",null,{"title":"Two Sum","categoryLabel":"LeetCode","readmeHtml":"$3","files":[{"name":"Solution.cs","language":"csharp","highlightedCode":"$4"},{"name":"Solution.py","language":"python","highlightedCode":"<span class=\"hljs-keyword\">class</span> <span class=\"hljs-title class_\">Solution</span>:\n    <span class=\"hljs-keyword\">def</span> <span class=\"hljs-title function_\">twoSum</span>(<span class=\"hljs-params\">self, nums: <span class=\"hljs-built_in\">list</span>[<span class=\"hljs-built_in\">int</span>], target: <span class=\"hljs-built_in\">int</span></span>) -&gt; <span class=\"hljs-built_in\">list</span>[<span class=\"hljs-built_in\">int</span>]:\n        seen = {}\n        <span class=\"hljs-keyword\">for</span> i, num <span class=\"hljs-keyword\">in</span> <span class=\"hljs-built_in\">enumerate</span>(nums):\n            remaining = target - num\n            <span class=\"hljs-keyword\">if</span> remaining <span class=\"hljs-keyword\">in</span> seen:\n                <span class=\"hljs-keyword\">return</span> [seen[remaining], i]\n            seen[num] = i\n        <span class=\"hljs-keyword\">return</span> []"}]}],["$L5"],"$L6"]}],"isPartial":false,"staleTime":300,"varyParams":null,"buildId":"DS6MO_4Q9vIX478YAWKXN"}
+5:["$","script","script-0",{"src":"/code-problems/_next/static/chunks/16znsrhbbncbl.js","async":true}]
+6:["$","$L7",null,{"children":["$","$8",null,{"name":"Next.MetadataOutlet","children":"$@9"}]}]
+9:null

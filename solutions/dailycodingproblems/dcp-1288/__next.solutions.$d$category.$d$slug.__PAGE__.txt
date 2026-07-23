@@ -1,0 +1,88 @@
+1:"$Sreact.fragment"
+2:I[6404,["/code-problems/_next/static/chunks/3rdqn8rx95pw7.js","/code-problems/_next/static/chunks/14mrh2-p_w84d.js","/code-problems/_next/static/chunks/16znsrhbbncbl.js"],"default"]
+8:I[97367,["/code-problems/_next/static/chunks/3rdqn8rx95pw7.js","/code-problems/_next/static/chunks/14mrh2-p_w84d.js"],"OutletBoundary"]
+9:"$Sreact.suspense"
+3:T592,<h1>Balanced Parentheses with Minimum Edits</h1>
+<p>This problem was asked by Facebook.</p>
+<p>Given a string of parentheses, find the balanced string that can be produced from it using the minimum number of insertions and deletions. If there are multiple solutions, return any of them. </p>
+<p>For example, given <code>&quot;(()&quot;</code>, you could return <code>&quot;(())&quot;</code>. Given <code>&quot;))()(&quot;</code>, you could return <code>&quot;()()()()&quot;</code>.</p>
+<h2>How the Solution Works</h2>
+<p>We can construct a balanced string with the minimum number of edits by tracking unmatched open parentheses:</p>
+<ul>
+<li>We traverse the string from left to right.</li>
+<li>If a closing parenthesis <code>)</code> is encountered and there is no unmatched open parenthesis <code>(</code>, we insert a <code>(</code> directly before it.</li>
+<li>If there is an unmatched <code>(</code>, we match it with the <code>)</code> and decrement our unmatched open counter.</li>
+<li>At the end of the string, if any unmatched open parentheses <code>(</code> remain, we append the corresponding number of closing parentheses <code>)</code> to the end.</li>
+</ul>
+<h2>Complexity</h2>
+<ul>
+<li><strong>Time Complexity:</strong> $O(N)$ where $N$ is the length of the string, as we process each character exactly once.</li>
+<li><strong>Space Complexity:</strong> $O(N)$ to build and return the balanced string.</li>
+</ul>
+4:T961,<span class="hljs-keyword">using</span> System;
+<span class="hljs-keyword">using</span> System.Text;
+
+<span class="hljs-keyword">class</span> <span class="hljs-title">Program</span>
+{
+    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-built_in">string</span> <span class="hljs-title">Balance</span>(<span class="hljs-params"><span class="hljs-built_in">string</span> s</span>)</span>
+    {
+        <span class="hljs-keyword">var</span> res = <span class="hljs-keyword">new</span> StringBuilder();
+        <span class="hljs-built_in">int</span> openCount = <span class="hljs-number">0</span>;
+
+        <span class="hljs-keyword">foreach</span> (<span class="hljs-built_in">char</span> ch <span class="hljs-keyword">in</span> s)
+        {
+            <span class="hljs-keyword">if</span> (ch == <span class="hljs-string">&#x27;(&#x27;</span>)
+            {
+                openCount++;
+                res.Append(ch);
+            }
+            <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> (ch == <span class="hljs-string">&#x27;)&#x27;</span>)
+            {
+                <span class="hljs-keyword">if</span> (openCount &gt; <span class="hljs-number">0</span>)
+                {
+                    openCount--;
+                }
+                <span class="hljs-keyword">else</span>
+                {
+                    res.Append(<span class="hljs-string">&#x27;(&#x27;</span>);
+                }
+                res.Append(ch);
+            }
+            <span class="hljs-keyword">else</span>
+            {
+                res.Append(ch);
+            }
+        }
+
+        <span class="hljs-comment">// Append remaining closing parentheses for any unmatched opening ones</span>
+        res.Append(<span class="hljs-string">&#x27;)&#x27;</span>, openCount);
+
+        <span class="hljs-keyword">return</span> res.ToString();
+    }
+
+    <span class="hljs-function"><span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title">Main</span>()</span>
+    {
+        Console.WriteLine(Balance(<span class="hljs-string">&quot;(()&quot;</span>));     <span class="hljs-comment">// Output: (())</span>
+        Console.WriteLine(Balance(<span class="hljs-string">&quot;))()(&quot;</span>));   <span class="hljs-comment">// Output: ()()()()</span>
+    }
+}5:T618,<span class="hljs-keyword">def</span> <span class="hljs-title function_">balance</span>(<span class="hljs-params">s: <span class="hljs-built_in">str</span></span>) -&gt; <span class="hljs-built_in">str</span>:
+    res, open_count = [], <span class="hljs-number">0</span>
+    <span class="hljs-keyword">for</span> char <span class="hljs-keyword">in</span> s:
+        <span class="hljs-keyword">if</span> char == <span class="hljs-string">&#x27;(&#x27;</span>:
+            open_count += <span class="hljs-number">1</span>
+            res.append(char)
+        <span class="hljs-keyword">elif</span> char == <span class="hljs-string">&#x27;)&#x27;</span>:
+            <span class="hljs-keyword">if</span> open_count &gt; <span class="hljs-number">0</span>:
+                open_count -= <span class="hljs-number">1</span>
+            <span class="hljs-keyword">else</span>:
+                res.append(<span class="hljs-string">&#x27;(&#x27;</span>)
+            res.append(char)
+    <span class="hljs-keyword">return</span> <span class="hljs-string">&quot;&quot;</span>.join(res) + <span class="hljs-string">&quot;)&quot;</span> * open_count
+
+<span class="hljs-keyword">if</span> __name__ == <span class="hljs-string">&quot;__main__&quot;</span>:
+    <span class="hljs-built_in">print</span>(balance(<span class="hljs-string">&quot;(()&quot;</span>))     <span class="hljs-comment"># Output: (())</span>
+    <span class="hljs-built_in">print</span>(balance(<span class="hljs-string">&quot;))()(&quot;</span>))   <span class="hljs-comment"># Output: ()()()()</span>
+0:{"rsc":["$","$1","c",{"children":[["$","$L2",null,{"title":"Balanced Parentheses with Minimum Edits","categoryLabel":"Daily Coding Problems","readmeHtml":"$3","files":[{"name":"Solution.cs","language":"csharp","highlightedCode":"$4"},{"name":"Solution.py","language":"python","highlightedCode":"$5"}]}],["$L6"],"$L7"]}],"isPartial":false,"staleTime":300,"varyParams":null,"buildId":"DS6MO_4Q9vIX478YAWKXN"}
+6:["$","script","script-0",{"src":"/code-problems/_next/static/chunks/16znsrhbbncbl.js","async":true}]
+7:["$","$L8",null,{"children":["$","$9",null,{"name":"Next.MetadataOutlet","children":"$@a"}]}]
+a:null

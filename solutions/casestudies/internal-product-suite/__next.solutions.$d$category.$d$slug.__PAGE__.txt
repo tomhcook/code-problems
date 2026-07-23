@@ -1,0 +1,39 @@
+1:"$Sreact.fragment"
+2:I[6404,["/code-problems/_next/static/chunks/3rdqn8rx95pw7.js","/code-problems/_next/static/chunks/14mrh2-p_w84d.js","/code-problems/_next/static/chunks/16znsrhbbncbl.js"],"default"]
+4:I[97367,["/code-problems/_next/static/chunks/3rdqn8rx95pw7.js","/code-problems/_next/static/chunks/14mrh2-p_w84d.js"],"OutletBoundary"]
+5:"$Sreact.suspense"
+3:T944,<h1>Proprietary Internal Product Development</h1>
+<p>A highly successful, proprietary business solution designed, architected, and built from the ground up to streamline operations and generate new revenue streams.</p>
+<h2>Technical Showcase</h2>
+<ul>
+<li><strong>Role</strong>: Lead Architect &amp; Developer (End-to-End Delivery)</li>
+<li><strong>Architecture</strong>: Ruby Web API &amp; Services</li>
+<li><strong>Backend &amp; Infrastructure</strong>: Ruby, Docker, SQL, Azure MSSQL</li>
+<li><strong>Hosting &amp; CI/CD</strong>: Azure DevOps pipelines &amp; cloud hosting environment</li>
+</ul>
+<hr>
+<h2>1. The Challenge</h2>
+<p>The business identified a key operational bottleneck and revenue opportunity that off-the-shelf software could not address. The objective was to plan, design, and implement a custom internal product to:</p>
+<ol>
+<li>Handle complex workflows and state transitions.</li>
+<li>Integrate securely with core legacy business databases and third-party services.</li>
+<li>Scale efficiently without exponential infrastructure costs.</li>
+<li>Support offline-first or low-connectivity client states.</li>
+</ol>
+<hr>
+<h2>2. Technical Implementation &amp; Design decisions</h2>
+<ul>
+<li><strong>API Architecture</strong>: Designed a clean, RESTful Ruby-based API with separation of concerns and robust routing models.</li>
+<li><strong>Database Tuning</strong>: Designed database schemas with Azure MSSQL, utilizing query optimization, tailored indices, and transactional guarantees to support high-concurrency usage.</li>
+<li><strong>Containerization &amp; Environment</strong>: Built consistent development and deployment flows using Docker containers.</li>
+<li><strong>CI/CD Pipeline</strong>: Configured build and release pipelines in Azure DevOps for automated integration, testing, and continuous deployment to ensure zero-downtime rolling updates.</li>
+</ul>
+<hr>
+<h2>3. Results &amp; Business Impact</h2>
+<ul>
+<li><strong>Revenue Generation</strong>: The product is actively used in production and is successfully earning significant new revenue/savings for the business.</li>
+<li><strong>Adoption</strong>: 100% internal adoption within the target division, replacing multiple disjointed spreadsheet-based workflows.</li>
+<li><strong>Performance</strong>: Optimized SQL query paths and state caching to keep page loads under 200ms.</li>
+</ul>
+0:{"rsc":["$","$1","c",{"children":[["$","$L2",null,{"title":"Proprietary Internal Product Development","categoryLabel":"Case Studies","readmeHtml":"$3","files":[]}],[["$","script","script-0",{"src":"/code-problems/_next/static/chunks/16znsrhbbncbl.js","async":true}]],["$","$L4",null,{"children":["$","$5",null,{"name":"Next.MetadataOutlet","children":"$@6"}]}]]}],"isPartial":false,"staleTime":300,"varyParams":null,"buildId":"DS6MO_4Q9vIX478YAWKXN"}
+6:null
