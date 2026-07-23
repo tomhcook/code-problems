@@ -55,6 +55,12 @@ export default function Dashboard({ solutions }: DashboardProps) {
     setTerminalInput("");
   };
 
+  const formatLanguage = (lang: string) => {
+    if (lang === "cpp") return "C++";
+    if (lang === "csharp") return "C#";
+    return lang.charAt(0).toUpperCase() + lang.slice(1);
+  };
+
   // Calculate statistics
   const stats = useMemo(() => {
     const total = solutions.length;
@@ -67,7 +73,7 @@ export default function Dashboard({ solutions }: DashboardProps) {
       
       // Language count
       sol.files.forEach((file) => {
-        const lang = file.language === "cpp" ? "C++" : file.language.charAt(0).toUpperCase() + file.language.slice(1);
+        const lang = formatLanguage(file.language);
         languagesCount[lang] = (languagesCount[lang] || 0) + 1;
       });
     });
@@ -215,7 +221,7 @@ export default function Dashboard({ solutions }: DashboardProps) {
                 onClick={() => setLanguageFilter(lang)}
                 className={`filter-btn ${languageFilter === lang ? "active" : ""}`}
               >
-                {lang === "cpp" ? "C++" : lang.charAt(0).toUpperCase() + lang.slice(1)}
+                {formatLanguage(lang)}
               </button>
             ))}
           </div>
@@ -239,7 +245,7 @@ export default function Dashboard({ solutions }: DashboardProps) {
                       key={file.name}
                       className={`lang-badge lang-badge-${file.language}`}
                     >
-                      {file.language === "cpp" ? "C++" : file.language.charAt(0).toUpperCase() + file.language.slice(1)}
+                      {formatLanguage(file.language)}
                     </span>
                   ))}
                 </div>

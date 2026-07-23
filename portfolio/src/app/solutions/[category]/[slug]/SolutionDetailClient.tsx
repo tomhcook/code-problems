@@ -68,7 +68,7 @@ export default function SolutionDetailClient({
                     className={`tab-btn ${activeTab === idx ? "active" : ""}`}
                     onClick={() => setActiveTab(idx)}
                   >
-                    {file.name} ({file.language === "cpp" ? "C++" : file.language.charAt(0).toUpperCase() + file.language.slice(1)})
+                    {file.name} ({file.language === "cpp" ? "C++" : file.language === "csharp" ? "C#" : file.language.charAt(0).toUpperCase() + file.language.slice(1)})
                   </button>
                 ))}
               </div>

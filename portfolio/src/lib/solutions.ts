@@ -26,6 +26,7 @@ const EXTENSION_MAP: Record<string, string> = {
   ".c++": "cpp",
   ".cc": "cpp",
   ".c": "c",
+  ".cs": "csharp",
   ".java": "java",
   ".js": "javascript",
   ".ts": "typescript",
