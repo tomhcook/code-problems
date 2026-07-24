@@ -17,6 +17,17 @@ export interface Solution {
   summary: string;
   files: SolutionFile[];
   date: string;
+  difficulty?: "Easy" | "Medium" | "Hard";
+}
+
+let LEETCODE_DIFFICULTY: Record<string, "Easy" | "Medium" | "Hard"> = {};
+try {
+  const difficultiesFile = path.join(process.cwd(), "src/lib/leetcode-difficulties.json");
+  if (fs.existsSync(difficultiesFile)) {
+    LEETCODE_DIFFICULTY = JSON.parse(fs.readFileSync(difficultiesFile, "utf-8"));
+  }
+} catch (err) {
+  console.error("Failed to load leetcode-difficulties.json", err);
 }
 
 const SOLUTIONS_DIR = path.join(process.cwd(), "../Solutions");
@@ -129,6 +140,14 @@ export function getAllSolutions(): Solution[] {
         title = formatTitle(folder);
       }
 
+      let difficulty: "Easy" | "Medium" | "Hard" | undefined = undefined;
+      if (category.toLowerCase() === "leetcode") {
+        const prefix = folder.substring(0, 4);
+        difficulty = LEETCODE_DIFFICULTY[prefix] || "Medium";
+      } else if (category.toLowerCase() === "dailycodingproblems") {
+        difficulty = "Medium";
+      }
+
       solutions.push({
         id: `${category.toLowerCase()}-${folder.toLowerCase()}`,
         slug: folder.toLowerCase(),
@@ -139,6 +158,7 @@ export function getAllSolutions(): Solution[] {
         summary: summary || "View solutions for this challenge.",
         files: codeFiles,
         date: folderStat.mtime.toISOString(),
+        difficulty,
       });
     }
   }

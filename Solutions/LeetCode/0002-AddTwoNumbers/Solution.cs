@@ -33,6 +33,9 @@ public class Solution {
                 l1.val = val;
                 curr = l1;
                 l1 = l1.next;
+                if (l2 != null) {
+                    l2 = l2.next;
+                }
             } else if (l2 != null) {
                 l2.val = val;
                 curr.next = l2;

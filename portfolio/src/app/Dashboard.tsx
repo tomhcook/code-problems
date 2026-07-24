@@ -19,6 +19,8 @@ export default function Dashboard({ solutions, cvSkills }: DashboardProps) {
   const [activeTab, setActiveTab] = useState<"overview" | "casestudies" | "dcp" | "leetcode">("overview");
   const [searchTerm, setSearchTerm] = useState("");
   const [languageFilter, setLanguageFilter] = useState("all");
+  const [sortBy, setSortBy] = useState<"difficulty" | "number" | "title" | "date">("difficulty");
+  const [sortOrder, setSortOrder] = useState<"asc" | "desc">("asc");
 
   const formatLanguage = (lang: string) => {
     if (lang === "cpp") return "C++";
@@ -151,6 +153,12 @@ export default function Dashboard({ solutions, cvSkills }: DashboardProps) {
     if (c === "leetcode" && s.includes("twosum")) {
       return { time: "O(N) Time", space: "O(N) Space", label: "Optimal Approach" };
     }
+    if (c === "leetcode" && s.includes("addtwonumbers")) {
+      return { time: "O(N) Time", space: "O(1) Aux Space", label: "Optimal Approach" };
+    }
+    if (c === "leetcode" && s.includes("3999")) {
+      return { time: "O(N * L) Time", space: "O(N * L) Space", label: "Optimal Rotation" };
+    }
     if (c === "dailycodingproblems" && s.includes("1288")) {
       return { time: "O(N) Time", space: "O(1) Space", label: "Optimal Traversal" };
     }
@@ -161,7 +169,7 @@ export default function Dashboard({ solutions, cvSkills }: DashboardProps) {
   };
 
   const finalSolutions = useMemo(() => {
-    return solutions.filter((sol) => {
+    const filtered = solutions.filter((sol) => {
       const matchesSearch =
         sol.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
         sol.readme.toLowerCase().includes(searchTerm.toLowerCase());
@@ -186,7 +194,36 @@ export default function Dashboard({ solutions, cvSkills }: DashboardProps) {
 
       return matchesSearch && matchesFilter && matchesLanguage;
     });
-  }, [solutions, searchTerm, filterType, activeTab, languageFilter]);
+
+    const difficultyOrder = { "Easy": 1, "Medium": 2, "Hard": 3 };
+
+    return filtered.sort((a, b) => {
+      let comparison = 0;
+      if (sortBy === "difficulty") {
+        const diffA = a.difficulty ? difficultyOrder[a.difficulty] : 99;
+        const diffB = b.difficulty ? difficultyOrder[b.difficulty] : 99;
+        comparison = diffA - diffB;
+      } else if (sortBy === "number") {
+        const getNumericId = (slug: string): number => {
+          const match = slug.match(/\d+/);
+          return match ? parseInt(match[0], 10) : 999999;
+        };
+        const numA = getNumericId(a.slug);
+        const numB = getNumericId(b.slug);
+        comparison = numA - numB;
+      } else if (sortBy === "date") {
+        comparison = new Date(b.date).getTime() - new Date(a.date).getTime();
+      } else {
+        comparison = a.title.localeCompare(b.title);
+      }
+
+      if (comparison === 0) {
+        comparison = a.title.localeCompare(b.title);
+      }
+
+      return sortOrder === "asc" ? comparison : -comparison;
+    });
+  }, [solutions, searchTerm, filterType, activeTab, languageFilter, sortBy, sortOrder]);
 
   return (
     <div className="container" style={{ display: "flex", flexDirection: "column", gap: "24px" }}>
@@ -424,49 +461,70 @@ export default function Dashboard({ solutions, cvSkills }: DashboardProps) {
           </div>
 
           {activeTab === "overview" ? (
-            <div style={{ display: "flex", gap: "8px", flexWrap: "wrap" }}>
-              <button
-                onClick={() => setFilterType("all")}
+            <div style={{ display: "flex", gap: "12px", alignItems: "center", flexWrap: "wrap" }}>
+              <div style={{ display: "flex", gap: "8px", flexWrap: "wrap" }}>
+                <button
+                  onClick={() => setFilterType("all")}
+                  className="gh-filter-select"
+                  style={{
+                    backgroundColor: filterType === "all" ? "var(--bg-tertiary)" : "transparent",
+                    borderColor: "var(--border-color)",
+                    color: filterType === "all" ? "var(--text-primary)" : "var(--text-secondary)",
+                    padding: "4px 10px",
+                    cursor: "pointer"
+                  }}
+                >
+                  All ({solutions.length})
+                </button>
+                <button
+                  onClick={() => setFilterType("casestudies")}
+                  className="gh-filter-select"
+                  style={{
+                    backgroundColor: filterType === "casestudies" ? "var(--bg-tertiary)" : "transparent",
+                    borderColor: "var(--border-color)",
+                    color: filterType === "casestudies" ? "var(--text-primary)" : "var(--text-secondary)",
+                    padding: "4px 10px",
+                    cursor: "pointer"
+                  }}
+                >
+                  Case Studies ({solutions.filter(s => s.category === "casestudies").length})
+                </button>
+                <button
+                  onClick={() => setFilterType("solutions")}
+                  className="gh-filter-select"
+                  style={{
+                    backgroundColor: filterType === "solutions" ? "var(--bg-tertiary)" : "transparent",
+                    borderColor: "var(--border-color)",
+                    color: filterType === "solutions" ? "var(--text-primary)" : "var(--text-secondary)",
+                    padding: "4px 10px",
+                    cursor: "pointer"
+                  }}
+                >
+                  Coding Challenges ({solutions.filter(s => s.category !== "casestudies").length})
+                </button>
+              </div>
+              <select
+                value={sortBy}
+                onChange={(e) => setSortBy(e.target.value as any)}
                 className="gh-filter-select"
-                style={{
-                  backgroundColor: filterType === "all" ? "var(--bg-tertiary)" : "transparent",
-                  borderColor: "var(--border-color)",
-                  color: filterType === "all" ? "var(--text-primary)" : "var(--text-secondary)",
-                  padding: "4px 10px",
-                  cursor: "pointer"
-                }}
+                style={{ padding: "4px 10px", fontSize: "13px" }}
               >
-                All ({solutions.length})
-              </button>
+                <option value="difficulty">Sort by Difficulty</option>
+                <option value="number">Sort by Number</option>
+                <option value="title">Sort by Title</option>
+                <option value="date">Sort by Date</option>
+              </select>
               <button
-                onClick={() => setFilterType("casestudies")}
+                onClick={() => setSortOrder(prev => prev === "asc" ? "desc" : "asc")}
                 className="gh-filter-select"
-                style={{
-                  backgroundColor: filterType === "casestudies" ? "var(--bg-tertiary)" : "transparent",
-                  borderColor: "var(--border-color)",
-                  color: filterType === "casestudies" ? "var(--text-primary)" : "var(--text-secondary)",
-                  padding: "4px 10px",
-                  cursor: "pointer"
-                }}
+                style={{ padding: "4px 8px", cursor: "pointer", fontSize: "13px", display: "inline-flex", alignItems: "center", justifyContent: "center" }}
+                title={sortOrder === "asc" ? "Sort Ascending" : "Sort Descending"}
               >
-                Case Studies ({solutions.filter(s => s.category === "casestudies").length})
-              </button>
-              <button
-                onClick={() => setFilterType("solutions")}
-                className="gh-filter-select"
-                style={{
-                  backgroundColor: filterType === "solutions" ? "var(--bg-tertiary)" : "transparent",
-                  borderColor: "var(--border-color)",
-                  color: filterType === "solutions" ? "var(--text-primary)" : "var(--text-secondary)",
-                  padding: "4px 10px",
-                  cursor: "pointer"
-                }}
-              >
-                Coding Challenges ({solutions.filter(s => s.category !== "casestudies").length})
+                {sortOrder === "asc" ? "▲" : "▼"}
               </button>
             </div>
           ) : (
-            <div style={{ display: "flex", gap: "12px", alignItems: "center" }}>
+            <div style={{ display: "flex", gap: "12px", alignItems: "center", flexWrap: "wrap" }}>
               <div className="gh-search-input-wrapper" style={{ margin: 0, width: "220px" }}>
                 <input
                   type="text"
@@ -490,6 +548,25 @@ export default function Dashboard({ solutions, cvSkills }: DashboardProps) {
                   </option>
                 ))}
               </select>
+              <select
+                value={sortBy}
+                onChange={(e) => setSortBy(e.target.value as any)}
+                className="gh-filter-select"
+                style={{ padding: "4px 10px", fontSize: "13px" }}
+              >
+                <option value="difficulty">Sort by Difficulty</option>
+                <option value="number">Sort by Number</option>
+                <option value="title">Sort by Title</option>
+                <option value="date">Sort by Date</option>
+              </select>
+              <button
+                onClick={() => setSortOrder(prev => prev === "asc" ? "desc" : "asc")}
+                className="gh-filter-select"
+                style={{ padding: "4px 8px", cursor: "pointer", fontSize: "13px", display: "inline-flex", alignItems: "center", justifyContent: "center" }}
+                title={sortOrder === "asc" ? "Sort Ascending" : "Sort Descending"}
+              >
+                {sortOrder === "asc" ? "▲" : "▼"}
+              </button>
             </div>
           )}
         </div>
@@ -524,6 +601,24 @@ export default function Dashboard({ solutions, cvSkills }: DashboardProps) {
                       }}>
                         {sol.categoryLabel}
                       </span>
+                      {sol.difficulty && (
+                        <span className="repo-badge" style={{
+                          backgroundColor: sol.difficulty === "Easy" ? "rgba(57, 211, 83, 0.15)" :
+                                           sol.difficulty === "Medium" ? "rgba(241, 224, 90, 0.15)" :
+                                           "rgba(248, 81, 73, 0.15)",
+                          color: sol.difficulty === "Easy" ? "#39d353" :
+                                 sol.difficulty === "Medium" ? "#f1e05a" :
+                                 "#f85149",
+                          borderColor: sol.difficulty === "Easy" ? "rgba(57, 211, 83, 0.3)" :
+                                       sol.difficulty === "Medium" ? "rgba(241, 224, 90, 0.3)" :
+                                       "rgba(248, 81, 73, 0.3)",
+                          fontSize: "11px",
+                          padding: "1px 6px",
+                          margin: 0
+                        }}>
+                          {sol.difficulty}
+                        </span>
+                      )}
                       <h3 className="solution-item-title" style={{ margin: 0 }}>
                         <Link href={`/solutions/${sol.category}/${sol.slug}`} style={{ textDecoration: "none", color: "var(--accent-secondary)", fontWeight: "600" }}>
                           {sol.title}
