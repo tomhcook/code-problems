@@ -3,6 +3,7 @@
 import React, { useState, useMemo } from "react";
 import Link from "next/link";
 import { Solution } from "../lib/solutions";
+import { DEV_CHALLENGES_APPS } from "../lib/devchallenges";
 
 interface CVSkill {
   name: string;
@@ -15,8 +16,48 @@ interface DashboardProps {
   cvSkills: CVSkill[];
 }
 
+export const getComplexityInfo = (category: string, slug: string, sol?: Solution) => {
+  if (sol?.complexity) {
+    return sol.complexity;
+  }
+  const s = slug.toLowerCase();
+  const c = category.toLowerCase();
+  if (c === "leetcode" && s.includes("twosum")) {
+    return { time: "O(N) Time", space: "O(N) Space", label: "Optimal Approach" };
+  }
+  if (c === "leetcode" && s.includes("addtwonumbers")) {
+    return { time: "O(N) Time", space: "O(1) Aux Space", label: "Optimal Approach" };
+  }
+  if (c === "leetcode" && s.includes("3999")) {
+    return { time: "O(N * L) Time", space: "O(N * L) Space", label: "Optimal Rotation" };
+  }
+  if (c === "leetcode" && s.includes("3514")) {
+    return { time: "O(N^2 + N * M) Time", space: "O(M) Space", label: "Optimized XOR Pairings" };
+  }
+  if (c === "dailycodingproblems" && s.includes("1288")) {
+    return { time: "O(N) Time", space: "O(1) Space", label: "Optimal Traversal" };
+  }
+  if (c === "dailycodingproblems" && s.includes("1289")) {
+    return { time: "O(I * (N + E)) Time", space: "O(N + E) Space", label: "Iterative Power Method" };
+  }
+  if (c === "greatfrontend" && s.includes("debounce")) {
+    return { time: "O(1) Time", space: "O(1) Space", label: "Closure Debounce" };
+  }
+  if (c === "casestudies" && s.includes("internal-product-suite")) {
+    return { time: "Lead Architect", space: "Revenue-Generating", label: "System Design Showcase" };
+  }
+  if (c === "casestudies" && s.includes("api-optimization")) {
+    return { time: "Full Stack Developer", space: "Efficiency", label: "Maintenance Showcase" };
+  }
+  if (c === "casestudies" && s.includes("android-upgrade")) {
+    return { time: "Mobile Developer", space: "Android 16 Upgrade", label: "Active Upgrade" };
+  }
+  return null;
+};
+
 export default function Dashboard({ solutions, cvSkills }: DashboardProps) {
-  const [activeTab, setActiveTab] = useState<"overview" | "casestudies" | "dcp" | "leetcode">("overview");
+  const [activeTab, setActiveTab] = useState<"overview" | "casestudies" | "challenges">("overview");
+  const [platformFilter, setPlatformFilter] = useState<"all" | "leetcode" | "dcp" | "greatfrontend" | "devchallenges">("all");
   const [searchTerm, setSearchTerm] = useState("");
   const [languageFilter, setLanguageFilter] = useState("all");
   const [sortBy, setSortBy] = useState<"difficulty" | "number" | "title" | "date">("difficulty");
@@ -71,37 +112,8 @@ export default function Dashboard({ solutions, cvSkills }: DashboardProps) {
     return Array.from(langs);
   }, [solutions]);
 
-  // Filter solutions
-  const filteredSolutions = useMemo(() => {
-    return solutions.filter((sol) => {
-      const matchesSearch =
-        sol.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
-        sol.readme.toLowerCase().includes(searchTerm.toLowerCase());
-
-      const matchesCategory =
-        activeTab === "overview" ||
-        (activeTab === "dcp" && sol.category === "dailycodingproblems") ||
-        (activeTab === "leetcode" && sol.category === "leetcode");
-
-      const matchesLanguage =
-        languageFilter === "all" ||
-        sol.files.some((file) => file.language === languageFilter);
-
-      return matchesSearch && matchesCategory && matchesLanguage;
-    });
-  }, [solutions, searchTerm, languageFilter, activeTab]);
-
   // Dynamically compute the top 4 skills for the radar graph
   const radarSkills = useMemo(() => {
-    const defaultRadar = [
-      { name: "Backend Dev", percentage: 95 },
-      { name: "Full Stack Web", percentage: 90 },
-      { name: "Databases", percentage: 90 },
-      { name: "Mobile Dev", percentage: 80 }
-    ];
-
-    if (!cvSkills || cvSkills.length < 4) return defaultRadar;
-
     return cvSkills.slice(0, 4).map(skill => {
       let displayName = skill.name;
       if (displayName.includes("(")) {
@@ -130,93 +142,84 @@ export default function Dashboard({ solutions, cvSkills }: DashboardProps) {
   const categoryLanguages = useMemo(() => {
     const dcpLangs = new Set<string>();
     const leetLangs = new Set<string>();
+    const gfeLangs = new Set<string>();
 
     solutions.forEach((sol) => {
       if (sol.category === "dailycodingproblems") {
         sol.files.forEach((file) => dcpLangs.add(formatLanguage(file.language)));
       } else if (sol.category === "leetcode") {
         sol.files.forEach((file) => leetLangs.add(formatLanguage(file.language)));
+      } else if (sol.category === "greatfrontend") {
+        sol.files.forEach((file) => gfeLangs.add(formatLanguage(file.language)));
       }
     });
 
     return {
       dcp: Array.from(dcpLangs).join(" / ") || "C# / C++ / Python",
-      leetcode: Array.from(leetLangs).join(" / ") || "Python / C# / C++"
+      leetcode: Array.from(leetLangs).join(" / ") || "Python / C# / C++",
+      greatfrontend: Array.from(gfeLangs).join(" / ") || "TypeScript / JavaScript"
     };
   }, [solutions]);
 
-  const [filterType, setFilterType] = useState<"all" | "solutions" | "casestudies">("all");
-
-  const getComplexityInfo = (category: string, slug: string) => {
-    const s = slug.toLowerCase();
-    const c = category.toLowerCase();
-    if (c === "leetcode" && s.includes("twosum")) {
-      return { time: "O(N) Time", space: "O(N) Space", label: "Optimal Approach" };
-    }
-    if (c === "leetcode" && s.includes("addtwonumbers")) {
-      return { time: "O(N) Time", space: "O(1) Aux Space", label: "Optimal Approach" };
-    }
-    if (c === "leetcode" && s.includes("3999")) {
-      return { time: "O(N * L) Time", space: "O(N * L) Space", label: "Optimal Rotation" };
-    }
-    if (c === "leetcode" && s.includes("3514")) {
-      return { time: "O(N^2 + N * M) Time", space: "O(M) Space", label: "Optimized XOR Pairings" };
-    }
-    if (c === "dailycodingproblems" && s.includes("1288")) {
-      return { time: "O(N) Time", space: "O(1) Space", label: "Optimal Traversal" };
-    }
-    if (c === "dailycodingproblems" && s.includes("1289")) {
-      return { time: "O(I * (N + E)) Time", space: "O(N + E) Space", label: "Iterative Power Method" };
-    }
-    if (c === "casestudies" && s.includes("internal-product-suite")) {
-      return { time: "Lead Architect", space: "Revenue-Generating", label: "System Design Showcase" };
-    }
-    if (c === "casestudies" && s.includes("api-optimization")) {
-      return { time: "Full Stack Developer", space: "Efficiency", label: "Maintenance Showcase" };
-    }
-    if (c === "casestudies" && s.includes("android-upgrade")) {
-      return { time: "Mobile Developer", space: "Android 16 Upgrade", label: "Active Upgrade" };
-    }
-    return null;
-  };
-
   const finalSolutions = useMemo(() => {
-    const filtered = solutions.filter((sol) => {
+    let filtered = solutions.filter((sol) => {
       const matchesSearch =
         sol.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
         sol.readme.toLowerCase().includes(searchTerm.toLowerCase());
 
-      let matchesFilter = true;
+      const isCaseStudy = sol.category === "casestudies";
+
       if (activeTab === "overview") {
-        matchesFilter = sol.category === "casestudies";
-      } else if (activeTab === "casestudies") {
-        matchesFilter = sol.category === "casestudies";
-      } else if (activeTab === "dcp") {
-        matchesFilter = sol.category === "dailycodingproblems";
-      } else if (activeTab === "leetcode") {
-        matchesFilter = sol.category === "leetcode";
+        return matchesSearch;
       }
 
-      const matchesLanguage =
-        languageFilter === "all" ||
-        sol.files.some((file) => file.language === languageFilter);
+      if (activeTab === "casestudies") {
+        return isCaseStudy && matchesSearch;
+      }
 
-      return matchesSearch && matchesFilter && matchesLanguage;
+      if (activeTab === "challenges") {
+        if (isCaseStudy) return false;
+
+        const matchesPlatform =
+          platformFilter === "all" ||
+          (platformFilter === "leetcode" && sol.category === "leetcode") ||
+          (platformFilter === "dcp" && sol.category === "dailycodingproblems") ||
+          (platformFilter === "greatfrontend" && sol.category === "greatfrontend");
+
+        const matchesLanguage =
+          languageFilter === "all" ||
+          sol.files.some((file) => file.language === languageFilter);
+
+        return matchesSearch && matchesPlatform && matchesLanguage;
+      }
+
+      return matchesSearch;
     });
 
-    const difficultyOrder = { "Easy": 1, "Medium": 2, "Hard": 3 };
+    if (activeTab === "overview" || activeTab === "casestudies") {
+      // Prioritize Case Studies first, then other top solutions, and limit to top 5
+      const caseStudies = filtered.filter((sol) => sol.category === "casestudies");
+      const nonCaseStudies = filtered.filter((sol) => sol.category !== "casestudies");
+      return [...caseStudies, ...nonCaseStudies].slice(0, 5);
+    }
+
+    const getNumericId = (slug: string) => {
+      const match = slug.match(/\d+/);
+      return match ? parseInt(match[0], 10) : 999999;
+    };
+
+    const getDifficultyWeight = (diff?: string) => {
+      if (diff === "Hard") return 3;
+      if (diff === "Medium") return 2;
+      if (diff === "Easy") return 1;
+      return 0;
+    };
 
     return filtered.sort((a, b) => {
       let comparison = 0;
       if (sortBy === "difficulty") {
-        const diffA = a.difficulty ? difficultyOrder[a.difficulty] : 99;
-        const diffB = b.difficulty ? difficultyOrder[b.difficulty] : 99;
-        comparison = diffA - diffB;
+        comparison = getDifficultyWeight(b.difficulty) - getDifficultyWeight(a.difficulty);
       } else if (sortBy === "number") {
-        const getNumericId = (slug: string): number => {
-          const match = slug.match(/\d+/);
-          return match ? parseInt(match[0], 10) : 999999;
-        };
         const numA = getNumericId(a.slug);
         const numB = getNumericId(b.slug);
         comparison = numA - numB;
@@ -232,7 +235,7 @@ export default function Dashboard({ solutions, cvSkills }: DashboardProps) {
 
       return sortOrder === "asc" ? comparison : -comparison;
     });
-  }, [solutions, searchTerm, filterType, activeTab, languageFilter, sortBy, sortOrder]);
+  }, [solutions, searchTerm, activeTab, platformFilter, languageFilter, sortBy, sortOrder]);
 
   return (
     <div className="container" style={{ display: "flex", flexDirection: "column", gap: "24px" }}>
@@ -272,6 +275,19 @@ export default function Dashboard({ solutions, cvSkills }: DashboardProps) {
             <span className="github-tab-count">{stats.categories["Case Studies"] || 0}</span>
           </button>
 
+          <button
+            onClick={() => setActiveTab("challenges")}
+            className={`github-tab-btn ${activeTab === "challenges" ? "active" : ""}`}
+          >
+            <svg aria-hidden="true" height="16" viewBox="0 0 16 16" version="1.1" width="16">
+              <path d="M2 2.5A2.5 2.5 0 0 1 4.5 0h8.75a.75.75 0 0 1 .75.75v12.5a.75.75 0 0 1-.75.75h-2.5a.75.75 0 1 1 0-1.5h1.75v-2h-8a1 1 0 0 0-.714 1.7.75.75 0 1 1-1.072 1.05A2.495 2.495 0 0 1 2 11.5Zm10.5-1h-8a1 1 0 0 0-1 1v6.708A2.486 2.486 0 0 1 4.5 9h8ZM5 12.25a.25.25 0 0 1 .25-.25h3.5a.25.25 0 0 1 .25.25v3.25a.25.25 0 0 1-.4.2l-1.45-1.087a.25.25 0 0 0-.3 0L5.4 16.7a.25.25 0 0 1-.4-.2Z"></path>
+            </svg>
+            <span>code-challenges &amp; apps</span>
+            <span className="github-tab-count">
+              {(stats.categories["LeetCode"] || 0) + (stats.categories["Daily Coding Problems"] || 0) + (stats.categories["GreatFrontEnd"] || 0) + DEV_CHALLENGES_APPS.length}
+            </span>
+          </button>
+
           <Link href="/cv" className="github-tab-btn" style={{ textDecoration: "none" }}>
             <svg aria-hidden="true" height="16" viewBox="0 0 16 16" version="1.1" width="16" fill="var(--text-secondary)">
               <path d="M2 3h6a4 4 0 0 1 8 0h6v18H2V3z"></path>
@@ -281,28 +297,6 @@ export default function Dashboard({ solutions, cvSkills }: DashboardProps) {
             </svg>
             <span>Resume</span>
           </Link>
-
-          <button
-            onClick={() => setActiveTab("leetcode")}
-            className={`github-tab-btn ${activeTab === "leetcode" ? "active" : ""}`}
-          >
-            <svg aria-hidden="true" height="16" viewBox="0 0 16 16" version="1.1" width="16">
-              <path d="M2 2.5A2.5 2.5 0 0 1 4.5 0h8.75a.75.75 0 0 1 .75.75v12.5a.75.75 0 0 1-.75.75h-2.5a.75.75 0 1 1 0-1.5h1.75v-2h-8a1 1 0 0 0-.714 1.7.75.75 0 1 1-1.072 1.05A2.495 2.495 0 0 1 2 11.5Zm10.5-1h-8a1 1 0 0 0-1 1v6.708A2.486 2.486 0 0 1 4.5 9h8ZM5 12.25a.25.25 0 0 1 .25-.25h3.5a.25.25 0 0 1 .25.25v3.25a.25.25 0 0 1-.4.2l-1.45-1.087a.25.25 0 0 0-.3 0L5.4 16.7a.25.25 0 0 1-.4-.2Z"></path>
-            </svg>
-            <span>leetcode</span>
-            <span className="github-tab-count">{stats.categories["LeetCode"] || 0}</span>
-          </button>
-
-          <button
-            onClick={() => setActiveTab("dcp")}
-            className={`github-tab-btn ${activeTab === "dcp" ? "active" : ""}`}
-          >
-            <svg aria-hidden="true" height="16" viewBox="0 0 16 16" version="1.1" width="16">
-              <path d="M2 2.5A2.5 2.5 0 0 1 4.5 0h8.75a.75.75 0 0 1 .75.75v12.5a.75.75 0 0 1-.75.75h-2.5a.75.75 0 1 1 0-1.5h1.75v-2h-8a1 1 0 0 0-.714 1.7.75.75 0 1 1-1.072 1.05A2.495 2.495 0 0 1 2 11.5Zm10.5-1h-8a1 1 0 0 0-1 1v6.708A2.486 2.486 0 0 1 4.5 9h8ZM5 12.25a.25.25 0 0 1 .25-.25h3.5a.25.25 0 0 1 .25.25v3.25a.25.25 0 0 1-.4.2l-1.45-1.087a.25.25 0 0 0-.3 0L5.4 16.7a.25.25 0 0 1-.4-.2Z"></path>
-            </svg>
-            <span>daily-coding-problems</span>
-            <span className="github-tab-count">{stats.categories["Daily Coding Problems"] || 0}</span>
-          </button>
         </div>
       </section>
 
@@ -318,143 +312,111 @@ export default function Dashboard({ solutions, cvSkills }: DashboardProps) {
             </div>
             <div className="markdown-card-body markdown-body" style={{ display: "flex", flexDirection: "column", gap: "16px" }}>
               <div>
-                <h2 style={{ marginTop: 0, fontSize: "20px", display: "flex", alignItems: "center", gap: "8px" }}>
-                  Hi, I'm Thomas Cook <span className="wave-emoji">👋</span>
-                </h2>
-                <p style={{ fontSize: "14px", lineHeight: "1.6", color: "var(--text-primary)", margin: "8px 0 16px 0" }}>
-                  A highly accomplished, fast-track Software Engineer &amp; Full Stack Developer. I build core backend service architectures in <strong>C# / .NET Core</strong>, cross-platform mobile systems with <strong>.NET MAUI</strong>, and interactive responsive web applications using <strong>React, TypeScript, Angular, and Node.js</strong>.
+                <h1 style={{ borderBottom: "none", margin: 0, fontSize: "24px", color: "var(--text-primary)" }}>
+                  Hi there, I&#39;m Thomas Cook 👋
+                </h1>
+                <p style={{ margin: "8px 0 0 0", color: "var(--text-secondary)", fontSize: "14px", lineHeight: "1.6" }}>
+                  <strong>Software Engineer</strong> at <strong>HWM Global</strong> specializing in <strong>C#, .NET Core, ASP.NET Core, SQL Database Optimization, React, TypeScript, and Azure DevOps</strong>.
                 </p>
               </div>
 
-              <div>
-                <Link href="/cv" style={{
-                  display: "inline-flex",
-                  alignItems: "center",
-                  gap: "8px",
-                  backgroundColor: "var(--color-success)",
-                  color: "#ffffff",
-                  textDecoration: "none",
-                  padding: "8px 16px",
-                  borderRadius: "6px",
-                  fontSize: "14px",
-                  fontWeight: "600",
-                  border: "1px solid rgba(240, 246, 252, 0.1)",
-                  cursor: "pointer",
-                  transition: "background-color 0.2s"
-                }}
-                  onMouseOver={(e) => e.currentTarget.style.backgroundColor = "#2ea043"}
-                  onMouseOut={(e) => e.currentTarget.style.backgroundColor = "var(--color-success)"}
-                >
-                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
-                    <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
-                    <polyline points="14 2 14 8 20 8"></polyline>
-                    <line x1="16" y1="13" x2="8" y2="13"></line>
-                    <line x1="16" y1="17" x2="8" y2="17"></line>
-                    <polyline points="10 9 9 9 8 9"></polyline>
-                  </svg>
-                  View Professional CV / Career Resume &rarr;
-                </Link>
+              <div style={{ display: "flex", gap: "12px", flexWrap: "wrap" }}>
+                <span className="repo-badge" style={{ backgroundColor: "rgba(56, 139, 253, 0.2)", color: "#79c0ff", borderColor: "#388bfd", fontWeight: "600" }}>
+                  🏢 Software Engineer @ HWM Global
+                </span>
+                <span className="repo-badge" style={{ backgroundColor: "rgba(46, 160, 67, 0.2)", color: "#56d364", borderColor: "#2ea043", fontWeight: "600" }}>
+                  ⚡ C# / .NET Core / SQL / React
+                </span>
               </div>
             </div>
           </section>
 
-          {/* Two-Column Grid: Pinned Repos (Left) and Radar Chart (Right) */}
-          <div style={{ display: "grid", gridTemplateColumns: "1.2fr 0.8fr", gap: "24px" }} className="layout-grid">
+          {/* Grid Layout: Pinned Repos (Left) + Top Skills Radar (Right) */}
+          <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(320px, 1fr))", gap: "24px" }}>
+            
+            {/* Pinned Repositories Grid */}
+            <section style={{ display: "flex", flexDirection: "column", gap: "16px", flex: "2" }}>
+              <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center" }}>
+                <h2 style={{ fontSize: "16px", fontWeight: "600", color: "var(--text-primary)" }}>Pinned Repositories &amp; Core Systems</h2>
+                <span style={{ fontSize: "12px", color: "var(--text-secondary)" }}>Customize pins</span>
+              </div>
 
-            {/* Pinned Repos / Spotlight info */}
-            <section style={{ display: "flex", flexDirection: "column", gap: "16px" }}>
-              <h2 style={{ fontSize: "14px", fontWeight: "600" }}>Featured Commercial Focus</h2>
-
-              <Link href="/solutions/casestudies/internal-product-suite" className="pinned-card" style={{ cursor: "pointer", textDecoration: "none" }}>
-                <div>
-                  <div className="pinned-card-title" style={{ display: "flex", alignItems: "center", gap: "8px" }}>
-                    <span style={{ color: "var(--accent-secondary)", fontWeight: "600" }}>internal-product-development</span>
-                    <span className="repo-badge" style={{ margin: 0, padding: "1px 6px" }}>Spotlight</span>
+              <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(280px, 1fr))", gap: "16px" }}>
+                <div className="pinned-card">
+                  <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center" }}>
+                    <Link href="/solutions/casestudies/internal-product-suite" style={{ textDecoration: "none" }}>
+                      <span className="pinned-card-title">HWM Global / Internal Product Suite</span>
+                    </Link>
+                    <span className="repo-badge">Public</span>
                   </div>
                   <p className="pinned-card-desc">
-                    Designed, architected, and built a custom internal product from the ground up. This software solution successfully streamlined key operations and is actively generating new revenue streams for the business.
+                    Lead full-stack C# .NET Core &amp; React product suite generating commercial software revenue.
                   </p>
+                  <div className="pinned-card-meta">
+                    <span className="pinned-card-lang">
+                      <span className="lang-color-dot lang-color-csharp"></span>
+                      C# / .NET / React
+                    </span>
+                    <span style={{ fontSize: "12px", color: "var(--text-secondary)" }}>★ 14</span>
+                  </div>
                 </div>
-                <div className="pinned-card-meta">
-                  <span className="language-indicator">
-                    <span className="language-color-circle lang-color-ruby"></span>
-                    Ruby / SQL / Docker / Azure MSSQL
-                  </span>
-                </div>
-              </Link>
 
-              <Link href="/solutions/casestudies/api-optimization" className="pinned-card" style={{ cursor: "pointer", textDecoration: "none" }}>
-                <div>
-                  <div className="pinned-card-title" style={{ display: "flex", alignItems: "center", gap: "8px" }}>
-                    <span style={{ color: "var(--accent-secondary)", fontWeight: "600" }}>api-performance-optimization</span>
+                <div className="pinned-card">
+                  <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center" }}>
+                    <Link href="/solutions/casestudies/api-optimization" style={{ textDecoration: "none" }}>
+                      <span className="pinned-card-title">HWM Global / SQL API Optimization</span>
+                    </Link>
+                    <span className="repo-badge">Public</span>
                   </div>
                   <p className="pinned-card-desc">
-                    Reduced API response times by 60% through SQL query tuning, Redis caching, and refactoring under a Shape Up lifecycle structure at HWM.
+                    Engineered SQL query optimizations reducing execution latency across production APIs.
                   </p>
-                </div>
-                <div className="pinned-card-meta">
-                  <span className="language-indicator">
-                    <span className="language-color-circle lang-color-csharp"></span>
-                    C# / React / Docker / Azure / MSSQL
-                  </span>
-                </div>
-              </Link>
-
-              <div className="pinned-card" style={{ cursor: "default" }}>
-                <div>
-                  <div className="pinned-card-title" style={{ display: "flex", alignItems: "center", gap: "8px" }}>
-                    <span style={{ color: "var(--accent-secondary)", fontWeight: "600" }}>algorithmic-problem-solving</span>
-                  </div>
-                  <p className="pinned-card-desc" style={{ marginBottom: "12px" }}>
-                    Completed various algorithm and data structure challenges to maintain sharp problem-solving skills.
-                  </p>
-
-                  <div style={{ display: "flex", gap: "16px", flexWrap: "wrap", fontSize: "13px" }}>
-                    <div>
-                      <strong>LeetCode:</strong> {solutions.filter(s => s.category === "leetcode").length} Solved
-                      <div style={{ fontSize: "11px", color: "var(--text-secondary)", marginTop: "2px" }}>
-                        <span style={{ color: "#39d353" }}>●</span> {solutions.filter(s => s.category === "leetcode" && s.difficulty === "Easy").length} Easy /
-                        <span style={{ color: "#f1e05a" }}> ●</span> {solutions.filter(s => s.category === "leetcode" && s.difficulty === "Medium").length} Med /
-                        <span style={{ color: "#f85149" }}> ●</span> {solutions.filter(s => s.category === "leetcode" && s.difficulty === "Hard").length} Hard
-                      </div>
-                    </div>
-                    <div>
-                      <strong>Daily Coding:</strong> {solutions.filter(s => s.category === "dailycodingproblems").length} Solved
-                    </div>
+                  <div className="pinned-card-meta">
+                    <span className="pinned-card-lang">
+                      <span className="lang-color-dot lang-color-csharp"></span>
+                      SQL / C# .NET Core
+                    </span>
+                    <span style={{ fontSize: "12px", color: "var(--text-secondary)" }}>★ 11</span>
                   </div>
                 </div>
-                <div className="pinned-card-meta" style={{ marginTop: "12px", display: "flex", justifyContent: "space-between", width: "100%", alignItems: "center" }}>
-                  <span className="language-indicator">
-                    Python / C# / C++
-                  </span>
-                  <button
-                    onClick={() => setActiveTab("leetcode")}
-                    style={{
-                      background: "none",
-                      border: "none",
-                      color: "var(--accent-secondary)",
-                      cursor: "pointer",
-                      fontSize: "12px",
-                      fontWeight: "600",
-                      padding: 0
-                    }}
-                  >
-                    View Solutions &rarr;
-                  </button>
+
+                <div className="pinned-card">
+                  <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center" }}>
+                    <Link href="/solutions/casestudies/android-upgrade" style={{ textDecoration: "none" }}>
+                      <span className="pinned-card-title">HWM Global / Android 16 Modernization</span>
+                    </Link>
+                    <span className="repo-badge">Public</span>
+                  </div>
+                  <p className="pinned-card-desc">
+                    Modernized mobile apps for Android 16 compatibility &amp; target API level compliance.
+                  </p>
+                  <div className="pinned-card-meta">
+                    <span className="pinned-card-lang">
+                      <span className="lang-color-dot lang-color-java"></span>
+                      Android / Java / C#
+                    </span>
+                    <span style={{ fontSize: "12px", color: "var(--text-secondary)" }}>★ 9</span>
+                  </div>
                 </div>
               </div>
             </section>
 
-            {/* SVG Skills Radar Graph */}
-            <section style={{ display: "flex", flexDirection: "column", gap: "16px" }}>
-              <h2 style={{ fontSize: "14px", fontWeight: "600" }}>Technical Focus</h2>
-              <div className="gh-card" style={{ padding: "24px", display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center", minHeight: "260px" }}>
+            {/* Top Skills Radar Visualiser */}
+            <section className="markdown-card" style={{ flex: "1", minWidth: "280px", marginBottom: "0px" }}>
+              <div className="markdown-card-header">
+                <svg aria-hidden="true" height="16" viewBox="0 0 16 16" version="1.1" width="16" fill="var(--text-secondary)">
+                  <path d="M8 0a8 8 0 1 1 0 16A8 8 0 0 1 8 0zM1.5 8a6.5 6.5 0 1 0 13 0 6.5 6.5 0 0 0-13 0z"></path>
+                </svg>
+                <span>Core Competency Matrix</span>
+              </div>
+              <div className="markdown-card-body" style={{ display: "flex", flexDirection: "column", alignItems: "center", padding: "16px" }}>
                 <svg width="220" height="220" viewBox="0 0 220 220" style={{ overflow: "visible" }}>
-                  <line x1="110" y1="20" x2="110" y2="200" stroke="#30363d" strokeWidth="1" />
-                  <line x1="20" y1="110" x2="200" y2="110" stroke="#30363d" strokeWidth="1" />
-
-                  <polygon points="110,20 200,110 110,200 20,110" fill="none" stroke="#21262d" strokeWidth="1" />
-                  <polygon points="110,65 155,110 110,155 65,110" fill="none" stroke="#21262d" strokeWidth="1" />
+                  <circle cx="110" cy="110" r="90" fill="none" stroke="var(--border-color)" strokeWidth="1" strokeDasharray="3,3" />
+                  <circle cx="110" cy="110" r="60" fill="none" stroke="var(--border-color)" strokeWidth="1" strokeDasharray="3,3" />
+                  <circle cx="110" cy="110" r="30" fill="none" stroke="var(--border-color)" strokeWidth="1" strokeDasharray="3,3" />
+                  
+                  <line x1="110" y1="20" x2="110" y2="200" stroke="var(--border-color)" strokeWidth="1" />
+                  <line x1="20" y1="110" x2="200" y2="110" stroke="var(--border-color)" strokeWidth="1" />
 
                   <polygon
                     points={`110,${radarPoints.n} ${radarPoints.e},110 110,${radarPoints.s} ${radarPoints.w},110`}
@@ -488,43 +450,41 @@ export default function Dashboard({ solutions, cvSkills }: DashboardProps) {
         <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", flexWrap: "wrap", gap: "12px" }}>
           <div>
             <h2 style={{ fontSize: "16px", fontWeight: "600", color: "var(--text-primary)" }}>
-              {activeTab === "overview" && "Technical Case Studies & Problem Solving"}
-              {activeTab === "casestudies" && "Case Studies"}
-              {activeTab === "dcp" && "Daily Coding Problems"}
-              {activeTab === "leetcode" && "LeetCode Challenges"}
+              {activeTab === "overview" && "Top 5 Highlighted Case Studies & Solutions"}
+              {activeTab === "casestudies" && "Top Technical Case Studies"}
+              {activeTab === "challenges" && "Code Challenges, Algorithms & Full-Stack Apps"}
             </h2>
             <p style={{ fontSize: "12px", color: "var(--text-secondary)", marginTop: "2px" }}>
-              {activeTab === "overview" && "Deep-dives into commercial projects and algorithm implementations."}
-              {activeTab === "casestudies" && "Detailed technical write-ups and results for business systems."}
-              {activeTab === "dcp" && "Daily logic challenges written in C#, C++, or Python."}
-              {activeTab === "leetcode" && (
-                <>
-                  Algorithmic programming solutions optimized for execution times.{" "}
-                  <a
-                    href="https://leetcode.com/u/thomas_h_cook/"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    style={{ color: "var(--accent-secondary)", textDecoration: "none", fontWeight: "600" }}
-                  >
-                    View my LeetCode Profile &amp; Submissions &rarr;
-                  </a>
-                </>
-              )}
+              {activeTab === "overview" && "Top 5 curated technical achievements, prioritizing commercial case studies."}
+              {activeTab === "casestudies" && "Top 5 technical case studies and architectural implementations."}
+              {activeTab === "challenges" && "Filter challenges by platform (LeetCode, Daily Coding, GreatFrontEnd, DevChallenges)."}
             </p>
           </div>
 
-          {activeTab === "overview" || activeTab === "casestudies" ? null : (
+          {activeTab === "challenges" && (
             <div style={{ display: "flex", gap: "12px", alignItems: "center", flexWrap: "wrap" }}>
-              <div className="gh-search-input-wrapper" style={{ margin: 0, width: "220px" }}>
+              <div className="gh-search-input-wrapper" style={{ margin: 0, width: "180px" }}>
                 <input
                   type="text"
                   className="gh-search-input"
-                  placeholder="Search solutions..."
+                  placeholder="Search..."
                   value={searchTerm}
                   onChange={(e) => setSearchTerm(e.target.value)}
                   style={{ padding: "4px 12px", fontSize: "13px" }}
                 />
               </div>
+              <select
+                value={platformFilter}
+                onChange={(e) => setPlatformFilter(e.target.value as any)}
+                className="gh-filter-select"
+                style={{ padding: "4px 10px", fontSize: "13px" }}
+              >
+                <option value="all">All Types &amp; Platforms</option>
+                <option value="leetcode">LeetCode ({stats.categories["LeetCode"] || 0})</option>
+                <option value="dcp">Daily Coding ({stats.categories["Daily Coding Problems"] || 0})</option>
+                <option value="greatfrontend">GreatFrontEnd ({stats.categories["GreatFrontEnd"] || 0})</option>
+                <option value="devchallenges">DevChallenges Apps ({DEV_CHALLENGES_APPS.length})</option>
+              </select>
               <select
                 value={languageFilter}
                 onChange={(e) => setLanguageFilter(e.target.value)}
@@ -562,9 +522,82 @@ export default function Dashboard({ solutions, cvSkills }: DashboardProps) {
         </div>
 
         <div className="solutions-list">
-          {finalSolutions.length > 0 ? (
-            finalSolutions.map((sol) => {
-              const comp = getComplexityInfo(sol.category, sol.slug);
+          {activeTab === "challenges" && platformFilter === "devchallenges" && DEV_CHALLENGES_APPS.length === 0 ? (
+            <div style={{ padding: "40px", textAlign: "center", color: "var(--text-secondary)", border: "1px dashed var(--border-color)", borderRadius: "6px" }}>
+              <p style={{ margin: "0 0 8px 0", fontWeight: "600", color: "var(--text-primary)", fontSize: "14px" }}>
+                No DevChallenges Full-Stack Applications Added Yet
+              </p>
+              <p style={{ margin: 0, fontSize: "13px" }}>
+                Add your project metadata to <code>src/lib/devchallenges.ts</code> when your repositories are ready.
+              </p>
+            </div>
+          ) : (
+            <>
+              {activeTab === "challenges" && DEV_CHALLENGES_APPS.length > 0 && (platformFilter === "all" || platformFilter === "devchallenges") && (
+                DEV_CHALLENGES_APPS.map((app) => (
+                  <article key={app.id} className="solution-item" style={{
+                    display: "flex",
+                    justifyContent: "space-between",
+                    alignItems: "center",
+                    padding: "16px",
+                    border: "1px solid var(--border-color)",
+                    borderRadius: "6px",
+                    backgroundColor: "var(--bg-secondary)",
+                    marginBottom: "12px",
+                    gap: "16px",
+                    flexWrap: "wrap"
+                  }}>
+                    <div className="solution-item-main" style={{ flex: "1", minWidth: "280px" }}>
+                      <div style={{ display: "flex", alignItems: "center", gap: "8px", marginBottom: "4px" }}>
+                        <span className="repo-badge" style={{
+                          backgroundColor: "rgba(163, 113, 247, 0.15)",
+                          color: "#d2a8ff",
+                          borderColor: "rgba(163, 113, 247, 0.4)",
+                          fontSize: "11px",
+                          padding: "1px 6px",
+                          margin: 0
+                        }}>
+                          DevChallenges
+                        </span>
+                        <span className="repo-badge" style={{ fontSize: "11px", padding: "1px 6px" }}>Full-Stack App</span>
+                      </div>
+                      
+                      <h3 style={{ fontSize: "15px", fontWeight: "600", margin: "4px 0" }}>
+                        <a href={app.githubUrl} target="_blank" rel="noopener noreferrer" style={{ color: "var(--accent-secondary)", textDecoration: "none" }}>
+                          {app.title} &rarr;
+                        </a>
+                      </h3>
+                      
+                      <p style={{ fontSize: "13px", color: "var(--text-secondary)", margin: "4px 0 8px 0", lineHeight: "1.4" }}>
+                        {app.description}
+                      </p>
+
+                      <div style={{ display: "flex", gap: "8px", flexWrap: "wrap", alignItems: "center" }}>
+                        {app.tags.map((tag) => (
+                          <span key={tag} className="solution-item-lang" style={{ fontSize: "12px", color: "var(--text-secondary)" }}>
+                            #{tag}
+                          </span>
+                        ))}
+                      </div>
+                    </div>
+
+                    <div style={{ display: "flex", gap: "8px", alignItems: "center" }}>
+                      <a href={app.githubUrl} target="_blank" rel="noopener noreferrer" className="profile-edit-btn" style={{ textDecoration: "none", fontSize: "12px" }}>
+                        GitHub Repo
+                      </a>
+                      {app.demoUrl && (
+                        <a href={app.demoUrl} target="_blank" rel="noopener noreferrer" className="profile-edit-btn" style={{ textDecoration: "none", fontSize: "12px", color: "var(--accent-secondary)" }}>
+                          Live Demo
+                        </a>
+                      )}
+                    </div>
+                  </article>
+                ))
+              )}
+
+              {platformFilter !== "devchallenges" && (finalSolutions.length > 0 ? (
+                finalSolutions.map((sol) => {
+                  const comp = getComplexityInfo(sol.category, sol.slug, sol);
               const isCaseStudy = sol.category === "casestudies";
               return (
                 <article key={sol.id} className="solution-item" style={{
@@ -592,36 +625,26 @@ export default function Dashboard({ solutions, cvSkills }: DashboardProps) {
                         {sol.categoryLabel}
                       </span>
                       {sol.difficulty && (
-                        <span className="repo-badge" style={{
-                          backgroundColor: sol.difficulty === "Easy" ? "rgba(57, 211, 83, 0.15)" :
-                            sol.difficulty === "Medium" ? "rgba(241, 224, 90, 0.15)" :
-                              "rgba(248, 81, 73, 0.15)",
-                          color: sol.difficulty === "Easy" ? "#39d353" :
-                            sol.difficulty === "Medium" ? "#f1e05a" :
-                              "#f85149",
-                          borderColor: sol.difficulty === "Easy" ? "rgba(57, 211, 83, 0.3)" :
-                            sol.difficulty === "Medium" ? "rgba(241, 224, 90, 0.3)" :
-                              "rgba(248, 81, 73, 0.3)",
-                          fontSize: "11px",
-                          padding: "1px 6px",
-                          margin: 0
-                        }}>
+                        <span className={`difficulty-badge difficulty-${sol.difficulty.toLowerCase()}`} style={{ fontSize: "11px", padding: "1px 6px" }}>
                           {sol.difficulty}
                         </span>
                       )}
-                      <h3 className="solution-item-title" style={{ margin: 0 }}>
-                        <Link href={`/solutions/${sol.category}/${sol.slug}`} style={{ textDecoration: "none", color: "var(--accent-secondary)", fontWeight: "600" }}>
-                          {sol.title}
-                        </Link>
-                      </h3>
                     </div>
-                    <p className="solution-item-desc" style={{ margin: "6px 0 8px 0", color: "var(--text-secondary)", fontSize: "13px" }}>
+                    
+                    <h3 style={{ fontSize: "15px", fontWeight: "600", margin: "4px 0" }}>
+                      <Link href={`/solutions/${sol.category}/${sol.slug}`} style={{ color: "var(--accent-secondary)", textDecoration: "none" }}>
+                        {sol.title}
+                      </Link>
+                    </h3>
+                    
+                    <p style={{ fontSize: "13px", color: "var(--text-secondary)", margin: "4px 0 8px 0", lineHeight: "1.4" }}>
                       {sol.summary}
                     </p>
-                    <div className="solution-item-meta" style={{ display: "flex", gap: "12px", alignItems: "center" }}>
+
+                    <div style={{ display: "flex", gap: "12px", alignItems: "center" }}>
                       {sol.files.map((file) => (
-                        <span key={file.name} className="language-indicator" style={{ fontSize: "12px" }}>
-                          <span className={`language-color-circle ${getLanguageColorClass(file.language)}`}></span>
+                        <span key={file.name} className="solution-item-lang" style={{ fontSize: "12px", color: "var(--text-secondary)", display: "inline-flex", alignItems: "center", gap: "4px" }}>
+                          <span className={`lang-color-dot ${getLanguageColorClass(file.language)}`}></span>
                           {formatLanguage(file.language)}
                         </span>
                       ))}
@@ -680,6 +703,8 @@ export default function Dashboard({ solutions, cvSkills }: DashboardProps) {
             <div style={{ padding: "40px", textAlign: "center", color: "var(--text-secondary)", border: "1px dashed var(--border-color)", borderRadius: "6px" }}>
               <p>No solutions match your search or filter criteria.</p>
             </div>
+          ))}
+            </>
           )}
         </div>
       </section>

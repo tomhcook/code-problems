@@ -7,6 +7,12 @@ export interface SolutionFile {
   language: string;
 }
 
+export interface ComplexityInfo {
+  time: string;
+  space: string;
+  label: string;
+}
+
 export interface Solution {
   id: string;
   slug: string;
@@ -18,6 +24,7 @@ export interface Solution {
   files: SolutionFile[];
   date: string;
   difficulty?: "Easy" | "Medium" | "Hard";
+  complexity?: ComplexityInfo;
 }
 
 let LEETCODE_DIFFICULTY: Record<string, "Easy" | "Medium" | "Hard"> = {};
@@ -50,7 +57,6 @@ function formatTitle(slug: string, readmeTitle?: string): string {
   if (readmeTitle) {
     return readmeTitle.replace(/^#\s*/, "").trim();
   }
-  // Fallback to formatting the slug: e.g. "001-TwoSum" -> "001: TwoSum", "DCP-1288" -> "DCP 1288"
   return slug
     .replace("-", " ")
     .replace(/([a-z])([A-Z])/g, "$1 $2")
@@ -64,10 +70,57 @@ function getCategoryLabel(category: string): string {
   if (category.toLowerCase() === "leetcode") {
     return "LeetCode";
   }
+  if (category.toLowerCase() === "greatfrontend") {
+    return "GreatFrontEnd";
+  }
   if (category.toLowerCase() === "casestudies") {
     return "Case Studies";
   }
   return category;
+}
+
+export function parseComplexityFromReadme(readmeContent: string): ComplexityInfo | null {
+  if (!readmeContent) return null;
+
+  let time: string | null = null;
+  let space: string | null = null;
+  let label: string = "Optimal Method";
+
+  const lines = readmeContent.split("\n");
+  for (const line of lines) {
+    const l = line.trim();
+
+    if (/\btime\b/i.test(l) && (l.includes("O(") || /complexity/i.test(l))) {
+      const match = l.match(/O\([^)]+\)/i);
+      if (match) {
+        time = `${match[0]} Time`;
+      }
+    }
+
+    if (/\bspace\b/i.test(l) && (l.includes("O(") || /complexity/i.test(l))) {
+      const match = l.match(/O\([^)]+\)/i);
+      if (match) {
+        space = `${match[0]} Space`;
+      }
+    }
+
+    if (/\boptimal\b|\bmethod\b|\bapproach\b|\brotation\b|\btraversal\b/i.test(l)) {
+      const cleanLabel = l.replace(/^[-*#]+\s*/, "").replace(/\*\*/g, "").trim();
+      if (cleanLabel.length >= 5 && cleanLabel.length <= 40) {
+        label = cleanLabel;
+      }
+    }
+  }
+
+  if (time || space) {
+    return {
+      time: time || "O(N) Time",
+      space: space || "O(1) Space",
+      label: label || "Optimal Method",
+    };
+  }
+
+  return null;
 }
 
 export function getAllSolutions(): Solution[] {
@@ -98,8 +151,6 @@ export function getAllSolutions(): Solution[] {
       for (const file of files) {
         const filePath = path.join(folderPath, file);
         const stat = fs.statSync(filePath);
-        
-        // Handle folder named Readme.md (e.g. LeetCode/001-TwoSum/Readme.md if empty)
         if (stat.isDirectory()) continue;
 
         const fileExt = path.extname(file).toLowerCase();
@@ -116,7 +167,6 @@ export function getAllSolutions(): Solution[] {
         }
       }
 
-      // Try to parse title from Readme
       let title = "";
       let summary = "";
       if (readmeContent) {
@@ -126,7 +176,6 @@ export function getAllSolutions(): Solution[] {
           title = formatTitle(folder, titleLine);
         }
         
-        // Extract a brief summary: first paragraph after title
         const bodyLines = lines
           .map((l) => l.trim())
           .filter((l) => l !== "" && !l.startsWith("#") && !l.startsWith(">"));
@@ -163,6 +212,8 @@ export function getAllSolutions(): Solution[] {
         }
       }
 
+      const parsedComplexity = parseComplexityFromReadme(readmeContent);
+
       solutions.push({
         id: `${category.toLowerCase()}-${folder.toLowerCase()}`,
         slug: folder.toLowerCase(),
@@ -174,6 +225,7 @@ export function getAllSolutions(): Solution[] {
         files: codeFiles,
         date: folderStat.mtime.toISOString(),
         difficulty,
+        complexity: parsedComplexity || undefined,
       });
     }
   }
