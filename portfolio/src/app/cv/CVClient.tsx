@@ -51,12 +51,15 @@ export default function CVClient({ solutions, cvSkills }: CVClientProps) {
     }
   }, []);
 
+  const isProd = process.env.NODE_ENV === "production";
+  const cvPdfPath = isProd ? "/code-problems/Thomas_Cook_CV.pdf" : "/Thomas_Cook_CV.pdf";
+
   return (
     <div className="container">
       {/* Action Buttons Header */}
       <div className="cv-actions" style={{ display: "flex", gap: "8px", justifyContent: "flex-end", marginBottom: "16px" }}>
         <a
-          href="/Thomas_Cook_CV.pdf"
+          href={cvPdfPath}
           target="_blank"
           rel="noopener noreferrer"
           className="profile-edit-btn"
@@ -79,7 +82,7 @@ export default function CVClient({ solutions, cvSkills }: CVClientProps) {
         </a>
 
         <a
-          href="/Thomas_Cook_CV.pdf"
+          href={cvPdfPath}
           download="Thomas_Cook_CV.pdf"
           className="profile-edit-btn"
           style={{
