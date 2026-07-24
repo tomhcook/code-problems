@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import Link from "next/link";
+import Script from "next/script";
 import "./globals.css";
 
 const geistSans = Geist({
@@ -60,6 +61,11 @@ export default function RootLayout({
           </div>
         </header>
         <div style={{ flex: 1 }}>{children}</div>
+        <Script
+          data-goatcounter="https://thomashcook.goatcounter.com/count"
+          src="//gc.zgo.at/count.js"
+          strategy="afterInteractive"
+        />
       </body>
     </html>
   );

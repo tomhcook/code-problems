@@ -146,6 +146,19 @@ export function getAllSolutions(): Solution[] {
         difficulty = LEETCODE_DIFFICULTY[prefix] || "Medium";
       } else if (category.toLowerCase() === "dailycodingproblems") {
         difficulty = "Medium";
+        if (
+          readmeContent.toLowerCase().includes("difficulty: hard") ||
+          readmeContent.toLowerCase().includes("difficulty: [hard]") ||
+          readmeContent.includes("## Difficulty: Hard")
+        ) {
+          difficulty = "Hard";
+        } else if (
+          readmeContent.toLowerCase().includes("difficulty: easy") ||
+          readmeContent.toLowerCase().includes("difficulty: [easy]") ||
+          readmeContent.includes("## Difficulty: Easy")
+        ) {
+          difficulty = "Easy";
+        }
       }
 
       solutions.push({

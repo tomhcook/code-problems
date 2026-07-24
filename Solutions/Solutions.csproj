@@ -1,0 +1,17 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
+    <TargetFramework>net9.0</TargetFramework>
+    <ImplicitUsings>disable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+    <!-- Disable auto-including all C# files to avoid multiple Main method conflicts -->
+    <EnableDefaultCompileItems>false</EnableDefaultCompileItems>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <!-- Compile only the file passed via the CompileFile property -->
+    <Compile Include="$(CompileFile)" Condition="'$(CompileFile)' != ''" />
+    <!-- Fallback placeholder if no file is specified -->
+    <Compile Include="Placeholder.cs" Condition="'$(CompileFile)' == ''" />
+  </ItemGroup>
+</Project>

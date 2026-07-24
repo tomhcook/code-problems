@@ -1,0 +1,15 @@
+E:\git\code-problems\Solutions\bin\Debug\net9.0\Solutions.exe
+E:\git\code-problems\Solutions\bin\Debug\net9.0\Solutions.deps.json
+E:\git\code-problems\Solutions\bin\Debug\net9.0\Solutions.runtimeconfig.json
+E:\git\code-problems\Solutions\bin\Debug\net9.0\Solutions.dll
+E:\git\code-problems\Solutions\bin\Debug\net9.0\Solutions.pdb
+E:\git\code-problems\Solutions\obj\Debug\net9.0\Solutions.GeneratedMSBuildEditorConfig.editorconfig
+E:\git\code-problems\Solutions\obj\Debug\net9.0\Solutions.AssemblyInfoInputs.cache
+E:\git\code-problems\Solutions\obj\Debug\net9.0\Solutions.AssemblyInfo.cs
+E:\git\code-problems\Solutions\obj\Debug\net9.0\Solutions.csproj.CoreCompileInputs.cache
+E:\git\code-problems\Solutions\obj\Debug\net9.0\Solutions.sourcelink.json
+E:\git\code-problems\Solutions\obj\Debug\net9.0\Solutions.dll
+E:\git\code-problems\Solutions\obj\Debug\net9.0\refint\Solutions.dll
+E:\git\code-problems\Solutions\obj\Debug\net9.0\Solutions.pdb
+E:\git\code-problems\Solutions\obj\Debug\net9.0\Solutions.genruntimeconfig.cache
+E:\git\code-problems\Solutions\obj\Debug\net9.0\ref\Solutions.dll

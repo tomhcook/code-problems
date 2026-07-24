@@ -162,6 +162,9 @@ export default function Dashboard({ solutions, cvSkills }: DashboardProps) {
     if (c === "dailycodingproblems" && s.includes("1288")) {
       return { time: "O(N) Time", space: "O(1) Space", label: "Optimal Traversal" };
     }
+    if (c === "dailycodingproblems" && s.includes("1289")) {
+      return { time: "O(I * (N + E)) Time", space: "O(N + E) Space", label: "Iterative Power Method" };
+    }
     if (c === "casestudies" && s.includes("internal-product-suite")) {
       return { time: "Lead Architect", space: "Revenue-Generating", label: "System Design Showcase" };
     }
