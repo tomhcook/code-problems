@@ -1,0 +1,11 @@
+# Workspace local customizations
+.agents/
+
+# C# build outputs
+bin/
+obj/
+*.exe
+
+# Python outputs
+__pycache__/
+*.pyc

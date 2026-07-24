@@ -159,6 +159,9 @@ export default function Dashboard({ solutions, cvSkills }: DashboardProps) {
     if (c === "leetcode" && s.includes("3999")) {
       return { time: "O(N * L) Time", space: "O(N * L) Space", label: "Optimal Rotation" };
     }
+    if (c === "leetcode" && s.includes("3514")) {
+      return { time: "O(N^2 + N * M) Time", space: "O(M) Space", label: "Optimized XOR Pairings" };
+    }
     if (c === "dailycodingproblems" && s.includes("1288")) {
       return { time: "O(N) Time", space: "O(1) Space", label: "Optimal Traversal" };
     }
