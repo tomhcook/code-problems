@@ -407,7 +407,19 @@ export default function Dashboard({ solutions, cvSkills }: DashboardProps) {
               {activeTab === "overview" && "Deep-dives into commercial projects and algorithm implementations."}
               {activeTab === "casestudies" && "Detailed technical write-ups and results for business systems."}
               {activeTab === "dcp" && "Daily logic challenges written in C#, C++, or Python."}
-              {activeTab === "leetcode" && "Algorithmic programming solutions optimized for execution times."}
+              {activeTab === "leetcode" && (
+                <>
+                  Algorithmic programming solutions optimized for execution times.{" "}
+                  <a
+                    href="https://leetcode.com/u/thomas_h_cook/"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    style={{ color: "var(--accent-secondary)", textDecoration: "none", fontWeight: "600" }}
+                  >
+                    View my LeetCode Profile &amp; Submissions &rarr;
+                  </a>
+                </>
+              )}
             </p>
           </div>
 

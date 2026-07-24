@@ -17,3 +17,5 @@ We can solve this problem in $O(N)$ time by using a hash map to keep track of nu
 
 - **Time Complexity:** $O(N)$ where $N$ is the number of elements in the array, as we traverse the list of numbers only once and hash map lookups take $O(1)$ time on average.
 - **Space Complexity:** $O(N)$ to store the numbers and their indices in the hash map.
+
+[LeetCode Problem Link](https://leetcode.com/problems/two-sum/)
