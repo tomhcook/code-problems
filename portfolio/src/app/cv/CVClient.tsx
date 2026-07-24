@@ -99,19 +99,41 @@ export default function CVClient({ solutions, cvSkills }: CVClientProps) {
       setHighlightedSkillName(skillName);
     }
 
-    // Find the first target element and scroll it into view
-    const element = document.querySelector(`.skill-target-${category}`);
-    if (element) {
-      element.scrollIntoView({ behavior: "smooth", block: "center" });
+    // Scroll to the timeline item where the skill is used
+    const skillItem = allMatrixSkills.find((s) => s.name === skillName);
+    if (skillItem && skillItem.roles && skillItem.roles.length > 0) {
+      const order = ["hwm", "dg", "ingenta", "personal"];
+      const targetRole = order.find((roleId) => skillItem.roles.includes(roleId));
+      if (targetRole) {
+        const element = document.getElementById(`timeline-${targetRole}`);
+        if (element) {
+          element.scrollIntoView({ behavior: "smooth", block: "center" });
+        }
+      }
+    } else {
+      const element = document.getElementById("professional-experience");
+      if (element) {
+        element.scrollIntoView({ behavior: "smooth", block: "start" });
+      }
     }
 
-    // Reset highlight after 3 seconds
+    // Reset highlight after 3.5 seconds
     setTimeout(() => {
       setHighlightedCategory((current) => current === category ? null : current);
       if (skillName) {
         setHighlightedSkillName((current) => current === skillName ? null : current);
       }
-    }, 3000);
+    }, 3500);
+  };
+
+  const isBulletHighlighted = (bulletSkills: string[], category: string) => {
+    if (activeSkillHover) {
+      return bulletSkills.includes(activeSkillHover);
+    }
+    if (highlightedSkillName) {
+      return bulletSkills.includes(highlightedSkillName);
+    }
+    return highlightedCategory === category;
   };
 
   React.useEffect(() => {
@@ -324,7 +346,7 @@ export default function CVClient({ solutions, cvSkills }: CVClientProps) {
           </section>
 
           {/* Professional Work Experience Timeline */}
-          <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: "12px", borderBottom: "1px solid var(--border-color)", paddingBottom: "8px" }}>
+          <div id="professional-experience" style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: "12px", borderBottom: "1px solid var(--border-color)", paddingBottom: "8px" }}>
             <h2 style={{ fontSize: "16px", fontWeight: "600" }}>Professional Experience</h2>
 
             {/* Hats filtering */}
@@ -360,42 +382,42 @@ export default function CVClient({ solutions, cvSkills }: CVClientProps) {
               <div className="timeline-desc">
                 <ul style={{ listStyleType: "disc" }}>
                   {(activeHat === "all" || activeHat === "lead" || activeHat === "backend") && (
-                    <li className={`skill-target-lead skill-target-backend ${highlightedCategory === "lead" || highlightedCategory === "backend" ? "highlight-glow" : ""}`}>
+                    <li className={`skill-target-lead skill-target-backend ${isBulletHighlighted(["C#", ".NET Core", "ASP.NET Core", "Docker", "Azure DevOps", "MSSQL", "SQL Tuning", "Entity Framework", "REST APIs", "Git", "Agile / Scrum"], "backend") ? "highlight-glow" : ""}`}>
                       <strong>[Product Development]</strong> Designed and delivered a custom proprietary internal product from the ground up, resulting in streamlined business operations and new revenue generation, by architecting the full-stack solution using C#, Docker, SQL, and Azure cloud services.
                     </li>
                   )}
                   {(activeHat === "all" || activeHat === "backend") && (
-                    <li className={`skill-target-backend skill-target-databases ${highlightedCategory === "backend" || highlightedCategory === "databases" ? "highlight-glow" : ""}`}>
+                    <li className={`skill-target-backend skill-target-databases ${isBulletHighlighted(["MSSQL", "SQL Tuning", "Redis Caching", "Datadog"], "backend") ? "highlight-glow" : ""}`}>
                       <strong>[Backend &amp; DB]</strong> Reduced API response times by 60% across 9 Shape Up cycles, as measured by Datadog latency monitoring, by actively refactoring internal API endpoints, resolving production bugs, tuning MSSQL query paths and database indexes, and introducing caching layers across 50+ merged PRs.
                     </li>
                   )}
                   {(activeHat === "all" || activeHat === "maui" || activeHat === "web") && (
-                    <li className={`skill-target-mobile skill-target-web ${highlightedCategory === "mobile" || highlightedCategory === "web" ? "highlight-glow" : ""}`}>
+                    <li className={`skill-target-mobile skill-target-web ${isBulletHighlighted([".NET MAUI", "Android SDK", "xUnit Testing"], "mobile") ? "highlight-glow" : ""}`}>
                       <strong>[Mobile &amp; Web]</strong> Ensured continued Android store compliance and platform compatibility, as validated by passing automated test suites, by migrating a cross-platform .NET MAUI mobile application from Android 15 to Android 16 (SDK 36) and writing xUnit test coverage.
                     </li>
                   )}
                   {(activeHat === "all" || activeHat === "backend") && (
-                    <li className={`skill-target-backend ${highlightedCategory === "backend" ? "highlight-glow" : ""}`}>
+                    <li className={`skill-target-backend ${isBulletHighlighted(["ASP.NET Core", "MSSQL", "SQL Tuning", "REST APIs"], "backend") ? "highlight-glow" : ""}`}>
                       <strong>[Backend &amp; DB]</strong> Improved production system reliability and data-driven workflow support, as demonstrated by reduced incident rates, by building backend services and web APIs using ASP.NET Core and MSSQL.
                     </li>
                   )}
                   {(activeHat === "all" || activeHat === "backend") && (
-                    <li className={`skill-target-backend ${highlightedCategory === "backend" ? "highlight-glow" : ""}`}>
+                    <li className={`skill-target-backend ${isBulletHighlighted(["C#", ".NET Core", "MSSQL", "Docker"], "backend") ? "highlight-glow" : ""}`}>
                       <strong>[Backend &amp; DB]</strong> Made key technical decisions on architecture, database models, and service integration across the HWM Global platform.
                     </li>
                   )}
                   {(activeHat === "all" || activeHat === "cloud") && (
-                    <li className={`skill-target-cloud ${highlightedCategory === "cloud" ? "highlight-glow" : ""}`}>
+                    <li className={`skill-target-cloud ${isBulletHighlighted(["Azure DevOps", "CI/CD Pipelines"], "cloud") ? "highlight-glow" : ""}`}>
                       <strong>[Cloud &amp; DevOps]</strong> Held full deployment responsibility, managing Azure DevOps CI/CD build and release pipelines for active production.
                     </li>
                   )}
                   {(activeHat === "all" || activeHat === "web") && (
-                    <li className={`skill-target-web ${highlightedCategory === "web" ? "highlight-glow" : ""}`}>
+                    <li className={`skill-target-web ${isBulletHighlighted(["React", "TypeScript", "JavaScript", "REST APIs"], "web") ? "highlight-glow" : ""}`}>
                       <strong>[Web &amp; Full Stack]</strong> Decreased client-facing tickets by 20% and accelerated bug-fixing cycles across 6+ products by implementing custom React UI enhancements, integrating Microsoft Clarity tracking, and developing a compliant cookie consent banner across both frontend and backend architectures.
                     </li>
                   )}
                   {(activeHat === "all" || activeHat === "lead") && (
-                    <li className={`skill-target-lead ${highlightedCategory === "lead" ? "highlight-glow" : ""}`}>
+                    <li className={`skill-target-lead ${isBulletHighlighted(["Shape Up", "Agile / Scrum"], "lead") ? "highlight-glow" : ""}`}>
                       <strong>[Team Lead]</strong> Kept engineering delivery on schedule during a leadership gap, as measured by sprint completion rates, by stepping in as temporary Team Lead to coordinate the backlog and run daily standups.
                     </li>
                   )}
@@ -416,22 +438,22 @@ export default function CVClient({ solutions, cvSkills }: CVClientProps) {
               <div className="timeline-desc">
                 <ul style={{ listStyleType: "disc" }}>
                   {(activeHat === "all" || activeHat === "web") && (
-                    <li className={`skill-target-web ${highlightedCategory === "web" ? "highlight-glow" : ""}`}>
+                    <li className={`skill-target-web ${isBulletHighlighted(["Node.js", "Angular 17", "TypeScript", "JavaScript"], "web") ? "highlight-glow" : ""}`}>
                       <strong>[Web &amp; Full Stack]</strong> Delivered customer-facing integration solutions, as measured by successful client deployments, by building interactive frontends and backend connectors using Node.js, Angular 17, TypeScript, and JavaScript.
                     </li>
                   )}
                   {(activeHat === "all" || activeHat === "backend" || activeHat === "web" || activeHat === "cloud") && (
-                    <li className={`skill-target-backend skill-target-web ${highlightedCategory === "backend" || highlightedCategory === "web" ? "highlight-glow" : ""}`}>
+                    <li className={`skill-target-backend skill-target-web ${isBulletHighlighted(["REST APIs", "AWS Lambda", "Postman", "CI/CD Pipelines", "Git"], "backend") ? "highlight-glow" : ""}`}>
                       <strong>[Backend &amp; Web]</strong> Automated customer service workflows for enterprise clients, as measured by reduced manual ticket handling, by connecting support platforms (Dixa, Zendesk) with AWS cloud services via REST APIs.
                     </li>
                   )}
                   {(activeHat === "all" || activeHat === "backend") && (
-                    <li className={`skill-target-web ${highlightedCategory === "web" ? "highlight-glow" : ""}`}>
+                    <li className={`skill-target-web ${isBulletHighlighted(["Generative AI", "Python", "Node.js", "JavaScript"], "web") ? "highlight-glow" : ""}`}>
                       <strong>[Backend &amp; DB]</strong> Improved AI-driven customer support accuracy, as measured by content routing success rates, by contributing to backend generative AI content routing and support tools.
                     </li>
                   )}
                   {(activeHat === "all" || activeHat === "cloud") && (
-                    <li>
+                    <li className={isBulletHighlighted(["AWS Lambda", "Postman", "Git"], "cloud") ? "highlight-glow" : ""}>
                       <strong>[Cloud &amp; DevOps]</strong> Maintained feature delivery quality in production, as measured by zero critical deployment failures, by utilizing AWS services and Postman for testing, monitoring, and deployment.
                     </li>
                   )}
@@ -452,17 +474,17 @@ export default function CVClient({ solutions, cvSkills }: CVClientProps) {
               <div className="timeline-desc">
                 <ul style={{ listStyleType: "disc" }}>
                   {(activeHat === "all" || activeHat === "backend" || activeHat === "cloud") && (
-                    <li className={`skill-target-backend skill-target-cloud ${highlightedCategory === "backend" || highlightedCategory === "cloud" ? "highlight-glow" : ""}`}>
+                    <li className={`skill-target-backend skill-target-cloud ${isBulletHighlighted(["C#", ".NET Core", "AWS Lambda", "REST APIs"], "backend") ? "highlight-glow" : ""}`}>
                       <strong>[Backend &amp; DB]</strong> Improved platform maintainability and reduced technical debt, as measured by modernised service coverage, by refactoring legacy C# .NET platforms and integrating serverless workflows using AWS Lambda.
                     </li>
                   )}
                   {(activeHat === "all" || activeHat === "backend" || activeHat === "cloud") && (
-                    <li className={`skill-target-backend ${highlightedCategory === "backend" ? "highlight-glow" : ""}`}>
+                    <li className={`skill-target-backend ${isBulletHighlighted(["C#", ".NET Core", "REST APIs"], "backend") ? "highlight-glow" : ""}`}>
                       <strong>[Backend &amp; DB]</strong> Increased shipping operations reliability for enterprise clients, as measured by carrier API uptime, by connecting system databases with global shipping carrier APIs including UPS, DPD, and Royal Mail.
                     </li>
                   )}
                   {(activeHat === "all" || activeHat === "lead" || activeHat === "backend") && (
-                    <li>
+                    <li className={isBulletHighlighted(["Agile / Scrum", "Git"], "lead") ? "highlight-glow" : ""}>
                       <strong>[Team Lead]</strong> Contributed to consistent sprint delivery and code quality, as measured by peer review completion rates, by collaborating in an Agile structure using Jira for task estimates, tracking, and reviews.
                     </li>
                   )}
@@ -481,17 +503,19 @@ export default function CVClient({ solutions, cvSkills }: CVClientProps) {
                 <span className="timeline-date">2019 — 2022</span>
               </div>
               <div className="timeline-desc">
-                <p>Reduced physical engine testing costs, as validated by dissertation results, by applying machine learning models to optimise engine power output predictions.</p>
+                <p className={isBulletHighlighted(["Python", "Ruby", "C++", "Machine Learning", "Git"], "personal") ? "highlight-glow" : ""} style={{ transition: "all 0.3s ease" }}>
+                  Reduced physical engine testing costs, as validated by dissertation results, by applying machine learning models to optimise engine power output predictions.
+                </p>
               </div>
             </div>
 
           </section>
 
-          {/* GitHub Style Contribution Matrix for Skills */}
+          {/* Technical Contribution Matrix */}
           <section style={{ marginTop: "32px", borderTop: "1px solid var(--border-color)", paddingTop: "24px" }}>
             <h2 style={{ fontSize: "16px", fontWeight: "600", marginBottom: "4px" }}>Technical Contribution Matrix</h2>
             <p style={{ fontSize: "12px", color: "var(--text-secondary)", marginBottom: "16px" }}>
-              Color intensity represents **proficiency level / depth of experience** (hover for details, click to highlight where utilized in the timeline above).
+              Color intensity represents **proficiency level / depth of experience** (hover column headers or cells, click row headers to scroll to career cards).
             </p>
             
             {/* The Grid */}
