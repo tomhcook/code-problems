@@ -61,6 +61,36 @@ export default function RootLayout({
           </div>
         </header>
         <div style={{ flex: 1 }}>{children}</div>
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify({
+              "@context": "https://schema.org",
+              "@type": "Person",
+              "name": "Thomas Cook",
+              "jobTitle": "Software Engineer",
+              "worksFor": {
+                "@type": "Organization",
+                "name": "HWM Global"
+              },
+              "url": "https://tomhcook.github.io/code-problems/",
+              "sameAs": [
+                "https://www.linkedin.com/in/thomas-cook-se/",
+                "https://github.com/tomhcook"
+              ],
+              "knowsAbout": [
+                "Software Engineering",
+                "C#",
+                ".NET Core",
+                "ASP.NET Core",
+                "SQL Database Optimization",
+                "React",
+                "TypeScript",
+                "Azure DevOps"
+              ]
+            })
+          }}
+        />
         <Script
           data-goatcounter="https://thomashcook.goatcounter.com/count"
           src="//gc.zgo.at/count.js"

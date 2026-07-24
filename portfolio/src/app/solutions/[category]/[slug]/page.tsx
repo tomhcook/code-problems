@@ -14,9 +14,36 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
       title: "Solution Not Found",
     };
   }
+  const fullTitle = `${solution.title} | Thomas Cook — Software Engineer`;
+  const summary = solution.summary || `Technical software engineering solution and code explanation for ${solution.title} by Thomas Cook.`;
+  const url = `https://tomhcook.github.io/code-problems/solutions/${category}/${slug}`;
+
   return {
-    title: `${solution.title} | Thomas Cook Portfolio`,
-    description: solution.summary || `Technical solution and code explanation for ${solution.title} by Thomas Cook.`,
+    title: fullTitle,
+    description: summary,
+    keywords: [
+      "Thomas Cook software",
+      "Thomas Cook software engineer",
+      solution.title,
+      solution.categoryLabel,
+      "Thomas Cook developer"
+    ],
+    authors: [{ name: "Thomas Cook", url: "https://tomhcook.github.io/code-problems/" }],
+    alternates: {
+      canonical: url,
+    },
+    openGraph: {
+      title: fullTitle,
+      description: summary,
+      url,
+      siteName: "Thomas Cook — Software Engineer",
+      type: "article",
+    },
+    twitter: {
+      card: "summary",
+      title: fullTitle,
+      description: summary,
+    },
   };
 }
 
