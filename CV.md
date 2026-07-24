@@ -55,4 +55,4 @@ Oct 2024 – Jun 2025
 
 ## Skills
 
-Backend: C#, .NET Core, ASP.NET Core, Entity Framework, REST APIs | Frontend: React, TypeScript, Angular, Node.js, JavaScript | Databases: MSSQL, SQL, Query Optimisation, Index Tuning | Mobile: .NET MAUI, Android SDK, xUnit | Cloud and DevOps: Azure DevOps, AWS Lambda, Docker, CI/CD Pipelines | Tools: Git, Jira, Postman, Microsoft Clarity | Methodologies: Shape Up, Agile, Scrum
+Backend: C#, .NET Core, ASP.NET Core, Entity Framework, REST APIs, Python, Ruby, C++ | Frontend: React, TypeScript, Angular, Node.js, JavaScript | Databases: MSSQL, SQL, Query Optimisation, Index Tuning, Redis Caching | Mobile & AI: .NET MAUI, Android SDK, xUnit, Generative AI, Machine Learning | Cloud and DevOps: Azure DevOps, AWS Lambda, Docker, Datadog, CI/CD Pipelines | Tools: Git, Jira, Postman, Microsoft Clarity | Methodologies: Shape Up, Agile, Scrum

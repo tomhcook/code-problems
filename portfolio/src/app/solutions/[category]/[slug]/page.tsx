@@ -1,9 +1,24 @@
 import React from "react";
+import { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { marked } from "marked";
 import hljs from "highlight.js";
 import { getAllSolutions, getSolutionBySlug } from "../../../../lib/solutions";
 import SolutionDetailClient from "./SolutionDetailClient";
+
+export async function generateMetadata({ params }: PageProps): Promise<Metadata> {
+  const { category, slug } = await params;
+  const solution = getSolutionBySlug(category, slug);
+  if (!solution) {
+    return {
+      title: "Solution Not Found",
+    };
+  }
+  return {
+    title: `${solution.title} | Thomas Cook Portfolio`,
+    description: solution.summary || `Technical solution and code explanation for ${solution.title} by Thomas Cook.`,
+  };
+}
 
 interface PageProps {
   params: Promise<{

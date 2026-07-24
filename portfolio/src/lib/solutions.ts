@@ -80,11 +80,13 @@ export function getAllSolutions(): Solution[] {
   const categories = fs.readdirSync(SOLUTIONS_DIR);
 
   for (const category of categories) {
+    if (["bin", "obj", ".vs", ".git", "node_modules", "out", ".next"].includes(category.toLowerCase())) continue;
     const categoryPath = path.join(SOLUTIONS_DIR, category);
     if (!fs.statSync(categoryPath).isDirectory()) continue;
 
     const folders = fs.readdirSync(categoryPath);
     for (const folder of folders) {
+      if (["bin", "obj", ".vs", ".git", "node_modules", "out", ".next"].includes(folder.toLowerCase())) continue;
       const folderPath = path.join(categoryPath, folder);
       const folderStat = fs.statSync(folderPath);
       if (!folderStat.isDirectory()) continue;

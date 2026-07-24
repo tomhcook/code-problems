@@ -14,9 +14,78 @@ interface CVClientProps {
   cvSkills: CVSkill[];
 }
 
+const allMatrixSkills = [
+  // Languages & Backend
+  { name: "C#", short: "C#", level: "Advanced", desc: "Core language for enterprise systems", color: "#39d353", cat: "Backend & Languages", targetCat: "backend", roles: ["hwm", "ingenta", "personal"] },
+  { name: ".NET Core", short: ".NET", level: "Advanced", desc: "ASP.NET Core APIs and workers", color: "#39d353", cat: "Backend & Languages", targetCat: "backend", roles: ["hwm", "ingenta", "personal"] },
+  { name: "ASP.NET Core", short: "ASP.NET", level: "Advanced", desc: "Web APIs & Microservices", color: "#39d353", cat: "Backend & Languages", targetCat: "backend", roles: ["hwm", "personal"] },
+  { name: "Python", short: "Python", level: "Advanced", desc: "Data processing and scripts", color: "#26a641", cat: "Backend & Languages", targetCat: "backend", roles: ["hwm", "dg", "personal"] },
+  { name: "Ruby", short: "Ruby", level: "Proficient", desc: "API services & scripting", color: "#006d21", cat: "Backend & Languages", targetCat: "backend", roles: ["hwm", "personal"] },
+  { name: "C++", short: "C++", level: "Proficient", desc: "Algorithm execution & systems", color: "#006d21", cat: "Backend & Languages", targetCat: "backend", roles: ["personal"] },
+  { name: "REST APIs", short: "APIs", level: "Advanced", desc: "Secure endpoints & serialization", color: "#39d353", cat: "Backend & Languages", targetCat: "backend", roles: ["hwm", "dg", "ingenta", "personal"] },
+
+  // Frontend & Web
+  { name: "React", short: "React", level: "Advanced", desc: "Interactive UI applications", color: "#26a641", cat: "Frontend & Web", targetCat: "web", roles: ["hwm", "personal"] },
+  { name: "TypeScript", short: "TS", level: "Advanced", desc: "Type-safe web interfaces", color: "#26a641", cat: "Frontend & Web", targetCat: "web", roles: ["hwm", "dg", "personal"] },
+  { name: "Angular 17", short: "Angular", level: "Advanced", desc: "Enterprise frontend systems", color: "#26a641", cat: "Frontend & Web", targetCat: "web", roles: ["dg", "personal"] },
+  { name: "Node.js", short: "Node", level: "Advanced", desc: "Serverless functions & scripts", color: "#26a641", cat: "Frontend & Web", targetCat: "web", roles: ["hwm", "dg", "personal"] },
+  { name: "JavaScript", short: "JS", level: "Advanced", desc: "Interactive client behaviors", color: "#26a641", cat: "Frontend & Web", targetCat: "web", roles: ["hwm", "dg", "personal"] },
+
+  // Databases & Cache
+  { name: "MSSQL", short: "MSSQL", level: "Advanced", desc: "Relational database models", color: "#39d353", cat: "Databases & Storage", targetCat: "databases", roles: ["hwm", "dg", "ingenta", "personal"] },
+  { name: "SQL Tuning", short: "SQL", level: "Advanced", desc: "Query paths and index structures", color: "#39d353", cat: "Databases & Storage", targetCat: "databases", roles: ["hwm", "dg", "ingenta", "personal"] },
+  { name: "Redis Caching", short: "Redis", level: "Proficient", desc: "High frequency state caching", color: "#006d21", cat: "Databases & Storage", targetCat: "databases", roles: ["hwm", "personal"] },
+  { name: "Entity Framework", short: "EF", level: "Advanced", desc: "ORM data access and migration", color: "#39d353", cat: "Databases & Storage", targetCat: "databases", roles: ["hwm", "personal"] },
+
+  // Mobile & AI
+  { name: ".NET MAUI", short: "MAUI", level: "Proficient", desc: "Cross-platform mobile systems", color: "#006d21", cat: "Mobile & AI", targetCat: "mobile", roles: ["hwm", "personal"] },
+  { name: "Android SDK", short: "Android", level: "Proficient", desc: "API migrations & store compliance", color: "#006d21", cat: "Mobile & AI", targetCat: "mobile", roles: ["hwm", "personal"] },
+  { name: "Generative AI", short: "GenAI", level: "Proficient", desc: "LLM integration & content routing", color: "#006d21", cat: "Mobile & AI", targetCat: "backend", roles: ["hwm", "dg", "personal"] },
+  { name: "Machine Learning", short: "ML", level: "Familiar", desc: "Dissertation predictive models", color: "#0e4429", cat: "Mobile & AI", targetCat: "backend", roles: ["hwm", "personal"] },
+
+  // DevOps & DevOps Infrastructure
+  { name: "Docker", short: "Docker", level: "Proficient", desc: "Containerized environments", color: "#006d21", cat: "DevOps & Tools", targetCat: "cloud", roles: ["hwm", "personal"] },
+  { name: "Azure DevOps", short: "Azure", level: "Proficient", desc: "CI/CD build/release pipelines", color: "#006d21", cat: "DevOps & Tools", targetCat: "cloud", roles: ["hwm", "personal"] },
+  { name: "AWS Lambda", short: "AWS", level: "Proficient", desc: "Serverless integration components", color: "#006d21", cat: "DevOps & Tools", targetCat: "cloud", roles: ["dg", "ingenta", "personal"] },
+  { name: "CI/CD Pipelines", short: "CI/CD", level: "Proficient", desc: "Continuous integration workflows", color: "#006d21", cat: "DevOps & Tools", targetCat: "cloud", roles: ["hwm", "dg", "ingenta", "personal"] },
+  { name: "Datadog", short: "Ddog", level: "Proficient", desc: "APM tracing, metrics, and dashboards", color: "#006d21", cat: "DevOps & Tools", targetCat: "cloud", roles: ["hwm", "personal"] },
+  { name: "Git", short: "Git", level: "Advanced", desc: "PR flows and version control", color: "#26a641", cat: "DevOps & Tools", targetCat: "cloud", roles: ["hwm", "dg", "ingenta", "personal"] },
+
+  // Methodologies & Testing
+  { name: "Shape Up", short: "ShapeUp", level: "Advanced", desc: "Product cycle execution", color: "#39d353", cat: "Methodologies & QA", targetCat: "lead", roles: ["hwm", "personal"] },
+  { name: "Agile / Scrum", short: "Agile", level: "Advanced", desc: "Sprint execution & backlogs", color: "#39d353", cat: "Methodologies & QA", targetCat: "lead", roles: ["hwm", "ingenta", "personal"] },
+  { name: "xUnit Testing", short: "xUnit", level: "Proficient", desc: "Automated test suite coverage", color: "#006d21", cat: "Methodologies & QA", targetCat: "mobile", roles: ["hwm", "personal"] },
+  { name: "Postman", short: "Postman", level: "Advanced", desc: "API testing & integration checks", color: "#26a641", cat: "Methodologies & QA", targetCat: "web", roles: ["hwm", "dg", "personal"] }
+];
+
 export default function CVClient({ solutions, cvSkills }: CVClientProps) {
   const [activeHat, setActiveHat] = useState("all");
   const [highlightedCategory, setHighlightedCategory] = useState<string | null>(null);
+  const [highlightedSkillName, setHighlightedSkillName] = useState<string | null>(null);
+  const [activeSkillHover, setActiveSkillHover] = useState<string | null>(null);
+  const [highlightedTimelineId, setHighlightedTimelineId] = useState<string | null>(null);
+
+  const triggerTimelineScroll = (id: string) => {
+    setHighlightedTimelineId(id);
+    const element = document.getElementById(`timeline-${id}`);
+    if (element) {
+      element.scrollIntoView({ behavior: "smooth", block: "center" });
+    }
+    setTimeout(() => {
+      setHighlightedTimelineId((current) => current === id ? null : current);
+    }, 2500);
+  };
+
+  const categorizedMatrixSkills = React.useMemo(() => {
+    const groups: Record<string, typeof allMatrixSkills> = {};
+    allMatrixSkills.forEach((item) => {
+      if (!groups[item.cat]) {
+        groups[item.cat] = [];
+      }
+      groups[item.cat].push(item);
+    });
+    return groups;
+  }, []);
 
   const getLanguageColorClass = (lang: string) => {
     if (lang === "csharp") return "lang-color-csharp";
@@ -24,8 +93,11 @@ export default function CVClient({ solutions, cvSkills }: CVClientProps) {
     return "lang-color-default";
   };
 
-  const triggerHighlight = (category: string) => {
+  const triggerHighlight = (category: string, skillName?: string) => {
     setHighlightedCategory(category);
+    if (skillName) {
+      setHighlightedSkillName(skillName);
+    }
 
     // Find the first target element and scroll it into view
     const element = document.querySelector(`.skill-target-${category}`);
@@ -36,6 +108,9 @@ export default function CVClient({ solutions, cvSkills }: CVClientProps) {
     // Reset highlight after 3 seconds
     setTimeout(() => {
       setHighlightedCategory((current) => current === category ? null : current);
+      if (skillName) {
+        setHighlightedSkillName((current) => current === skillName ? null : current);
+      }
     }, 3000);
   };
 
@@ -108,8 +183,12 @@ export default function CVClient({ solutions, cvSkills }: CVClientProps) {
         {/* Left Sidebar: GitHub Profile Info & Achievements */}
         <aside className="profile-sidebar">
           <div className="profile-avatar-container">
-            <div className="profile-avatar">
-              TC
+            <div className="profile-avatar" style={{ overflow: "hidden" }}>
+              <img 
+                src="https://media.licdn.com/dms/image/v2/D4E03AQFHVzNHJljAnw/profile-displayphoto-scale_400_400/B4EZ.PYwdcGgAg-/0/1784817061315?e=1786579200&v=beta&t=CF11sK9kk0Z1RGCtwGGrmjM9xWxa-TQRaqreTJc5RU4" 
+                alt="Thomas Cook" 
+                style={{ width: "100%", height: "100%", objectFit: "cover" }} 
+              />
             </div>
           </div>
           <h1 className="profile-name" style={{ fontSize: "22px" }}>Thomas Cook</h1>
@@ -269,7 +348,7 @@ export default function CVClient({ solutions, cvSkills }: CVClientProps) {
           <section className="timeline">
 
             {/* HWM Global */}
-            <div className="timeline-item active">
+            <div id="timeline-hwm" className="timeline-item active" style={{ boxShadow: highlightedTimelineId === "hwm" ? "0 0 15px rgba(57, 211, 83, 0.4)" : undefined, transition: "box-shadow 0.3s ease" }}>
               <div className="timeline-item-header">
                 <div>
                   <span className="timeline-title">Software Engineer</span>
@@ -325,7 +404,7 @@ export default function CVClient({ solutions, cvSkills }: CVClientProps) {
             </div>
 
             {/* Digital Genius */}
-            <div className="timeline-item">
+            <div id="timeline-dg" className="timeline-item" style={{ boxShadow: highlightedTimelineId === "dg" ? "0 0 15px rgba(57, 211, 83, 0.4)" : undefined, transition: "box-shadow 0.3s ease" }}>
               <div className="timeline-item-header">
                 <div>
                   <span className="timeline-title">Solutions Engineer</span>
@@ -361,7 +440,7 @@ export default function CVClient({ solutions, cvSkills }: CVClientProps) {
             </div>
 
             {/* Ingenta */}
-            <div className="timeline-item">
+            <div id="timeline-ingenta" className="timeline-item" style={{ boxShadow: highlightedTimelineId === "ingenta" ? "0 0 15px rgba(57, 211, 83, 0.4)" : undefined, transition: "box-shadow 0.3s ease" }}>
               <div className="timeline-item-header">
                 <div>
                   <span className="timeline-title">Software Consultant</span>
@@ -372,8 +451,8 @@ export default function CVClient({ solutions, cvSkills }: CVClientProps) {
               </div>
               <div className="timeline-desc">
                 <ul style={{ listStyleType: "disc" }}>
-                  {(activeHat === "all" || activeHat === "backend") && (
-                    <li className={`skill-target-backend ${highlightedCategory === "backend" ? "highlight-glow" : ""}`}>
+                  {(activeHat === "all" || activeHat === "backend" || activeHat === "cloud") && (
+                    <li className={`skill-target-backend skill-target-cloud ${highlightedCategory === "backend" || highlightedCategory === "cloud" ? "highlight-glow" : ""}`}>
                       <strong>[Backend &amp; DB]</strong> Improved platform maintainability and reduced technical debt, as measured by modernised service coverage, by refactoring legacy C# .NET platforms and integrating serverless workflows using AWS Lambda.
                     </li>
                   )}
@@ -392,7 +471,7 @@ export default function CVClient({ solutions, cvSkills }: CVClientProps) {
             </div>
 
             {/* University of Lincoln */}
-            <div className="timeline-item">
+            <div id="timeline-personal" className="timeline-item" style={{ boxShadow: highlightedTimelineId === "personal" ? "0 0 15px rgba(57, 211, 83, 0.4)" : undefined, transition: "box-shadow 0.3s ease" }}>
               <div className="timeline-item-header">
                 <div>
                   <span className="timeline-title">Education: BSc Games Computing Science (2:1)</span>
@@ -406,6 +485,174 @@ export default function CVClient({ solutions, cvSkills }: CVClientProps) {
               </div>
             </div>
 
+          </section>
+
+          {/* GitHub Style Contribution Matrix for Skills */}
+          <section style={{ marginTop: "32px", borderTop: "1px solid var(--border-color)", paddingTop: "24px" }}>
+            <h2 style={{ fontSize: "16px", fontWeight: "600", marginBottom: "4px" }}>Technical Contribution Matrix</h2>
+            <p style={{ fontSize: "12px", color: "var(--text-secondary)", marginBottom: "16px" }}>
+              Color intensity represents **proficiency level / depth of experience** (hover for details, click to highlight where utilized in the timeline above).
+            </p>
+            
+            {/* The Grid */}
+            <div style={{
+              backgroundColor: "var(--bg-secondary)",
+              border: "1px solid var(--border-color)",
+              borderRadius: "6px",
+              padding: "16px",
+              marginBottom: "24px",
+              overflowX: "auto"
+            }}>
+              <div style={{ display: "flex", flexDirection: "column", gap: "6px", minWidth: "580px" }}>
+                {/* Header labels for columns */}
+                <div style={{ display: "flex", alignItems: "center" }}>
+                  <div style={{ width: "140px" }} /> {/* spacer */}
+                  <div style={{ display: "flex", gap: "5px" }}>
+                    {allMatrixSkills.map((item) => (
+                      <div
+                        key={item.name}
+                        style={{
+                          width: "15px",
+                          height: "50px",
+                          position: "relative",
+                          cursor: "pointer"
+                        }}
+                        onMouseOver={() => setActiveSkillHover(item.name)}
+                        onMouseOut={() => setActiveSkillHover(null)}
+                        onClick={() => triggerHighlight(item.targetCat, item.name)}
+                      >
+                        <div
+                          style={{
+                            position: "absolute",
+                            bottom: "0",
+                            left: "2px",
+                            transform: "rotate(-45deg)",
+                            transformOrigin: "bottom left",
+                            fontSize: "9px",
+                            color: "var(--text-secondary)",
+                            whiteSpace: "nowrap",
+                            fontWeight: activeSkillHover === item.name ? "bold" : "normal",
+                            transition: "font-weight 0.15s ease",
+                            pointerEvents: "none"
+                          }}
+                          title={item.name}
+                        >
+                          {item.short}
+                        </div>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+
+                {/* Rows for Roles */}
+                {[
+                  { id: "hwm", name: "HWM Global", targetCat: "backend" },
+                  { id: "dg", name: "Digital Genius", targetCat: "web" },
+                  { id: "ingenta", name: "Ingenta", targetCat: "backend" },
+                  { id: "personal", name: "Academic & Personal", targetCat: "mobile" }
+                ].map((role) => (
+                  <div key={role.id} style={{ display: "flex", alignItems: "center" }}>
+                    {/* Role Label */}
+                    <div 
+                      style={{ 
+                        width: "140px", 
+                        fontSize: "12px", 
+                        fontWeight: "600", 
+                        color: "var(--text-primary)",
+                        cursor: "pointer",
+                        textDecoration: highlightedTimelineId === role.id ? "underline" : "none",
+                        textDecorationColor: "var(--color-success)"
+                      }}
+                      onClick={() => triggerTimelineScroll(role.id)}
+                      title={`Click to scroll to ${role.name}`}
+                    >
+                      {role.name}
+                    </div>
+
+                    {/* Columns (Skills) */}
+                    <div style={{ display: "flex", gap: "5px" }}>
+                      {allMatrixSkills.map((item) => {
+                        const isUsed = item.roles.includes(role.id);
+                        const cellColor = isUsed ? item.color : "#161b22";
+                        const isHovered = activeSkillHover === item.name;
+                        return (
+                          <div
+                            key={item.name}
+                            style={{
+                              width: "15px",
+                              height: "15px",
+                              backgroundColor: cellColor,
+                              borderRadius: "2px",
+                              cursor: isUsed ? "pointer" : "default",
+                              transform: isHovered && isUsed ? "scale(1.3)" : "none",
+                              boxShadow: isHovered && isUsed ? `0 0 8px ${item.color}` : "none",
+                              transition: "all 0.15s ease",
+                              zIndex: isHovered ? 10 : 1,
+                              opacity: isHovered && !isUsed ? 0.4 : 1
+                            }}
+                            title={isUsed ? `${item.name} (${item.level}) - Used at ${role.name}. ${item.desc}` : `${item.name} - Not used in this role`}
+                            onClick={() => isUsed && triggerHighlight(item.targetCat, item.name)}
+                            onMouseOver={() => setActiveSkillHover(item.name)}
+                            onMouseOut={() => setActiveSkillHover(null)}
+                          />
+                        );
+                      })}
+                    </div>
+                  </div>
+                ))}
+              </div>
+
+              <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginTop: "16px", fontSize: "11px", color: "var(--text-secondary)" }}>
+                <span>{allMatrixSkills.length} skills mapped across roles (hover column headers or cells)</span>
+                <div style={{ display: "flex", alignItems: "center", gap: "4px" }}>
+                  <span>Familiar</span>
+                  <div style={{ width: "10px", height: "10px", backgroundColor: "#0e4429", borderRadius: "1px" }} />
+                  <div style={{ width: "10px", height: "10px", backgroundColor: "#006d21", borderRadius: "1px" }} />
+                  <div style={{ width: "10px", height: "10px", backgroundColor: "#26a641", borderRadius: "1px" }} />
+                  <div style={{ width: "10px", height: "10px", backgroundColor: "#39d353", borderRadius: "1px" }} />
+                  <span>Expert</span>
+                </div>
+              </div>
+            </div>
+
+            {/* Compact list of categorized skills */}
+            <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(180px, 1fr))", gap: "16px" }}>
+              {Object.entries(categorizedMatrixSkills).map(([category, items]) => (
+                <div key={category} style={{ display: "flex", flexDirection: "column", gap: "8px" }}>
+                  <h3 style={{ fontSize: "13px", fontWeight: "600", color: "var(--text-primary)", borderBottom: "1px solid var(--border-color)", paddingBottom: "4px" }}>
+                    {category}
+                  </h3>
+                  <div style={{ display: "flex", flexDirection: "column", gap: "4px" }}>
+                    {items.map((item) => {
+                      const isHighlighted = highlightedSkillName === item.name || activeSkillHover === item.name;
+                      return (
+                        <div
+                          key={item.name}
+                          style={{
+                            display: "flex",
+                            alignItems: "center",
+                            gap: "8px",
+                            fontSize: "12px",
+                            backgroundColor: isHighlighted ? "rgba(57, 211, 83, 0.15)" : "transparent",
+                            padding: "2px 6px",
+                            borderRadius: "4px",
+                            transition: "all 0.3s ease",
+                            cursor: "pointer",
+                            transform: isHighlighted ? "translateX(4px)" : "none"
+                          }}
+                          onMouseOver={() => setActiveSkillHover(item.name)}
+                          onMouseOut={() => setActiveSkillHover(null)}
+                          onClick={() => triggerHighlight(item.targetCat, item.name)}
+                        >
+                          <div style={{ width: "8px", height: "8px", backgroundColor: item.color, borderRadius: "50%" }} />
+                          <span style={{ color: "var(--text-secondary)" }}>{item.name}</span>
+                        </div>
+                      );
+                    })}
+                  </div>
+                </div>
+              ))}
+            </div>
           </section>
 
         </main>

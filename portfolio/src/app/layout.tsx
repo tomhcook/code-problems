@@ -15,8 +15,8 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "Thomas Cook Portfolio",
-  description: "Software Engineer & Full Stack Developer Solutions Portfolio",
+  title: "Thomas Cook | Software Engineer & Full Stack Developer Portfolio",
+  description: "Professional portfolio and technical solutions of Thomas Cook, a Software Engineer specializing in C#, .NET Core, ASP.NET Core, SQL database optimization, React, and TypeScript.",
 };
 
 export default function RootLayout({

@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://tomhcook.github.io/code-problems/sitemap.xml
