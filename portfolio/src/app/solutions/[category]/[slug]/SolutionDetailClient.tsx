@@ -14,6 +14,7 @@ interface SolutionDetailClientProps {
   categoryLabel: string;
   readmeHtml: string;
   files: HighlightedFile[];
+  slug: string;
 }
 
 export default function SolutionDetailClient({
@@ -21,6 +22,7 @@ export default function SolutionDetailClient({
   categoryLabel,
   readmeHtml,
   files,
+  slug,
 }: SolutionDetailClientProps) {
   const [activeTab, setActiveTab] = useState(0);
 
@@ -37,6 +39,48 @@ export default function SolutionDetailClient({
   };
 
   const isCaseStudy = categoryLabel === "Case Studies";
+  const isApiOpt = slug.toLowerCase().includes("api-optimization");
+  const isAndroidUpgrade = slug.toLowerCase().includes("android-upgrade");
+
+  const sidebarData = isAndroidUpgrade ? {
+    labels: [
+      { text: "case-study", bg: "rgba(163, 113, 247, 0.15)", color: "#d3b3f7", border: "rgba(163, 113, 247, 0.4)" },
+      { text: "c#", bg: "rgba(23, 134, 0, 0.15)", color: "#7ef76d", border: "rgba(23, 134, 0, 0.4)" },
+      { text: ".net-maui", bg: "rgba(49, 120, 198, 0.15)", color: "#7dc3ff", border: "rgba(49, 120, 198, 0.4)" },
+      { text: "android-sdk-36", bg: "rgba(56, 139, 253, 0.15)", color: "#58a6ff", border: "rgba(56, 139, 253, 0.4)" },
+      { text: "xunit", bg: "rgba(46, 160, 67, 0.15)", color: "#56d364", border: "rgba(46, 160, 67, 0.4)" }
+    ],
+    company: "HWM",
+    role: "Mobile Developer",
+    projects: "Android 16 Upgrade Migration",
+    milestone: "Active Upgrade PR Submitted",
+    cvHighlight: "mobile"
+  } : isApiOpt ? {
+    labels: [
+      { text: "case-study", bg: "rgba(163, 113, 247, 0.15)", color: "#d3b3f7", border: "rgba(163, 113, 247, 0.4)" },
+      { text: "c#", bg: "rgba(23, 134, 0, 0.15)", color: "#7ef76d", border: "rgba(23, 134, 0, 0.4)" },
+      { text: "react", bg: "rgba(49, 120, 198, 0.15)", color: "#7dc3ff", border: "rgba(49, 120, 198, 0.4)" },
+      { text: "docker", bg: "rgba(56, 139, 253, 0.15)", color: "#58a6ff", border: "rgba(56, 139, 253, 0.4)" },
+      { text: "azure-mssql", bg: "rgba(46, 160, 67, 0.15)", color: "#56d364", border: "rgba(46, 160, 67, 0.4)" }
+    ],
+    company: "HWM",
+    role: "Full Stack Developer",
+    projects: "API Performance & Integrations",
+    milestone: "60% Latency Reduction & 50+ PRs Shipped",
+    cvHighlight: "backend"
+  } : {
+    labels: [
+      { text: "case-study", bg: "rgba(163, 113, 247, 0.15)", color: "#d3b3f7", border: "rgba(163, 113, 247, 0.4)" },
+      { text: "ruby", bg: "rgba(112, 21, 22, 0.15)", color: "#ff8284", border: "rgba(112, 21, 22, 0.4)" },
+      { text: "docker", bg: "rgba(56, 139, 253, 0.15)", color: "#58a6ff", border: "rgba(56, 139, 253, 0.4)" },
+      { text: "azure-mssql", bg: "rgba(46, 160, 67, 0.15)", color: "#56d364", border: "rgba(46, 160, 67, 0.4)" }
+    ],
+    company: "HWM",
+    role: "Lead Architect",
+    projects: "Internal Products Suite",
+    milestone: "Production Launch & Direct Revenue Delivery",
+    cvHighlight: "lead"
+  };
 
   if (isCaseStudy) {
     return (
@@ -154,36 +198,48 @@ export default function SolutionDetailClient({
             <div style={{ borderBottom: "1px solid var(--border-color)", paddingBottom: "16px" }}>
               <div style={{ fontWeight: "600", marginBottom: "8px", color: "var(--text-primary)" }}>Labels</div>
               <div style={{ display: "flex", flexWrap: "wrap", gap: "6px" }}>
-                <span style={{ backgroundColor: "rgba(163, 113, 247, 0.15)", color: "#d3b3f7", border: "1px solid rgba(163, 113, 247, 0.4)", padding: "2px 8px", borderRadius: "2em", fontSize: "11px", fontWeight: "600" }}>case-study</span>
-                <span style={{ backgroundColor: "rgba(112, 21, 22, 0.15)", color: "#ff8284", border: "1px solid rgba(112, 21, 22, 0.4)", padding: "2px 8px", borderRadius: "2em", fontSize: "11px", fontWeight: "600" }}>ruby</span>
-                <span style={{ backgroundColor: "rgba(56, 139, 253, 0.15)", color: "#58a6ff", border: "1px solid rgba(56, 139, 253, 0.4)", padding: "2px 8px", borderRadius: "2em", fontSize: "11px", fontWeight: "600" }}>docker</span>
-                <span style={{ backgroundColor: "rgba(46, 160, 67, 0.15)", color: "#56d364", border: "1px solid rgba(46, 160, 67, 0.4)", padding: "2px 8px", borderRadius: "2em", fontSize: "11px", fontWeight: "600" }}>azure-mssql</span>
+                {sidebarData.labels.map((lbl) => (
+                  <span
+                    key={lbl.text}
+                    style={{
+                      backgroundColor: lbl.bg,
+                      color: lbl.color,
+                      border: `1px solid ${lbl.border}`,
+                      padding: "2px 8px",
+                      borderRadius: "2em",
+                      fontSize: "11px",
+                      fontWeight: "600"
+                    }}
+                  >
+                    {lbl.text}
+                  </span>
+                ))}
               </div>
             </div>
 
             <div style={{ borderBottom: "1px solid var(--border-color)", paddingBottom: "16px" }}>
               <div style={{ fontWeight: "600", marginBottom: "8px", color: "var(--text-primary)" }}>Company</div>
-              <span style={{ fontWeight: "500", color: "var(--text-primary)" }}>HWM Global</span>
+              <span style={{ fontWeight: "500", color: "var(--text-primary)" }}>{sidebarData.company}</span>
             </div>
 
             <div style={{ borderBottom: "1px solid var(--border-color)", paddingBottom: "16px" }}>
               <div style={{ fontWeight: "600", marginBottom: "8px", color: "var(--text-primary)" }}>Role</div>
-              <span style={{ fontWeight: "500", color: "var(--text-primary)" }}>Software Engineer</span>
+              <span style={{ fontWeight: "500", color: "var(--text-primary)" }}>{sidebarData.role}</span>
             </div>
 
             <div style={{ borderBottom: "1px solid var(--border-color)", paddingBottom: "16px" }}>
               <div style={{ fontWeight: "600", marginBottom: "8px", color: "var(--text-primary)" }}>Projects</div>
-              <span style={{ fontWeight: "500", color: "var(--text-primary)" }}>Internal Products Suite</span>
+              <span style={{ fontWeight: "500", color: "var(--text-primary)" }}>{sidebarData.projects}</span>
             </div>
 
             <div style={{ borderBottom: "1px solid var(--border-color)", paddingBottom: "16px" }}>
               <div style={{ fontWeight: "600", marginBottom: "8px", color: "var(--text-primary)" }}>Milestone</div>
-              <span style={{ fontWeight: "500", color: "var(--text-primary)" }}>Production Launch &amp; Direct Revenue Delivery</span>
+              <span style={{ fontWeight: "500", color: "var(--text-primary)" }}>{sidebarData.milestone}</span>
             </div>
 
             <div style={{ borderBottom: "1px solid var(--border-color)", paddingBottom: "16px" }}>
               <div style={{ fontWeight: "600", marginBottom: "8px", color: "var(--text-primary)" }}>Resume Reference</div>
-              <Link href="/cv?highlight=backend" style={{ fontWeight: "600", color: "var(--accent-secondary)", textDecoration: "none", display: "inline-flex", alignItems: "center", gap: "4px" }}>
+              <Link href={`/cv?highlight=${sidebarData.cvHighlight}`} style={{ fontWeight: "600", color: "var(--accent-secondary)", textDecoration: "none", display: "inline-flex", alignItems: "center", gap: "4px" }}>
                 View in CV (Highlighted) &rarr;
               </Link>
             </div>

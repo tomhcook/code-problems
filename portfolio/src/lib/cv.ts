@@ -61,9 +61,9 @@ function getDefaultSkills(): CVSkill[] {
     { name: "Backend Dev (C# / .NET)", level: "Advanced", percentage: 95 },
     { name: "Full Stack Web (React / TS)", level: "Advanced", percentage: 90 },
     { name: "Databases (MSSQL)", level: "Advanced", percentage: 90 },
-    { name: "Mobile Dev (.NET MAUI)", level: "Intermediate", percentage: 80 },
-    { name: "Cloud & DevOps (Azure / AWS)", level: "Intermediate", percentage: 75 },
-    { name: "AI & LLM Integrations", level: "Intermediate", percentage: 75 },
+    { name: "Mobile Dev (.NET MAUI)", level: "Proficient", percentage: 80 },
+    { name: "Cloud & DevOps (Azure / AWS)", level: "Proficient", percentage: 75 },
+    { name: "AI & LLM Integrations", level: "Proficient", percentage: 75 },
     { name: "Python Engineering", level: "Advanced", percentage: 85 }
   ];
 }

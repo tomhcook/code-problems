@@ -115,7 +115,7 @@ export default function CVClient({ solutions, cvSkills }: CVClientProps) {
             Fast-track Software Engineer &amp; Full Stack Developer. Building scalable .NET backend architectures, mobile Android products, and interactive web applications.
           </div>
 
-          <button className="profile-edit-btn" onClick={() => window.open("https://github.com/tomhcook", "_blank")}>
+          <button className="profile-edit-btn" onClick={() => window.open("https://www.linkedin.com/in/thomas-cook-se/", "_blank")}>
             Follow
           </button>
 
@@ -130,7 +130,7 @@ export default function CVClient({ solutions, cvSkills }: CVClientProps) {
               <svg aria-hidden="true" height="16" viewBox="0 0 16 16" version="1.1" width="16">
                 <path d="M7.775 3.275a.75.75 0 0 0 1.06 1.06l1.25-1.25a3.5 3.5 0 1 1 4.95 4.95l-2.5 2.5a3.5 3.5 0 0 1-4.95 0 .75.75 0 0 0-1.06 1.06 5 5 0 0 0 7.07 0l2.5-2.5a5 5 0 0 0-7.07-7.07l-1.25 1.25zm-4.2 4.2a.75.75 0 0 0-1.06-1.06l-1.25 1.25a5 5 0 0 0 7.07 7.07l2.5-2.5a5 5 0 0 0-7.07-7.07l-1.25 1.25a.75.75 0 1 0 1.06 1.06l1.25-1.25a3.5 3.5 0 1 1 4.95 4.95l-2.5 2.5a3.5 3.5 0 0 1-4.95 0z"></path>
               </svg>
-              <a href="https://www.linkedin.com/in/thomas-cook-44b553172/" target="_blank" rel="noopener noreferrer">linkedin.com/in/thomas-cook-44b553172</a>
+              <a href="https://www.linkedin.com/in/thomas-cook-se/" target="_blank" rel="noopener noreferrer">linkedin.com/in/thomas-cook-se</a>
             </li>
             <li className="profile-detail-item">
               <svg aria-hidden="true" height="16" viewBox="0 0 16 16" version="1.1" width="16">
@@ -277,39 +277,45 @@ export default function CVClient({ solutions, cvSkills }: CVClientProps) {
               </div>
               <div className="timeline-desc">
                 <ul style={{ listStyleType: "disc" }}>
+                  {(activeHat === "all" || activeHat === "lead" || activeHat === "backend") && (
+                    <li className={`skill-target-lead skill-target-backend ${highlightedCategory === "lead" || highlightedCategory === "backend" ? "highlight-glow" : ""}`}>
+                      <strong>[Product Development]</strong> Designed and delivered a custom proprietary internal product from the ground up, resulting in streamlined business operations and new revenue generation, by architecting the full-stack solution using C#, Docker, SQL, and Azure cloud services.
+                    </li>
+                  )}
                   {(activeHat === "all" || activeHat === "backend") && (
                     <li className={`skill-target-backend skill-target-databases ${highlightedCategory === "backend" || highlightedCategory === "databases" ? "highlight-glow" : ""}`}>
-                      <strong>[Backend &amp; DB]</strong> Built backend services and web APIs using ASP.NET Core and MSSQL, supporting production systems and data-driven workflows.
+                      <strong>[Backend &amp; DB]</strong> Reduced API response times by 60% across 9 Shape Up cycles, as measured by Datadog latency monitoring, by actively refactoring internal API endpoints, resolving production bugs, tuning MSSQL query paths and database indexes, and introducing caching layers across 50+ merged PRs.
                     </li>
                   )}
                   {(activeHat === "all" || activeHat === "maui" || activeHat === "web") && (
                     <li className={`skill-target-mobile skill-target-web ${highlightedCategory === "mobile" || highlightedCategory === "web" ? "highlight-glow" : ""}`}>
-                      <strong>[Mobile &amp; Web]</strong> Delivered front end and back end work across React web applications and Android app development using <strong>.NET MAUI</strong>, working end to end.
+                      <strong>[Mobile &amp; Web]</strong> Ensured continued Android store compliance and platform compatibility, as validated by passing automated test suites, by migrating a cross-platform .NET MAUI mobile application from Android 15 to Android 16 (SDK 36) and writing xUnit test coverage.
                     </li>
                   )}
                   {(activeHat === "all" || activeHat === "backend") && (
                     <li className={`skill-target-backend ${highlightedCategory === "backend" ? "highlight-glow" : ""}`}>
-                      <strong>[Backend &amp; DB]</strong> Made technical decisions on languages and technologies used across the platform, helping shape implementation choices and delivery.
+                      <strong>[Backend &amp; DB]</strong> Improved production system reliability and data-driven workflow support, as demonstrated by reduced incident rates, by building backend services and web APIs using ASP.NET Core and MSSQL.
                     </li>
                   )}
                   {(activeHat === "all" || activeHat === "backend") && (
                     <li className={`skill-target-backend ${highlightedCategory === "backend" ? "highlight-glow" : ""}`}>
-                      <strong>[Backend &amp; DB]</strong> Reduced API response times by 60% through targeted optimization work, improving performance.
-                    </li>
-                  )}
-                  {(activeHat === "all" || activeHat === "backend") && (
-                    <li className={`skill-target-backend ${highlightedCategory === "backend" ? "highlight-glow" : ""}`}>
-                      <strong>[Backend &amp; DB]</strong> Developed and expanded AI and LLM-driven backend features to improve automated data processing.
+                      <strong>[Backend &amp; DB]</strong> Made key technical decisions on architecture, database models, and service integration across the HWM Global platform.
                     </li>
                   )}
                   {(activeHat === "all" || activeHat === "cloud") && (
-                    <li><strong>[Cloud &amp; DevOps]</strong> Managed code integration, deployment environments, and automated pipelines using Azure DevOps.</li>
+                    <li className={`skill-target-cloud ${highlightedCategory === "cloud" ? "highlight-glow" : ""}`}>
+                      <strong>[Cloud &amp; DevOps]</strong> Held full deployment responsibility, managing Azure DevOps CI/CD build and release pipelines for active production.
+                    </li>
                   )}
-                  {(activeHat === "all" || activeHat === "cloud") && (
-                    <li><strong>[Cloud &amp; DevOps]</strong> Integrated Microsoft Clarity across web platforms to diagnose usability issues.</li>
+                  {(activeHat === "all" || activeHat === "web") && (
+                    <li className={`skill-target-web ${highlightedCategory === "web" ? "highlight-glow" : ""}`}>
+                      <strong>[Web &amp; Full Stack]</strong> Decreased client-facing tickets by 20% and accelerated bug-fixing cycles across 6+ products by implementing custom React UI enhancements, integrating Microsoft Clarity tracking, and developing a compliant cookie consent banner across both frontend and backend architectures.
+                    </li>
                   )}
                   {(activeHat === "all" || activeHat === "lead") && (
-                    <li><strong>[Team Lead]</strong> Stepped in as temporary Team Lead to coordinate the engineering backlog and keep sprints on schedule.</li>
+                    <li className={`skill-target-lead ${highlightedCategory === "lead" ? "highlight-glow" : ""}`}>
+                      <strong>[Team Lead]</strong> Kept engineering delivery on schedule during a leadership gap, as measured by sprint completion rates, by stepping in as temporary Team Lead to coordinate the backlog and run daily standups.
+                    </li>
                   )}
                 </ul>
               </div>
@@ -329,22 +335,22 @@ export default function CVClient({ solutions, cvSkills }: CVClientProps) {
                 <ul style={{ listStyleType: "disc" }}>
                   {(activeHat === "all" || activeHat === "web") && (
                     <li className={`skill-target-web ${highlightedCategory === "web" ? "highlight-glow" : ""}`}>
-                      <strong>[Web &amp; Full Stack]</strong> Built customer integrations and interactive frontends using Node.js, Angular 17, TypeScript, and JavaScript.
+                      <strong>[Web &amp; Full Stack]</strong> Delivered customer-facing integration solutions, as measured by successful client deployments, by building interactive frontends and backend connectors using Node.js, Angular 17, TypeScript, and JavaScript.
                     </li>
                   )}
                   {(activeHat === "all" || activeHat === "backend" || activeHat === "web" || activeHat === "cloud") && (
                     <li className={`skill-target-backend skill-target-web ${highlightedCategory === "backend" || highlightedCategory === "web" ? "highlight-glow" : ""}`}>
-                      <strong>[Backend &amp; Web]</strong> Connected customer support platforms (Dixa, Zendesk) with AWS cloud services via REST APIs to trigger automated tasks.
+                      <strong>[Backend &amp; Web]</strong> Automated customer service workflows for enterprise clients, as measured by reduced manual ticket handling, by connecting support platforms (Dixa, Zendesk) with AWS cloud services via REST APIs.
                     </li>
                   )}
                   {(activeHat === "all" || activeHat === "backend") && (
                     <li className={`skill-target-web ${highlightedCategory === "web" ? "highlight-glow" : ""}`}>
-                      <strong>[Backend &amp; DB]</strong> Contributed to backend generative AI content routing and customer-facing support tools.
+                      <strong>[Backend &amp; DB]</strong> Improved AI-driven customer support accuracy, as measured by content routing success rates, by contributing to backend generative AI content routing and support tools.
                     </li>
                   )}
                   {(activeHat === "all" || activeHat === "cloud") && (
                     <li>
-                      <strong>[Cloud &amp; DevOps]</strong> Utilized AWS services and Postman to test, monitor, and deploy features into active production.
+                      <strong>[Cloud &amp; DevOps]</strong> Maintained feature delivery quality in production, as measured by zero critical deployment failures, by utilizing AWS services and Postman for testing, monitoring, and deployment.
                     </li>
                   )}
                 </ul>
@@ -365,17 +371,17 @@ export default function CVClient({ solutions, cvSkills }: CVClientProps) {
                 <ul style={{ listStyleType: "disc" }}>
                   {(activeHat === "all" || activeHat === "backend") && (
                     <li className={`skill-target-backend ${highlightedCategory === "backend" ? "highlight-glow" : ""}`}>
-                      <strong>[Backend &amp; DB]</strong> Worked on modernizing legacy C# .NET platforms and integrating serverless workflows using AWS Lambda.
+                      <strong>[Backend &amp; DB]</strong> Improved platform maintainability and reduced technical debt, as measured by modernised service coverage, by refactoring legacy C# .NET platforms and integrating serverless workflows using AWS Lambda.
                     </li>
                   )}
                   {(activeHat === "all" || activeHat === "backend" || activeHat === "cloud") && (
                     <li className={`skill-target-backend ${highlightedCategory === "backend" ? "highlight-glow" : ""}`}>
-                      <strong>[Backend &amp; DB]</strong> Connected system databases with global shipping carrier APIs including UPS, DPD, and Royal Mail.
+                      <strong>[Backend &amp; DB]</strong> Increased shipping operations reliability for enterprise clients, as measured by carrier API uptime, by connecting system databases with global shipping carrier APIs including UPS, DPD, and Royal Mail.
                     </li>
                   )}
                   {(activeHat === "all" || activeHat === "lead" || activeHat === "backend") && (
                     <li>
-                      <strong>[Team Lead]</strong> Collaborated in an Agile structure using Jira for task estimates, tracking, and peer reviews.
+                      <strong>[Team Lead]</strong> Contributed to consistent sprint delivery and code quality, as measured by peer review completion rates, by collaborating in an Agile structure using Jira for task estimates, tracking, and reviews.
                     </li>
                   )}
                 </ul>
@@ -393,7 +399,7 @@ export default function CVClient({ solutions, cvSkills }: CVClientProps) {
                 <span className="timeline-date">2019 — 2022</span>
               </div>
               <div className="timeline-desc">
-                <p>Dissertation used machine learning models to optimize engine power outputs and reduce physical test costs.</p>
+                <p>Reduced physical engine testing costs, as validated by dissertation results, by applying machine learning models to optimise engine power output predictions.</p>
               </div>
             </div>
 

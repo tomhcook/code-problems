@@ -59,6 +59,7 @@ export default async function Page({ params }: PageProps) {
       categoryLabel={solution.categoryLabel}
       readmeHtml={readmeHtml}
       files={highlightedFiles}
+      slug={slug}
     />
   );
 }

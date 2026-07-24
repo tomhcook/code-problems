@@ -165,6 +165,12 @@ export default function Dashboard({ solutions, cvSkills }: DashboardProps) {
     if (c === "casestudies" && s.includes("internal-product-suite")) {
       return { time: "Lead Architect", space: "Revenue-Generating", label: "System Design Showcase" };
     }
+    if (c === "casestudies" && s.includes("api-optimization")) {
+      return { time: "Full Stack Developer", space: "Efficiency", label: "Maintenance Showcase" };
+    }
+    if (c === "casestudies" && s.includes("android-upgrade")) {
+      return { time: "Mobile Developer", space: "Android 16 Upgrade", label: "Active Upgrade" };
+    }
     return null;
   };
 
@@ -176,10 +182,7 @@ export default function Dashboard({ solutions, cvSkills }: DashboardProps) {
 
       let matchesFilter = true;
       if (activeTab === "overview") {
-        matchesFilter =
-          filterType === "all" ||
-          (filterType === "solutions" && sol.category !== "casestudies") ||
-          (filterType === "casestudies" && sol.category === "casestudies");
+        matchesFilter = sol.category === "casestudies";
       } else if (activeTab === "casestudies") {
         matchesFilter = sol.category === "casestudies";
       } else if (activeTab === "dcp") {
@@ -263,16 +266,15 @@ export default function Dashboard({ solutions, cvSkills }: DashboardProps) {
             <span className="github-tab-count">{stats.categories["Case Studies"] || 0}</span>
           </button>
 
-          <button
-            onClick={() => setActiveTab("dcp")}
-            className={`github-tab-btn ${activeTab === "dcp" ? "active" : ""}`}
-          >
-            <svg aria-hidden="true" height="16" viewBox="0 0 16 16" version="1.1" width="16">
-              <path d="M2 2.5A2.5 2.5 0 0 1 4.5 0h8.75a.75.75 0 0 1 .75.75v12.5a.75.75 0 0 1-.75.75h-2.5a.75.75 0 1 1 0-1.5h1.75v-2h-8a1 1 0 0 0-.714 1.7.75.75 0 1 1-1.072 1.05A2.495 2.495 0 0 1 2 11.5Zm10.5-1h-8a1 1 0 0 0-1 1v6.708A2.486 2.486 0 0 1 4.5 9h8ZM5 12.25a.25.25 0 0 1 .25-.25h3.5a.25.25 0 0 1 .25.25v3.25a.25.25 0 0 1-.4.2l-1.45-1.087a.25.25 0 0 0-.3 0L5.4 16.7a.25.25 0 0 1-.4-.2Z"></path>
+          <Link href="/cv" className="github-tab-btn" style={{ textDecoration: "none" }}>
+            <svg aria-hidden="true" height="16" viewBox="0 0 16 16" version="1.1" width="16" fill="var(--text-secondary)">
+              <path d="M2 3h6a4 4 0 0 1 8 0h6v18H2V3z"></path>
+              <path d="M6 8h12"></path>
+              <path d="M6 12h12"></path>
+              <path d="M6 16h12"></path>
             </svg>
-            <span>daily-coding-problems</span>
-            <span className="github-tab-count">{stats.categories["Daily Coding Problems"] || 0}</span>
-          </button>
+            <span>Resume</span>
+          </Link>
 
           <button
             onClick={() => setActiveTab("leetcode")}
@@ -285,15 +287,16 @@ export default function Dashboard({ solutions, cvSkills }: DashboardProps) {
             <span className="github-tab-count">{stats.categories["LeetCode"] || 0}</span>
           </button>
 
-          <Link href="/cv" className="github-tab-btn" style={{ textDecoration: "none" }}>
-            <svg aria-hidden="true" height="16" viewBox="0 0 16 16" version="1.1" width="16" fill="var(--text-secondary)">
-              <path d="M2 3h6a4 4 0 0 1 8 0h6v18H2V3z"></path>
-              <path d="M6 8h12"></path>
-              <path d="M6 12h12"></path>
-              <path d="M6 16h12"></path>
+          <button
+            onClick={() => setActiveTab("dcp")}
+            className={`github-tab-btn ${activeTab === "dcp" ? "active" : ""}`}
+          >
+            <svg aria-hidden="true" height="16" viewBox="0 0 16 16" version="1.1" width="16">
+              <path d="M2 2.5A2.5 2.5 0 0 1 4.5 0h8.75a.75.75 0 0 1 .75.75v12.5a.75.75 0 0 1-.75.75h-2.5a.75.75 0 1 1 0-1.5h1.75v-2h-8a1 1 0 0 0-.714 1.7.75.75 0 1 1-1.072 1.05A2.495 2.495 0 0 1 2 11.5Zm10.5-1h-8a1 1 0 0 0-1 1v6.708A2.486 2.486 0 0 1 4.5 9h8ZM5 12.25a.25.25 0 0 1 .25-.25h3.5a.25.25 0 0 1 .25.25v3.25a.25.25 0 0 1-.4.2l-1.45-1.087a.25.25 0 0 0-.3 0L5.4 16.7a.25.25 0 0 1-.4-.2Z"></path>
             </svg>
-            <span>Interactive Resume / CV</span>
-          </Link>
+            <span>daily-coding-problems</span>
+            <span className="github-tab-count">{stats.categories["Daily Coding Problems"] || 0}</span>
+          </button>
         </div>
       </section>
 
@@ -374,20 +377,64 @@ export default function Dashboard({ solutions, cvSkills }: DashboardProps) {
                 </div>
               </Link>
 
-              <div className="pinned-card" style={{ cursor: "default" }}>
+              <Link href="/solutions/casestudies/api-optimization" className="pinned-card" style={{ cursor: "pointer", textDecoration: "none" }}>
                 <div>
                   <div className="pinned-card-title" style={{ display: "flex", alignItems: "center", gap: "8px" }}>
-                    <span style={{ color: "var(--accent-secondary)", fontWeight: "600" }}>systems-integration-optimization</span>
+                    <span style={{ color: "var(--accent-secondary)", fontWeight: "600" }}>api-performance-optimization</span>
                   </div>
                   <p className="pinned-card-desc">
-                    Reduced API response times by 60% through targeted MSSQL query path and caching optimizations. Integrated carrier endpoints (UPS, DHL) and generative AI content routing.
+                    Reduced API response times by 60% through SQL query tuning, Redis caching, and refactoring under a Shape Up lifecycle structure at HWM.
                   </p>
                 </div>
                 <div className="pinned-card-meta">
                   <span className="language-indicator">
-                    <span className="language-color-circle lang-color-default"></span>
-                    Backend Systems
+                    <span className="language-color-circle lang-color-csharp"></span>
+                    C# / React / Docker / Azure / MSSQL
                   </span>
+                </div>
+              </Link>
+
+              <div className="pinned-card" style={{ cursor: "default" }}>
+                <div>
+                  <div className="pinned-card-title" style={{ display: "flex", alignItems: "center", gap: "8px" }}>
+                    <span style={{ color: "var(--accent-secondary)", fontWeight: "600" }}>algorithmic-problem-solving</span>
+                  </div>
+                  <p className="pinned-card-desc" style={{ marginBottom: "12px" }}>
+                    Completed various algorithm and data structure challenges to maintain sharp problem-solving skills.
+                  </p>
+
+                  <div style={{ display: "flex", gap: "16px", flexWrap: "wrap", fontSize: "13px" }}>
+                    <div>
+                      <strong>LeetCode:</strong> {solutions.filter(s => s.category === "leetcode").length} Solved
+                      <div style={{ fontSize: "11px", color: "var(--text-secondary)", marginTop: "2px" }}>
+                        <span style={{ color: "#39d353" }}>●</span> {solutions.filter(s => s.category === "leetcode" && s.difficulty === "Easy").length} Easy /
+                        <span style={{ color: "#f1e05a" }}> ●</span> {solutions.filter(s => s.category === "leetcode" && s.difficulty === "Medium").length} Med /
+                        <span style={{ color: "#f85149" }}> ●</span> {solutions.filter(s => s.category === "leetcode" && s.difficulty === "Hard").length} Hard
+                      </div>
+                    </div>
+                    <div>
+                      <strong>Daily Coding:</strong> {solutions.filter(s => s.category === "dailycodingproblems").length} Solved
+                    </div>
+                  </div>
+                </div>
+                <div className="pinned-card-meta" style={{ marginTop: "12px", display: "flex", justifyContent: "space-between", width: "100%", alignItems: "center" }}>
+                  <span className="language-indicator">
+                    Python / C# / C++
+                  </span>
+                  <button
+                    onClick={() => setActiveTab("leetcode")}
+                    style={{
+                      background: "none",
+                      border: "none",
+                      color: "var(--accent-secondary)",
+                      cursor: "pointer",
+                      fontSize: "12px",
+                      fontWeight: "600",
+                      padding: 0
+                    }}
+                  >
+                    View Solutions &rarr;
+                  </button>
                 </div>
               </div>
             </section>
@@ -460,70 +507,7 @@ export default function Dashboard({ solutions, cvSkills }: DashboardProps) {
             </p>
           </div>
 
-          {activeTab === "overview" ? (
-            <div style={{ display: "flex", gap: "12px", alignItems: "center", flexWrap: "wrap" }}>
-              <div style={{ display: "flex", gap: "8px", flexWrap: "wrap" }}>
-                <button
-                  onClick={() => setFilterType("all")}
-                  className="gh-filter-select"
-                  style={{
-                    backgroundColor: filterType === "all" ? "var(--bg-tertiary)" : "transparent",
-                    borderColor: "var(--border-color)",
-                    color: filterType === "all" ? "var(--text-primary)" : "var(--text-secondary)",
-                    padding: "4px 10px",
-                    cursor: "pointer"
-                  }}
-                >
-                  All ({solutions.length})
-                </button>
-                <button
-                  onClick={() => setFilterType("casestudies")}
-                  className="gh-filter-select"
-                  style={{
-                    backgroundColor: filterType === "casestudies" ? "var(--bg-tertiary)" : "transparent",
-                    borderColor: "var(--border-color)",
-                    color: filterType === "casestudies" ? "var(--text-primary)" : "var(--text-secondary)",
-                    padding: "4px 10px",
-                    cursor: "pointer"
-                  }}
-                >
-                  Case Studies ({solutions.filter(s => s.category === "casestudies").length})
-                </button>
-                <button
-                  onClick={() => setFilterType("solutions")}
-                  className="gh-filter-select"
-                  style={{
-                    backgroundColor: filterType === "solutions" ? "var(--bg-tertiary)" : "transparent",
-                    borderColor: "var(--border-color)",
-                    color: filterType === "solutions" ? "var(--text-primary)" : "var(--text-secondary)",
-                    padding: "4px 10px",
-                    cursor: "pointer"
-                  }}
-                >
-                  Coding Challenges ({solutions.filter(s => s.category !== "casestudies").length})
-                </button>
-              </div>
-              <select
-                value={sortBy}
-                onChange={(e) => setSortBy(e.target.value as any)}
-                className="gh-filter-select"
-                style={{ padding: "4px 10px", fontSize: "13px" }}
-              >
-                <option value="difficulty">Sort by Difficulty</option>
-                <option value="number">Sort by Number</option>
-                <option value="title">Sort by Title</option>
-                <option value="date">Sort by Date</option>
-              </select>
-              <button
-                onClick={() => setSortOrder(prev => prev === "asc" ? "desc" : "asc")}
-                className="gh-filter-select"
-                style={{ padding: "4px 8px", cursor: "pointer", fontSize: "13px", display: "inline-flex", alignItems: "center", justifyContent: "center" }}
-                title={sortOrder === "asc" ? "Sort Ascending" : "Sort Descending"}
-              >
-                {sortOrder === "asc" ? "▲" : "▼"}
-              </button>
-            </div>
-          ) : (
+          {activeTab === "overview" || activeTab === "casestudies" ? null : (
             <div style={{ display: "flex", gap: "12px", alignItems: "center", flexWrap: "wrap" }}>
               <div className="gh-search-input-wrapper" style={{ margin: 0, width: "220px" }}>
                 <input
@@ -604,14 +588,14 @@ export default function Dashboard({ solutions, cvSkills }: DashboardProps) {
                       {sol.difficulty && (
                         <span className="repo-badge" style={{
                           backgroundColor: sol.difficulty === "Easy" ? "rgba(57, 211, 83, 0.15)" :
-                                           sol.difficulty === "Medium" ? "rgba(241, 224, 90, 0.15)" :
-                                           "rgba(248, 81, 73, 0.15)",
+                            sol.difficulty === "Medium" ? "rgba(241, 224, 90, 0.15)" :
+                              "rgba(248, 81, 73, 0.15)",
                           color: sol.difficulty === "Easy" ? "#39d353" :
-                                 sol.difficulty === "Medium" ? "#f1e05a" :
-                                 "#f85149",
+                            sol.difficulty === "Medium" ? "#f1e05a" :
+                              "#f85149",
                           borderColor: sol.difficulty === "Easy" ? "rgba(57, 211, 83, 0.3)" :
-                                       sol.difficulty === "Medium" ? "rgba(241, 224, 90, 0.3)" :
-                                       "rgba(248, 81, 73, 0.3)",
+                            sol.difficulty === "Medium" ? "rgba(241, 224, 90, 0.3)" :
+                              "rgba(248, 81, 73, 0.3)",
                           fontSize: "11px",
                           padding: "1px 6px",
                           margin: 0

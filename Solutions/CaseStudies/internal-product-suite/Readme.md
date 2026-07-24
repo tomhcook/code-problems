@@ -7,6 +7,7 @@ A highly successful, proprietary business solution designed, architected, and bu
 * **Architecture**: Ruby Web API & Services
 * **Backend & Infrastructure**: Ruby, Docker, SQL, Azure MSSQL
 * **Hosting & CI/CD**: Azure DevOps pipelines & cloud hosting environment
+* **Deployment**: Full responsibility for performing and managing production deployments personally
 
 ---
 

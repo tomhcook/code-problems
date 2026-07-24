@@ -47,10 +47,6 @@ export default function RootLayout({
                 </svg>
                 <span className="logo-text">Thomas_Cook</span>
               </Link>
-
-              <div className="nav-search-mock">
-                <span>Type <kbd style={{ background: "#21262d", padding: "1px 4px", borderRadius: "3px", fontSize: "10px" }}>/</kbd> to search</span>
-              </div>
             </div>
 
             <nav className="nav-links">
@@ -58,7 +54,7 @@ export default function RootLayout({
                 Dashboard
               </Link>
               <Link href="/cv" className="nav-link">
-                My CV
+                CV
               </Link>
             </nav>
           </div>
