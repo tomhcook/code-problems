@@ -197,10 +197,18 @@ export default function Dashboard({ solutions, cvSkills }: DashboardProps) {
     });
 
     if (activeTab === "overview" || activeTab === "casestudies") {
-      // Prioritize Case Studies first, then other top solutions, and limit to top 5
+      // Prioritize Case Studies first, then sort remaining by difficulty (Hard first), and limit to top 5
       const caseStudies = filtered.filter((sol) => sol.category === "casestudies");
       const nonCaseStudies = filtered.filter((sol) => sol.category !== "casestudies");
-      return [...caseStudies, ...nonCaseStudies].slice(0, 5);
+      const sortedNonCase = nonCaseStudies.sort((a, b) => {
+        const diffA = a.difficulty || "Medium";
+        const diffB = b.difficulty || "Medium";
+        const weightA = diffA === "Hard" ? 3 : diffA === "Medium" ? 2 : 1;
+        const weightB = diffB === "Hard" ? 3 : diffB === "Medium" ? 2 : 1;
+        if (weightA !== weightB) return weightB - weightA;
+        return new Date(b.date).getTime() - new Date(a.date).getTime();
+      });
+      return [...caseStudies, ...sortedNonCase].slice(0, 5);
     }
 
     const getNumericId = (slug: string) => {
@@ -331,117 +339,6 @@ export default function Dashboard({ solutions, cvSkills }: DashboardProps) {
             </div>
           </section>
 
-          {/* Grid Layout: Pinned Repos (Left) + Top Skills Radar (Right) */}
-          <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(320px, 1fr))", gap: "24px" }}>
-            
-            {/* Pinned Repositories Grid */}
-            <section style={{ display: "flex", flexDirection: "column", gap: "16px", flex: "2" }}>
-              <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center" }}>
-                <h2 style={{ fontSize: "16px", fontWeight: "600", color: "var(--text-primary)" }}>Pinned Repositories &amp; Core Systems</h2>
-                <span style={{ fontSize: "12px", color: "var(--text-secondary)" }}>Customize pins</span>
-              </div>
-
-              <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(280px, 1fr))", gap: "16px" }}>
-                <div className="pinned-card">
-                  <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center" }}>
-                    <Link href="/solutions/casestudies/internal-product-suite" style={{ textDecoration: "none" }}>
-                      <span className="pinned-card-title">HWM Global / Internal Product Suite</span>
-                    </Link>
-                    <span className="repo-badge">Public</span>
-                  </div>
-                  <p className="pinned-card-desc">
-                    Lead full-stack C# .NET Core &amp; React product suite generating commercial software revenue.
-                  </p>
-                  <div className="pinned-card-meta">
-                    <span className="pinned-card-lang">
-                      <span className="lang-color-dot lang-color-csharp"></span>
-                      C# / .NET / React
-                    </span>
-                    <span style={{ fontSize: "12px", color: "var(--text-secondary)" }}>★ 14</span>
-                  </div>
-                </div>
-
-                <div className="pinned-card">
-                  <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center" }}>
-                    <Link href="/solutions/casestudies/api-optimization" style={{ textDecoration: "none" }}>
-                      <span className="pinned-card-title">HWM Global / SQL API Optimization</span>
-                    </Link>
-                    <span className="repo-badge">Public</span>
-                  </div>
-                  <p className="pinned-card-desc">
-                    Engineered SQL query optimizations reducing execution latency across production APIs.
-                  </p>
-                  <div className="pinned-card-meta">
-                    <span className="pinned-card-lang">
-                      <span className="lang-color-dot lang-color-csharp"></span>
-                      SQL / C# .NET Core
-                    </span>
-                    <span style={{ fontSize: "12px", color: "var(--text-secondary)" }}>★ 11</span>
-                  </div>
-                </div>
-
-                <div className="pinned-card">
-                  <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center" }}>
-                    <Link href="/solutions/casestudies/android-upgrade" style={{ textDecoration: "none" }}>
-                      <span className="pinned-card-title">HWM Global / Android 16 Modernization</span>
-                    </Link>
-                    <span className="repo-badge">Public</span>
-                  </div>
-                  <p className="pinned-card-desc">
-                    Modernized mobile apps for Android 16 compatibility &amp; target API level compliance.
-                  </p>
-                  <div className="pinned-card-meta">
-                    <span className="pinned-card-lang">
-                      <span className="lang-color-dot lang-color-java"></span>
-                      Android / Java / C#
-                    </span>
-                    <span style={{ fontSize: "12px", color: "var(--text-secondary)" }}>★ 9</span>
-                  </div>
-                </div>
-              </div>
-            </section>
-
-            {/* Top Skills Radar Visualiser */}
-            <section className="markdown-card" style={{ flex: "1", minWidth: "280px", marginBottom: "0px" }}>
-              <div className="markdown-card-header">
-                <svg aria-hidden="true" height="16" viewBox="0 0 16 16" version="1.1" width="16" fill="var(--text-secondary)">
-                  <path d="M8 0a8 8 0 1 1 0 16A8 8 0 0 1 8 0zM1.5 8a6.5 6.5 0 1 0 13 0 6.5 6.5 0 0 0-13 0z"></path>
-                </svg>
-                <span>Core Competency Matrix</span>
-              </div>
-              <div className="markdown-card-body" style={{ display: "flex", flexDirection: "column", alignItems: "center", padding: "16px" }}>
-                <svg width="220" height="220" viewBox="0 0 220 220" style={{ overflow: "visible" }}>
-                  <circle cx="110" cy="110" r="90" fill="none" stroke="var(--border-color)" strokeWidth="1" strokeDasharray="3,3" />
-                  <circle cx="110" cy="110" r="60" fill="none" stroke="var(--border-color)" strokeWidth="1" strokeDasharray="3,3" />
-                  <circle cx="110" cy="110" r="30" fill="none" stroke="var(--border-color)" strokeWidth="1" strokeDasharray="3,3" />
-                  
-                  <line x1="110" y1="20" x2="110" y2="200" stroke="var(--border-color)" strokeWidth="1" />
-                  <line x1="20" y1="110" x2="200" y2="110" stroke="var(--border-color)" strokeWidth="1" />
-
-                  <polygon
-                    points={`110,${radarPoints.n} ${radarPoints.e},110 110,${radarPoints.s} ${radarPoints.w},110`}
-                    fill="rgba(57, 211, 83, 0.15)"
-                    stroke="#39d353"
-                    strokeWidth="2"
-                  />
-
-                  <line x1="110" y1={radarPoints.n} x2="110" y2={radarPoints.s} stroke="#39d353" strokeWidth="1" />
-                  <line x1={radarPoints.w} y1="110" x2={radarPoints.e} y2="110" stroke="#39d353" strokeWidth="1" />
-
-                  <circle cx="110" cy={radarPoints.n} r="4" fill="#ffffff" stroke="#39d353" strokeWidth="1.5" />
-                  <circle cx={radarPoints.e} cy="110" r="4" fill="#ffffff" stroke="#39d353" strokeWidth="1.5" />
-                  <circle cx="110" cy={radarPoints.s} r="4" fill="#ffffff" stroke="#39d353" strokeWidth="1.5" />
-                  <circle cx={radarPoints.w} cy="110" r="4" fill="#ffffff" stroke="#39d353" strokeWidth="1.5" />
-
-                  <text x="110" y="10" textAnchor="middle" fill="var(--text-primary)" fontSize="10" fontWeight="600">{radarSkills[0].percentage}% {radarSkills[0].name}</text>
-                  <text x="200" y="113" textAnchor="start" fill="var(--text-primary)" fontSize="10" fontWeight="600">{radarSkills[1].percentage}% {radarSkills[1].name}</text>
-                  <text x="110" y="212" textAnchor="middle" fill="var(--text-primary)" fontSize="10" fontWeight="600">{radarSkills[2].percentage}% {radarSkills[2].name}</text>
-                  <text x="25" y="113" textAnchor="end" fill="var(--text-primary)" fontSize="10" fontWeight="600">{radarSkills[3].percentage}% {radarSkills[3].name}</text>
-                </svg>
-              </div>
-            </section>
-
-          </div>
         </>
       )}
 
@@ -550,9 +447,9 @@ export default function Dashboard({ solutions, cvSkills }: DashboardProps) {
                     <div className="solution-item-main" style={{ flex: "1", minWidth: "280px" }}>
                       <div style={{ display: "flex", alignItems: "center", gap: "8px", marginBottom: "4px" }}>
                         <span className="repo-badge" style={{
-                          backgroundColor: "rgba(163, 113, 247, 0.15)",
-                          color: "#d2a8ff",
-                          borderColor: "rgba(163, 113, 247, 0.4)",
+                          backgroundColor: "rgba(56, 139, 253, 0.2)",
+                          color: "#79c0ff",
+                          borderColor: "#388bfd",
                           fontSize: "11px",
                           padding: "1px 6px",
                           margin: 0
@@ -708,6 +605,48 @@ export default function Dashboard({ solutions, cvSkills }: DashboardProps) {
           )}
         </div>
       </section>
+
+      {/* Core Competency Matrix under the solutions list on Overview tab */}
+      {activeTab === "overview" && (
+        <section className="markdown-card" style={{ marginTop: "24px", marginBottom: "0px", width: "100%" }}>
+          <div className="markdown-card-header">
+            <svg aria-hidden="true" height="16" viewBox="0 0 16 16" version="1.1" width="16" fill="var(--text-secondary)">
+              <path d="M8 0a8 8 0 1 1 0 16A8 8 0 0 1 8 0zM1.5 8a6.5 6.5 0 1 0 13 0 6.5 6.5 0 0 0-13 0z"></path>
+            </svg>
+            <span>Core Competency Matrix</span>
+          </div>
+          <div className="markdown-card-body" style={{ display: "flex", flexDirection: "column", alignItems: "center", padding: "24px", backgroundColor: "var(--bg-secondary)" }}>
+            <svg width="220" height="220" viewBox="0 0 220 220" style={{ overflow: "visible" }}>
+              <circle cx="110" cy="110" r="90" fill="none" stroke="var(--border-color)" strokeWidth="1" strokeDasharray="3,3" />
+              <circle cx="110" cy="110" r="60" fill="none" stroke="var(--border-color)" strokeWidth="1" strokeDasharray="3,3" />
+              <circle cx="110" cy="110" r="30" fill="none" stroke="var(--border-color)" strokeWidth="1" strokeDasharray="3,3" />
+              
+              <line x1="110" y1="20" x2="110" y2="200" stroke="var(--border-color)" strokeWidth="1" />
+              <line x1="20" y1="110" x2="200" y2="110" stroke="var(--border-color)" strokeWidth="1" />
+
+              <polygon
+                points={`110,${radarPoints.n} ${radarPoints.e},110 110,${radarPoints.s} ${radarPoints.w},110`}
+                fill="rgba(57, 211, 83, 0.15)"
+                stroke="#39d353"
+                strokeWidth="2"
+              />
+
+              <line x1="110" y1={radarPoints.n} x2="110" y2={radarPoints.s} stroke="#39d353" strokeWidth="1" />
+              <line x1={radarPoints.w} y1="110" x2={radarPoints.e} y2="110" stroke="#39d353" strokeWidth="1" />
+
+              <circle cx="110" cy={radarPoints.n} r="4" fill="#ffffff" stroke="#39d353" strokeWidth="1.5" />
+              <circle cx={radarPoints.e} cy="110" r="4" fill="#ffffff" stroke="#39d353" strokeWidth="1.5" />
+              <circle cx="110" cy={radarPoints.s} r="4" fill="#ffffff" stroke="#39d353" strokeWidth="1.5" />
+              <circle cx={radarPoints.w} cy="110" r="4" fill="#ffffff" stroke="#39d353" strokeWidth="1.5" />
+
+              <text x="110" y="10" textAnchor="middle" fill="var(--text-primary)" fontSize="10.5" fontWeight="600">{radarSkills[0].percentage}% {radarSkills[0].name}</text>
+              <text x="200" y="113" textAnchor="start" fill="var(--text-primary)" fontSize="10.5" fontWeight="600">{radarSkills[1].percentage}% {radarSkills[1].name}</text>
+              <text x="110" y="212" textAnchor="middle" fill="var(--text-primary)" fontSize="10.5" fontWeight="600">{radarSkills[2].percentage}% {radarSkills[2].name}</text>
+              <text x="25" y="113" textAnchor="end" fill="var(--text-primary)" fontSize="10.5" fontWeight="600">{radarSkills[3].percentage}% {radarSkills[3].name}</text>
+            </svg>
+          </div>
+        </section>
+      )}
 
     </div>
   );
