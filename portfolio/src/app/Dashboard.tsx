@@ -25,6 +25,9 @@ export const getComplexityInfo = (category: string, slug: string, sol?: Solution
   if (c === "leetcode" && s.includes("twosum")) {
     return { time: "O(N) Time", space: "O(N) Space", label: "Optimal Approach" };
   }
+  if (c === "leetcode" && s.includes("0336")) {
+    return { time: "O(N * L^2) Time", space: "O(N * L) Space", label: "HashMap Prefix/Suffix Matching" };
+  }
   if (c === "leetcode" && s.includes("addtwonumbers")) {
     return { time: "O(N) Time", space: "O(1) Aux Space", label: "Optimal Approach" };
   }
@@ -33,6 +36,9 @@ export const getComplexityInfo = (category: string, slug: string, sol?: Solution
   }
   if (c === "leetcode" && s.includes("3514")) {
     return { time: "O(N^2 + N * M) Time", space: "O(M) Space", label: "Optimized XOR Pairings" };
+  }
+  if (c === "leetcode" && s.includes("3536")) {
+    return { time: "O(log_10(N)) Time", space: "O(1) Space", label: "Two Max Digits Tracking" };
   }
   if (c === "dailycodingproblems" && s.includes("1288")) {
     return { time: "O(N) Time", space: "O(1) Space", label: "Optimal Traversal" };
