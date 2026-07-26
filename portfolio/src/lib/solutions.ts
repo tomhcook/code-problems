@@ -13,6 +13,25 @@ export interface ComplexityInfo {
   label: string;
 }
 
+export interface CaseStudyLabel {
+  text: string;
+  bg: string;
+  color: string;
+  border: string;
+}
+
+export interface CaseStudyMeta {
+  role: string;
+  company: string;
+  projects: string;
+  milestone: string;
+  cvHighlight: string;
+  labels: CaseStudyLabel[];
+  dashboardTime?: string;
+  dashboardSpace?: string;
+  dashboardLabel?: string;
+}
+
 export interface Solution {
   id: string;
   slug: string;
@@ -25,6 +44,7 @@ export interface Solution {
   date: string;
   difficulty?: "Easy" | "Medium" | "Hard";
   complexity?: ComplexityInfo;
+  caseStudyMeta?: CaseStudyMeta;
 }
 
 let LEETCODE_DIFFICULTY: Record<string, "Easy" | "Medium" | "Hard"> = {};
@@ -123,10 +143,28 @@ export function parseComplexityFromReadme(readmeContent: string): ComplexityInfo
   return null;
 }
 
+function loadCaseStudyMeta(folderPath: string): CaseStudyMeta | undefined {
+  const metaPath = path.join(folderPath, "metadata.json");
+  if (!fs.existsSync(metaPath)) return undefined;
+  try {
+    return JSON.parse(fs.readFileSync(metaPath, "utf-8")) as CaseStudyMeta;
+  } catch (err) {
+    console.error(`Failed to load metadata.json at ${metaPath}`, err);
+    return undefined;
+  }
+}
+
+// Module-level memoization cache — avoids re-scanning the filesystem on every call.
+// Reset between builds automatically since the module is re-evaluated each build.
+let _solutionsCache: Solution[] | null = null;
+
 export function getAllSolutions(): Solution[] {
+  if (_solutionsCache) return _solutionsCache;
+
   if (!fs.existsSync(SOLUTIONS_DIR)) {
     console.warn(`Solutions directory not found at ${SOLUTIONS_DIR}`);
-    return [];
+    _solutionsCache = [];
+    return _solutionsCache;
   }
 
   const solutions: Solution[] = [];
@@ -175,7 +213,7 @@ export function getAllSolutions(): Solution[] {
         if (titleLine) {
           title = formatTitle(folder, titleLine);
         }
-        
+
         const bodyLines = lines
           .map((l) => l.trim())
           .filter((l) => l !== "" && !l.startsWith("#") && !l.startsWith(">"));
@@ -213,6 +251,9 @@ export function getAllSolutions(): Solution[] {
       }
 
       const parsedComplexity = parseComplexityFromReadme(readmeContent);
+      const caseStudyMeta = category.toLowerCase() === "casestudies"
+        ? loadCaseStudyMeta(folderPath)
+        : undefined;
 
       solutions.push({
         id: `${category.toLowerCase()}-${folder.toLowerCase()}`,
@@ -226,11 +267,13 @@ export function getAllSolutions(): Solution[] {
         date: folderStat.mtime.toISOString(),
         difficulty,
         complexity: parsedComplexity || undefined,
+        caseStudyMeta,
       });
     }
   }
 
-  return solutions;
+  _solutionsCache = solutions;
+  return _solutionsCache;
 }
 
 export function getSolutionBySlug(category: string, slug: string): Solution | undefined {

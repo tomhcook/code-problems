@@ -1,8 +1,10 @@
 # Thomas Cook
 
-Software Engineer | C# / .NET Developer | Full Stack Developer
+Software Engineer
 
 Lincoln, England, GB | thomascook0404@outlook.com | +44 7932 229819 | github.com/tomhcook | linkedin.com/in/thomas-cook-se | tomhcook.github.io/code-problems
+
+Interactive engineering portfolio with documented case studies, algorithm solutions, and complexity analysis — tomhcook.github.io/code-problems
 
 ---
 
@@ -17,22 +19,20 @@ Software Engineer with commercial experience building production backend service
 ### HWM Global — Software Engineer
 Jun 2025 – Present
 
-* Designed and delivered a custom proprietary internal product from the ground up, resulting in streamlined business operations and new revenue generation, by architecting the full-stack solution using C#, Docker, SQL, and Azure cloud services.
-* Reduced API response times by 60% across 9 Shape Up cycles, as measured by Datadog latency monitoring, by actively refactoring internal API endpoints, resolving production bugs, tuning MSSQL query paths and database indexes, and introducing caching layers across 50+ merged PRs.
-* Ensured continued Android store compliance and platform compatibility, as validated by passing automated test suites, by migrating a cross-platform .NET MAUI mobile application from Android 15 to Android 16 (SDK 36) and writing xUnit test coverage.
-* Improved production system reliability and data-driven workflow support, as demonstrated by reduced incident rates, by building backend services and web APIs using ASP.NET Core and MSSQL.
+* Reduced API response times by 60% across 9 Shape Up cycles, as measured by Datadog latency monitoring, by diagnosing systematic query plan regressions and resolving them through targeted index restructuring, Redis caching layers, and endpoint refactoring across 50+ merged PRs. [Case Study →](https://tomhcook.github.io/code-problems/solutions/casestudies/api-optimization)
+* Decreased client-facing support tickets by 20% and accelerated bug-fixing cycles across 6+ production web applications, by implementing custom React UI enhancements, integrating Microsoft Clarity session tracking, and developing a compliant cookie consent banner across both frontend and backend architectures to gain deeper usage insights.
+* Kept engineering delivery on schedule during a leadership gap, as measured by sprint completion rates, by stepping in as temporary Team Lead to coordinate the backlog and run daily standups.
+* Designed and delivered a custom proprietary internal product from the ground up — a workflow management platform that replaced manual spreadsheet processes across an entire business division, generating new direct revenue by architecting the full-stack solution using Ruby, Docker, SQL, and Azure cloud services. [Case Study →](https://tomhcook.github.io/code-problems/solutions/casestudies/internal-product-suite)
+* Proactively migrated a production .NET MAUI mobile application to Android 16 (SDK 36) ahead of mandatory store compliance deadlines, validated by passing automated xUnit test suites. [Case Study →](https://tomhcook.github.io/code-problems/solutions/casestudies/android-upgrade)
 * Shaped platform direction and implementation approach, as reflected in adopted technical standards, by making key decisions on architecture, database models, and service integration.
 * Maintained production uptime and release velocity, as measured by successful zero-downtime deployments, by owning full deployment responsibility through Azure DevOps CI/CD build and release pipelines.
-* Decreased client-facing support tickets by 20% and accelerated bug-fixing cycles across 6+ production web applications, by implementing custom React UI enhancements, integrating Microsoft Clarity session tracking, and developing a compliant cookie consent banner across both frontend and backend architectures to gain deeper usage insights.
-* Supported automated data processing capabilities, as measured by reduced manual processing time, by contributing to AI and LLM-driven backend features.
-* Kept engineering delivery on schedule during a leadership gap, as measured by sprint completion rates, by stepping in as temporary Team Lead to coordinate the backlog and run daily standups.
+* Built automated data processing features using AI and LLM-driven backend services, reducing manual processing time by approximately 30%.
 
 ### Digital Genius — Solutions Engineer
 Oct 2024 – Jun 2025
 
 * Delivered customer-facing integration solutions, as measured by successful client deployments, by building interactive frontends and backend connectors using Node.js, Angular 17, TypeScript, and JavaScript.
 * Automated customer service workflows for enterprise clients, as measured by reduced manual ticket handling, by connecting support platforms (Dixa, Zendesk) with AWS cloud services via REST APIs.
-* Improved AI-driven customer support accuracy, as measured by content routing success rates, by contributing to backend generative AI content routing and support tools.
 * Maintained feature delivery quality in production, as measured by zero critical deployment failures, by utilizing AWS services and Postman for testing, monitoring, and deployment.
 
 ### Ingenta — Software Consultant
@@ -40,7 +40,6 @@ Oct 2024 – Jun 2025
 
 * Improved platform maintainability and reduced technical debt, as measured by modernised service coverage, by refactoring legacy C# .NET platforms and integrating serverless workflows using AWS Lambda.
 * Increased shipping operations reliability for enterprise clients, as measured by carrier API uptime, by connecting system databases with global shipping carrier APIs including UPS, DPD, and Royal Mail.
-* Contributed to consistent sprint delivery and code quality, as measured by peer review completion rates, by collaborating in an Agile structure using Jira for task estimates, tracking, and reviews.
 
 ---
 
@@ -49,10 +48,17 @@ Oct 2024 – Jun 2025
 ### University of Lincoln — BSc Games Computing Science, 2:1
 2019 – 2022
 
-* Reduced physical engine testing costs, as validated by dissertation results, by applying machine learning models to optimise engine power output predictions.
+Applied machine learning models to optimise engine power output predictions, reducing physical engine testing costs as validated by dissertation results.
 
 ---
 
 ## Skills
 
-Backend: C#, .NET Core, ASP.NET Core, Entity Framework, REST APIs, Python, Ruby, C++ | Frontend: React, TypeScript, Angular, Node.js, JavaScript | Databases: MSSQL, SQL, Query Optimisation, Index Tuning, Redis Caching | Mobile & AI: .NET MAUI, Android SDK, xUnit, Generative AI, Machine Learning | Cloud and DevOps: Azure DevOps, AWS Lambda, Docker, Datadog, CI/CD Pipelines | Tools: Git, Jira, Postman, Microsoft Clarity | Methodologies: Shape Up, Agile, Scrum
+| Category | Technologies |
+|---|---|
+| Languages & Backend | C#, .NET Core, ASP.NET Core, Entity Framework, REST APIs, Python, Ruby, C++ |
+| Frontend & Web | React, TypeScript, Angular, Node.js, JavaScript |
+| Databases | MSSQL, Query Optimisation, Index Tuning, Redis Caching |
+| Cloud & DevOps | Azure DevOps, AWS Lambda, Docker, Datadog, CI/CD Pipelines |
+| Mobile & Testing | .NET MAUI, Android SDK 36, xUnit |
+| Methodologies | Shape Up, Agile, Scrum |

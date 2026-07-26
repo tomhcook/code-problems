@@ -102,6 +102,7 @@ export default async function Page({ params }: PageProps) {
       readmeHtml={readmeHtml}
       files={highlightedFiles}
       slug={slug}
+      caseStudyMeta={solution.caseStudyMeta}
     />
   );
 }

@@ -27,10 +27,10 @@ export default function RootLayout({
   return (
     <html
       lang="en"
-      className={`${geistSans.variable} ${geistMono.variable} h-full antialiased`}
+      className={`${geistSans.variable} ${geistMono.variable}`}
       suppressHydrationWarning
     >
-      <body className="min-h-full flex flex-col" suppressHydrationWarning>
+      <body suppressHydrationWarning>
         <header className="navbar">
           <div className="navbar-container">
             <div style={{ display: "flex", alignItems: "center", gap: "16px" }}>

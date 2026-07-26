@@ -4,6 +4,7 @@ import React, { useState, useMemo } from "react";
 import Link from "next/link";
 import { Solution } from "../lib/solutions";
 import { DEV_CHALLENGES_APPS } from "../lib/devchallenges";
+import { formatLanguage, getLanguageColorClass, getDifficultyWeight } from "../lib/utils";
 
 interface CVSkill {
   name: string;
@@ -16,51 +17,6 @@ interface DashboardProps {
   cvSkills: CVSkill[];
 }
 
-export const getComplexityInfo = (category: string, slug: string, sol?: Solution) => {
-  if (sol?.complexity) {
-    return sol.complexity;
-  }
-  const s = slug.toLowerCase();
-  const c = category.toLowerCase();
-  if (c === "leetcode" && s.includes("twosum")) {
-    return { time: "O(N) Time", space: "O(N) Space", label: "Optimal Approach" };
-  }
-  if (c === "leetcode" && s.includes("0336")) {
-    return { time: "O(N * L^2) Time", space: "O(N * L) Space", label: "HashMap Prefix/Suffix Matching" };
-  }
-  if (c === "leetcode" && s.includes("addtwonumbers")) {
-    return { time: "O(N) Time", space: "O(1) Aux Space", label: "Optimal Approach" };
-  }
-  if (c === "leetcode" && s.includes("3999")) {
-    return { time: "O(N * L) Time", space: "O(N * L) Space", label: "Optimal Rotation" };
-  }
-  if (c === "leetcode" && s.includes("3514")) {
-    return { time: "O(N^2 + N * M) Time", space: "O(M) Space", label: "Optimized XOR Pairings" };
-  }
-  if (c === "leetcode" && s.includes("3536")) {
-    return { time: "O(log_10(N)) Time", space: "O(1) Space", label: "Two Max Digits Tracking" };
-  }
-  if (c === "dailycodingproblems" && s.includes("1288")) {
-    return { time: "O(N) Time", space: "O(1) Space", label: "Optimal Traversal" };
-  }
-  if (c === "dailycodingproblems" && s.includes("1289")) {
-    return { time: "O(I * (N + E)) Time", space: "O(N + E) Space", label: "Iterative Power Method" };
-  }
-  if (c === "greatfrontend" && s.includes("debounce")) {
-    return { time: "O(1) Time", space: "O(1) Space", label: "Closure Debounce" };
-  }
-  if (c === "casestudies" && s.includes("internal-product-suite")) {
-    return { time: "Lead Architect", space: "Revenue-Generating", label: "System Design Showcase" };
-  }
-  if (c === "casestudies" && s.includes("api-optimization")) {
-    return { time: "Full Stack Developer", space: "Efficiency", label: "Maintenance Showcase" };
-  }
-  if (c === "casestudies" && s.includes("android-upgrade")) {
-    return { time: "Mobile Developer", space: "Android 16 Upgrade", label: "Active Upgrade" };
-  }
-  return null;
-};
-
 export default function Dashboard({ solutions, cvSkills }: DashboardProps) {
   const [activeTab, setActiveTab] = useState<"overview" | "casestudies" | "challenges">("overview");
   const [platformFilter, setPlatformFilter] = useState<"all" | "leetcode" | "dcp" | "greatfrontend" | "devchallenges">("all");
@@ -68,22 +24,6 @@ export default function Dashboard({ solutions, cvSkills }: DashboardProps) {
   const [languageFilter, setLanguageFilter] = useState("all");
   const [sortBy, setSortBy] = useState<"difficulty" | "number" | "title" | "date">("difficulty");
   const [sortOrder, setSortOrder] = useState<"asc" | "desc">("asc");
-
-  const formatLanguage = (lang: string) => {
-    if (lang === "cpp") return "C++";
-    if (lang === "csharp") return "C#";
-    return lang.charAt(0).toUpperCase() + lang.slice(1);
-  };
-
-  const getLanguageColorClass = (lang: string) => {
-    if (lang === "cpp") return "lang-color-cpp";
-    if (lang === "csharp") return "lang-color-csharp";
-    if (lang === "python") return "lang-color-python";
-    if (lang === "javascript") return "lang-color-javascript";
-    if (lang === "typescript") return "lang-color-typescript";
-    if (lang === "ruby") return "lang-color-ruby";
-    return "lang-color-default";
-  };
 
   // Calculate statistics
   const stats = useMemo(() => {
@@ -133,7 +73,11 @@ export default function Dashboard({ solutions, cvSkills }: DashboardProps) {
   }, [cvSkills]);
 
   // Compute SVG polygon coordinates dynamically based on percentages
+  // Guard: radar chart requires exactly 4 data points
   const radarPoints = useMemo(() => {
+    if (radarSkills.length < 4) {
+      return { polygon: "110,20 200,110 110,200 20,110", n: 20, e: 200, s: 200, w: 20 };
+    }
     const n = 110 - (90 * (radarSkills[0].percentage / 100));
     const e = 110 + (90 * (radarSkills[1].percentage / 100));
     const s = 110 + (90 * (radarSkills[2].percentage / 100));
@@ -207,10 +151,8 @@ export default function Dashboard({ solutions, cvSkills }: DashboardProps) {
       const caseStudies = filtered.filter((sol) => sol.category === "casestudies");
       const nonCaseStudies = filtered.filter((sol) => sol.category !== "casestudies");
       const sortedNonCase = nonCaseStudies.sort((a, b) => {
-        const diffA = a.difficulty || "Medium";
-        const diffB = b.difficulty || "Medium";
-        const weightA = diffA === "Hard" ? 3 : diffA === "Medium" ? 2 : 1;
-        const weightB = diffB === "Hard" ? 3 : diffB === "Medium" ? 2 : 1;
+        const weightA = getDifficultyWeight(a.difficulty || "Medium");
+        const weightB = getDifficultyWeight(b.difficulty || "Medium");
         if (weightA !== weightB) return weightB - weightA;
         return new Date(b.date).getTime() - new Date(a.date).getTime();
       });
@@ -222,12 +164,7 @@ export default function Dashboard({ solutions, cvSkills }: DashboardProps) {
       return match ? parseInt(match[0], 10) : 999999;
     };
 
-    const getDifficultyWeight = (diff?: string) => {
-      if (diff === "Hard") return 3;
-      if (diff === "Medium") return 2;
-      if (diff === "Easy") return 1;
-      return 0;
-    };
+    // getDifficultyWeight imported from ../lib/utils
 
     return filtered.sort((a, b) => {
       let comparison = 0;
@@ -378,7 +315,7 @@ export default function Dashboard({ solutions, cvSkills }: DashboardProps) {
               </div>
               <select
                 value={platformFilter}
-                onChange={(e) => setPlatformFilter(e.target.value as any)}
+                onChange={(e) => setPlatformFilter(e.target.value as typeof platformFilter)}
                 className="gh-filter-select"
                 style={{ padding: "4px 10px", fontSize: "13px" }}
               >
@@ -403,7 +340,7 @@ export default function Dashboard({ solutions, cvSkills }: DashboardProps) {
               </select>
               <select
                 value={sortBy}
-                onChange={(e) => setSortBy(e.target.value as any)}
+                onChange={(e) => setSortBy(e.target.value as typeof sortBy)}
                 className="gh-filter-select"
                 style={{ padding: "4px 10px", fontSize: "13px" }}
               >
@@ -500,7 +437,11 @@ export default function Dashboard({ solutions, cvSkills }: DashboardProps) {
 
               {platformFilter !== "devchallenges" && (finalSolutions.length > 0 ? (
                 finalSolutions.map((sol) => {
-                  const comp = getComplexityInfo(sol.category, sol.slug, sol);
+                  const comp = sol.complexity || (sol.caseStudyMeta ? {
+                    time: sol.caseStudyMeta.dashboardTime || sol.caseStudyMeta.role,
+                    space: sol.caseStudyMeta.dashboardSpace || sol.caseStudyMeta.projects,
+                    label: sol.caseStudyMeta.dashboardLabel || sol.caseStudyMeta.milestone
+                  } : null);
               const isCaseStudy = sol.category === "casestudies";
               return (
                 <article key={sol.id} className="solution-item" style={{

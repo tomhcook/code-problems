@@ -29,10 +29,10 @@ export const metadata: Metadata = {
     siteName: "Thomas Cook — Software Engineer",
     images: [
       {
-        url: "https://media.licdn.com/dms/image/v2/D4E03AQFHVzNHJljAnw/profile-displayphoto-scale_400_400/B4EZ.PYwdcGgAg-/0/1784817061315?e=1786579200&v=beta&t=CF11sK9kk0Z1RGCtwGGrmjM9xWxa-TQRaqreTJc5RU4",
-        width: 400,
-        height: 400,
-        alt: "Thomas Cook Software Engineer",
+        url: "https://tomhcook.github.io/code-problems/og-image.jpg",
+        width: 1200,
+        height: 630,
+        alt: "Thomas Cook Software Engineer Portfolio",
       },
     ],
     locale: "en_GB",
@@ -42,7 +42,7 @@ export const metadata: Metadata = {
     card: "summary",
     title: "Thomas Cook — Software Engineer Portfolio & Solutions",
     description: "Official software engineering portfolio, C# & .NET projects, and code solutions of Thomas Cook, Software Engineer at HWM Global.",
-    images: ["https://media.licdn.com/dms/image/v2/D4E03AQFHVzNHJljAnw/profile-displayphoto-scale_400_400/B4EZ.PYwdcGgAg-/0/1784817061315?e=1786579200&v=beta&t=CF11sK9kk0Z1RGCtwGGrmjM9xWxa-TQRaqreTJc5RU4"],
+    images: ["https://tomhcook.github.io/code-problems/og-image.jpg"],
   },
 };
 

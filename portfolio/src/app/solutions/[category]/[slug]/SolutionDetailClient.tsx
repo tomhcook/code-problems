@@ -2,6 +2,8 @@
 
 import React, { useState } from "react";
 import Link from "next/link";
+import { CaseStudyMeta } from "../../../../lib/solutions";
+import { formatLanguage } from "../../../../lib/utils";
 
 interface HighlightedFile {
   name: string;
@@ -15,6 +17,7 @@ interface SolutionDetailClientProps {
   readmeHtml: string;
   files: HighlightedFile[];
   slug: string;
+  caseStudyMeta?: CaseStudyMeta;
 }
 
 export default function SolutionDetailClient({
@@ -23,6 +26,7 @@ export default function SolutionDetailClient({
   readmeHtml,
   files,
   slug,
+  caseStudyMeta,
 }: SolutionDetailClientProps) {
   const [activeTab, setActiveTab] = useState(0);
 
@@ -31,54 +35,18 @@ export default function SolutionDetailClient({
     return code.split(/\r\n|\r|\n/).length;
   };
 
-  // Helper to format language name
-  const formatLanguage = (lang: string) => {
-    if (lang === "cpp") return "C++";
-    if (lang === "csharp") return "C#";
-    return lang.charAt(0).toUpperCase() + lang.slice(1);
-  };
-
   const isCaseStudy = categoryLabel === "Case Studies";
-  const isApiOpt = slug.toLowerCase().includes("api-optimization");
-  const isAndroidUpgrade = slug.toLowerCase().includes("android-upgrade");
 
-  const sidebarData = isAndroidUpgrade ? {
+  // Sidebar data is loaded from metadata.json sidecar files via the caseStudyMeta prop.
+  // Falls back to sensible defaults if the prop is missing.
+  const sidebarData = caseStudyMeta || {
     labels: [
-      { text: "case-study", bg: "rgba(163, 113, 247, 0.15)", color: "#d3b3f7", border: "rgba(163, 113, 247, 0.4)" },
-      { text: "c#", bg: "rgba(23, 134, 0, 0.15)", color: "#7ef76d", border: "rgba(23, 134, 0, 0.4)" },
-      { text: ".net-maui", bg: "rgba(49, 120, 198, 0.15)", color: "#7dc3ff", border: "rgba(49, 120, 198, 0.4)" },
-      { text: "android-sdk-36", bg: "rgba(56, 139, 253, 0.15)", color: "#58a6ff", border: "rgba(56, 139, 253, 0.4)" },
-      { text: "xunit", bg: "rgba(46, 160, 67, 0.15)", color: "#56d364", border: "rgba(46, 160, 67, 0.4)" }
+      { text: "case-study", bg: "rgba(163, 113, 247, 0.15)", color: "#d3b3f7", border: "rgba(163, 113, 247, 0.4)" }
     ],
-    company: "HWM",
-    role: "Mobile Developer",
-    projects: "Android 16 Upgrade Migration",
-    milestone: "Active Upgrade PR Submitted",
-    cvHighlight: "mobile"
-  } : isApiOpt ? {
-    labels: [
-      { text: "case-study", bg: "rgba(163, 113, 247, 0.15)", color: "#d3b3f7", border: "rgba(163, 113, 247, 0.4)" },
-      { text: "c#", bg: "rgba(23, 134, 0, 0.15)", color: "#7ef76d", border: "rgba(23, 134, 0, 0.4)" },
-      { text: "react", bg: "rgba(49, 120, 198, 0.15)", color: "#7dc3ff", border: "rgba(49, 120, 198, 0.4)" },
-      { text: "docker", bg: "rgba(56, 139, 253, 0.15)", color: "#58a6ff", border: "rgba(56, 139, 253, 0.4)" },
-      { text: "azure-mssql", bg: "rgba(46, 160, 67, 0.15)", color: "#56d364", border: "rgba(46, 160, 67, 0.4)" }
-    ],
-    company: "HWM",
-    role: "Full Stack Developer",
-    projects: "API Performance & Integrations",
-    milestone: "60% Latency Reduction & 50+ PRs Shipped",
-    cvHighlight: "backend"
-  } : {
-    labels: [
-      { text: "case-study", bg: "rgba(163, 113, 247, 0.15)", color: "#d3b3f7", border: "rgba(163, 113, 247, 0.4)" },
-      { text: "ruby", bg: "rgba(112, 21, 22, 0.15)", color: "#ff8284", border: "rgba(112, 21, 22, 0.4)" },
-      { text: "docker", bg: "rgba(56, 139, 253, 0.15)", color: "#58a6ff", border: "rgba(56, 139, 253, 0.4)" },
-      { text: "azure-mssql", bg: "rgba(46, 160, 67, 0.15)", color: "#56d364", border: "rgba(46, 160, 67, 0.4)" }
-    ],
-    company: "HWM",
-    role: "Lead Architect",
-    projects: "Internal Products Suite",
-    milestone: "Production Launch & Direct Revenue Delivery",
+    company: "—",
+    role: "—",
+    projects: "—",
+    milestone: "—",
     cvHighlight: "lead"
   };
 
