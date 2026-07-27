@@ -1,15 +1,16 @@
 {
   "role": "Mobile Developer",
   "company": "HWM",
-  "projects": "Android 16 Upgrade Migration",
+  "projects": "Android 16 & .NET 10 Migration",
   "milestone": "Active Upgrade PR Submitted",
   "cvHighlight": "mobile",
-  "dashboardTime": "Mobile Developer",
-  "dashboardSpace": "Android 16 Upgrade",
+  "dashboardTime": "Mobile & Systems Developer",
+  "dashboardSpace": "Android 16 & .NET 10 Upgrade",
   "dashboardLabel": "Active Upgrade",
   "labels": [
     { "text": "case-study", "bg": "rgba(163, 113, 247, 0.15)", "color": "#d3b3f7", "border": "rgba(163, 113, 247, 0.4)" },
     { "text": "c#", "bg": "rgba(23, 134, 0, 0.15)", "color": "#7ef76d", "border": "rgba(23, 134, 0, 0.4)" },
+    { "text": ".net-10", "bg": "rgba(163, 23, 23, 0.15)", "color": "#f78e8e", "border": "rgba(163, 23, 23, 0.4)" },
     { "text": ".net-maui", "bg": "rgba(49, 120, 198, 0.15)", "color": "#7dc3ff", "border": "rgba(49, 120, 198, 0.4)" },
     { "text": "android-sdk-36", "bg": "rgba(56, 139, 253, 0.15)", "color": "#58a6ff", "border": "rgba(56, 139, 253, 0.4)" },
     { "text": "xunit", "bg": "rgba(46, 160, 67, 0.15)", "color": "#56d364", "border": "rgba(46, 160, 67, 0.4)" }
