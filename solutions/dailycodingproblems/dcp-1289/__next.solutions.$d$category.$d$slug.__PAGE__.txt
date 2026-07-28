@@ -1,0 +1,269 @@
+1:"$Sreact.fragment"
+2:I[6404,["/code-problems/_next/static/chunks/0ob_z_0z7sy-0.js","/code-problems/_next/static/chunks/14mrh2-p_w84d.js","/code-problems/_next/static/chunks/3-jly6ly-1vwu.js"],"default"]
+8:I[97367,["/code-problems/_next/static/chunks/0ob_z_0z7sy-0.js","/code-problems/_next/static/chunks/14mrh2-p_w84d.js"],"OutletBoundary"]
+9:"$Sreact.suspense"
+3:T8b1,<h1>PageRank Algorithm</h1>
+<p>This problem was asked by Google.</p>
+<p>PageRank is an algorithm used by Google to rank the importance of different websites. While there have been changes over the years, the central idea is to assign each site a score based on the importance of other pages that link to that page.</p>
+<p>More mathematically, suppose there are $N$ sites, and each site $i$ has a certain count $C_i$ of outgoing links. Then the score for a particular site $S_j$ is defined as:</p>
+<p>$$\text{score}(S_j) = \frac{1 - d}{N} + d \times \left( \frac{\text{score}(S_x)}{C_x} + \frac{\text{score}(S_y)}{C_y} + \dots + \frac{\text{score}(S_z)}{C_z} \right)$$</p>
+<p>Here, $S_x, S_y, \dots, S_z$ denote the scores of all the other sites that have outgoing links to $S_j$, and $d$ is a damping factor, usually set to around 0.85, used to model the probability that a user will stop searching.</p>
+<p>Given a directed graph of links between various websites, write a program that calculates each site&#39;s page rank.</p>
+<h2>Difficulty: Hard</h2>
+<h2>How the Solution Works</h2>
+<p>We implement the <strong>Power Iteration</strong> method to calculate the PageRank:</p>
+<ol>
+<li><strong>Graph Representation:</strong> We represent the graph as an adjacency list of outgoing links.</li>
+<li><strong>Dangling Nodes:</strong> Nodes with no outgoing links ($C_i = 0$) are treated as linking to all nodes in the graph to prevent the rank from leaking/disappearing.</li>
+<li><strong>Iterative Update:</strong> <ul>
+<li>Initialize the rank of all $N$ pages to $1/N$.</li>
+<li>In each iteration, compute the new ranks based on the incoming ranks and distribute dangling node ranks equally.</li>
+<li>Continue iterating until the ranks converge (i.e., the maximum change between iterations is below a threshold $\epsilon = 10^{-6}$), or up to a maximum number of iterations (e.g., 100).</li>
+</ul>
+</li>
+</ol>
+<h2>Complexity</h2>
+<ul>
+<li><strong>Time Complexity:</strong> $O(I \times (N + E))$ where $I$ is the number of iterations to convergence, $N$ is the number of websites (nodes), and $E$ is the number of links (edges).</li>
+<li><strong>Space Complexity:</strong> $O(N + E)$ to store the graph and the ranks.</li>
+</ul>
+4:T272f,<span class="hljs-keyword">using</span> System;
+<span class="hljs-keyword">using</span> System.Collections.Generic;
+<span class="hljs-keyword">using</span> System.Linq;
+
+<span class="hljs-keyword">class</span> <span class="hljs-title">Solution</span>
+{
+    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> Dictionary&lt;<span class="hljs-built_in">string</span>, <span class="hljs-built_in">double</span>&gt; <span class="hljs-title">PageRank</span>(<span class="hljs-params">
+        Dictionary&lt;<span class="hljs-built_in">string</span>, List&lt;<span class="hljs-built_in">string</span>&gt;&gt; graph, 
+        <span class="hljs-built_in">double</span> d = <span class="hljs-number">0.85</span>, 
+        <span class="hljs-built_in">double</span> tol = <span class="hljs-number">1e-6</span>, 
+        <span class="hljs-built_in">int</span> maxIter = <span class="hljs-number">100</span></span>)</span>
+    {
+        <span class="hljs-comment">// Gather all unique nodes in the graph</span>
+        <span class="hljs-keyword">var</span> nodes = <span class="hljs-keyword">new</span> HashSet&lt;<span class="hljs-built_in">string</span>&gt;(graph.Keys);
+        <span class="hljs-keyword">foreach</span> (<span class="hljs-keyword">var</span> targets <span class="hljs-keyword">in</span> graph.Values)
+        {
+            <span class="hljs-keyword">foreach</span> (<span class="hljs-keyword">var</span> node <span class="hljs-keyword">in</span> targets)
+            {
+                nodes.Add(node);
+            }
+        }
+
+        <span class="hljs-built_in">int</span> N = nodes.Count;
+        <span class="hljs-keyword">if</span> (N == <span class="hljs-number">0</span>) <span class="hljs-keyword">return</span> <span class="hljs-keyword">new</span> Dictionary&lt;<span class="hljs-built_in">string</span>, <span class="hljs-built_in">double</span>&gt;();
+
+        <span class="hljs-comment">// Initialize ranks to 1/N</span>
+        <span class="hljs-keyword">var</span> ranks = nodes.ToDictionary(node =&gt; node, node =&gt; <span class="hljs-number">1.0</span> / N);
+        
+        <span class="hljs-comment">// Compute outdegrees</span>
+        <span class="hljs-keyword">var</span> outdegree = nodes.ToDictionary(
+            node =&gt; node, 
+            node =&gt; graph.ContainsKey(node) ? graph[node].Count : <span class="hljs-number">0</span>
+        );
+        
+        <span class="hljs-comment">// Map incoming links</span>
+        <span class="hljs-keyword">var</span> incoming = nodes.ToDictionary(node =&gt; node, node =&gt; <span class="hljs-keyword">new</span> HashSet&lt;<span class="hljs-built_in">string</span>&gt;());
+        <span class="hljs-keyword">foreach</span> (<span class="hljs-keyword">var</span> kvp <span class="hljs-keyword">in</span> graph)
+        {
+            <span class="hljs-built_in">string</span> src = kvp.Key;
+            <span class="hljs-keyword">foreach</span> (<span class="hljs-keyword">var</span> dst <span class="hljs-keyword">in</span> kvp.Value)
+            {
+                incoming[dst].Add(src);
+            }
+        }
+
+        <span class="hljs-comment">// Identify dangling nodes</span>
+        <span class="hljs-keyword">var</span> danglingNodes = nodes.Where(node =&gt; outdegree[node] == <span class="hljs-number">0</span>).ToList();
+
+        <span class="hljs-keyword">for</span> (<span class="hljs-built_in">int</span> iter = <span class="hljs-number">0</span>; iter &lt; maxIter; iter++)
+        {
+            <span class="hljs-keyword">var</span> newRanks = <span class="hljs-keyword">new</span> Dictionary&lt;<span class="hljs-built_in">string</span>, <span class="hljs-built_in">double</span>&gt;();
+            <span class="hljs-built_in">double</span> danglingSum = danglingNodes.Sum(node =&gt; ranks[node]);
+
+            <span class="hljs-keyword">foreach</span> (<span class="hljs-keyword">var</span> node <span class="hljs-keyword">in</span> nodes)
+            {
+                <span class="hljs-built_in">double</span> rankSum = danglingSum / N;
+
+                <span class="hljs-keyword">foreach</span> (<span class="hljs-keyword">var</span> src <span class="hljs-keyword">in</span> incoming[node])
+                {
+                    rankSum += ranks[src] / outdegree[src];
+                }
+
+                newRanks[node] = (<span class="hljs-number">1.0</span> - d) / N + d * rankSum;
+            }
+
+            <span class="hljs-comment">// Check convergence</span>
+            <span class="hljs-built_in">double</span> maxDiff = nodes.Max(node =&gt; Math.Abs(newRanks[node] - ranks[node]));
+            ranks = newRanks;
+
+            <span class="hljs-keyword">if</span> (maxDiff &lt; tol)
+            {
+                <span class="hljs-keyword">break</span>;
+            }
+        }
+
+        <span class="hljs-keyword">return</span> ranks;
+    }
+
+    <span class="hljs-function"><span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title">Main</span>()</span>
+    {
+        <span class="hljs-comment">// Test Case 1: Simple cycle A &lt;-&gt; B</span>
+        Console.WriteLine(<span class="hljs-string">&quot;Test 1: Simple Cycle (A &lt;-&gt; B)&quot;</span>);
+        <span class="hljs-keyword">var</span> g1 = <span class="hljs-keyword">new</span> Dictionary&lt;<span class="hljs-built_in">string</span>, List&lt;<span class="hljs-built_in">string</span>&gt;&gt;
+        {
+            { <span class="hljs-string">&quot;A&quot;</span>, <span class="hljs-keyword">new</span> List&lt;<span class="hljs-built_in">string</span>&gt; { <span class="hljs-string">&quot;B&quot;</span> } },
+            { <span class="hljs-string">&quot;B&quot;</span>, <span class="hljs-keyword">new</span> List&lt;<span class="hljs-built_in">string</span>&gt; { <span class="hljs-string">&quot;A&quot;</span> } }
+        };
+        <span class="hljs-keyword">var</span> r1 = PageRank(g1);
+        <span class="hljs-keyword">foreach</span> (<span class="hljs-keyword">var</span> kvp <span class="hljs-keyword">in</span> r1.OrderBy(x =&gt; x.Key))
+        {
+            Console.WriteLine(<span class="hljs-string">$&quot;  <span class="hljs-subst">{kvp.Key}</span>: <span class="hljs-subst">{kvp.Value:F4}</span>&quot;</span>);
+        }
+
+        <span class="hljs-comment">// Test Case 2: Chain with a dangling node A -&gt; B -&gt; C</span>
+        Console.WriteLine(<span class="hljs-string">&quot;\nTest 2: Chain (A -&gt; B -&gt; C)&quot;</span>);
+        <span class="hljs-keyword">var</span> g2 = <span class="hljs-keyword">new</span> Dictionary&lt;<span class="hljs-built_in">string</span>, List&lt;<span class="hljs-built_in">string</span>&gt;&gt;
+        {
+            { <span class="hljs-string">&quot;A&quot;</span>, <span class="hljs-keyword">new</span> List&lt;<span class="hljs-built_in">string</span>&gt; { <span class="hljs-string">&quot;B&quot;</span> } },
+            { <span class="hljs-string">&quot;B&quot;</span>, <span class="hljs-keyword">new</span> List&lt;<span class="hljs-built_in">string</span>&gt; { <span class="hljs-string">&quot;C&quot;</span> } }
+        };
+        <span class="hljs-keyword">var</span> r2 = PageRank(g2);
+        <span class="hljs-keyword">foreach</span> (<span class="hljs-keyword">var</span> kvp <span class="hljs-keyword">in</span> r2.OrderBy(x =&gt; x.Key))
+        {
+            Console.WriteLine(<span class="hljs-string">$&quot;  <span class="hljs-subst">{kvp.Key}</span>: <span class="hljs-subst">{kvp.Value:F4}</span>&quot;</span>);
+        }
+
+        <span class="hljs-comment">// Test Case 3: Star Graph (A links to B, C, D)</span>
+        Console.WriteLine(<span class="hljs-string">&quot;\nTest 3: Star Graph (A -&gt; B, C, D)&quot;</span>);
+        <span class="hljs-keyword">var</span> g3 = <span class="hljs-keyword">new</span> Dictionary&lt;<span class="hljs-built_in">string</span>, List&lt;<span class="hljs-built_in">string</span>&gt;&gt;
+        {
+            { <span class="hljs-string">&quot;A&quot;</span>, <span class="hljs-keyword">new</span> List&lt;<span class="hljs-built_in">string</span>&gt; { <span class="hljs-string">&quot;B&quot;</span>, <span class="hljs-string">&quot;C&quot;</span>, <span class="hljs-string">&quot;D&quot;</span> } }
+        };
+        <span class="hljs-keyword">var</span> r3 = PageRank(g3);
+        <span class="hljs-keyword">foreach</span> (<span class="hljs-keyword">var</span> kvp <span class="hljs-keyword">in</span> r3.OrderBy(x =&gt; x.Key))
+        {
+            Console.WriteLine(<span class="hljs-string">$&quot;  <span class="hljs-subst">{kvp.Key}</span>: <span class="hljs-subst">{kvp.Value:F4}</span>&quot;</span>);
+        }
+
+        <span class="hljs-comment">// Test Case 4: Disconnected components (A -&gt; B) and (C -&gt; D)</span>
+        Console.WriteLine(<span class="hljs-string">&quot;\nTest 4: Disconnected Components (A -&gt; B, C -&gt; D)&quot;</span>);
+        <span class="hljs-keyword">var</span> g4 = <span class="hljs-keyword">new</span> Dictionary&lt;<span class="hljs-built_in">string</span>, List&lt;<span class="hljs-built_in">string</span>&gt;&gt;
+        {
+            { <span class="hljs-string">&quot;A&quot;</span>, <span class="hljs-keyword">new</span> List&lt;<span class="hljs-built_in">string</span>&gt; { <span class="hljs-string">&quot;B&quot;</span> } },
+            { <span class="hljs-string">&quot;C&quot;</span>, <span class="hljs-keyword">new</span> List&lt;<span class="hljs-built_in">string</span>&gt; { <span class="hljs-string">&quot;D&quot;</span> } }
+        };
+        <span class="hljs-keyword">var</span> r4 = PageRank(g4);
+        <span class="hljs-keyword">foreach</span> (<span class="hljs-keyword">var</span> kvp <span class="hljs-keyword">in</span> r4.OrderBy(x =&gt; x.Key))
+        {
+            Console.WriteLine(<span class="hljs-string">$&quot;  <span class="hljs-subst">{kvp.Key}</span>: <span class="hljs-subst">{kvp.Value:F4}</span>&quot;</span>);
+        }
+    }
+}
+5:T1fa0,<span class="hljs-keyword">from</span> typing <span class="hljs-keyword">import</span> <span class="hljs-type">Dict</span>, <span class="hljs-type">List</span>
+
+<span class="hljs-keyword">def</span> <span class="hljs-title function_">pagerank</span>(<span class="hljs-params">
+    graph: <span class="hljs-type">Dict</span>[<span class="hljs-built_in">str</span>, <span class="hljs-type">List</span>[<span class="hljs-built_in">str</span>]], 
+    d: <span class="hljs-built_in">float</span> = <span class="hljs-number">0.85</span>, 
+    tol: <span class="hljs-built_in">float</span> = <span class="hljs-number">1e-6</span>, 
+    max_iter: <span class="hljs-built_in">int</span> = <span class="hljs-number">100</span>
+</span>) -&gt; <span class="hljs-type">Dict</span>[<span class="hljs-built_in">str</span>, <span class="hljs-built_in">float</span>]:
+    <span class="hljs-string">&quot;&quot;&quot;
+    Calculates the PageRank score for each website in a directed graph.
+    
+    :param graph: A dictionary representing the directed graph where keys are source
+                  nodes and values are lists of target nodes.
+    :param d: The damping factor (probability of continuing to click links).
+    :param tol: The convergence tolerance threshold.
+    :param max_iter: The maximum number of iterations.
+    :return: A dictionary mapping each node to its PageRank score.
+    &quot;&quot;&quot;</span>
+    <span class="hljs-comment"># Collect all unique nodes in the graph</span>
+    nodes = <span class="hljs-built_in">set</span>(graph.keys())
+    <span class="hljs-keyword">for</span> targets <span class="hljs-keyword">in</span> graph.values():
+        nodes.update(targets)
+        
+    N = <span class="hljs-built_in">len</span>(nodes)
+    <span class="hljs-keyword">if</span> N == <span class="hljs-number">0</span>:
+        <span class="hljs-keyword">return</span> {}
+        
+    <span class="hljs-comment"># Initialize all ranks to 1/N</span>
+    ranks = {node: <span class="hljs-number">1.0</span> / N <span class="hljs-keyword">for</span> node <span class="hljs-keyword">in</span> nodes}
+    
+    <span class="hljs-comment"># Calculate outdegree for all nodes</span>
+    outdegree = {node: <span class="hljs-built_in">len</span>(graph.get(node, [])) <span class="hljs-keyword">for</span> node <span class="hljs-keyword">in</span> nodes}
+    
+    <span class="hljs-comment"># Calculate incoming links for all nodes</span>
+    incoming = {node: <span class="hljs-built_in">set</span>() <span class="hljs-keyword">for</span> node <span class="hljs-keyword">in</span> nodes}
+    <span class="hljs-keyword">for</span> src, targets <span class="hljs-keyword">in</span> graph.items():
+        <span class="hljs-keyword">for</span> dst <span class="hljs-keyword">in</span> targets:
+            incoming[dst].add(src)
+            
+    <span class="hljs-comment"># Identify dangling nodes (outdegree = 0)</span>
+    dangling_nodes = [node <span class="hljs-keyword">for</span> node <span class="hljs-keyword">in</span> nodes <span class="hljs-keyword">if</span> outdegree[node] == <span class="hljs-number">0</span>]
+    
+    <span class="hljs-keyword">for</span> _ <span class="hljs-keyword">in</span> <span class="hljs-built_in">range</span>(max_iter):
+        new_ranks = {}
+        <span class="hljs-comment"># Sum of ranks of all dangling nodes</span>
+        dangling_sum = <span class="hljs-built_in">sum</span>(ranks[node] <span class="hljs-keyword">for</span> node <span class="hljs-keyword">in</span> dangling_nodes)
+        
+        <span class="hljs-keyword">for</span> node <span class="hljs-keyword">in</span> nodes:
+            <span class="hljs-comment"># Base (1 - d) / N + d * (rank of dangling nodes redistributed equally)</span>
+            rank_sum = dangling_sum / N
+            
+            <span class="hljs-comment"># Add contributions from incoming pages</span>
+            <span class="hljs-keyword">for</span> src <span class="hljs-keyword">in</span> incoming[node]:
+                rank_sum += ranks[src] / outdegree[src]
+                
+            new_ranks[node] = (<span class="hljs-number">1.0</span> - d) / N + d * rank_sum
+            
+        <span class="hljs-comment"># Check convergence</span>
+        diff = <span class="hljs-built_in">max</span>(<span class="hljs-built_in">abs</span>(new_ranks[node] - ranks[node]) <span class="hljs-keyword">for</span> node <span class="hljs-keyword">in</span> nodes)
+        ranks = new_ranks
+        <span class="hljs-keyword">if</span> diff &lt; tol:
+            <span class="hljs-keyword">break</span>
+            
+    <span class="hljs-keyword">return</span> ranks
+
+<span class="hljs-keyword">if</span> __name__ == <span class="hljs-string">&quot;__main__&quot;</span>:
+    <span class="hljs-comment"># Test Case 1: Simple cycle A &lt;-&gt; B</span>
+    <span class="hljs-built_in">print</span>(<span class="hljs-string">&quot;Test 1: Simple Cycle (A &lt;-&gt; B)&quot;</span>)
+    g1 = {
+        <span class="hljs-string">&quot;A&quot;</span>: [<span class="hljs-string">&quot;B&quot;</span>],
+        <span class="hljs-string">&quot;B&quot;</span>: [<span class="hljs-string">&quot;A&quot;</span>]
+    }
+    r1 = pagerank(g1)
+    <span class="hljs-keyword">for</span> node, rank <span class="hljs-keyword">in</span> <span class="hljs-built_in">sorted</span>(r1.items()):
+        <span class="hljs-built_in">print</span>(<span class="hljs-string">f&quot;  <span class="hljs-subst">{node}</span>: <span class="hljs-subst">{rank:<span class="hljs-number">.4</span>f}</span>&quot;</span>)
+        
+    <span class="hljs-comment"># Test Case 2: Chain with a dangling node A -&gt; B -&gt; C</span>
+    <span class="hljs-built_in">print</span>(<span class="hljs-string">&quot;\nTest 2: Chain (A -&gt; B -&gt; C)&quot;</span>)
+    g2 = {
+        <span class="hljs-string">&quot;A&quot;</span>: [<span class="hljs-string">&quot;B&quot;</span>],
+        <span class="hljs-string">&quot;B&quot;</span>: [<span class="hljs-string">&quot;C&quot;</span>]
+    }
+    r2 = pagerank(g2)
+    <span class="hljs-keyword">for</span> node, rank <span class="hljs-keyword">in</span> <span class="hljs-built_in">sorted</span>(r2.items()):
+        <span class="hljs-built_in">print</span>(<span class="hljs-string">f&quot;  <span class="hljs-subst">{node}</span>: <span class="hljs-subst">{rank:<span class="hljs-number">.4</span>f}</span>&quot;</span>)
+
+    <span class="hljs-comment"># Test Case 3: Star Graph (A links to B, C, D)</span>
+    <span class="hljs-built_in">print</span>(<span class="hljs-string">&quot;\nTest 3: Star Graph (A -&gt; B, C, D)&quot;</span>)
+    g3 = {
+        <span class="hljs-string">&quot;A&quot;</span>: [<span class="hljs-string">&quot;B&quot;</span>, <span class="hljs-string">&quot;C&quot;</span>, <span class="hljs-string">&quot;D&quot;</span>]
+    }
+    r3 = pagerank(g3)
+    <span class="hljs-keyword">for</span> node, rank <span class="hljs-keyword">in</span> <span class="hljs-built_in">sorted</span>(r3.items()):
+        <span class="hljs-built_in">print</span>(<span class="hljs-string">f&quot;  <span class="hljs-subst">{node}</span>: <span class="hljs-subst">{rank:<span class="hljs-number">.4</span>f}</span>&quot;</span>)
+
+    <span class="hljs-comment"># Test Case 4: Disconnected components (A -&gt; B) and (C -&gt; D)</span>
+    <span class="hljs-built_in">print</span>(<span class="hljs-string">&quot;\nTest 4: Disconnected Components (A -&gt; B, C -&gt; D)&quot;</span>)
+    g4 = {
+        <span class="hljs-string">&quot;A&quot;</span>: [<span class="hljs-string">&quot;B&quot;</span>],
+        <span class="hljs-string">&quot;C&quot;</span>: [<span class="hljs-string">&quot;D&quot;</span>]
+    }
+    r4 = pagerank(g4)
+    <span class="hljs-keyword">for</span> node, rank <span class="hljs-keyword">in</span> <span class="hljs-built_in">sorted</span>(r4.items()):
+        <span class="hljs-built_in">print</span>(<span class="hljs-string">f&quot;  <span class="hljs-subst">{node}</span>: <span class="hljs-subst">{rank:<span class="hljs-number">.4</span>f}</span>&quot;</span>)
+0:{"rsc":["$","$1","c",{"children":[["$","$L2",null,{"title":"PageRank Algorithm","categoryLabel":"Daily Coding Problems","readmeHtml":"$3","files":[{"name":"Solution.cs","language":"csharp","highlightedCode":"$4"},{"name":"Solution.py","language":"python","highlightedCode":"$5"}],"slug":"dcp-1289"}],["$L6"],"$L7"]}],"isPartial":false,"staleTime":300,"varyParams":null,"buildId":"2kyWR4y9FitCPVQnEoUvH"}
+6:["$","script","script-0",{"src":"/code-problems/_next/static/chunks/3-jly6ly-1vwu.js","async":true}]
+7:["$","$L8",null,{"children":["$","$9",null,{"name":"Next.MetadataOutlet","children":"$@a"}]}]
+a:null

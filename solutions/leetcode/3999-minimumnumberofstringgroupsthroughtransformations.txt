@@ -1,0 +1,97 @@
+1:"$Sreact.fragment"
+2:I[22016,["/code-problems/_next/static/chunks/0ob_z_0z7sy-0.js","/code-problems/_next/static/chunks/14mrh2-p_w84d.js"],""]
+3:I[39756,["/code-problems/_next/static/chunks/0ob_z_0z7sy-0.js","/code-problems/_next/static/chunks/14mrh2-p_w84d.js"],"default"]
+4:I[37457,["/code-problems/_next/static/chunks/0ob_z_0z7sy-0.js","/code-problems/_next/static/chunks/14mrh2-p_w84d.js"],"default"]
+5:I[79520,["/code-problems/_next/static/chunks/0ob_z_0z7sy-0.js","/code-problems/_next/static/chunks/14mrh2-p_w84d.js"],""]
+a:I[68027,["/code-problems/_next/static/chunks/0ob_z_0z7sy-0.js","/code-problems/_next/static/chunks/14mrh2-p_w84d.js"],"default",1]
+:HL["/code-problems/_next/static/chunks/0s2z6pg3qhyc7.css","style"]
+:HL["/code-problems/_next/static/media/797e433ab948586e-s.p.0r6juujl39pe6.woff2","font",{"crossOrigin":"","type":"font/woff2"}]
+:HL["/code-problems/_next/static/media/caa3a2e1cccd8315-s.p.0wgildi0cnwt9.woff2","font",{"crossOrigin":"","type":"font/woff2"}]
+0:{"P":null,"c":["","solutions","leetcode","3999-minimumnumberofstringgroupsthroughtransformations"],"q":"","i":false,"f":[[["",{"children":["solutions",{"children":[["category","leetcode","d",null],{"children":[["slug","3999-minimumnumberofstringgroupsthroughtransformations","d",null],{"children":["__PAGE__",{}]}]}]}]},"$undefined","$undefined",16],[["$","$1","c",{"children":[[["$","link","0",{"rel":"stylesheet","href":"/code-problems/_next/static/chunks/0s2z6pg3qhyc7.css","precedence":"next","crossOrigin":"$undefined","nonce":"$undefined"}],["$","script","script-0",{"src":"/code-problems/_next/static/chunks/0ob_z_0z7sy-0.js","async":true,"nonce":"$undefined"}],["$","script","script-1",{"src":"/code-problems/_next/static/chunks/14mrh2-p_w84d.js","async":true,"nonce":"$undefined"}]],["$","html",null,{"lang":"en","className":"geist_a71539c9-module__T19VSG__variable geist_mono_8d43a2aa-module__8Li5zG__variable","suppressHydrationWarning":true,"children":["$","body",null,{"suppressHydrationWarning":true,"children":[["$","header",null,{"className":"navbar","children":["$","div",null,{"className":"navbar-container","children":[["$","div",null,{"style":{"display":"flex","alignItems":"center","gap":"16px"},"children":["$","$L2",null,{"href":"/cv","className":"nav-logo","children":[["$","svg",null,{"height":"24","viewBox":"0 0 24 24","width":"24","style":{"stroke":"#f0f6fc","fill":"none"},"children":[["$","rect",null,{"x":"2","y":"2","width":"20","height":"20","rx":"4","strokeWidth":"2"}],["$","polyline",null,{"points":"9 16 5 12 9 8","strokeWidth":"2","strokeLinecap":"round","strokeLinejoin":"round"}],["$","polyline",null,{"points":"15 8 19 12 15 16","strokeWidth":"2","strokeLinecap":"round","strokeLinejoin":"round"}],["$","line",null,{"x1":"14","y1":"6","x2":"10","y2":"18","strokeWidth":"2","strokeLinecap":"round"}]]}],["$","span",null,{"className":"logo-text","children":"Thomas_Cook"}]]}]}],["$","nav",null,{"className":"nav-links","children":[["$","$L2",null,{"href":"/","className":"nav-link","children":"Dashboard"}],["$","$L2",null,{"href":"/cv","className":"nav-link","children":"CV"}]]}]]}]}],["$","div",null,{"style":{"flex":1},"children":["$","$L3",null,{"parallelRouterKey":"children","error":"$undefined","errorStyles":"$undefined","errorScripts":"$undefined","template":["$","$L4",null,{}],"templateStyles":"$undefined","templateScripts":"$undefined","notFound":[[["$","title",null,{"children":"404: This page could not be found."}],["$","div",null,{"style":{"fontFamily":"system-ui,\"Segoe UI\",Roboto,Helvetica,Arial,sans-serif,\"Apple Color Emoji\",\"Segoe UI Emoji\"","height":"100vh","textAlign":"center","display":"flex","flexDirection":"column","alignItems":"center","justifyContent":"center"},"children":["$","div",null,{"children":[["$","style",null,{"dangerouslySetInnerHTML":{"__html":"body{color:#000;background:#fff;margin:0}.next-error-h1{border-right:1px solid rgba(0,0,0,.3)}@media (prefers-color-scheme:dark){body{color:#fff;background:#000}.next-error-h1{border-right:1px solid rgba(255,255,255,.3)}}"}}],["$","h1",null,{"className":"next-error-h1","style":{"display":"inline-block","margin":"0 20px 0 0","padding":"0 23px 0 0","fontSize":24,"fontWeight":500,"verticalAlign":"top","lineHeight":"49px"},"children":404}],["$","div",null,{"style":{"display":"inline-block"},"children":["$","h2",null,{"style":{"fontSize":14,"fontWeight":400,"lineHeight":"49px","margin":0},"children":"This page could not be found."}]}]]}]}]],[]],"forbidden":"$undefined","unauthorized":"$undefined"}]}],["$","script",null,{"type":"application/ld+json","dangerouslySetInnerHTML":{"__html":"{\"@context\":\"https://schema.org\",\"@type\":\"Person\",\"name\":\"Thomas Cook\",\"jobTitle\":\"Software Engineer\",\"worksFor\":{\"@type\":\"Organization\",\"name\":\"HWM Global\"},\"url\":\"https://tomhcook.github.io/code-problems/\",\"sameAs\":[\"https://www.linkedin.com/in/thomas-cook-se/\",\"https://github.com/tomhcook\"],\"knowsAbout\":[\"Software Engineering\",\"C#\",\".NET Core\",\"ASP.NET Core\",\"SQL Database Optimization\",\"React\",\"TypeScript\",\"Azure DevOps\"]}"}}],["$","$L5",null,{"data-goatcounter":"https://thomashcook.goatcounter.com/count","src":"//gc.zgo.at/count.js","strategy":"afterInteractive"}]]}]}]]}],{"children":[["$","$1","c",{"children":[null,["$","$L3",null,{"parallelRouterKey":"children","error":"$undefined","errorStyles":"$undefined","errorScripts":"$undefined","template":["$","$L4",null,{}],"templateStyles":"$undefined","templateScripts":"$undefined","notFound":"$undefined","forbidden":"$undefined","unauthorized":"$undefined"}]]}],{"children":[["$","$1","c",{"children":[null,["$","$L3",null,{"parallelRouterKey":"children","error":"$undefined","errorStyles":"$undefined","errorScripts":"$undefined","template":["$","$L4",null,{}],"templateStyles":"$undefined","templateScripts":"$undefined","notFound":"$undefined","forbidden":"$undefined","unauthorized":"$undefined"}]]}],{"children":["$L6",{"children":["$L7",{},null,false,null]},null,false,"$@8"]},null,false,"$@8"]},null,false,"$@8"]},null,false,null],"$L9",false]],"m":"$undefined","G":["$a",["$Lb"]],"S":true,"h":null,"s":"$undefined","l":"$undefined","p":"$undefined","d":"$undefined","b":"2kyWR4y9FitCPVQnEoUvH"}
+d:I[97367,["/code-problems/_next/static/chunks/0ob_z_0z7sy-0.js","/code-problems/_next/static/chunks/14mrh2-p_w84d.js"],"OutletBoundary"]
+e:"$Sreact.suspense"
+11:I[97367,["/code-problems/_next/static/chunks/0ob_z_0z7sy-0.js","/code-problems/_next/static/chunks/14mrh2-p_w84d.js"],"ViewportBoundary"]
+13:I[97367,["/code-problems/_next/static/chunks/0ob_z_0z7sy-0.js","/code-problems/_next/static/chunks/14mrh2-p_w84d.js"],"MetadataBoundary"]
+6:["$","$1","c",{"children":[null,["$","$L3",null,{"parallelRouterKey":"children","error":"$undefined","errorStyles":"$undefined","errorScripts":"$undefined","template":["$","$L4",null,{}],"templateStyles":"$undefined","templateScripts":"$undefined","notFound":"$undefined","forbidden":"$undefined","unauthorized":"$undefined"}]]}]
+7:["$","$1","c",{"children":["$Lc",[["$","script","script-0",{"src":"/code-problems/_next/static/chunks/3-jly6ly-1vwu.js","async":true,"nonce":"$undefined"}]],["$","$Ld",null,{"children":["$","$e",null,{"name":"Next.MetadataOutlet","children":"$@f"}]}]]}]
+10:[]
+8:"$W10"
+9:["$","$1","h",{"children":[null,["$","$L11",null,{"children":"$L12"}],["$","div",null,{"hidden":true,"children":["$","$L13",null,{"children":["$","$e",null,{"name":"Next.Metadata","children":"$L14"}]}]}],["$","meta",null,{"name":"next-size-adjust","content":""}]]}]
+b:["$","link","0",{"rel":"stylesheet","href":"/code-problems/_next/static/chunks/0s2z6pg3qhyc7.css","precedence":"next","crossOrigin":"$undefined","nonce":"$undefined"}]
+15:I[6404,["/code-problems/_next/static/chunks/0ob_z_0z7sy-0.js","/code-problems/_next/static/chunks/14mrh2-p_w84d.js","/code-problems/_next/static/chunks/3-jly6ly-1vwu.js"],"default"]
+16:T796,<h1>Minimum Number of String Groups Through Transformations</h1>
+<p>You are given an array of strings <code>words</code>. A transformation on a string <code>s</code> is defined by:</p>
+<ol>
+<li>Extracting the subsequence of characters at even indices (<code>E</code>) and odd indices (<code>O</code>).</li>
+<li>Independently cyclically shifting <code>E</code> and <code>O</code> by any number of positions to the right.</li>
+<li>Reconstructing the string by placing the shifted characters back into their respective even/odd positions.</li>
+</ol>
+<p>Two strings are equivalent if one can be transformed into the other by a single transformation. The goal is to partition the <code>words</code> into the minimum number of groups such that all strings in a group are equivalent.</p>
+<h2>How the Solution Works</h2>
+<p>We can solve this problem in $O(N \cdot L)$ time with an <strong>optimal approach</strong>:</p>
+<ul>
+<li>For each word, we extract the characters at even indices (<code>E</code>) and odd indices (<code>O</code>) to form two separate subsequences.</li>
+<li>We find the lexicographically smallest cyclic rotation (canonical representation) for <code>E</code> and <code>O</code> independently (using Booth&#39;s algorithm or linear rotation comparisons).</li>
+<li>We combine the two canonical sequences into a unified key, e.g. <code>(canonical_E, canonical_O)</code>.</li>
+<li>By putting these keys in a hash set, the size of the set gives the minimum number of groups.</li>
+</ul>
+<h2>Complexity</h2>
+<ul>
+<li><strong>Time Complexity:</strong> $O(N \cdot L)$ where $N$ is the number of words and $L$ is the max length of a word.</li>
+<li><strong>Space Complexity:</strong> $O(N \cdot L)$ to store the canonical representations in a hash set.</li>
+</ul>
+<p>⚡ <strong>Optimal Approach</strong></p>
+<p><a href="https://leetcode.com/problems/minimum-number-of-string-groups-through-transformations/">LeetCode Problem Link</a></p>
+17:T12cc,<span class="hljs-keyword">from</span> typing <span class="hljs-keyword">import</span> <span class="hljs-type">List</span>
+
+<span class="hljs-keyword">class</span> <span class="hljs-title class_">Solution</span>:
+    <span class="hljs-keyword">def</span> <span class="hljs-title function_">getMinRotation</span>(<span class="hljs-params">self, s: <span class="hljs-built_in">str</span></span>) -&gt; <span class="hljs-built_in">str</span>:
+        n = <span class="hljs-built_in">len</span>(s)
+        <span class="hljs-keyword">if</span> n &lt;= <span class="hljs-number">1</span>:
+            <span class="hljs-keyword">return</span> s
+        
+        doubled = s + s
+        i, j, k = <span class="hljs-number">0</span>, <span class="hljs-number">1</span>, <span class="hljs-number">0</span>
+        
+        <span class="hljs-keyword">while</span> i &lt; n <span class="hljs-keyword">and</span> j &lt; n <span class="hljs-keyword">and</span> k &lt; n:
+            diff = <span class="hljs-built_in">ord</span>(doubled[i + k]) - <span class="hljs-built_in">ord</span>(doubled[j + k])
+            <span class="hljs-keyword">if</span> diff == <span class="hljs-number">0</span>:
+                k += <span class="hljs-number">1</span>
+            <span class="hljs-keyword">else</span>:
+                <span class="hljs-keyword">if</span> diff &gt; <span class="hljs-number">0</span>:
+                    i = <span class="hljs-built_in">max</span>(i + k + <span class="hljs-number">1</span>, j + <span class="hljs-number">1</span>)
+                <span class="hljs-keyword">else</span>:
+                    j = <span class="hljs-built_in">max</span>(j + k + <span class="hljs-number">1</span>, i + <span class="hljs-number">1</span>)
+                k = <span class="hljs-number">0</span>
+                
+        start = <span class="hljs-built_in">min</span>(i, j)
+        <span class="hljs-keyword">return</span> doubled[start : start + n]
+
+    <span class="hljs-keyword">def</span> <span class="hljs-title function_">minimumGroups</span>(<span class="hljs-params">self, words: <span class="hljs-type">List</span>[<span class="hljs-built_in">str</span>]</span>) -&gt; <span class="hljs-built_in">int</span>:
+        uniqueSignatures = <span class="hljs-built_in">set</span>()
+        
+        <span class="hljs-keyword">for</span> word <span class="hljs-keyword">in</span> words:
+            evenSubseq = word[<span class="hljs-number">0</span>::<span class="hljs-number">2</span>]
+            oddSubseq = word[<span class="hljs-number">1</span>::<span class="hljs-number">2</span>]
+            canonEven = <span class="hljs-variable language_">self</span>.getMinRotation(evenSubseq)
+            canonOdd = <span class="hljs-variable language_">self</span>.getMinRotation(oddSubseq)
+            signature = (canonEven, canonOdd)
+            uniqueSignatures.add(signature)
+            
+        <span class="hljs-keyword">return</span> <span class="hljs-built_in">len</span>(uniqueSignatures)
+
+<span class="hljs-keyword">if</span> __name__ == <span class="hljs-string">&#x27;__main__&#x27;</span>:
+    sol = Solution()
+    testCases = [
+        ([<span class="hljs-string">&quot;ntgwz&quot;</span>, <span class="hljs-string">&quot;zwntg&quot;</span>], <span class="hljs-number">1</span>),
+        ([<span class="hljs-string">&quot;abc&quot;</span>, <span class="hljs-string">&quot;cab&quot;</span>, <span class="hljs-string">&quot;bac&quot;</span>, <span class="hljs-string">&quot;acb&quot;</span>, <span class="hljs-string">&quot;bca&quot;</span>, <span class="hljs-string">&quot;cba&quot;</span>], <span class="hljs-number">3</span>),
+        ([<span class="hljs-string">&quot;leet&quot;</span>, <span class="hljs-string">&quot;abb&quot;</span>, <span class="hljs-string">&quot;bab&quot;</span>, <span class="hljs-string">&quot;deed&quot;</span>, <span class="hljs-string">&quot;edde&quot;</span>, <span class="hljs-string">&quot;code&quot;</span>, <span class="hljs-string">&quot;bba&quot;</span>], <span class="hljs-number">5</span>)
+    ]
+    <span class="hljs-keyword">for</span> idx, (words, expected) <span class="hljs-keyword">in</span> <span class="hljs-built_in">enumerate</span>(testCases, <span class="hljs-number">1</span>):
+        result = sol.minimumGroups(words)
+        <span class="hljs-built_in">print</span>(<span class="hljs-string">f&quot;Test <span class="hljs-subst">{idx}</span>: words=<span class="hljs-subst">{words}</span> -&gt; Result=<span class="hljs-subst">{result}</span> | Expected=<span class="hljs-subst">{expected}</span> | <span class="hljs-subst">{<span class="hljs-string">&#x27;PASS&#x27;</span> <span class="hljs-keyword">if</span> result == expected <span class="hljs-keyword">else</span> <span class="hljs-string">&#x27;FAIL&#x27;</span>}</span>&quot;</span>)
+c:["$","$L15",null,{"title":"Minimum Number of String Groups Through Transformations","categoryLabel":"LeetCode","readmeHtml":"$16","files":[{"name":"Solution.py","language":"python","highlightedCode":"$17"}],"slug":"3999-minimumnumberofstringgroupsthroughtransformations","caseStudyMeta":"$undefined"}]
+12:[["$","meta","0",{"charSet":"utf-8"}],["$","meta","1",{"name":"viewport","content":"width=device-width, initial-scale=1"}]]
+18:I[27201,["/code-problems/_next/static/chunks/0ob_z_0z7sy-0.js","/code-problems/_next/static/chunks/14mrh2-p_w84d.js"],"IconMark"]
+f:null
+14:[["$","title","0",{"children":"Minimum Number of String Groups Through Transformations | Thomas Cook — Software Engineer"}],["$","meta","1",{"name":"description","content":"You are given an array of strings `words`. A transformation on a string `s` is defined by:"}],["$","link","2",{"rel":"author","href":"https://tomhcook.github.io/code-problems/"}],["$","meta","3",{"name":"author","content":"Thomas Cook"}],["$","meta","4",{"name":"keywords","content":"Thomas Cook software,Thomas Cook software engineer,Minimum Number of String Groups Through Transformations,LeetCode,Thomas Cook developer"}],["$","link","5",{"rel":"canonical","href":"https://tomhcook.github.io/code-problems/solutions/leetcode/3999-minimumnumberofstringgroupsthroughtransformations"}],["$","meta","6",{"property":"og:title","content":"Minimum Number of String Groups Through Transformations | Thomas Cook — Software Engineer"}],["$","meta","7",{"property":"og:description","content":"You are given an array of strings `words`. A transformation on a string `s` is defined by:"}],["$","meta","8",{"property":"og:url","content":"https://tomhcook.github.io/code-problems/solutions/leetcode/3999-minimumnumberofstringgroupsthroughtransformations"}],["$","meta","9",{"property":"og:site_name","content":"Thomas Cook — Software Engineer"}],["$","meta","10",{"property":"og:type","content":"article"}],["$","meta","11",{"name":"twitter:card","content":"summary"}],["$","meta","12",{"name":"twitter:title","content":"Minimum Number of String Groups Through Transformations | Thomas Cook — Software Engineer"}],["$","meta","13",{"name":"twitter:description","content":"You are given an array of strings `words`. A transformation on a string `s` is defined by:"}],["$","link","14",{"rel":"icon","href":"/code-problems/favicon.ico?favicon.2vob68tjqpejf.ico","sizes":"256x256","type":"image/x-icon"}],["$","$L18","15",{}]]

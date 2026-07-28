@@ -1,0 +1,140 @@
+1:"$Sreact.fragment"
+2:I[6404,["/code-problems/_next/static/chunks/0ob_z_0z7sy-0.js","/code-problems/_next/static/chunks/14mrh2-p_w84d.js","/code-problems/_next/static/chunks/3-jly6ly-1vwu.js"],"default"]
+8:I[97367,["/code-problems/_next/static/chunks/0ob_z_0z7sy-0.js","/code-problems/_next/static/chunks/14mrh2-p_w84d.js"],"OutletBoundary"]
+9:"$Sreact.suspense"
+3:T824,<h1>Palindrome Pairs</h1>
+<p>Given a list of unique words, find all pairs of distinct indices <code>(i, j)</code> in the given list, so that the concatenation of the two words, i.e., <code>words[i] + words[j]</code> is a palindrome.</p>
+<h2>How the Solution Works</h2>
+<p>A brute-force solution checks all pairs, which takes $O(N^2 \cdot L)$ time (where $N$ is the number of words and $L$ is the maximum length of a word). This is too slow for the constraints ($N \le 5000$).</p>
+<p>An optimal approach uses a <strong>Hash Map</strong> to store each word and its index, allowing $O(1)$ lookup time:</p>
+<ol>
+<li>We populate a hash map mapping each word to its index.</li>
+<li>For each word <code>words[i]</code>, we split it into all possible prefixes and suffixes <code>word[:j]</code> and <code>word[j:]</code> for $j \in [0, L]$.</li>
+<li>For each split:<ul>
+<li><strong>Case 1:</strong> If the prefix is a palindrome, we check if the reverse of the suffix exists in our hash map. If it does (and is not <code>i</code>), then <code>reversed(suffix) + word</code> (i.e. <code>words[idx] + words[i]</code>) forms a palindrome.</li>
+<li><strong>Case 2:</strong> If the suffix is a palindrome, we check if the reverse of the prefix exists in our hash map. If it does (and is not <code>i</code>), then <code>word + reversed(prefix)</code> (i.e. <code>words[i] + words[idx]</code>) forms a palindrome. To avoid double-counting the full-word reverse pairs (which are handled when the prefix is empty in Case 1), we only apply Case 2 when the suffix is non-empty (<code>j &lt; L</code>).</li>
+</ul>
+</li>
+</ol>
+<h2>Complexity</h2>
+<ul>
+<li><strong>Time Complexity:</strong> $O(N \cdot L^2)$ where $N$ is the number of words and $L$ is the maximum length of a word. For each of the $N$ words, we perform $L$ splits, and checking for palindrome and slicing takes $O(L)$ time.</li>
+<li><strong>Space Complexity:</strong> $O(N \cdot L)$ to store all words and their indices in the hash map.</li>
+</ul>
+<p><a href="https://leetcode.com/problems/palindrome-pairs/">LeetCode Problem Link</a></p>
+4:T2443,<span class="hljs-keyword">using</span> System;
+<span class="hljs-keyword">using</span> System.Collections.Generic;
+<span class="hljs-keyword">using</span> System.Linq;
+
+<span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title">Solution</span> {
+    <span class="hljs-function"><span class="hljs-keyword">private</span> <span class="hljs-built_in">bool</span> <span class="hljs-title">IsPalindrome</span>(<span class="hljs-params"><span class="hljs-built_in">string</span> s, <span class="hljs-built_in">int</span> left, <span class="hljs-built_in">int</span> right</span>)</span> {
+        <span class="hljs-keyword">while</span> (left &lt; right) {
+            <span class="hljs-keyword">if</span> (s[left++] != s[right--]) {
+                <span class="hljs-keyword">return</span> <span class="hljs-literal">false</span>;
+            }
+        }
+        <span class="hljs-keyword">return</span> <span class="hljs-literal">true</span>;
+    }
+
+    <span class="hljs-keyword">public</span> IList&lt;IList&lt;<span class="hljs-built_in">int</span>&gt;&gt; PalindromePairs(<span class="hljs-built_in">string</span>[] words) {
+        <span class="hljs-keyword">var</span> res = <span class="hljs-keyword">new</span> List&lt;IList&lt;<span class="hljs-built_in">int</span>&gt;&gt;();
+        <span class="hljs-keyword">var</span> wordToIdx = <span class="hljs-keyword">new</span> Dictionary&lt;<span class="hljs-built_in">string</span>, <span class="hljs-built_in">int</span>&gt;();
+        <span class="hljs-keyword">for</span> (<span class="hljs-built_in">int</span> i = <span class="hljs-number">0</span>; i &lt; words.Length; i++) {
+            wordToIdx[words[i]] = i;
+        }
+
+        <span class="hljs-keyword">for</span> (<span class="hljs-built_in">int</span> i = <span class="hljs-number">0</span>; i &lt; words.Length; i++) {
+            <span class="hljs-built_in">string</span> word = words[i];
+            <span class="hljs-built_in">int</span> n = word.Length;
+            <span class="hljs-keyword">for</span> (<span class="hljs-built_in">int</span> j = <span class="hljs-number">0</span>; j &lt;= n; j++) {
+                <span class="hljs-comment">// Case 1: Prefix is a palindrome, check if reversed suffix is in dictionary</span>
+                <span class="hljs-keyword">if</span> (IsPalindrome(word, <span class="hljs-number">0</span>, j - <span class="hljs-number">1</span>)) {
+                    <span class="hljs-built_in">char</span>[] suffixArr = word.Substring(j).ToCharArray();
+                    Array.Reverse(suffixArr);
+                    <span class="hljs-built_in">string</span> revSuff = <span class="hljs-keyword">new</span> <span class="hljs-built_in">string</span>(suffixArr);
+                    <span class="hljs-keyword">if</span> (wordToIdx.TryGetValue(revSuff, <span class="hljs-keyword">out</span> <span class="hljs-built_in">int</span> idx) &amp;&amp; idx != i) {
+                        res.Add(<span class="hljs-keyword">new</span> List&lt;<span class="hljs-built_in">int</span>&gt; { idx, i });
+                    }
+                }
+
+                <span class="hljs-comment">// Case 2: Suffix is a palindrome, check if reversed prefix is in dictionary</span>
+                <span class="hljs-comment">// j &lt; n to avoid duplicates (suffix must be non-empty)</span>
+                <span class="hljs-keyword">if</span> (j &lt; n &amp;&amp; IsPalindrome(word, j, n - <span class="hljs-number">1</span>)) {
+                    <span class="hljs-built_in">char</span>[] prefixArr = word.Substring(<span class="hljs-number">0</span>, j).ToCharArray();
+                    Array.Reverse(prefixArr);
+                    <span class="hljs-built_in">string</span> revPref = <span class="hljs-keyword">new</span> <span class="hljs-built_in">string</span>(prefixArr);
+                    <span class="hljs-keyword">if</span> (wordToIdx.TryGetValue(revPref, <span class="hljs-keyword">out</span> <span class="hljs-built_in">int</span> idx) &amp;&amp; idx != i) {
+                        res.Add(<span class="hljs-keyword">new</span> List&lt;<span class="hljs-built_in">int</span>&gt; { i, idx });
+                    }
+                }
+            }
+        }
+
+        <span class="hljs-keyword">return</span> res;
+    }
+
+    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title">Main</span>(<span class="hljs-params"><span class="hljs-built_in">string</span>[] <span class="hljs-keyword">args</span></span>)</span> {
+        Solution sol = <span class="hljs-keyword">new</span> Solution();
+        <span class="hljs-keyword">var</span> testCases = <span class="hljs-keyword">new</span> (<span class="hljs-built_in">string</span>[] words, <span class="hljs-built_in">int</span>[][] expected)[] {
+            (<span class="hljs-keyword">new</span> <span class="hljs-built_in">string</span>[] { <span class="hljs-string">&quot;abcd&quot;</span>, <span class="hljs-string">&quot;dcba&quot;</span>, <span class="hljs-string">&quot;lls&quot;</span>, <span class="hljs-string">&quot;s&quot;</span>, <span class="hljs-string">&quot;sssll&quot;</span> }, <span class="hljs-keyword">new</span> <span class="hljs-built_in">int</span>[][] { <span class="hljs-keyword">new</span> <span class="hljs-built_in">int</span>[] { <span class="hljs-number">0</span>, <span class="hljs-number">1</span> }, <span class="hljs-keyword">new</span> <span class="hljs-built_in">int</span>[] { <span class="hljs-number">1</span>, <span class="hljs-number">0</span> }, <span class="hljs-keyword">new</span> <span class="hljs-built_in">int</span>[] { <span class="hljs-number">3</span>, <span class="hljs-number">2</span> }, <span class="hljs-keyword">new</span> <span class="hljs-built_in">int</span>[] { <span class="hljs-number">2</span>, <span class="hljs-number">4</span> } }),
+            (<span class="hljs-keyword">new</span> <span class="hljs-built_in">string</span>[] { <span class="hljs-string">&quot;bat&quot;</span>, <span class="hljs-string">&quot;tab&quot;</span>, <span class="hljs-string">&quot;cat&quot;</span> }, <span class="hljs-keyword">new</span> <span class="hljs-built_in">int</span>[][] { <span class="hljs-keyword">new</span> <span class="hljs-built_in">int</span>[] { <span class="hljs-number">0</span>, <span class="hljs-number">1</span> }, <span class="hljs-keyword">new</span> <span class="hljs-built_in">int</span>[] { <span class="hljs-number">1</span>, <span class="hljs-number">0</span> } }),
+            (<span class="hljs-keyword">new</span> <span class="hljs-built_in">string</span>[] { <span class="hljs-string">&quot;a&quot;</span>, <span class="hljs-string">&quot;&quot;</span> }, <span class="hljs-keyword">new</span> <span class="hljs-built_in">int</span>[][] { <span class="hljs-keyword">new</span> <span class="hljs-built_in">int</span>[] { <span class="hljs-number">0</span>, <span class="hljs-number">1</span> }, <span class="hljs-keyword">new</span> <span class="hljs-built_in">int</span>[] { <span class="hljs-number">1</span>, <span class="hljs-number">0</span> } })
+        };
+
+        <span class="hljs-keyword">for</span> (<span class="hljs-built_in">int</span> idx = <span class="hljs-number">0</span>; idx &lt; testCases.Length; idx++) {
+            <span class="hljs-keyword">var</span> tc = testCases[idx];
+            <span class="hljs-keyword">var</span> result = sol.PalindromePairs(tc.words);
+            
+            <span class="hljs-comment">// Compare results</span>
+            <span class="hljs-built_in">bool</span> pass = <span class="hljs-literal">true</span>;
+            <span class="hljs-keyword">if</span> (result.Count != tc.expected.Length) {
+                pass = <span class="hljs-literal">false</span>;
+            } <span class="hljs-keyword">else</span> {
+                <span class="hljs-keyword">var</span> resSorted = result.Select(r =&gt; <span class="hljs-built_in">string</span>.Join(<span class="hljs-string">&quot;,&quot;</span>, r.OrderBy(x =&gt; x))).OrderBy(x =&gt; x).ToList();
+                <span class="hljs-keyword">var</span> expSorted = tc.expected.Select(e =&gt; <span class="hljs-built_in">string</span>.Join(<span class="hljs-string">&quot;,&quot;</span>, e.OrderBy(x =&gt; x))).OrderBy(x =&gt; x).ToList();
+                <span class="hljs-keyword">for</span> (<span class="hljs-built_in">int</span> i = <span class="hljs-number">0</span>; i &lt; resSorted.Count; i++) {
+                    <span class="hljs-keyword">if</span> (resSorted[i] != expSorted[i]) {
+                        pass = <span class="hljs-literal">false</span>;
+                        <span class="hljs-keyword">break</span>;
+                    }
+                }
+            }
+
+            Console.WriteLine(<span class="hljs-string">$&quot;Test <span class="hljs-subst">{idx + <span class="hljs-number">1</span>}</span>: words=[<span class="hljs-subst">{<span class="hljs-built_in">string</span>.Join(<span class="hljs-string">&quot;, &quot;</span>, tc.words)}</span>] -&gt; ResultCount=<span class="hljs-subst">{result.Count}</span> | Pass=<span class="hljs-subst">{pass}</span>&quot;</span>);
+        }
+    }
+}
+5:T1066,<span class="hljs-keyword">class</span> <span class="hljs-title class_">Solution</span>:
+    <span class="hljs-keyword">def</span> <span class="hljs-title function_">palindromePairs</span>(<span class="hljs-params">self, words: <span class="hljs-built_in">list</span>[<span class="hljs-built_in">str</span>]</span>) -&gt; <span class="hljs-built_in">list</span>[<span class="hljs-built_in">list</span>[<span class="hljs-built_in">int</span>]]:
+        word_to_idx = {w: i <span class="hljs-keyword">for</span> i, w <span class="hljs-keyword">in</span> <span class="hljs-built_in">enumerate</span>(words)}
+        res = []
+        
+        <span class="hljs-keyword">for</span> i, word <span class="hljs-keyword">in</span> <span class="hljs-built_in">enumerate</span>(words):
+            n = <span class="hljs-built_in">len</span>(word)
+            <span class="hljs-keyword">for</span> j <span class="hljs-keyword">in</span> <span class="hljs-built_in">range</span>(n + <span class="hljs-number">1</span>):
+                pref = word[:j]
+                suff = word[j:]
+                <span class="hljs-keyword">if</span> pref == pref[::-<span class="hljs-number">1</span>]:
+                    rev_suff = suff[::-<span class="hljs-number">1</span>]
+                    <span class="hljs-keyword">if</span> rev_suff <span class="hljs-keyword">in</span> word_to_idx <span class="hljs-keyword">and</span> word_to_idx[rev_suff] != i:
+                        res.append([word_to_idx[rev_suff], i])
+                <span class="hljs-keyword">if</span> suff != <span class="hljs-string">&quot;&quot;</span> <span class="hljs-keyword">and</span> suff == suff[::-<span class="hljs-number">1</span>]:
+                    rev_pref = pref[::-<span class="hljs-number">1</span>]
+                    <span class="hljs-keyword">if</span> rev_pref <span class="hljs-keyword">in</span> word_to_idx <span class="hljs-keyword">and</span> word_to_idx[rev_pref] != i:
+                        res.append([i, word_to_idx[rev_pref]])
+        <span class="hljs-keyword">return</span> res
+
+<span class="hljs-keyword">if</span> __name__ == <span class="hljs-string">&#x27;__main__&#x27;</span>:
+    sol = Solution()
+    test_cases = [
+        ([<span class="hljs-string">&quot;abcd&quot;</span>, <span class="hljs-string">&quot;dcba&quot;</span>, <span class="hljs-string">&quot;lls&quot;</span>, <span class="hljs-string">&quot;s&quot;</span>, <span class="hljs-string">&quot;sssll&quot;</span>], [[<span class="hljs-number">0</span>, <span class="hljs-number">1</span>], [<span class="hljs-number">1</span>, <span class="hljs-number">0</span>], [<span class="hljs-number">3</span>, <span class="hljs-number">2</span>], [<span class="hljs-number">2</span>, <span class="hljs-number">4</span>]]),
+        ([<span class="hljs-string">&quot;bat&quot;</span>, <span class="hljs-string">&quot;tab&quot;</span>, <span class="hljs-string">&quot;cat&quot;</span>], [[<span class="hljs-number">0</span>, <span class="hljs-number">1</span>], [<span class="hljs-number">1</span>, <span class="hljs-number">0</span>]]),
+        ([<span class="hljs-string">&quot;a&quot;</span>, <span class="hljs-string">&quot;&quot;</span>], [[<span class="hljs-number">0</span>, <span class="hljs-number">1</span>], [<span class="hljs-number">1</span>, <span class="hljs-number">0</span>]])
+    ]
+    <span class="hljs-keyword">for</span> idx, (words, expected) <span class="hljs-keyword">in</span> <span class="hljs-built_in">enumerate</span>(test_cases, <span class="hljs-number">1</span>):
+        result = sol.palindromePairs(words)
+        <span class="hljs-built_in">print</span>(<span class="hljs-string">f&quot;Test <span class="hljs-subst">{idx}</span>: words=<span class="hljs-subst">{words}</span> -&gt; Result=<span class="hljs-subst">{result}</span> | Expected=<span class="hljs-subst">{expected}</span> | <span class="hljs-subst">{<span class="hljs-string">&#x27;PASS&#x27;</span> <span class="hljs-keyword">if</span> <span class="hljs-built_in">sorted</span>(result) == <span class="hljs-built_in">sorted</span>(expected) <span class="hljs-keyword">else</span> <span class="hljs-string">&#x27;FAIL&#x27;</span>}</span>&quot;</span>)
+0:{"rsc":["$","$1","c",{"children":[["$","$L2",null,{"title":"Palindrome Pairs","categoryLabel":"LeetCode","readmeHtml":"$3","files":[{"name":"Solution.cs","language":"csharp","highlightedCode":"$4"},{"name":"Solution.py","language":"python","highlightedCode":"$5"}],"slug":"0336-palindromepairs"}],["$L6"],"$L7"]}],"isPartial":false,"staleTime":300,"varyParams":null,"buildId":"2kyWR4y9FitCPVQnEoUvH"}
+6:["$","script","script-0",{"src":"/code-problems/_next/static/chunks/3-jly6ly-1vwu.js","async":true}]
+7:["$","$L8",null,{"children":["$","$9",null,{"name":"Next.MetadataOutlet","children":"$@a"}]}]
+a:null

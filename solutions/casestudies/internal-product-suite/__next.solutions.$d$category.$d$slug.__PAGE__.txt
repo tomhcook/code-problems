@@ -1,0 +1,41 @@
+1:"$Sreact.fragment"
+2:I[6404,["/code-problems/_next/static/chunks/0ob_z_0z7sy-0.js","/code-problems/_next/static/chunks/14mrh2-p_w84d.js","/code-problems/_next/static/chunks/3-jly6ly-1vwu.js"],"default"]
+5:I[97367,["/code-problems/_next/static/chunks/0ob_z_0z7sy-0.js","/code-problems/_next/static/chunks/14mrh2-p_w84d.js"],"OutletBoundary"]
+6:"$Sreact.suspense"
+3:T9bc,<h1>Proprietary Internal Product Development</h1>
+<p>A highly successful, proprietary business solution designed, architected, and built from the ground up to streamline operations and generate new revenue streams.</p>
+<h2>Technical Showcase</h2>
+<ul>
+<li><strong>Role</strong>: Lead Architect &amp; Developer (End-to-End Delivery)</li>
+<li><strong>Architecture</strong>: Ruby Web API &amp; Services</li>
+<li><strong>Backend &amp; Infrastructure</strong>: Ruby, Docker, SQL, Azure MSSQL</li>
+<li><strong>Hosting &amp; CI/CD</strong>: Azure DevOps pipelines &amp; cloud hosting environment</li>
+<li><strong>Deployment</strong>: Full responsibility for performing and managing production deployments personally</li>
+</ul>
+<hr>
+<h2>1. The Challenge</h2>
+<p>The business identified a key operational bottleneck and revenue opportunity that off-the-shelf software could not address. The objective was to plan, design, and implement a custom internal product to:</p>
+<ol>
+<li>Handle complex workflows and state transitions.</li>
+<li>Integrate securely with core legacy business databases and third-party services.</li>
+<li>Scale efficiently without exponential infrastructure costs.</li>
+<li>Support offline-first or low-connectivity client states.</li>
+</ol>
+<hr>
+<h2>2. Technical Implementation &amp; Design decisions</h2>
+<ul>
+<li><strong>API Architecture</strong>: Designed a clean, RESTful Ruby-based API with separation of concerns and robust routing models.</li>
+<li><strong>Database Tuning</strong>: Designed database schemas with Azure MSSQL, utilizing query optimization, tailored indices, and transactional guarantees to support high-concurrency usage.</li>
+<li><strong>Containerization &amp; Environment</strong>: Built consistent development and deployment flows using Docker containers.</li>
+<li><strong>CI/CD Pipeline</strong>: Configured build and release pipelines in Azure DevOps for automated integration, testing, and continuous deployment to ensure zero-downtime rolling updates.</li>
+</ul>
+<hr>
+<h2>3. Results &amp; Business Impact</h2>
+<ul>
+<li><strong>Revenue Generation</strong>: The product is actively used in production and is successfully earning significant new revenue/savings for the business.</li>
+<li><strong>Adoption</strong>: 100% internal adoption within the target division, replacing multiple disjointed spreadsheet-based workflows.</li>
+<li><strong>Performance</strong>: Optimized SQL query paths and state caching to keep page loads under 200ms.</li>
+</ul>
+0:{"rsc":["$","$1","c",{"children":[["$","$L2",null,{"title":"Proprietary Internal Product Development","categoryLabel":"Case Studies","readmeHtml":"$3","files":[],"slug":"internal-product-suite","caseStudyMeta":{"role":"Lead Architect","company":"HWM","projects":"Internal Products Suite","milestone":"Production Launch & Direct Revenue Delivery","cvHighlight":"lead","dashboardTime":"Lead Architect","dashboardSpace":"Revenue-Generating","dashboardLabel":"System Design Showcase","labels":[{"text":"case-study","bg":"rgba(163, 113, 247, 0.15)","color":"#d3b3f7","border":"rgba(163, 113, 247, 0.4)"},{"text":"ruby","bg":"rgba(112, 21, 22, 0.15)","color":"#ff8284","border":"rgba(112, 21, 22, 0.4)"},{"text":"docker","bg":"rgba(56, 139, 253, 0.15)","color":"#58a6ff","border":"rgba(56, 139, 253, 0.4)"},{"text":"azure-mssql","bg":"rgba(46, 160, 67, 0.15)","color":"#56d364","border":"rgba(46, 160, 67, 0.4)"}]}}],[["$","script","script-0",{"src":"/code-problems/_next/static/chunks/3-jly6ly-1vwu.js","async":true}]],"$L4"]}],"isPartial":false,"staleTime":300,"varyParams":null,"buildId":"2kyWR4y9FitCPVQnEoUvH"}
+4:["$","$L5",null,{"children":["$","$6",null,{"name":"Next.MetadataOutlet","children":"$@7"}]}]
+7:null

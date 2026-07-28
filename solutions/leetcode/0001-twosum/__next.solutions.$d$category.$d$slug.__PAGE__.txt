@@ -1,0 +1,80 @@
+1:"$Sreact.fragment"
+2:I[6404,["/code-problems/_next/static/chunks/0ob_z_0z7sy-0.js","/code-problems/_next/static/chunks/14mrh2-p_w84d.js","/code-problems/_next/static/chunks/3-jly6ly-1vwu.js"],"default"]
+8:I[97367,["/code-problems/_next/static/chunks/0ob_z_0z7sy-0.js","/code-problems/_next/static/chunks/14mrh2-p_w84d.js"],"OutletBoundary"]
+9:"$Sreact.suspense"
+3:T55e,<h1>Two Sum</h1>
+<p>Given an array of integers <code>nums</code> and an integer <code>target</code>, return indices of the two numbers such that they add up to <code>target</code>.</p>
+<p>You may assume that each input would have exactly one solution, and you may not use the same element twice. You can return the answer in any order.</p>
+<h2>How the Solution Works</h2>
+<p>We can solve this problem in $O(N)$ time by using a hash map to keep track of numbers we have already seen along with their indices:</p>
+<ul>
+<li>We traverse the array from left to right.</li>
+<li>For each number, we calculate the <code>remaining</code> complement needed to reach the <code>target</code> (<code>target - num</code>).</li>
+<li>We check if this complement exists in our hash map:<ul>
+<li>If it does, we return the indices of the complement and the current number.</li>
+<li>If it does not, we add the current number and its index to the hash map.</li>
+</ul>
+</li>
+</ul>
+<h2>Complexity</h2>
+<ul>
+<li><strong>Time Complexity:</strong> $O(N)$ where $N$ is the number of elements in the array, as we traverse the list of numbers only once and hash map lookups take $O(1)$ time on average.</li>
+<li><strong>Space Complexity:</strong> $O(N)$ to store the numbers and their indices in the hash map.</li>
+</ul>
+<p><a href="https://leetcode.com/problems/two-sum/">LeetCode Problem Link</a></p>
+4:T122b,<span class="hljs-keyword">using</span> System;
+<span class="hljs-keyword">using</span> System.Collections.Generic;
+<span class="hljs-keyword">using</span> System.Linq;
+
+<span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title">Solution</span> {
+    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-built_in">int</span>[] <span class="hljs-title">TwoSum</span>(<span class="hljs-params"><span class="hljs-built_in">int</span>[] nums, <span class="hljs-built_in">int</span> target</span>)</span> {
+        Dictionary&lt;<span class="hljs-built_in">int</span>, <span class="hljs-built_in">int</span>&gt; seen = <span class="hljs-keyword">new</span> Dictionary&lt;<span class="hljs-built_in">int</span>, <span class="hljs-built_in">int</span>&gt;();
+        <span class="hljs-keyword">for</span> (<span class="hljs-built_in">int</span> i = <span class="hljs-number">0</span>; i &lt; nums.Length; i++) {
+            <span class="hljs-built_in">int</span> remaining = target - nums[i];
+            <span class="hljs-keyword">if</span> (seen.ContainsKey(remaining)) {
+                <span class="hljs-keyword">return</span> <span class="hljs-keyword">new</span> <span class="hljs-built_in">int</span>[] { seen[remaining], i };
+            }
+            seen[nums[i]] = i;
+        }
+        <span class="hljs-keyword">return</span> <span class="hljs-keyword">new</span> <span class="hljs-built_in">int</span>[<span class="hljs-number">0</span>];
+    }
+
+    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title">Main</span>(<span class="hljs-params"><span class="hljs-built_in">string</span>[] <span class="hljs-keyword">args</span></span>)</span> {
+        Solution sol = <span class="hljs-keyword">new</span> Solution();
+        <span class="hljs-keyword">var</span> testCases = <span class="hljs-keyword">new</span> (<span class="hljs-built_in">int</span>[] nums, <span class="hljs-built_in">int</span> target, <span class="hljs-built_in">int</span>[] expected)[] {
+            (<span class="hljs-keyword">new</span> <span class="hljs-built_in">int</span>[] { <span class="hljs-number">2</span>, <span class="hljs-number">7</span>, <span class="hljs-number">11</span>, <span class="hljs-number">15</span> }, <span class="hljs-number">9</span>, <span class="hljs-keyword">new</span> <span class="hljs-built_in">int</span>[] { <span class="hljs-number">0</span>, <span class="hljs-number">1</span> }),
+            (<span class="hljs-keyword">new</span> <span class="hljs-built_in">int</span>[] { <span class="hljs-number">3</span>, <span class="hljs-number">2</span>, <span class="hljs-number">4</span> }, <span class="hljs-number">6</span>, <span class="hljs-keyword">new</span> <span class="hljs-built_in">int</span>[] { <span class="hljs-number">1</span>, <span class="hljs-number">2</span> }),
+            (<span class="hljs-keyword">new</span> <span class="hljs-built_in">int</span>[] { <span class="hljs-number">3</span>, <span class="hljs-number">3</span> }, <span class="hljs-number">6</span>, <span class="hljs-keyword">new</span> <span class="hljs-built_in">int</span>[] { <span class="hljs-number">0</span>, <span class="hljs-number">1</span> })
+        };
+
+        <span class="hljs-keyword">for</span> (<span class="hljs-built_in">int</span> i = <span class="hljs-number">0</span>; i &lt; testCases.Length; i++) {
+            <span class="hljs-keyword">var</span> tc = testCases[i];
+            <span class="hljs-built_in">int</span>[] result = sol.TwoSum(tc.nums, tc.target);
+            <span class="hljs-built_in">bool</span> pass = result.OrderBy(x =&gt; x).SequenceEqual(tc.expected.OrderBy(x =&gt; x));
+            Console.WriteLine(<span class="hljs-string">$&quot;Test <span class="hljs-subst">{i + <span class="hljs-number">1</span>}</span>: nums=[<span class="hljs-subst">{<span class="hljs-built_in">string</span>.Join(<span class="hljs-string">&quot;, &quot;</span>, tc.nums)}</span>], target=<span class="hljs-subst">{tc.target}</span> -&gt; Result=[<span class="hljs-subst">{<span class="hljs-built_in">string</span>.Join(<span class="hljs-string">&quot;, &quot;</span>, result)}</span>] | Expected=[<span class="hljs-subst">{<span class="hljs-built_in">string</span>.Join(<span class="hljs-string">&quot;, &quot;</span>, tc.expected)}</span>] | <span class="hljs-subst">{(pass ? <span class="hljs-string">&quot;PASS&quot;</span> : <span class="hljs-string">&quot;FAIL&quot;</span>)}</span>&quot;</span>);
+        }
+    }
+}
+5:Ta50,<span class="hljs-keyword">class</span> <span class="hljs-title class_">Solution</span>:
+    <span class="hljs-keyword">def</span> <span class="hljs-title function_">twoSum</span>(<span class="hljs-params">self, nums: <span class="hljs-built_in">list</span>[<span class="hljs-built_in">int</span>], target: <span class="hljs-built_in">int</span></span>) -&gt; <span class="hljs-built_in">list</span>[<span class="hljs-built_in">int</span>]:
+        seen = {}
+        <span class="hljs-keyword">for</span> i, num <span class="hljs-keyword">in</span> <span class="hljs-built_in">enumerate</span>(nums):
+            remaining = target - num
+            <span class="hljs-keyword">if</span> remaining <span class="hljs-keyword">in</span> seen:
+                <span class="hljs-keyword">return</span> [seen[remaining], i]
+            seen[num] = i
+        <span class="hljs-keyword">return</span> []
+
+<span class="hljs-keyword">if</span> __name__ == <span class="hljs-string">&#x27;__main__&#x27;</span>:
+    sol = Solution()
+    test_cases = [
+        ([<span class="hljs-number">2</span>, <span class="hljs-number">7</span>, <span class="hljs-number">11</span>, <span class="hljs-number">15</span>], <span class="hljs-number">9</span>, [<span class="hljs-number">0</span>, <span class="hljs-number">1</span>]),
+        ([<span class="hljs-number">3</span>, <span class="hljs-number">2</span>, <span class="hljs-number">4</span>], <span class="hljs-number">6</span>, [<span class="hljs-number">1</span>, <span class="hljs-number">2</span>]),
+        ([<span class="hljs-number">3</span>, <span class="hljs-number">3</span>], <span class="hljs-number">6</span>, [<span class="hljs-number">0</span>, <span class="hljs-number">1</span>])
+    ]
+    <span class="hljs-keyword">for</span> idx, (nums, target, expected) <span class="hljs-keyword">in</span> <span class="hljs-built_in">enumerate</span>(test_cases, <span class="hljs-number">1</span>):
+        result = sol.twoSum(nums, target)
+        <span class="hljs-built_in">print</span>(<span class="hljs-string">f&quot;Test <span class="hljs-subst">{idx}</span>: nums=<span class="hljs-subst">{nums}</span>, target=<span class="hljs-subst">{target}</span> -&gt; Result=<span class="hljs-subst">{result}</span> | Expected=<span class="hljs-subst">{expected}</span> | <span class="hljs-subst">{<span class="hljs-string">&#x27;PASS&#x27;</span> <span class="hljs-keyword">if</span> <span class="hljs-built_in">sorted</span>(result) == <span class="hljs-built_in">sorted</span>(expected) <span class="hljs-keyword">else</span> <span class="hljs-string">&#x27;FAIL&#x27;</span>}</span>&quot;</span>)0:{"rsc":["$","$1","c",{"children":[["$","$L2",null,{"title":"Two Sum","categoryLabel":"LeetCode","readmeHtml":"$3","files":[{"name":"Solution.cs","language":"csharp","highlightedCode":"$4"},{"name":"Solution.py","language":"python","highlightedCode":"$5"}],"slug":"0001-twosum"}],["$L6"],"$L7"]}],"isPartial":false,"staleTime":300,"varyParams":null,"buildId":"2kyWR4y9FitCPVQnEoUvH"}
+6:["$","script","script-0",{"src":"/code-problems/_next/static/chunks/3-jly6ly-1vwu.js","async":true}]
+7:["$","$L8",null,{"children":["$","$9",null,{"name":"Next.MetadataOutlet","children":"$@a"}]}]
+a:null

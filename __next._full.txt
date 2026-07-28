@@ -1,0 +1,933 @@
+1:"$Sreact.fragment"
+2:I[22016,["/code-problems/_next/static/chunks/0ob_z_0z7sy-0.js","/code-problems/_next/static/chunks/14mrh2-p_w84d.js"],""]
+3:I[39756,["/code-problems/_next/static/chunks/0ob_z_0z7sy-0.js","/code-problems/_next/static/chunks/14mrh2-p_w84d.js"],"default"]
+4:I[37457,["/code-problems/_next/static/chunks/0ob_z_0z7sy-0.js","/code-problems/_next/static/chunks/14mrh2-p_w84d.js"],"default"]
+5:I[79520,["/code-problems/_next/static/chunks/0ob_z_0z7sy-0.js","/code-problems/_next/static/chunks/14mrh2-p_w84d.js"],""]
+6:I[5105,["/code-problems/_next/static/chunks/0ob_z_0z7sy-0.js","/code-problems/_next/static/chunks/14mrh2-p_w84d.js","/code-problems/_next/static/chunks/3bzaebcqqpv9_.js"],"default"]
+1d:I[68027,["/code-problems/_next/static/chunks/0ob_z_0z7sy-0.js","/code-problems/_next/static/chunks/14mrh2-p_w84d.js"],"default",1]
+:HL["/code-problems/_next/static/chunks/0s2z6pg3qhyc7.css","style"]
+:HL["/code-problems/_next/static/media/797e433ab948586e-s.p.0r6juujl39pe6.woff2","font",{"crossOrigin":"","type":"font/woff2"}]
+:HL["/code-problems/_next/static/media/caa3a2e1cccd8315-s.p.0wgildi0cnwt9.woff2","font",{"crossOrigin":"","type":"font/woff2"}]
+7:Tb64,# Android 16 & .NET 10 Migration across Multi-App Ecosystem (HWM)
+
+An active engineering initiative at **HWM** focusing on migrating multiple enterprise applications from .NET 9 to .NET 10, alongside upgrading a critical cross-platform mobile application to support Android 16 (SDK 36).
+
+## Technical Showcase
+* **Role**: Mobile & Systems Developer (C# / .NET)
+* **Architecture**: .NET MAUI Mobile App, ASP.NET Core Web APIs, Background Services
+* **Backend & Infrastructure**: C#, .NET 10, Android SDK 36, MAUI, xUnit
+* **Hosting & CI/CD**: Azure DevOps build & release pipelines
+* **Deployment**: Full responsibility for managing and verifying multi-app releases
+
+---
+
+## 1. The Challenge
+With the release of Android 16 (SDK 36) and the availability of .NET 10, HWM required a comprehensive upgrade of its mobile and backend services to maintain store compliance, ensure API compatibility, and leverage performance optimizations.
+
+Key challenges included:
+1. **Multi-App Orchestration**: Upgrading the shared libraries and dependencies from .NET 9 to .NET 10 across multiple connected applications (Mobile App, Web APIs, and worker services) without causing breaking API mismatches.
+2. **Android 16 Platform Deprecations**: Targeting SDK 36, which introduced stricter background service execution limits, media permission constraints, and updated platform rendering behavior in MAUI.
+3. **MAUI Compatibility**: Troubleshooting runtime rendering differences and dependency conflicts between the new .NET 10 MAUI workload and legacy custom UI handlers.
+4. **Regression Prevention**: Ensuring all business-critical paths continued to function by writing comprehensive automated integration and unit test coverage.
+
+---
+
+## 2. Technical Implementation & Design Decisions
+* **System-Wide .NET 10 Upgrade**: Led the migration of project files, packages, and build environments across multiple microservices and the MAUI app. Standardized package dependencies to eliminate version skew during build time.
+* **SDK 36 Integration & Service Refactoring**: Configured MSBuild project targets to build against SDK 36, and restructured background worker lifecycle handlers in the mobile app to comply with Android 16 background restrictions.
+* **Automated Testing Suite**: Implemented xUnit test suites to validate MAUI platform handlers, API serialization, and service lifecycles to detect regressions early in the upgrade cycle.
+* **DevOps Pipeline Migration**: Updated Azure DevOps YAML pipelines to use the .NET 10 SDK and SDK 36 build tooling, ensuring seamless CI/CD execution.
+
+---
+
+## 3. Current Status & Impact
+* **Upgrade PR Active**: The consolidated multi-app upgrade PR is undergoing CI/CD verification and pipeline automated testing.
+* **Compliance & Future Proof**: Successfully positioned the mobile and backend ecosystem to support Android 16 devices on day one with maximum performance benefits from .NET 10.
+8:T821,# API Performance Optimization & Systems Integration (HWM)
+
+An optimization initiative executed at **HWM** that successfully reduced core API response times by 60% across 9 cycles of Shape Up product development, supporting system-wide stability and bug reduction.
+
+## Technical Showcase
+* **Role**: Full Stack Developer (Core Systems & Integration)
+* **Architecture**: C# Web API & React Services
+* **Backend & Infrastructure**: C#, React, Docker, SQL, Azure MSSQL
+* **Hosting & CI/CD**: Azure DevOps pipelines & cloud hosting environment
+* **Deployment**: Full responsibility for performing and managing production deployments personally
+
+---
+
+## 1. The Challenge
+High latency in core API endpoints was causing application lag and slow load times for client interfaces. The objective was to:
+1. Identify bottleneck queries and refactor slower REST API endpoints under a Shape Up cycle structure.
+2. Deliver key features within the 4-week building phase.
+3. Manage carrier systems integrations (UPS, DHL) and async routing.
+4. Clean up the codebase and resolve production issues during the 2-week cool-down/bug-fixing phase.
+
+---
+
+## 2. Technical Implementation & Design Decisions
+* **API Latency Cut**: Refactored SQL query execution paths, added index tuning in MSSQL, and introduced a Redis-based state caching layer for high-frequency endpoints.
+* **Shape Up Cycle Delivery**: Led development across 9 cycles. Merged 50+ Pull Requests for new backend features during 4-week cycles.
+* **Dedicated Bug-Fixing Cycles**: Proactively resolved side-bugs and edge cases during the 2-week cool-down/fixing period of each cycle to dramatically reduce regression tickets.
+
+---
+
+## 3. Results & Business Impact
+* **60% Performance Speedup**: Core API response times were cut by approximately 60%, drastically improving user experience.
+* **High Output & Reliability**: Maintained consistent feature delivery with 50+ PRs successfully merged in 9 sprints.
+* **System Stability**: Proactive bug fixing during the 2-week cool-down phases significantly lowered weekly support ticket counts.
+9:T840,# Proprietary Internal Product Development
+
+A highly successful, proprietary business solution designed, architected, and built from the ground up to streamline operations and generate new revenue streams.
+
+## Technical Showcase
+* **Role**: Lead Architect & Developer (End-to-End Delivery)
+* **Architecture**: Ruby Web API & Services
+* **Backend & Infrastructure**: Ruby, Docker, SQL, Azure MSSQL
+* **Hosting & CI/CD**: Azure DevOps pipelines & cloud hosting environment
+* **Deployment**: Full responsibility for performing and managing production deployments personally
+
+---
+
+## 1. The Challenge
+The business identified a key operational bottleneck and revenue opportunity that off-the-shelf software could not address. The objective was to plan, design, and implement a custom internal product to:
+1. Handle complex workflows and state transitions.
+2. Integrate securely with core legacy business databases and third-party services.
+3. Scale efficiently without exponential infrastructure costs.
+4. Support offline-first or low-connectivity client states.
+
+---
+
+## 2. Technical Implementation & Design decisions
+* **API Architecture**: Designed a clean, RESTful Ruby-based API with separation of concerns and robust routing models.
+* **Database Tuning**: Designed database schemas with Azure MSSQL, utilizing query optimization, tailored indices, and transactional guarantees to support high-concurrency usage.
+* **Containerization & Environment**: Built consistent development and deployment flows using Docker containers.
+* **CI/CD Pipeline**: Configured build and release pipelines in Azure DevOps for automated integration, testing, and continuous deployment to ensure zero-downtime rolling updates.
+
+---
+
+## 3. Results & Business Impact
+* **Revenue Generation**: The product is actively used in production and is successfully earning significant new revenue/savings for the business.
+* **Adoption**: 100% internal adoption within the target division, replacing multiple disjointed spreadsheet-based workflows.
+* **Performance**: Optimized SQL query paths and state caching to keep page loads under 200ms.
+a:T46f,# Balanced Parentheses with Minimum Edits
+
+This problem was asked by Facebook.
+
+Given a string of parentheses, find the balanced string that can be produced from it using the minimum number of insertions and deletions. If there are multiple solutions, return any of them. 
+
+For example, given `"(()"`, you could return `"(())"`. Given `"))()("`, you could return `"()()()()"`.
+
+## How the Solution Works
+
+We can construct a balanced string with the minimum number of edits by tracking unmatched open parentheses:
+* We traverse the string from left to right.
+* If a closing parenthesis `)` is encountered and there is no unmatched open parenthesis `(`, we insert a `(` directly before it.
+* If there is an unmatched `(`, we match it with the `)` and decrement our unmatched open counter.
+* At the end of the string, if any unmatched open parentheses `(` remain, we append the corresponding number of closing parentheses `)` to the end.
+
+## Complexity
+
+- **Time Complexity:** $O(N)$ where $N$ is the length of the string, as we process each character exactly once.
+- **Space Complexity:** $O(N)$ to build and return the balanced string.
+b:T7d3,# PageRank Algorithm
+
+This problem was asked by Google.
+
+PageRank is an algorithm used by Google to rank the importance of different websites. While there have been changes over the years, the central idea is to assign each site a score based on the importance of other pages that link to that page.
+
+More mathematically, suppose there are $N$ sites, and each site $i$ has a certain count $C_i$ of outgoing links. Then the score for a particular site $S_j$ is defined as:
+
+$$\text{score}(S_j) = \frac{1 - d}{N} + d \times \left( \frac{\text{score}(S_x)}{C_x} + \frac{\text{score}(S_y)}{C_y} + \dots + \frac{\text{score}(S_z)}{C_z} \right)$$
+
+Here, $S_x, S_y, \dots, S_z$ denote the scores of all the other sites that have outgoing links to $S_j$, and $d$ is a damping factor, usually set to around 0.85, used to model the probability that a user will stop searching.
+
+Given a directed graph of links between various websites, write a program that calculates each site's page rank.
+
+## Difficulty: Hard
+
+## How the Solution Works
+
+We implement the **Power Iteration** method to calculate the PageRank:
+1. **Graph Representation:** We represent the graph as an adjacency list of outgoing links.
+2. **Dangling Nodes:** Nodes with no outgoing links ($C_i = 0$) are treated as linking to all nodes in the graph to prevent the rank from leaking/disappearing.
+3. **Iterative Update:** 
+   - Initialize the rank of all $N$ pages to $1/N$.
+   - In each iteration, compute the new ranks based on the incoming ranks and distribute dangling node ranks equally.
+   - Continue iterating until the ranks converge (i.e., the maximum change between iterations is below a threshold $\epsilon = 10^{-6}$), or up to a maximum number of iterations (e.g., 100).
+
+## Complexity
+
+- **Time Complexity:** $O(I \times (N + E))$ where $I$ is the number of iterations to convergence, $N$ is the number of websites (nodes), and $E$ is the number of links (edges).
+- **Space Complexity:** $O(N + E)$ to store the graph and the ranks.
+c:Tfb3,using System;
+using System.Collections.Generic;
+using System.Linq;
+
+class Solution
+{
+    public static Dictionary<string, double> PageRank(
+        Dictionary<string, List<string>> graph, 
+        double d = 0.85, 
+        double tol = 1e-6, 
+        int maxIter = 100)
+    {
+        // Gather all unique nodes in the graph
+        var nodes = new HashSet<string>(graph.Keys);
+        foreach (var targets in graph.Values)
+        {
+            foreach (var node in targets)
+            {
+                nodes.Add(node);
+            }
+        }
+
+        int N = nodes.Count;
+        if (N == 0) return new Dictionary<string, double>();
+
+        // Initialize ranks to 1/N
+        var ranks = nodes.ToDictionary(node => node, node => 1.0 / N);
+        
+        // Compute outdegrees
+        var outdegree = nodes.ToDictionary(
+            node => node, 
+            node => graph.ContainsKey(node) ? graph[node].Count : 0
+        );
+        
+        // Map incoming links
+        var incoming = nodes.ToDictionary(node => node, node => new HashSet<string>());
+        foreach (var kvp in graph)
+        {
+            string src = kvp.Key;
+            foreach (var dst in kvp.Value)
+            {
+                incoming[dst].Add(src);
+            }
+        }
+
+        // Identify dangling nodes
+        var danglingNodes = nodes.Where(node => outdegree[node] == 0).ToList();
+
+        for (int iter = 0; iter < maxIter; iter++)
+        {
+            var newRanks = new Dictionary<string, double>();
+            double danglingSum = danglingNodes.Sum(node => ranks[node]);
+
+            foreach (var node in nodes)
+            {
+                double rankSum = danglingSum / N;
+
+                foreach (var src in incoming[node])
+                {
+                    rankSum += ranks[src] / outdegree[src];
+                }
+
+                newRanks[node] = (1.0 - d) / N + d * rankSum;
+            }
+
+            // Check convergence
+            double maxDiff = nodes.Max(node => Math.Abs(newRanks[node] - ranks[node]));
+            ranks = newRanks;
+
+            if (maxDiff < tol)
+            {
+                break;
+            }
+        }
+
+        return ranks;
+    }
+
+    static void Main()
+    {
+        // Test Case 1: Simple cycle A <-> B
+        Console.WriteLine("Test 1: Simple Cycle (A <-> B)");
+        var g1 = new Dictionary<string, List<string>>
+        {
+            { "A", new List<string> { "B" } },
+            { "B", new List<string> { "A" } }
+        };
+        var r1 = PageRank(g1);
+        foreach (var kvp in r1.OrderBy(x => x.Key))
+        {
+            Console.WriteLine($"  {kvp.Key}: {kvp.Value:F4}");
+        }
+
+        // Test Case 2: Chain with a dangling node A -> B -> C
+        Console.WriteLine("\nTest 2: Chain (A -> B -> C)");
+        var g2 = new Dictionary<string, List<string>>
+        {
+            { "A", new List<string> { "B" } },
+            { "B", new List<string> { "C" } }
+        };
+        var r2 = PageRank(g2);
+        foreach (var kvp in r2.OrderBy(x => x.Key))
+        {
+            Console.WriteLine($"  {kvp.Key}: {kvp.Value:F4}");
+        }
+
+        // Test Case 3: Star Graph (A links to B, C, D)
+        Console.WriteLine("\nTest 3: Star Graph (A -> B, C, D)");
+        var g3 = new Dictionary<string, List<string>>
+        {
+            { "A", new List<string> { "B", "C", "D" } }
+        };
+        var r3 = PageRank(g3);
+        foreach (var kvp in r3.OrderBy(x => x.Key))
+        {
+            Console.WriteLine($"  {kvp.Key}: {kvp.Value:F4}");
+        }
+
+        // Test Case 4: Disconnected components (A -> B) and (C -> D)
+        Console.WriteLine("\nTest 4: Disconnected Components (A -> B, C -> D)");
+        var g4 = new Dictionary<string, List<string>>
+        {
+            { "A", new List<string> { "B" } },
+            { "C", new List<string> { "D" } }
+        };
+        var r4 = PageRank(g4);
+        foreach (var kvp in r4.OrderBy(x => x.Key))
+        {
+            Console.WriteLine($"  {kvp.Key}: {kvp.Value:F4}");
+        }
+    }
+}
+d:Tcb1,from typing import Dict, List
+
+def pagerank(
+    graph: Dict[str, List[str]], 
+    d: float = 0.85, 
+    tol: float = 1e-6, 
+    max_iter: int = 100
+) -> Dict[str, float]:
+    """
+    Calculates the PageRank score for each website in a directed graph.
+    
+    :param graph: A dictionary representing the directed graph where keys are source
+                  nodes and values are lists of target nodes.
+    :param d: The damping factor (probability of continuing to click links).
+    :param tol: The convergence tolerance threshold.
+    :param max_iter: The maximum number of iterations.
+    :return: A dictionary mapping each node to its PageRank score.
+    """
+    # Collect all unique nodes in the graph
+    nodes = set(graph.keys())
+    for targets in graph.values():
+        nodes.update(targets)
+        
+    N = len(nodes)
+    if N == 0:
+        return {}
+        
+    # Initialize all ranks to 1/N
+    ranks = {node: 1.0 / N for node in nodes}
+    
+    # Calculate outdegree for all nodes
+    outdegree = {node: len(graph.get(node, [])) for node in nodes}
+    
+    # Calculate incoming links for all nodes
+    incoming = {node: set() for node in nodes}
+    for src, targets in graph.items():
+        for dst in targets:
+            incoming[dst].add(src)
+            
+    # Identify dangling nodes (outdegree = 0)
+    dangling_nodes = [node for node in nodes if outdegree[node] == 0]
+    
+    for _ in range(max_iter):
+        new_ranks = {}
+        # Sum of ranks of all dangling nodes
+        dangling_sum = sum(ranks[node] for node in dangling_nodes)
+        
+        for node in nodes:
+            # Base (1 - d) / N + d * (rank of dangling nodes redistributed equally)
+            rank_sum = dangling_sum / N
+            
+            # Add contributions from incoming pages
+            for src in incoming[node]:
+                rank_sum += ranks[src] / outdegree[src]
+                
+            new_ranks[node] = (1.0 - d) / N + d * rank_sum
+            
+        # Check convergence
+        diff = max(abs(new_ranks[node] - ranks[node]) for node in nodes)
+        ranks = new_ranks
+        if diff < tol:
+            break
+            
+    return ranks
+
+if __name__ == "__main__":
+    # Test Case 1: Simple cycle A <-> B
+    print("Test 1: Simple Cycle (A <-> B)")
+    g1 = {
+        "A": ["B"],
+        "B": ["A"]
+    }
+    r1 = pagerank(g1)
+    for node, rank in sorted(r1.items()):
+        print(f"  {node}: {rank:.4f}")
+        
+    # Test Case 2: Chain with a dangling node A -> B -> C
+    print("\nTest 2: Chain (A -> B -> C)")
+    g2 = {
+        "A": ["B"],
+        "B": ["C"]
+    }
+    r2 = pagerank(g2)
+    for node, rank in sorted(r2.items()):
+        print(f"  {node}: {rank:.4f}")
+
+    # Test Case 3: Star Graph (A links to B, C, D)
+    print("\nTest 3: Star Graph (A -> B, C, D)")
+    g3 = {
+        "A": ["B", "C", "D"]
+    }
+    r3 = pagerank(g3)
+    for node, rank in sorted(r3.items()):
+        print(f"  {node}: {rank:.4f}")
+
+    # Test Case 4: Disconnected components (A -> B) and (C -> D)
+    print("\nTest 4: Disconnected Components (A -> B, C -> D)")
+    g4 = {
+        "A": ["B"],
+        "C": ["D"]
+    }
+    r4 = pagerank(g4)
+    for node, rank in sorted(r4.items()):
+        print(f"  {node}: {rank:.4f}")
+e:T481,# Two Sum
+
+Given an array of integers `nums` and an integer `target`, return indices of the two numbers such that they add up to `target`.
+
+You may assume that each input would have exactly one solution, and you may not use the same element twice. You can return the answer in any order.
+
+## How the Solution Works
+
+We can solve this problem in $O(N)$ time by using a hash map to keep track of numbers we have already seen along with their indices:
+* We traverse the array from left to right.
+* For each number, we calculate the `remaining` complement needed to reach the `target` (`target - num`).
+* We check if this complement exists in our hash map:
+  * If it does, we return the indices of the complement and the current number.
+  * If it does not, we add the current number and its index to the hash map.
+
+## Complexity
+
+- **Time Complexity:** $O(N)$ where $N$ is the number of elements in the array, as we traverse the list of numbers only once and hash map lookups take $O(1)$ time on average.
+- **Space Complexity:** $O(N)$ to store the numbers and their indices in the hash map.
+
+[LeetCode Problem Link](https://leetcode.com/problems/two-sum/)
+f:T527,using System;
+using System.Collections.Generic;
+using System.Linq;
+
+public class Solution {
+    public int[] TwoSum(int[] nums, int target) {
+        Dictionary<int, int> seen = new Dictionary<int, int>();
+        for (int i = 0; i < nums.Length; i++) {
+            int remaining = target - nums[i];
+            if (seen.ContainsKey(remaining)) {
+                return new int[] { seen[remaining], i };
+            }
+            seen[nums[i]] = i;
+        }
+        return new int[0];
+    }
+
+    public static void Main(string[] args) {
+        Solution sol = new Solution();
+        var testCases = new (int[] nums, int target, int[] expected)[] {
+            (new int[] { 2, 7, 11, 15 }, 9, new int[] { 0, 1 }),
+            (new int[] { 3, 2, 4 }, 6, new int[] { 1, 2 }),
+            (new int[] { 3, 3 }, 6, new int[] { 0, 1 })
+        };
+
+        for (int i = 0; i < testCases.Length; i++) {
+            var tc = testCases[i];
+            int[] result = sol.TwoSum(tc.nums, tc.target);
+            bool pass = result.OrderBy(x => x).SequenceEqual(tc.expected.OrderBy(x => x));
+            Console.WriteLine($"Test {i + 1}: nums=[{string.Join(", ", tc.nums)}], target={tc.target} -> Result=[{string.Join(", ", result)}] | Expected=[{string.Join(", ", tc.expected)}] | {(pass ? "PASS" : "FAIL")}");
+        }
+    }
+}
+10:T58e,# Add Two Numbers
+
+You are given two non-empty linked lists representing two non-negative integers. The digits are stored in reverse order, and each of their nodes contains a single digit. Add the two numbers and return the sum as a linked list.
+
+## How the Solution Works
+
+We can solve this problem in $O(N)$ time with an **in-place** optimal approach:
+* We traverse both linked lists node-by-node, adding corresponding digits along with a `carry` from the previous sum.
+* **In-place Optimization (Memory Efficient)**: Instead of allocating memory for a new list ($O(N)$ auxiliary space), we reuse the nodes of the input list `l1` to store the sum values. 
+* If `l1` is shorter than `l2`, we dynamically redirect the traversal pointer to reuse the remaining nodes of `l2`.
+* We allocate a new node only in the rare case of a final carry overflow at the end (e.g. $99 + 1 = 100$). This ensures we avoid extra garbage collection and keep the memory footprint extremely low.
+
+## Complexity
+
+- **Time Complexity:** $O(N)$ where $N = \max(\text{len}(l1), \text{len}(l2))$, as we traverse the nodes of the lists at most once.
+- **Space Complexity:** $O(N)$ to represent the return value list, but **$O(1)$ Auxiliary Space** because we reuse the input nodes in-place rather than allocating a new list.
+
+⚡ **Optimal Approach** (Minimal Memory Footprint)
+
+[LeetCode Problem Link](https://leetcode.com/problems/add-two-numbers/)
+11:Tc8c,using System;
+using System.Collections.Generic;
+
+public class ListNode {
+    public int val;
+    public ListNode next;
+    public ListNode(int val=0, ListNode next=null) {
+        this.val = val;
+        this.next = next;
+    }
+}
+
+public class Solution {
+    public ListNode AddTwoNumbers(ListNode l1, ListNode l2) {
+        ListNode dummy = new ListNode(0);
+        dummy.next = l1;
+        ListNode curr = dummy;
+        int carry = 0;
+        
+        while (l1 != null || l2 != null || carry != 0) {
+            int val = carry;
+            if (l1 != null) {
+                val += l1.val;
+            }
+            if (l2 != null) {
+                val += l2.val;
+            }
+            
+            carry = val / 10;
+            val = val % 10;
+            
+            if (l1 != null) {
+                l1.val = val;
+                curr = l1;
+                l1 = l1.next;
+                if (l2 != null) {
+                    l2 = l2.next;
+                }
+            } else if (l2 != null) {
+                l2.val = val;
+                curr.next = l2;
+                curr = l2;
+                l2 = l2.next;
+            } else {
+                curr.next = new ListNode(val);
+                curr = curr.next;
+            }
+            
+            if (l2 != null && l1 == null) {
+                curr.next = l2;
+                l1 = l2;
+                l2 = null;
+            }
+        }
+        return dummy.next;
+    }
+
+    public static ListNode ToListNode(int[] arr) {
+        ListNode dummy = new ListNode();
+        ListNode curr = dummy;
+        foreach (int val in arr) {
+            curr.next = new ListNode(val);
+            curr = curr.next;
+        }
+        return dummy.next;
+    }
+
+    public static List<int> ToList(ListNode node) {
+        List<int> res = new List<int>();
+        while (node != null) {
+            res.Add(node.val);
+            node = node.next;
+        }
+        return res;
+    }
+
+    public static void Main(string[] args) {
+        Solution sol = new Solution();
+        var testCases = new (int[] l1, int[] l2, int[] expected)[] {
+            (new int[] { 2, 4, 3 }, new int[] { 5, 6, 4 }, new int[] { 7, 0, 8 }),
+            (new int[] { 0 }, new int[] { 0 }, new int[] { 0 }),
+            (new int[] { 9, 9, 9, 9, 9, 9, 9 }, new int[] { 9, 9, 9, 9 }, new int[] { 8, 9, 9, 9, 0, 0, 0, 1 })
+        };
+
+        for (int i = 0; i < testCases.Length; i++) {
+            var tc = testCases[i];
+            ListNode l1 = ToListNode(tc.l1);
+            ListNode l2 = ToListNode(tc.l2);
+            ListNode resNode = sol.AddTwoNumbers(l1, l2);
+            List<int> result = ToList(resNode);
+            bool pass = result.Count == tc.expected.Length;
+            if (pass) {
+                for (int j = 0; j < result.Count; j++) {
+                    if (result[j] != tc.expected[j]) {
+                        pass = false;
+                        break;
+                    }
+                }
+            }
+            Console.WriteLine($"Test {i + 1}: l1=[{string.Join(", ", tc.l1)}], l2=[{string.Join(", ", tc.l2)}] -> Result=[{string.Join(", ", result)}] | Expected=[{string.Join(", ", tc.expected)}] | {(pass ? "PASS" : "FAIL")}");
+        }
+    }
+}12:T7ec,from typing import Optional
+
+# Definition for singly-linked list.
+class ListNode:
+    def __init__(self, val=0, next=None):
+        self.val = val
+        self.next = next
+class Solution:
+    def addTwoNumbers(self, l1: Optional[ListNode], l2: Optional[ListNode]) -> Optional[ListNode]:
+        dummy = ListNode(0)
+        dummy.next = l1
+        curr = dummy
+        carry = 0
+        
+        while l1 or l2 or carry:
+            val = carry
+            if l1:
+                val += l1.val
+            if l2:
+                val += l2.val
+                
+            carry, val = divmod(val, 10)
+            
+            if l1:
+                l1.val = val
+                curr = l1
+                l1 = l1.next
+                if l2:
+                    l2 = l2.next
+            elif l2:
+                l2.val = val
+                curr.next = l2
+                curr = l2
+                l2 = l2.next
+            else:
+                curr.next = ListNode(val)
+                curr = curr.next
+                
+            if l2 and not l1:
+                curr.next = l2
+                l1 = l2
+                l2 = None
+                
+        return dummy.next
+
+def to_list_node(lst):
+    dummy = ListNode()
+    curr = dummy
+    for val in lst:
+        curr.next = ListNode(val)
+        curr = curr.next
+    return dummy.next
+
+def to_array(node):
+    res = []
+    while node:
+        res.append(node.val)
+        node = node.next
+    return res
+
+if __name__ == '__main__':
+    sol = Solution()
+    test_cases = [
+        ([2, 4, 3], [5, 6, 4], [7, 0, 8]),
+        ([0], [0], [0]),
+        ([9, 9, 9, 9, 9, 9, 9], [9, 9, 9, 9], [8, 9, 9, 9, 0, 0, 0, 1])
+    ]
+    for idx, (l1_arr, l2_arr, expected) in enumerate(test_cases, 1):
+        l1 = to_list_node(l1_arr)
+        l2 = to_list_node(l2_arr)
+        res_node = sol.addTwoNumbers(l1, l2)
+        result = to_array(res_node)
+        print(f"Test {idx}: l1={l1_arr}, l2={l2_arr} -> Result={result} | Expected={expected} | {'PASS' if result == expected else 'FAIL'}")13:T6e0,# Palindrome Pairs
+
+Given a list of unique words, find all pairs of distinct indices `(i, j)` in the given list, so that the concatenation of the two words, i.e., `words[i] + words[j]` is a palindrome.
+
+## How the Solution Works
+
+A brute-force solution checks all pairs, which takes $O(N^2 \cdot L)$ time (where $N$ is the number of words and $L$ is the maximum length of a word). This is too slow for the constraints ($N \le 5000$).
+
+An optimal approach uses a **Hash Map** to store each word and its index, allowing $O(1)$ lookup time:
+1. We populate a hash map mapping each word to its index.
+2. For each word `words[i]`, we split it into all possible prefixes and suffixes `word[:j]` and `word[j:]` for $j \in [0, L]$.
+3. For each split:
+   * **Case 1:** If the prefix is a palindrome, we check if the reverse of the suffix exists in our hash map. If it does (and is not `i`), then `reversed(suffix) + word` (i.e. `words[idx] + words[i]`) forms a palindrome.
+   * **Case 2:** If the suffix is a palindrome, we check if the reverse of the prefix exists in our hash map. If it does (and is not `i`), then `word + reversed(prefix)` (i.e. `words[i] + words[idx]`) forms a palindrome. To avoid double-counting the full-word reverse pairs (which are handled when the prefix is empty in Case 1), we only apply Case 2 when the suffix is non-empty (`j < L`).
+
+## Complexity
+
+- **Time Complexity:** $O(N \cdot L^2)$ where $N$ is the number of words and $L$ is the maximum length of a word. For each of the $N$ words, we perform $L$ splits, and checking for palindrome and slicing takes $O(L)$ time.
+- **Space Complexity:** $O(N \cdot L)$ to store all words and their indices in the hash map.
+
+[LeetCode Problem Link](https://leetcode.com/problems/palindrome-pairs/)
+14:Td21,using System;
+using System.Collections.Generic;
+using System.Linq;
+
+public class Solution {
+    private bool IsPalindrome(string s, int left, int right) {
+        while (left < right) {
+            if (s[left++] != s[right--]) {
+                return false;
+            }
+        }
+        return true;
+    }
+
+    public IList<IList<int>> PalindromePairs(string[] words) {
+        var res = new List<IList<int>>();
+        var wordToIdx = new Dictionary<string, int>();
+        for (int i = 0; i < words.Length; i++) {
+            wordToIdx[words[i]] = i;
+        }
+
+        for (int i = 0; i < words.Length; i++) {
+            string word = words[i];
+            int n = word.Length;
+            for (int j = 0; j <= n; j++) {
+                // Case 1: Prefix is a palindrome, check if reversed suffix is in dictionary
+                if (IsPalindrome(word, 0, j - 1)) {
+                    char[] suffixArr = word.Substring(j).ToCharArray();
+                    Array.Reverse(suffixArr);
+                    string revSuff = new string(suffixArr);
+                    if (wordToIdx.TryGetValue(revSuff, out int idx) && idx != i) {
+                        res.Add(new List<int> { idx, i });
+                    }
+                }
+
+                // Case 2: Suffix is a palindrome, check if reversed prefix is in dictionary
+                // j < n to avoid duplicates (suffix must be non-empty)
+                if (j < n && IsPalindrome(word, j, n - 1)) {
+                    char[] prefixArr = word.Substring(0, j).ToCharArray();
+                    Array.Reverse(prefixArr);
+                    string revPref = new string(prefixArr);
+                    if (wordToIdx.TryGetValue(revPref, out int idx) && idx != i) {
+                        res.Add(new List<int> { i, idx });
+                    }
+                }
+            }
+        }
+
+        return res;
+    }
+
+    public static void Main(string[] args) {
+        Solution sol = new Solution();
+        var testCases = new (string[] words, int[][] expected)[] {
+            (new string[] { "abcd", "dcba", "lls", "s", "sssll" }, new int[][] { new int[] { 0, 1 }, new int[] { 1, 0 }, new int[] { 3, 2 }, new int[] { 2, 4 } }),
+            (new string[] { "bat", "tab", "cat" }, new int[][] { new int[] { 0, 1 }, new int[] { 1, 0 } }),
+            (new string[] { "a", "" }, new int[][] { new int[] { 0, 1 }, new int[] { 1, 0 } })
+        };
+
+        for (int idx = 0; idx < testCases.Length; idx++) {
+            var tc = testCases[idx];
+            var result = sol.PalindromePairs(tc.words);
+            
+            // Compare results
+            bool pass = true;
+            if (result.Count != tc.expected.Length) {
+                pass = false;
+            } else {
+                var resSorted = result.Select(r => string.Join(",", r.OrderBy(x => x))).OrderBy(x => x).ToList();
+                var expSorted = tc.expected.Select(e => string.Join(",", e.OrderBy(x => x))).OrderBy(x => x).ToList();
+                for (int i = 0; i < resSorted.Count; i++) {
+                    if (resSorted[i] != expSorted[i]) {
+                        pass = false;
+                        break;
+                    }
+                }
+            }
+
+            Console.WriteLine($"Test {idx + 1}: words=[{string.Join(", ", tc.words)}] -> ResultCount={result.Count} | Pass={pass}");
+        }
+    }
+}
+15:T51e,class Solution:
+    def palindromePairs(self, words: list[str]) -> list[list[int]]:
+        word_to_idx = {w: i for i, w in enumerate(words)}
+        res = []
+        
+        for i, word in enumerate(words):
+            n = len(word)
+            for j in range(n + 1):
+                pref = word[:j]
+                suff = word[j:]
+                if pref == pref[::-1]:
+                    rev_suff = suff[::-1]
+                    if rev_suff in word_to_idx and word_to_idx[rev_suff] != i:
+                        res.append([word_to_idx[rev_suff], i])
+                if suff != "" and suff == suff[::-1]:
+                    rev_pref = pref[::-1]
+                    if rev_pref in word_to_idx and word_to_idx[rev_pref] != i:
+                        res.append([i, word_to_idx[rev_pref]])
+        return res
+
+if __name__ == '__main__':
+    sol = Solution()
+    test_cases = [
+        (["abcd", "dcba", "lls", "s", "sssll"], [[0, 1], [1, 0], [3, 2], [2, 4]]),
+        (["bat", "tab", "cat"], [[0, 1], [1, 0]]),
+        (["a", ""], [[0, 1], [1, 0]])
+    ]
+    for idx, (words, expected) in enumerate(test_cases, 1):
+        result = sol.palindromePairs(words)
+        print(f"Test {idx}: words={words} -> Result={result} | Expected={expected} | {'PASS' if sorted(result) == sorted(expected) else 'FAIL'}")
+16:T4c6,# Number of Unique XOR Triplets II
+
+Given an integer array `nums`, a XOR triplet is defined as the XOR of three elements `nums[i] XOR nums[j] XOR nums[k]` where `i <= j <= k`.
+
+Return the number of unique XOR values that can be formed by these triplets.
+
+## Difficulty: Medium
+
+## How the Solution Works
+
+Given the constraints ($N \le 1500$, $nums[i] \le 1500$):
+1. **Bounded XOR Value:** The maximum value in `nums` is 1500. The next power of two is 2048. Since XORing numbers under 2048 results in a value under 2048, all possible XOR triplet values will be strictly less than 2048.
+2. **Step 1 (Pairs):** We use a boolean array `s1` of size 2048 to track all possible XORs of two elements `nums[i] ^ nums[j]` for $i \le j$.
+3. **Step 2 (Triplets):** We use another boolean array `s2` of size 2048 to track all possible XORs of three elements. For every XOR value `x` in `s1` that is possible, and for every `num` in `nums`, we set `s2[x ^ num] = True`.
+4. **Result:** The sum of `True` values in `s2` is our answer.
+
+## Complexity
+
+- **Time Complexity:** $O(N^2 + N \cdot M)$ where $N$ is the length of `nums` and $M = 2048$ (the maximum possible XOR value).
+- **Space Complexity:** $O(M)$ to store the boolean arrays.
+17:T479,using System;
+
+public class Solution
+{
+    public int UniqueXorTriplets(int[] nums)
+    {
+        int limit = 2048;
+        
+        // s1 tracks all pair XORs (nums[i] ^ nums[j]) for i <= j
+        bool[] s1 = new bool[limit];
+        int n = nums.Length;
+        for (int i = 0; i < n; i++)
+        {
+            for (int j = i; j < n; j++)
+            {
+                s1[nums[i] ^ nums[j]] = true;
+            }
+        }
+        
+        // s2 tracks all triplet XORs (pair_xor ^ nums[k])
+        bool[] s2 = new bool[limit];
+        for (int x = 0; x < limit; x++)
+        {
+            if (s1[x])
+            {
+                foreach (int num in nums)
+                {
+                    s2[x ^ num] = true;
+                }
+            }
+        }
+        
+        int count = 0;
+        for (int i = 0; i < limit; i++)
+        {
+            if (s2[i]) count++;
+        }
+        
+        return count;
+    }
+
+    static void Main()
+    {
+        var sol = new Solution();
+        int result = sol.UniqueXorTriplets(new int[] { 1, 3, 5 });
+        Console.WriteLine("Example [1, 3, 5] Unique Triplet XOR Count: " + result);
+    }
+}
+18:T644,# Minimum Number of String Groups Through Transformations
+
+You are given an array of strings `words`. A transformation on a string `s` is defined by:
+1. Extracting the subsequence of characters at even indices (`E`) and odd indices (`O`).
+2. Independently cyclically shifting `E` and `O` by any number of positions to the right.
+3. Reconstructing the string by placing the shifted characters back into their respective even/odd positions.
+
+Two strings are equivalent if one can be transformed into the other by a single transformation. The goal is to partition the `words` into the minimum number of groups such that all strings in a group are equivalent.
+
+## How the Solution Works
+
+We can solve this problem in $O(N \cdot L)$ time with an **optimal approach**:
+* For each word, we extract the characters at even indices (`E`) and odd indices (`O`) to form two separate subsequences.
+* We find the lexicographically smallest cyclic rotation (canonical representation) for `E` and `O` independently (using Booth's algorithm or linear rotation comparisons).
+* We combine the two canonical sequences into a unified key, e.g. `(canonical_E, canonical_O)`.
+* By putting these keys in a hash set, the size of the set gives the minimum number of groups.
+
+## Complexity
+
+- **Time Complexity:** $O(N \cdot L)$ where $N$ is the number of words and $L$ is the max length of a word.
+- **Space Complexity:** $O(N \cdot L)$ to store the canonical representations in a hash set.
+
+⚡ **Optimal Approach**
+
+[LeetCode Problem Link](https://leetcode.com/problems/minimum-number-of-string-groups-through-transformations/)
+19:T602,from typing import List
+
+class Solution:
+    def getMinRotation(self, s: str) -> str:
+        n = len(s)
+        if n <= 1:
+            return s
+        
+        doubled = s + s
+        i, j, k = 0, 1, 0
+        
+        while i < n and j < n and k < n:
+            diff = ord(doubled[i + k]) - ord(doubled[j + k])
+            if diff == 0:
+                k += 1
+            else:
+                if diff > 0:
+                    i = max(i + k + 1, j + 1)
+                else:
+                    j = max(j + k + 1, i + 1)
+                k = 0
+                
+        start = min(i, j)
+        return doubled[start : start + n]
+
+    def minimumGroups(self, words: List[str]) -> int:
+        uniqueSignatures = set()
+        
+        for word in words:
+            evenSubseq = word[0::2]
+            oddSubseq = word[1::2]
+            canonEven = self.getMinRotation(evenSubseq)
+            canonOdd = self.getMinRotation(oddSubseq)
+            signature = (canonEven, canonOdd)
+            uniqueSignatures.add(signature)
+            
+        return len(uniqueSignatures)
+
+if __name__ == '__main__':
+    sol = Solution()
+    testCases = [
+        (["ntgwz", "zwntg"], 1),
+        (["abc", "cab", "bac", "acb", "bca", "cba"], 3),
+        (["leet", "abb", "bab", "deed", "edde", "code", "bba"], 5)
+    ]
+    for idx, (words, expected) in enumerate(testCases, 1):
+        result = sol.minimumGroups(words)
+        print(f"Test {idx}: words={words} -> Result={result} | Expected={expected} | {'PASS' if result == expected else 'FAIL'}")
+0:{"P":null,"c":["",""],"q":"","i":false,"f":[[["",{"children":["__PAGE__",{}]},"$undefined","$undefined",16],[["$","$1","c",{"children":[[["$","link","0",{"rel":"stylesheet","href":"/code-problems/_next/static/chunks/0s2z6pg3qhyc7.css","precedence":"next","crossOrigin":"$undefined","nonce":"$undefined"}],["$","script","script-0",{"src":"/code-problems/_next/static/chunks/0ob_z_0z7sy-0.js","async":true,"nonce":"$undefined"}],["$","script","script-1",{"src":"/code-problems/_next/static/chunks/14mrh2-p_w84d.js","async":true,"nonce":"$undefined"}]],["$","html",null,{"lang":"en","className":"geist_a71539c9-module__T19VSG__variable geist_mono_8d43a2aa-module__8Li5zG__variable","suppressHydrationWarning":true,"children":["$","body",null,{"suppressHydrationWarning":true,"children":[["$","header",null,{"className":"navbar","children":["$","div",null,{"className":"navbar-container","children":[["$","div",null,{"style":{"display":"flex","alignItems":"center","gap":"16px"},"children":["$","$L2",null,{"href":"/cv","className":"nav-logo","children":[["$","svg",null,{"height":"24","viewBox":"0 0 24 24","width":"24","style":{"stroke":"#f0f6fc","fill":"none"},"children":[["$","rect",null,{"x":"2","y":"2","width":"20","height":"20","rx":"4","strokeWidth":"2"}],["$","polyline",null,{"points":"9 16 5 12 9 8","strokeWidth":"2","strokeLinecap":"round","strokeLinejoin":"round"}],["$","polyline",null,{"points":"15 8 19 12 15 16","strokeWidth":"2","strokeLinecap":"round","strokeLinejoin":"round"}],["$","line",null,{"x1":"14","y1":"6","x2":"10","y2":"18","strokeWidth":"2","strokeLinecap":"round"}]]}],["$","span",null,{"className":"logo-text","children":"Thomas_Cook"}]]}]}],["$","nav",null,{"className":"nav-links","children":[["$","$L2",null,{"href":"/","className":"nav-link","children":"Dashboard"}],["$","$L2",null,{"href":"/cv","className":"nav-link","children":"CV"}]]}]]}]}],["$","div",null,{"style":{"flex":1},"children":["$","$L3",null,{"parallelRouterKey":"children","error":"$undefined","errorStyles":"$undefined","errorScripts":"$undefined","template":["$","$L4",null,{}],"templateStyles":"$undefined","templateScripts":"$undefined","notFound":[[["$","title",null,{"children":"404: This page could not be found."}],["$","div",null,{"style":{"fontFamily":"system-ui,\"Segoe UI\",Roboto,Helvetica,Arial,sans-serif,\"Apple Color Emoji\",\"Segoe UI Emoji\"","height":"100vh","textAlign":"center","display":"flex","flexDirection":"column","alignItems":"center","justifyContent":"center"},"children":["$","div",null,{"children":[["$","style",null,{"dangerouslySetInnerHTML":{"__html":"body{color:#000;background:#fff;margin:0}.next-error-h1{border-right:1px solid rgba(0,0,0,.3)}@media (prefers-color-scheme:dark){body{color:#fff;background:#000}.next-error-h1{border-right:1px solid rgba(255,255,255,.3)}}"}}],["$","h1",null,{"className":"next-error-h1","style":{"display":"inline-block","margin":"0 20px 0 0","padding":"0 23px 0 0","fontSize":24,"fontWeight":500,"verticalAlign":"top","lineHeight":"49px"},"children":404}],["$","div",null,{"style":{"display":"inline-block"},"children":["$","h2",null,{"style":{"fontSize":14,"fontWeight":400,"lineHeight":"49px","margin":0},"children":"This page could not be found."}]}]]}]}]],[]],"forbidden":"$undefined","unauthorized":"$undefined"}]}],["$","script",null,{"type":"application/ld+json","dangerouslySetInnerHTML":{"__html":"{\"@context\":\"https://schema.org\",\"@type\":\"Person\",\"name\":\"Thomas Cook\",\"jobTitle\":\"Software Engineer\",\"worksFor\":{\"@type\":\"Organization\",\"name\":\"HWM Global\"},\"url\":\"https://tomhcook.github.io/code-problems/\",\"sameAs\":[\"https://www.linkedin.com/in/thomas-cook-se/\",\"https://github.com/tomhcook\"],\"knowsAbout\":[\"Software Engineering\",\"C#\",\".NET Core\",\"ASP.NET Core\",\"SQL Database Optimization\",\"React\",\"TypeScript\",\"Azure DevOps\"]}"}}],["$","$L5",null,{"data-goatcounter":"https://thomashcook.goatcounter.com/count","src":"//gc.zgo.at/count.js","strategy":"afterInteractive"}]]}]}]]}],{"children":[["$","$1","c",{"children":[["$","$L6",null,{"solutions":[{"id":"casestudies-android-upgrade","slug":"android-upgrade","title":"Android 16 & .NET 10 Migration across Multi-App Ecosystem (HWM)","category":"casestudies","categoryLabel":"Case Studies","readme":"$7","summary":"An active engineering initiative at **HWM** focusing on migrating multiple enterprise applications from .NET 9 to .NE...","files":[],"date":"2026-07-28T05:37:22.799Z","difficulty":"$undefined","complexity":"$undefined","caseStudyMeta":{"role":"Mobile Developer","company":"HWM","projects":"Android 16 & .NET 10 Migration","milestone":"Active Upgrade PR Submitted","cvHighlight":"mobile","dashboardTime":"Mobile & Systems Developer","dashboardSpace":"Android 16 & .NET 10 Upgrade","dashboardLabel":"Active Upgrade","labels":[{"text":"case-study","bg":"rgba(163, 113, 247, 0.15)","color":"#d3b3f7","border":"rgba(163, 113, 247, 0.4)"},{"text":"c#","bg":"rgba(23, 134, 0, 0.15)","color":"#7ef76d","border":"rgba(23, 134, 0, 0.4)"},{"text":".net-10","bg":"rgba(163, 23, 23, 0.15)","color":"#f78e8e","border":"rgba(163, 23, 23, 0.4)"},{"text":".net-maui","bg":"rgba(49, 120, 198, 0.15)","color":"#7dc3ff","border":"rgba(49, 120, 198, 0.4)"},{"text":"android-sdk-36","bg":"rgba(56, 139, 253, 0.15)","color":"#58a6ff","border":"rgba(56, 139, 253, 0.4)"},{"text":"xunit","bg":"rgba(46, 160, 67, 0.15)","color":"#56d364","border":"rgba(46, 160, 67, 0.4)"}]}},{"id":"casestudies-api-optimization","slug":"api-optimization","title":"API Performance Optimization & Systems Integration (HWM)","category":"casestudies","categoryLabel":"Case Studies","readme":"$8","summary":"An optimization initiative executed at **HWM** that successfully reduced core API response times by 60% across 9 cycl...","files":[],"date":"2026-07-28T05:37:22.799Z","difficulty":"$undefined","complexity":"$undefined","caseStudyMeta":{"role":"Full Stack Developer","company":"HWM","projects":"API Performance & Integrations","milestone":"60% Latency Reduction & 50+ PRs Shipped","cvHighlight":"backend","dashboardTime":"Full Stack Developer","dashboardSpace":"Efficiency","dashboardLabel":"Maintenance Showcase","labels":[{"text":"case-study","bg":"rgba(163, 113, 247, 0.15)","color":"#d3b3f7","border":"rgba(163, 113, 247, 0.4)"},{"text":"c#","bg":"rgba(23, 134, 0, 0.15)","color":"#7ef76d","border":"rgba(23, 134, 0, 0.4)"},{"text":"react","bg":"rgba(49, 120, 198, 0.15)","color":"#7dc3ff","border":"rgba(49, 120, 198, 0.4)"},{"text":"docker","bg":"rgba(56, 139, 253, 0.15)","color":"#58a6ff","border":"rgba(56, 139, 253, 0.4)"},{"text":"azure-mssql","bg":"rgba(46, 160, 67, 0.15)","color":"#56d364","border":"rgba(46, 160, 67, 0.4)"}]}},{"id":"casestudies-internal-product-suite","slug":"internal-product-suite","title":"Proprietary Internal Product Development","category":"casestudies","categoryLabel":"Case Studies","readme":"$9","summary":"A highly successful, proprietary business solution designed, architected, and built from the ground up to streamline ...","files":[],"date":"2026-07-28T05:37:22.800Z","difficulty":"$undefined","complexity":"$undefined","caseStudyMeta":{"role":"Lead Architect","company":"HWM","projects":"Internal Products Suite","milestone":"Production Launch & Direct Revenue Delivery","cvHighlight":"lead","dashboardTime":"Lead Architect","dashboardSpace":"Revenue-Generating","dashboardLabel":"System Design Showcase","labels":[{"text":"case-study","bg":"rgba(163, 113, 247, 0.15)","color":"#d3b3f7","border":"rgba(163, 113, 247, 0.4)"},{"text":"ruby","bg":"rgba(112, 21, 22, 0.15)","color":"#ff8284","border":"rgba(112, 21, 22, 0.4)"},{"text":"docker","bg":"rgba(56, 139, 253, 0.15)","color":"#58a6ff","border":"rgba(56, 139, 253, 0.4)"},{"text":"azure-mssql","bg":"rgba(46, 160, 67, 0.15)","color":"#56d364","border":"rgba(46, 160, 67, 0.4)"}]}},{"id":"dailycodingproblems-dcp-1288","slug":"dcp-1288","title":"Balanced Parentheses with Minimum Edits","category":"dailycodingproblems","categoryLabel":"Daily Coding Problems","readme":"$a","summary":"This problem was asked by Facebook.","files":[{"name":"Solution.cs","code":"using System;\nusing System.Text;\n\nclass Program\n{\n    public static string Balance(string s)\n    {\n        var res = new StringBuilder();\n        int openCount = 0;\n\n        foreach (char ch in s)\n        {\n            if (ch == '(')\n            {\n                openCount++;\n                res.Append(ch);\n            }\n            else if (ch == ')')\n            {\n                if (openCount > 0)\n                {\n                    openCount--;\n                }\n                else\n                {\n                    res.Append('(');\n                }\n                res.Append(ch);\n            }\n            else\n            {\n                res.Append(ch);\n            }\n        }\n\n        // Append remaining closing parentheses for any unmatched opening ones\n        res.Append(')', openCount);\n\n        return res.ToString();\n    }\n\n    static void Main()\n    {\n        Console.WriteLine(Balance(\"(()\"));     // Output: (())\n        Console.WriteLine(Balance(\"))()(\"));   // Output: ()()()()\n    }\n}","language":"csharp"},{"name":"Solution.py","code":"def balance(s: str) -> str:\n    res, open_count = [], 0\n    for char in s:\n        if char == '(':\n            open_count += 1\n            res.append(char)\n        elif char == ')':\n            if open_count > 0:\n                open_count -= 1\n            else:\n                res.append('(')\n            res.append(char)\n    return \"\".join(res) + \")\" * open_count\n\nif __name__ == \"__main__\":\n    print(balance(\"(()\"))     # Output: (())\n    print(balance(\"))()(\"))   # Output: ()()()()\n","language":"python"}],"date":"2026-07-28T05:37:22.800Z","difficulty":"Medium","complexity":{"time":"O(N) Time","space":"O(N) Space","label":"Optimal Method"},"caseStudyMeta":"$undefined"},{"id":"dailycodingproblems-dcp-1289","slug":"dcp-1289","title":"PageRank Algorithm","category":"dailycodingproblems","categoryLabel":"Daily Coding Problems","readme":"$b","summary":"This problem was asked by Google.","files":[{"name":"Solution.cs","code":"$c","language":"csharp"},{"name":"Solution.py","code":"$d","language":"python"}],"date":"2026-07-28T05:37:22.800Z","difficulty":"Hard","complexity":{"time":"O(I \\times (N + E) Time","space":"O(N + E) Space","label":"Optimal Method"},"caseStudyMeta":"$undefined"},{"id":"greatfrontend-gfe-001-debounce","slug":"gfe-001-debounce","title":"GFE-001: Implement Debounce Function","category":"greatfrontend","categoryLabel":"GreatFrontEnd","readme":"# GFE-001: Implement Debounce Function\n\n## Description\nImplement a `debounce` function in TypeScript that delays invoking `func` until after `wait` milliseconds have elapsed since the last time the debounced function was invoked. Highly essential for optimizing search input handlers and scroll listeners.\n\n## Complexity\n- **Time Complexity:** O(1) per call\n- **Space Complexity:** O(1) auxiliary space (single timer handle closure)\n","summary":"Implement a `debounce` function in TypeScript that delays invoking `func` until after `wait` milliseconds have elapse...","files":[{"name":"Solution.ts","code":"/**\n * @param {(...args: Array<any>) => any} func\n * @param {number} wait\n * @returns {(...args: Array<any>) => void}\n */\nexport default function debounce(\n  func: (...args: Array<any>) => any,\n  wait: number\n): (...args: Array<any>) => void {\n  let timeoutId: ReturnType<typeof setTimeout> | null = null;\n\n  return function (this: any, ...args: Array<any>) {\n    const context = this;\n\n    if (timeoutId !== null) {\n      clearTimeout(timeoutId);\n    }\n\n    timeoutId = setTimeout(() => {\n      func.apply(context, args);\n    }, wait);\n  };\n}\n","language":"typescript"}],"date":"2026-07-28T05:37:22.800Z","difficulty":"$undefined","complexity":{"time":"O(1) Time","space":"O(1) Space","label":"Optimal Method"},"caseStudyMeta":"$undefined"},{"id":"leetcode-0001-twosum","slug":"0001-twosum","title":"Two Sum","category":"leetcode","categoryLabel":"LeetCode","readme":"$e","summary":"Given an array of integers `nums` and an integer `target`, return indices of the two numbers such that they add up to...","files":[{"name":"Solution.cs","code":"$f","language":"csharp"},{"name":"Solution.py","code":"class Solution:\n    def twoSum(self, nums: list[int], target: int) -> list[int]:\n        seen = {}\n        for i, num in enumerate(nums):\n            remaining = target - num\n            if remaining in seen:\n                return [seen[remaining], i]\n            seen[num] = i\n        return []\n\nif __name__ == '__main__':\n    sol = Solution()\n    test_cases = [\n        ([2, 7, 11, 15], 9, [0, 1]),\n        ([3, 2, 4], 6, [1, 2]),\n        ([3, 3], 6, [0, 1])\n    ]\n    for idx, (nums, target, expected) in enumerate(test_cases, 1):\n        result = sol.twoSum(nums, target)\n        print(f\"Test {idx}: nums={nums}, target={target} -> Result={result} | Expected={expected} | {'PASS' if sorted(result) == sorted(expected) else 'FAIL'}\")","language":"python"}],"date":"2026-07-28T05:37:22.800Z","difficulty":"Easy","complexity":{"time":"O(N) Time","space":"O(N) Space","label":"Optimal Method"},"caseStudyMeta":"$undefined"},{"id":"leetcode-0002-addtwonumbers","slug":"0002-addtwonumbers","title":"Add Two Numbers","category":"leetcode","categoryLabel":"LeetCode","readme":"$10","summary":"You are given two non-empty linked lists representing two non-negative integers. The digits are stored in reverse ord...","files":[{"name":"Solution.cs","code":"$11","language":"csharp"},{"name":"Solution.py","code":"$12","language":"python"}],"date":"2026-07-28T05:37:22.800Z","difficulty":"Medium","complexity":{"time":"O(N) Time","space":"O(N) Space","label":"Optimal Method"},"caseStudyMeta":"$undefined"},{"id":"leetcode-0336-palindromepairs","slug":"0336-palindromepairs","title":"Palindrome Pairs","category":"leetcode","categoryLabel":"LeetCode","readme":"$13","summary":"Given a list of unique words, find all pairs of distinct indices `(i, j)` in the given list, so that the concatenatio...","files":[{"name":"Solution.cs","code":"$14","language":"csharp"},{"name":"Solution.py","code":"$15","language":"python"}],"date":"2026-07-28T05:37:22.801Z","difficulty":"Hard","complexity":{"time":"O(N \\cdot L^2) Time","space":"O(N \\cdot L) Space","label":"Optimal Method"},"caseStudyMeta":"$undefined"},{"id":"leetcode-3514-numberofuniquexortripletsii","slug":"3514-numberofuniquexortripletsii","title":"Number of Unique XOR Triplets II","category":"leetcode","categoryLabel":"LeetCode","readme":"$16","summary":"Given an integer array `nums`, a XOR triplet is defined as the XOR of three elements `nums[i] XOR nums[j] XOR nums[k]...","files":[{"name":"Solution.cs","code":"$17","language":"csharp"},{"name":"Solution.py","code":"from typing import List\n\nclass Solution:\n    def UniqueXorTriplets(self, nums: List[int]) -> int:\n        # Since nums[i] <= 1500, the maximum possible XOR value is < 2048\n        limit = 2048\n        \n        # s1 tracks all pair XORs (nums[i] ^ nums[j]) for i <= j\n        s1 = [False] * limit\n        n = len(nums)\n        for i in range(n):\n            for j in range(i, n):\n                s1[nums[i] ^ nums[j]] = True\n                \n        # s2 tracks all triplet XORs (pair_xor ^ nums[k])\n        s2 = [False] * limit\n        for x in range(limit):\n            if s1[x]:\n                for num in nums:\n                    s2[x ^ num] = True\n                    \n        return sum(s2)\n\nif __name__ == \"__main__\":\n    sol = Solution()\n    print(\"Example [1, 3, 5] Unique Triplet XOR Count:\", sol.UniqueXorTriplets([1, 3, 5]))\n","language":"python"}],"date":"2026-07-28T05:37:22.801Z","difficulty":"Medium","complexity":{"time":"O(N^2 + N \\cdot M) Time","space":"O(M) Space","label":"Optimal Method"},"caseStudyMeta":"$undefined"},{"id":"leetcode-3536-maximumproductoftwodigits","slug":"3536-maximumproductoftwodigits","title":"Maximum Product of Two Digits","category":"leetcode","categoryLabel":"LeetCode","readme":"# Maximum Product of Two Digits\n\nGiven a positive integer `n`, return the maximum product that can be obtained by multiplying any two digits found within `n`. You are permitted to use the same digit twice if it appears more than once in the number.\n\n## How the Solution Works\n\nTo find the maximum product of any two digits in `n`:\n1. We extract the digits of `n` by continuously taking `n % 10` and dividing `n` by 10.\n2. We keep track of the two largest digits (`max1` and `max2`) seen during the traversal.\n3. The maximum product will simply be the product of these two largest digits.\n\n## Complexity\n\n- **Time Complexity:** $O(\\log_{10}(n))$ since we process each digit of `n` exactly once, which corresponds to the number of digits in `n`.\n- **Space Complexity:** $O(1)$ auxiliary space as we only store the two largest digits.\n\n[LeetCode Problem Link](https://leetcode.com/problems/maximum-product-of-two-digits/)\n","summary":"Given a positive integer `n`, return the maximum product that can be obtained by multiplying any two digits found wit...","files":[{"name":"Solution.cs","code":"using System;\nusing System.Collections.Generic;\n\npublic class Solution {\n    public int MaxProduct(int n) {\n        int max1 = 0;\n        int max2 = 0;\n        while (n > 0) {\n            int digit = n % 10;\n            if (digit > max1) {\n                max2 = max1;\n                max1 = digit;\n            } else if (digit > max2) {\n                max2 = digit;\n            }\n            n /= 10;\n        }\n        return max1 * max2;\n    }\n\n    public static void Main(string[] args) {\n        Solution sol = new Solution();\n        var testCases = new (int n, int expected)[] {\n            (31, 3),\n            (22, 4),\n            (124, 8)\n        };\n\n        for (int idx = 0; idx < testCases.Length; idx++) {\n            var tc = testCases[idx];\n            int result = sol.MaxProduct(tc.n);\n            Console.WriteLine($\"Test {idx + 1}: n={tc.n} -> Result={result} | Expected={tc.expected} | {(result == tc.expected ? \"PASS\" : \"FAIL\")}\");\n        }\n    }\n}\n","language":"csharp"},{"name":"Solution.py","code":"class Solution:\n    def maxProduct(self, n: int) -> int:\n        digits = []\n        while n > 0:\n            digits.append(n % 10)\n            n //= 10\n        digits.sort(reverse=True)\n        return digits[0] * digits[1]\n\nif __name__ == '__main__':\n    sol = Solution()\n    test_cases = [\n        (31, 3),\n        (22, 4),\n        (124, 8)\n    ]\n    for idx, (n, expected) in enumerate(test_cases, 1):\n        result = sol.maxProduct(n)\n        print(f\"Test {idx}: n={n} -> Result={result} | Expected={expected} | {'PASS' if result == expected else 'FAIL'}\")\n","language":"python"}],"date":"2026-07-28T05:37:22.801Z","difficulty":"Easy","complexity":{"time":"O(\\log_{10}(n) Time","space":"O(1) Space","label":"Optimal Method"},"caseStudyMeta":"$undefined"},{"id":"leetcode-3999-minimumnumberofstringgroupsthroughtransformations","slug":"3999-minimumnumberofstringgroupsthroughtransformations","title":"Minimum Number of String Groups Through Transformations","category":"leetcode","categoryLabel":"LeetCode","readme":"$18","summary":"You are given an array of strings `words`. A transformation on a string `s` is defined by:","files":[{"name":"Solution.py","code":"$19","language":"python"}],"date":"2026-07-28T05:37:22.801Z","difficulty":"Hard","complexity":{"time":"O(N \\cdot L) Time","space":"O(N \\cdot L) Space","label":"⚡ Optimal Approach"},"caseStudyMeta":"$undefined"}],"cvSkills":[{"name":"Backend Dev (C# / .NET)","level":"Advanced","percentage":95},{"name":"Full Stack Web (React / TS)","level":"Advanced","percentage":90},{"name":"Databases (MSSQL)","level":"Advanced","percentage":90},{"name":"Mobile Dev (.NET MAUI)","level":"Proficient","percentage":80},{"name":"Cloud & DevOps (Azure / AWS)","level":"Proficient","percentage":75},{"name":"AI & LLM Integrations","level":"Proficient","percentage":75},{"name":"Python Engineering","level":"Advanced","percentage":85},{"name":"Containerization (Docker)","level":"Proficient","percentage":80},{"name":"Caching & Redis","level":"Proficient","percentage":80},{"name":"Ruby Development","level":"Proficient","percentage":75}]}],["$L1a"],"$L1b"]}],{},null,false,null]},null,false,null],"$L1c",false]],"m":"$undefined","G":["$1d",["$L1e"]],"S":true,"h":null,"s":"$undefined","l":"$undefined","p":"$undefined","d":"$undefined","b":"2kyWR4y9FitCPVQnEoUvH"}
+1f:I[97367,["/code-problems/_next/static/chunks/0ob_z_0z7sy-0.js","/code-problems/_next/static/chunks/14mrh2-p_w84d.js"],"OutletBoundary"]
+20:"$Sreact.suspense"
+22:I[97367,["/code-problems/_next/static/chunks/0ob_z_0z7sy-0.js","/code-problems/_next/static/chunks/14mrh2-p_w84d.js"],"ViewportBoundary"]
+24:I[97367,["/code-problems/_next/static/chunks/0ob_z_0z7sy-0.js","/code-problems/_next/static/chunks/14mrh2-p_w84d.js"],"MetadataBoundary"]
+1a:["$","script","script-0",{"src":"/code-problems/_next/static/chunks/3bzaebcqqpv9_.js","async":true,"nonce":"$undefined"}]
+1b:["$","$L1f",null,{"children":["$","$20",null,{"name":"Next.MetadataOutlet","children":"$@21"}]}]
+1c:["$","$1","h",{"children":[null,["$","$L22",null,{"children":"$L23"}],["$","div",null,{"hidden":true,"children":["$","$L24",null,{"children":["$","$20",null,{"name":"Next.Metadata","children":"$L25"}]}]}],["$","meta",null,{"name":"next-size-adjust","content":""}]]}]
+1e:["$","link","0",{"rel":"stylesheet","href":"/code-problems/_next/static/chunks/0s2z6pg3qhyc7.css","precedence":"next","crossOrigin":"$undefined","nonce":"$undefined"}]
+23:[["$","meta","0",{"charSet":"utf-8"}],["$","meta","1",{"name":"viewport","content":"width=device-width, initial-scale=1"}]]
+26:I[27201,["/code-problems/_next/static/chunks/0ob_z_0z7sy-0.js","/code-problems/_next/static/chunks/14mrh2-p_w84d.js"],"IconMark"]
+21:null
+25:[["$","title","0",{"children":"Thomas Cook — Software Engineer Portfolio & Solutions"}],["$","meta","1",{"name":"description","content":"Official software engineering portfolio, C# & .NET projects, and code solutions of Thomas Cook, Software Engineer at HWM Global."}],["$","link","2",{"rel":"author","href":"https://tomhcook.github.io/code-problems/"}],["$","meta","3",{"name":"author","content":"Thomas Cook"}],["$","meta","4",{"name":"keywords","content":"Thomas Cook software,Thomas Cook software engineer,Thomas Cook software developer,Thomas Cook C#,Thomas Cook .NET,Thomas Cook HWM Global,Thomas Cook developer Lincoln,Thomas Cook portfolio"}],["$","meta","5",{"name":"creator","content":"Thomas Cook"}],["$","meta","6",{"name":"publisher","content":"Thomas Cook"}],["$","link","7",{"rel":"canonical","href":"https://tomhcook.github.io/code-problems/"}],["$","meta","8",{"property":"og:title","content":"Thomas Cook — Software Engineer Portfolio & Solutions"}],["$","meta","9",{"property":"og:description","content":"Official software engineering portfolio, C# & .NET projects, and code solutions of Thomas Cook, Software Engineer at HWM Global."}],["$","meta","10",{"property":"og:url","content":"https://tomhcook.github.io/code-problems/"}],["$","meta","11",{"property":"og:site_name","content":"Thomas Cook — Software Engineer"}],["$","meta","12",{"property":"og:locale","content":"en_GB"}],["$","meta","13",{"property":"og:image","content":"https://tomhcook.github.io/code-problems/og-image.jpg"}],["$","meta","14",{"property":"og:image:width","content":"1200"}],["$","meta","15",{"property":"og:image:height","content":"630"}],["$","meta","16",{"property":"og:image:alt","content":"Thomas Cook Software Engineer Portfolio"}],["$","meta","17",{"property":"og:type","content":"website"}],["$","meta","18",{"name":"twitter:card","content":"summary"}],["$","meta","19",{"name":"twitter:title","content":"Thomas Cook — Software Engineer Portfolio & Solutions"}],["$","meta","20",{"name":"twitter:description","content":"Official software engineering portfolio, C# & .NET projects, and code solutions of Thomas Cook, Software Engineer at HWM Global."}],["$","meta","21",{"name":"twitter:image","content":"https://tomhcook.github.io/code-problems/og-image.jpg"}],["$","link","22",{"rel":"icon","href":"/code-problems/favicon.ico?favicon.2vob68tjqpejf.ico","sizes":"256x256","type":"image/x-icon"}],["$","$L26","23",{}]]

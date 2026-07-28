@@ -1,0 +1,41 @@
+1:"$Sreact.fragment"
+2:I[6404,["/code-problems/_next/static/chunks/0ob_z_0z7sy-0.js","/code-problems/_next/static/chunks/14mrh2-p_w84d.js","/code-problems/_next/static/chunks/3-jly6ly-1vwu.js"],"default"]
+6:I[97367,["/code-problems/_next/static/chunks/0ob_z_0z7sy-0.js","/code-problems/_next/static/chunks/14mrh2-p_w84d.js"],"OutletBoundary"]
+7:"$Sreact.suspense"
+3:T99a,<h1>API Performance Optimization &amp; Systems Integration (HWM)</h1>
+<p>An optimization initiative executed at <strong>HWM</strong> that successfully reduced core API response times by 60% across 9 cycles of Shape Up product development, supporting system-wide stability and bug reduction.</p>
+<h2>Technical Showcase</h2>
+<ul>
+<li><strong>Role</strong>: Full Stack Developer (Core Systems &amp; Integration)</li>
+<li><strong>Architecture</strong>: C# Web API &amp; React Services</li>
+<li><strong>Backend &amp; Infrastructure</strong>: C#, React, Docker, SQL, Azure MSSQL</li>
+<li><strong>Hosting &amp; CI/CD</strong>: Azure DevOps pipelines &amp; cloud hosting environment</li>
+<li><strong>Deployment</strong>: Full responsibility for performing and managing production deployments personally</li>
+</ul>
+<hr>
+<h2>1. The Challenge</h2>
+<p>High latency in core API endpoints was causing application lag and slow load times for client interfaces. The objective was to:</p>
+<ol>
+<li>Identify bottleneck queries and refactor slower REST API endpoints under a Shape Up cycle structure.</li>
+<li>Deliver key features within the 4-week building phase.</li>
+<li>Manage carrier systems integrations (UPS, DHL) and async routing.</li>
+<li>Clean up the codebase and resolve production issues during the 2-week cool-down/bug-fixing phase.</li>
+</ol>
+<hr>
+<h2>2. Technical Implementation &amp; Design Decisions</h2>
+<ul>
+<li><strong>API Latency Cut</strong>: Refactored SQL query execution paths, added index tuning in MSSQL, and introduced a Redis-based state caching layer for high-frequency endpoints.</li>
+<li><strong>Shape Up Cycle Delivery</strong>: Led development across 9 cycles. Merged 50+ Pull Requests for new backend features during 4-week cycles.</li>
+<li><strong>Dedicated Bug-Fixing Cycles</strong>: Proactively resolved side-bugs and edge cases during the 2-week cool-down/fixing period of each cycle to dramatically reduce regression tickets.</li>
+</ul>
+<hr>
+<h2>3. Results &amp; Business Impact</h2>
+<ul>
+<li><strong>60% Performance Speedup</strong>: Core API response times were cut by approximately 60%, drastically improving user experience.</li>
+<li><strong>High Output &amp; Reliability</strong>: Maintained consistent feature delivery with 50+ PRs successfully merged in 9 sprints.</li>
+<li><strong>System Stability</strong>: Proactive bug fixing during the 2-week cool-down phases significantly lowered weekly support ticket counts.</li>
+</ul>
+0:{"rsc":["$","$1","c",{"children":[["$","$L2",null,{"title":"API Performance Optimization & Systems Integration (HWM)","categoryLabel":"Case Studies","readmeHtml":"$3","files":[],"slug":"api-optimization","caseStudyMeta":{"role":"Full Stack Developer","company":"HWM","projects":"API Performance & Integrations","milestone":"60% Latency Reduction & 50+ PRs Shipped","cvHighlight":"backend","dashboardTime":"Full Stack Developer","dashboardSpace":"Efficiency","dashboardLabel":"Maintenance Showcase","labels":[{"text":"case-study","bg":"rgba(163, 113, 247, 0.15)","color":"#d3b3f7","border":"rgba(163, 113, 247, 0.4)"},{"text":"c#","bg":"rgba(23, 134, 0, 0.15)","color":"#7ef76d","border":"rgba(23, 134, 0, 0.4)"},{"text":"react","bg":"rgba(49, 120, 198, 0.15)","color":"#7dc3ff","border":"rgba(49, 120, 198, 0.4)"},{"text":"docker","bg":"rgba(56, 139, 253, 0.15)","color":"#58a6ff","border":"rgba(56, 139, 253, 0.4)"},{"text":"azure-mssql","bg":"rgba(46, 160, 67, 0.15)","color":"#56d364","border":"rgba(46, 160, 67, 0.4)"}]}}],["$L4"],"$L5"]}],"isPartial":false,"staleTime":300,"varyParams":null,"buildId":"2kyWR4y9FitCPVQnEoUvH"}
+4:["$","script","script-0",{"src":"/code-problems/_next/static/chunks/3-jly6ly-1vwu.js","async":true}]
+5:["$","$L6",null,{"children":["$","$7",null,{"name":"Next.MetadataOutlet","children":"$@8"}]}]
+8:null

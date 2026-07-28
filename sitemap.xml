@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+  <!-- Core Pages -->
+  <url>
+    <loc>https://tomhcook.github.io/code-problems/</loc>
+    <priority>1.00</priority>
+  </url>
+  <url>
+    <loc>https://tomhcook.github.io/code-problems/cv</loc>
+    <priority>0.90</priority>
+  </url>
+  
+  <!-- Case Studies -->
+  <url>
+    <loc>https://tomhcook.github.io/code-problems/solutions/casestudies/android-upgrade</loc>
+    <priority>0.80</priority>
+  </url>
+  <url>
+    <loc>https://tomhcook.github.io/code-problems/solutions/casestudies/api-optimization</loc>
+    <priority>0.80</priority>
+  </url>
+  <url>
+    <loc>https://tomhcook.github.io/code-problems/solutions/casestudies/internal-product-suite</loc>
+    <priority>0.80</priority>
+  </url>
+
+  <!-- Coding Solutions -->
+  <url>
+    <loc>https://tomhcook.github.io/code-problems/solutions/dailycodingproblems/dcp-1288</loc>
+    <priority>0.70</priority>
+  </url>
+  <url>
+    <loc>https://tomhcook.github.io/code-problems/solutions/dailycodingproblems/dcp-1289</loc>
+    <priority>0.70</priority>
+  </url>
+  <url>
+    <loc>https://tomhcook.github.io/code-problems/solutions/leetcode/0001-twosum</loc>
+    <priority>0.70</priority>
+  </url>
+  <url>
+    <loc>https://tomhcook.github.io/code-problems/solutions/leetcode/0002-addtwonumbers</loc>
+    <priority>0.70</priority>
+  </url>
+  <url>
+    <loc>https://tomhcook.github.io/code-problems/solutions/leetcode/3514-numberofuniquexortripletsii</loc>
+    <priority>0.70</priority>
+  </url>
+  <url>
+    <loc>https://tomhcook.github.io/code-problems/solutions/leetcode/3999-minimumnumberofstringgroupsthroughtransformations</loc>
+    <priority>0.70</priority>
+  </url>
+</urlset>
