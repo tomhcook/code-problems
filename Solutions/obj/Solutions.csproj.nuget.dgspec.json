@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "E:\\git\\code-problems\\Solutions\\Solutions.csproj": {}
+    "e:\\git\\code-problems\\Solutions\\Solutions.csproj": {}
   },
   "projects": {
-    "E:\\git\\code-problems\\Solutions\\Solutions.csproj": {
+    "e:\\git\\code-problems\\Solutions\\Solutions.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "E:\\git\\code-problems\\Solutions\\Solutions.csproj",
+        "projectUniqueName": "e:\\git\\code-problems\\Solutions\\Solutions.csproj",
         "projectName": "Solutions",
-        "projectPath": "E:\\git\\code-problems\\Solutions\\Solutions.csproj",
+        "projectPath": "e:\\git\\code-problems\\Solutions\\Solutions.csproj",
         "packagesPath": "C:\\Users\\Tom\\.nuget\\packages\\",
-        "outputPath": "E:\\git\\code-problems\\Solutions\\obj\\",
+        "outputPath": "e:\\git\\code-problems\\Solutions\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
