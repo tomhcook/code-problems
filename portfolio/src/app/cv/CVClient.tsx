@@ -303,6 +303,7 @@ export default function CVClient({ solutions, cvSkills }: CVClientProps) {
                 <li className={highlightedCategory === "web" ? "highlight-glow" : ""} style={{ transition: "all 0.3s ease" }}>Designing robust web interfaces using React, TypeScript, Angular, and Node.js.</li>
                 <li className={highlightedCategory === "databases" ? "highlight-glow" : ""} style={{ transition: "all 0.3s ease" }}>Designing relational databases, tuning indexes, and resolving query performance issues.</li>
                 <li className={highlightedCategory === "backend" ? "highlight-glow" : ""} style={{ transition: "all 0.3s ease" }}>Integrating third-party APIs (payment processors, global carriers) and cloud services (AWS Lambda, Azure DevOps).</li>
+                <li className={highlightedCategory === "cloud" ? "highlight-glow" : ""} style={{ transition: "all 0.3s ease" }}>Raising quality and delivery speed with k6 performance testing, CI/CD pipelines, and infrastructure as code (Terraform, CloudFormation).</li>
                 <li className={highlightedCategory === "backend" ? "highlight-glow" : ""} style={{ transition: "all 0.3s ease" }}>Implementing business intelligence models and automated LLM-driven automation tasks.</li>
               </ul>
             </div>
@@ -410,9 +411,14 @@ export default function CVClient({ solutions, cvSkills }: CVClientProps) {
                       <strong>[Backend &amp; DB]</strong> Reduced API response times by 60% across 9 Shape Up cycles, as measured by Datadog latency monitoring, by actively refactoring internal API endpoints, resolving production bugs, tuning MSSQL query paths and database indexes, and introducing caching layers across 50+ merged PRs.
                     </li>
                   )}
+                  {(activeHat === "all" || activeHat === "backend" || activeHat === "cloud" || activeHat === "lead") && (
+                    <li className={`skill-target-backend skill-target-cloud ${isBulletHighlighted(["k6 Load Testing", "Datadog"], "backend") ? "highlight-glow" : ""}`}>
+                      <strong>[Performance Testing]</strong> Owned the adoption of k6 performance and load testing from tool selection through team rollout, exposing major weak points the previous testing approach had missed across the majority of HWM&apos;s applications; the fixes that followed delivered an 18.3% improvement in response times, as measured in Datadog.
+                    </li>
+                  )}
                   {(activeHat === "all" || activeHat === "maui" || activeHat === "web") && (
                     <li className={`skill-target-mobile skill-target-web ${isBulletHighlighted([".NET MAUI", "Android SDK", "xUnit Testing"], "mobile") ? "highlight-glow" : ""}`}>
-                      <strong>[Mobile &amp; Web]</strong> Ensured continued Android store compliance and platform compatibility, as validated by passing automated test suites, by migrating a cross-platform .NET MAUI mobile application from Android 15 to Android 16 (SDK 36) and writing xUnit test coverage.
+                      <strong>[Mobile &amp; Web]</strong> Ensured continued Android store compliance and platform compatibility, as validated by passing automated test suites, by migrating a cross-platform .NET MAUI mobile application from Android 15 to Android 16 (SDK 36) and writing xUnit test coverage, while delivering features end to end across React web apps and .NET MAUI mobile apps (Android and iOS).
                     </li>
                   )}
                   {(activeHat === "all" || activeHat === "backend") && (
@@ -430,14 +436,39 @@ export default function CVClient({ solutions, cvSkills }: CVClientProps) {
                       <strong>[Cloud &amp; DevOps]</strong> Held full deployment responsibility, managing Azure DevOps CI/CD build and release pipelines for active production.
                     </li>
                   )}
+                  {(activeHat === "all" || activeHat === "cloud") && (
+                    <li className={`skill-target-cloud ${isBulletHighlighted(["Terraform", "CloudFormation / CDK", "CI/CD Pipelines", "Azure DevOps", "GitHub Enterprise"], "cloud") ? "highlight-glow" : ""}`}>
+                      <strong>[Cloud &amp; DevOps]</strong> Cut deployments and environment setup from hours to minutes by building CI/CD pipelines and Terraform / CloudFormation automation, alongside internal tools and test tooling now used by 16+ engineers across Azure DevOps and GitHub Enterprise.
+                    </li>
+                  )}
+                  {(activeHat === "all" || activeHat === "cloud" || activeHat === "backend") && (
+                    <li className={`skill-target-cloud skill-target-databases ${isBulletHighlighted(["Azure", "Docker", "Kubernetes", "Linux", "MySQL", "DynamoDB", "MSSQL"], "cloud") ? "highlight-glow" : ""}`}>
+                      <strong>[Cloud &amp; DevOps]</strong> Work daily with Azure across Linux and Windows environments, running development environments and internal projects on Docker and Kubernetes, with data held in MSSQL, MySQL, and DynamoDB.
+                    </li>
+                  )}
+                  {(activeHat === "all" || activeHat === "backend") && (
+                    <li className={`skill-target-backend ${isBulletHighlighted(["Generative AI", "Python", "AI Coding Tools"], "backend") ? "highlight-glow" : ""}`}>
+                      <strong>[Backend &amp; AI]</strong> Developed and expanded AI and LLM-driven backend features for automated data processing and user-facing intelligence, reducing manual processing time by approximately 30%, alongside Python services for file conversion.
+                    </li>
+                  )}
                   {(activeHat === "all" || activeHat === "web") && (
                     <li className={`skill-target-web ${isBulletHighlighted(["React", "TypeScript", "JavaScript", "REST APIs", "Microsoft Clarity"], "web") ? "highlight-glow" : ""}`}>
                       <strong>[Web &amp; Full Stack]</strong> Decreased client-facing tickets by 20% and accelerated bug-fixing cycles across 6+ products by implementing custom React UI enhancements, integrating Microsoft Clarity tracking, and developing a compliant cookie consent banner across both frontend and backend architectures.
                     </li>
                   )}
+                  {(activeHat === "all" || activeHat === "web") && (
+                    <li className={`skill-target-web ${isBulletHighlighted(["Playwright", "AI Coding Tools", "React", "TypeScript"], "web") ? "highlight-glow" : ""}`}>
+                      <strong>[Testing &amp; Quality]</strong> Evaluating and prototyping alternatives to Playwright to improve the reliability and maintainability of front-end testing, and used AI coding tools (Claude) to write a front-end testing suite.
+                    </li>
+                  )}
                   {(activeHat === "all" || activeHat === "lead") && (
                     <li className={`skill-target-lead ${isBulletHighlighted(["Shape Up", "Agile / Scrum"], "lead") ? "highlight-glow" : ""}`}>
                       <strong>[Team Lead]</strong> Kept engineering delivery on schedule during a leadership gap, as measured by sprint completion rates, by stepping in as temporary Team Lead to coordinate the backlog and run daily standups.
+                    </li>
+                  )}
+                  {(activeHat === "all" || activeHat === "lead") && (
+                    <li className={`skill-target-lead ${isBulletHighlighted([], "lead") ? "highlight-glow" : ""}`}>
+                      <strong>[Team Lead]</strong> Co-led the technology evaluation for a major new platform, researching language and framework options and presenting recommendations to management.
                     </li>
                   )}
                 </ul>
@@ -458,7 +489,7 @@ export default function CVClient({ solutions, cvSkills }: CVClientProps) {
                 <ul style={{ listStyleType: "disc" }}>
                   {(activeHat === "all" || activeHat === "web") && (
                     <li className={`skill-target-web ${isBulletHighlighted(["Node.js", "Angular 17", "TypeScript", "JavaScript"], "web") ? "highlight-glow" : ""}`}>
-                      <strong>[Web &amp; Full Stack]</strong> Delivered customer-facing integration solutions, as measured by successful client deployments, by building interactive frontends and backend connectors using Node.js, Angular 17, TypeScript, and JavaScript.
+                      <strong>[Web &amp; Full Stack]</strong> Delivered more than 30 customer integrations by building interactive frontends and backend connectors using Node.js, Angular 17, TypeScript, and JavaScript.
                     </li>
                   )}
                   {(activeHat === "all" || activeHat === "backend" || activeHat === "web" || activeHat === "cloud") && (
@@ -471,9 +502,19 @@ export default function CVClient({ solutions, cvSkills }: CVClientProps) {
                       <strong>[Backend &amp; DB]</strong> Improved AI-driven customer support accuracy, as measured by content routing success rates, by contributing to backend generative AI content routing and support tools.
                     </li>
                   )}
+                  {(activeHat === "all" || activeHat === "backend") && (
+                    <li className={`skill-target-backend skill-target-databases ${isBulletHighlighted(["Go", "Python", "PostgreSQL"], "backend") ? "highlight-glow" : ""}`}>
+                      <strong>[Backend &amp; DB]</strong> Worked with customer and internal stakeholders on the SaaS platform, turning their needs into integrations and support tooling, using Go, Python, and PostgreSQL.
+                    </li>
+                  )}
                   {(activeHat === "all" || activeHat === "cloud") && (
                     <li className={isBulletHighlighted(["AWS Lambda", "Postman", "Git", "AWS API Gateway & S3", "AWS SQS / SNS / EventBridge", "AWS ECS / EC2"], "cloud") ? "highlight-glow" : ""}>
                       <strong>[Cloud &amp; DevOps]</strong> Maintained feature delivery quality in production, as measured by zero critical deployment failures, by utilizing AWS services and Postman for testing, monitoring, and deployment.
+                    </li>
+                  )}
+                  {(activeHat === "all" || activeHat === "lead") && (
+                    <li className={`skill-target-lead ${isBulletHighlighted(["Mentoring & Code Review"], "lead") ? "highlight-glow" : ""}`}>
+                      <strong>[Team Lead]</strong> Helped lead and mentor a team of five junior developers alongside hands-on engineering.
                     </li>
                   )}
                 </ul>
@@ -505,6 +546,11 @@ export default function CVClient({ solutions, cvSkills }: CVClientProps) {
                   {(activeHat === "all" || activeHat === "lead" || activeHat === "backend") && (
                     <li className={isBulletHighlighted(["Agile / Scrum", "Git", "Jira", "Mentoring & Code Review"], "lead") ? "highlight-glow" : ""}>
                       <strong>[Team Lead]</strong> Contributed to consistent sprint delivery and code quality, as measured by peer review completion rates, by collaborating in an Agile structure using Jira for task estimates, tracking, and reviews.
+                    </li>
+                  )}
+                  {(activeHat === "all" || activeHat === "lead") && (
+                    <li className={`skill-target-lead ${isBulletHighlighted([], "lead") ? "highlight-glow" : ""}`}>
+                      <strong>[Stakeholders]</strong> Engaged regularly with client stakeholders on SaaS products, translating their requirements into delivered work.
                     </li>
                   )}
                 </ul>
