@@ -2,11 +2,11 @@
   "role": "Mobile Developer",
   "company": "HWM",
   "projects": "Android 16 & .NET 10 Migration",
-  "milestone": "Active Upgrade PR Submitted",
+  "milestone": "Upgrade Merged & Released",
   "cvHighlight": "mobile",
   "dashboardTime": "Mobile & Systems Developer",
   "dashboardSpace": "Android 16 & .NET 10 Upgrade",
-  "dashboardLabel": "Active Upgrade",
+  "dashboardLabel": "Completed Upgrade",
   "labels": [
     { "text": "case-study", "bg": "rgba(163, 113, 247, 0.15)", "color": "#d3b3f7", "border": "rgba(163, 113, 247, 0.4)" },
     { "text": "c#", "bg": "rgba(23, 134, 0, 0.15)", "color": "#7ef76d", "border": "rgba(23, 134, 0, 0.4)" },

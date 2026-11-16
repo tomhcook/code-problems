@@ -1,0 +1,15 @@
+{
+  "role": "Software Engineer",
+  "company": "Confidential",
+  "projects": "k6 Load Testing Rollout",
+  "milestone": "18.3% Faster Responses After k6 Findings",
+  "cvHighlight": "cloud",
+  "dashboardTime": "Software Engineer",
+  "dashboardSpace": "Performance & Reliability",
+  "dashboardLabel": "Load Testing Rollout",
+  "labels": [
+    { "text": "case-study", "bg": "rgba(163, 113, 247, 0.15)", "color": "#d3b3f7", "border": "rgba(163, 113, 247, 0.4)" },
+    { "text": "k6", "bg": "rgba(126, 103, 255, 0.15)", "color": "#b3a6ff", "border": "rgba(126, 103, 255, 0.4)" },
+    { "text": "load-testing", "bg": "rgba(56, 139, 253, 0.15)", "color": "#58a6ff", "border": "rgba(56, 139, 253, 0.4)" }
+  ]
+}

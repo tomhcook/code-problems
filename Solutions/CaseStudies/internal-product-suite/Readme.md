@@ -2,6 +2,11 @@
 
 A highly successful, proprietary business solution designed, architected, and built from the ground up to streamline operations and generate new revenue streams.
 
+## At a glance
+* **Problem**: An operational bottleneck and revenue opportunity that off-the-shelf software could not address.
+* **Approach**: Designed, architected and built a custom workflow product end to end: Ruby API, Azure MSSQL, Docker, Azure DevOps pipelines.
+* **Outcome**: In production, replacing multiple spreadsheet-based workflows across a business division, with page loads under 200ms.
+
 ## Technical Showcase
 * **Role**: Lead Architect & Developer (End-to-End Delivery)
 * **Architecture**: Ruby Web API & Services

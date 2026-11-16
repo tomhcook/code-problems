@@ -1,7 +1,9 @@
 "use client";
 
 import React, { useState } from "react";
+import Link from "next/link";
 import { Solution } from "../../lib/solutions";
+import { EMAIL, LINKEDIN_URL, GITHUB_URL, CV_LAST_UPDATED } from "../../lib/site";
 
 interface CVSkill {
   name: string;
@@ -46,7 +48,7 @@ const allMatrixSkills = [
   { name: "Android SDK", short: "Android", level: "Proficient", desc: "API migrations & store compliance", color: "#006d21", cat: "Mobile & AI", targetCat: "mobile", roles: ["hwm", "personal"] },
   { name: "Generative AI", short: "GenAI", level: "Proficient", desc: "LLM integration & content routing", color: "#006d21", cat: "Mobile & AI", targetCat: "backend", roles: ["hwm", "dg", "personal"] },
   { name: "AI Coding Tools", short: "AI Dev", level: "Proficient", desc: "AI-assisted development & test generation", color: "#006d21", cat: "Mobile & AI", targetCat: "backend", roles: ["hwm"] },
-  { name: "Machine Learning", short: "ML", level: "Familiar", desc: "Dissertation predictive models", color: "#0e4429", cat: "Mobile & AI", targetCat: "backend", roles: ["hwm", "personal"] },
+  { name: "Machine Learning", short: "ML", level: "Familiar", desc: "Dissertation predictive models", color: "#0e4429", cat: "Mobile & AI", targetCat: "backend", roles: ["personal"] },
 
   // DevOps & DevOps Infrastructure
   { name: "Docker", short: "Docker", level: "Proficient", desc: "Containerized environments", color: "#006d21", cat: "DevOps & Tools", targetCat: "cloud", roles: ["hwm", "personal"] },
@@ -83,6 +85,17 @@ export default function CVClient({ solutions, cvSkills }: CVClientProps) {
   const [highlightedSkillName, setHighlightedSkillName] = useState<string | null>(null);
   const [activeSkillHover, setActiveSkillHover] = useState<string | null>(null);
   const [highlightedTimelineId, setHighlightedTimelineId] = useState<string | null>(null);
+  const [emailCopied, setEmailCopied] = useState(false);
+
+  const copyEmail = async () => {
+    try {
+      await navigator.clipboard.writeText(EMAIL);
+      setEmailCopied(true);
+      setTimeout(() => setEmailCopied(false), 2000);
+    } catch {
+      window.prompt("Copy this email address:", EMAIL);
+    }
+  };
 
   const triggerTimelineScroll = (id: string) => {
     setHighlightedTimelineId(id);
@@ -158,6 +171,10 @@ export default function CVClient({ solutions, cvSkills }: CVClientProps) {
   React.useEffect(() => {
     if (typeof window !== "undefined") {
       const params = new URLSearchParams(window.location.search);
+      const hat = params.get("hat");
+      if (hat && ["backend", "cloud", "web", "maui", "lead"].includes(hat)) {
+        setTimeout(() => setActiveHat(hat), 0);
+      }
       const highlight = params.get("highlight");
       if (highlight) {
         setTimeout(() => {
@@ -169,6 +186,8 @@ export default function CVClient({ solutions, cvSkills }: CVClientProps) {
 
   const isProd = process.env.NODE_ENV === "production";
   const cvPdfPath = isProd ? "/code-problems/Thomas_Cook_CV.pdf" : "/Thomas_Cook_CV.pdf";
+  const mailtoHref = `mailto:${EMAIL}?subject=${encodeURIComponent("Opportunity for Thomas Cook")}`;
+  const caseStudies = solutions.filter((x) => x.categoryLabel === "Case Studies");
 
   return (
     <div className="container">
@@ -176,6 +195,7 @@ export default function CVClient({ solutions, cvSkills }: CVClientProps) {
       <div className="cv-actions" style={{ display: "flex", gap: "8px", justifyContent: "flex-end", marginBottom: "16px" }}>
         <a
           href={cvPdfPath}
+          data-goatcounter-click="pdf-view"
           target="_blank"
           rel="noopener noreferrer"
           className="profile-edit-btn"
@@ -200,6 +220,7 @@ export default function CVClient({ solutions, cvSkills }: CVClientProps) {
         <a
           href={cvPdfPath}
           download="Thomas_Cook_CV.pdf"
+          data-goatcounter-click="pdf-download"
           className="profile-edit-btn"
           style={{
             width: "auto",
@@ -225,93 +246,305 @@ export default function CVClient({ solutions, cvSkills }: CVClientProps) {
         <aside className="profile-sidebar">
           <div className="profile-avatar-container">
             <div className="profile-avatar" style={{ overflow: "hidden" }}>
-              <img 
-                src="https://media.licdn.com/dms/image/v2/D4E03AQFHVzNHJljAnw/profile-displayphoto-scale_400_400/B4EZ.PYwdcGgAg-/0/1784817061315?e=1786579200&v=beta&t=CF11sK9kk0Z1RGCtwGGrmjM9xWxa-TQRaqreTJc5RU4" 
-                alt="Thomas Cook" 
-                style={{ width: "100%", height: "100%", objectFit: "cover" }} 
-              />
+              <div className="avatar-initials" role="img" aria-label="Thomas Cook">TC</div>
             </div>
           </div>
           <h1 className="profile-name" style={{ fontSize: "22px" }}>Thomas Cook</h1>
-          <div className="profile-username" style={{ fontSize: "16px", marginBottom: "8px" }}>tomhcook</div>
+          <div className="profile-username" style={{ fontSize: "16px", marginBottom: "8px" }}><a href={GITHUB_URL} target="_blank" rel="noopener noreferrer" data-goatcounter-click="github-click" style={{ color: "inherit" }}>tomhcook</a></div>
           <div className="profile-bio" style={{ fontSize: "13px", marginBottom: "16px" }}>
             Fast-track Software Engineer &amp; Full Stack Developer. Building scalable .NET backend architectures, mobile Android products, and interactive web applications.
           </div>
 
-          <button className="profile-edit-btn" onClick={() => window.open("https://www.linkedin.com/in/thomas-cook-se/", "_blank")}>
-            Follow
-          </button>
+          <a className="profile-edit-btn" href={LINKEDIN_URL} target="_blank" rel="noopener noreferrer" data-goatcounter-click="linkedin-click">
+            Connect on LinkedIn
+          </a>
 
           <ul className="profile-details-list" style={{ marginBottom: "24px" }}>
             <li className="profile-detail-item">
               <svg aria-hidden="true" height="16" viewBox="0 0 16 16" version="1.1" width="16">
                 <path d="M1.75 2h12.5c.966 0 1.75.784 1.75 1.75v8.5A1.75 1.75 0 0 1 14.25 14H1.75A1.75 1.75 0 0 1 0 12.25v-8.5C0 2.784.784 2 1.75 2zM1.5 12.25c0 .138.112.25.25.25h12.5a.25.25 0 0 0 .25-.25V6.03L8.17 9.87a.75.75 0 0 1-.84 0L1.5 6.03v6.22zM1.5 4.397v.528l6 3.843 6-3.843v-.528a.25.25 0 0 0-.25-.25H1.75a.25.25 0 0 0-.25.25z"></path>
               </svg>
-              <a href="mailto:thomascook0404@outlook.com">thomascook0404@outlook.com</a>
+              <a href={mailtoHref} data-goatcounter-click="email-click">{EMAIL}</a>
             </li>
             <li className="profile-detail-item">
               <svg aria-hidden="true" height="16" viewBox="0 0 16 16" version="1.1" width="16">
                 <path d="M7.775 3.275a.75.75 0 0 0 1.06 1.06l1.25-1.25a3.5 3.5 0 1 1 4.95 4.95l-2.5 2.5a3.5 3.5 0 0 1-4.95 0 .75.75 0 0 0-1.06 1.06 5 5 0 0 0 7.07 0l2.5-2.5a5 5 0 0 0-7.07-7.07l-1.25 1.25zm-4.2 4.2a.75.75 0 0 0-1.06-1.06l-1.25 1.25a5 5 0 0 0 7.07 7.07l2.5-2.5a5 5 0 0 0-7.07-7.07l-1.25 1.25a.75.75 0 1 0 1.06 1.06l1.25-1.25a3.5 3.5 0 1 1 4.95 4.95l-2.5 2.5a3.5 3.5 0 0 1-4.95 0z"></path>
               </svg>
-              <a href="https://www.linkedin.com/in/thomas-cook-se/" target="_blank" rel="noopener noreferrer">linkedin.com/in/thomas-cook-se</a>
+              <a href={LINKEDIN_URL} target="_blank" rel="noopener noreferrer" data-goatcounter-click="linkedin-click">linkedin.com/in/thomas-cook-se</a>
             </li>
             <li className="profile-detail-item">
               <svg aria-hidden="true" height="16" viewBox="0 0 16 16" version="1.1" width="16">
                 <path d="M11.536 3.464a5 5 0 0 0-7.072 0L1.646 6.282a1 1 0 0 0 0 1.436L4.464 10.54a5 5 0 0 0 7.072 0l2.818-2.818a1 1 0 0 0 0-1.436zM3.757 5.586l2.819-2.819a3.5 3.5 0 0 1 4.949 0l2.819 2.819a1 1 0 0 1 0 1.414l-2.819 2.819a3.5 3.5 0 0 1-4.949 0L3.757 7a1 1 0 0 1 0-1.414zM8 9a1 1 0 1 1 0-2 1 1 0 0 1 0 2z"></path>
               </svg>
-              <span>Lincoln, GB</span>
+              <span>Lincoln, England, UK (remote)</span>
             </li>
           </ul>
 
-          {/* GitHub Style Achievements Widget populated from CV */}
           <div style={{ borderTop: "1px solid var(--border-color)", paddingTop: "16px" }}>
-            <h3 style={{ fontSize: "14px", fontWeight: "600", marginBottom: "12px", color: "var(--text-primary)" }}>Achievements</h3>
-            <div style={{ display: "flex", flexDirection: "column", gap: "10px" }}>
-              {cvSkills.map((skill, index) => {
-                const emojis = ["⚡", "🌐", "🤖", "📱", "👥", "⚙️", "🚀"];
-                const emoji = emojis[index % emojis.length];
-                return (
-                  <div key={skill.name} style={{ display: "flex", gap: "8px", alignItems: "center" }}>
-                    <span style={{ fontSize: "20px" }} title={skill.name}>{emoji}</span>
-                    <span style={{ fontSize: "12px", color: "var(--text-secondary)" }}>
-                      {skill.name.split("(")[0].trim()} ({skill.level})
-                    </span>
-                  </div>
-                );
-              })}
-            </div>
+            <h2 style={{ fontSize: "14px", fontWeight: "600", marginBottom: "12px", color: "var(--text-primary)" }}>Core skills</h2>
+            <ul style={{ listStyle: "none", display: "flex", flexDirection: "column", gap: "8px" }}>
+              {cvSkills.slice(0, 6).map((skill) => (
+                <li key={skill.name} style={{ fontSize: "12px", color: "var(--text-secondary)" }}>
+                  {skill.name} <span style={{ color: "var(--text-muted)" }}>({skill.level})</span>
+                </li>
+              ))}
+            </ul>
           </div>
         </aside>
 
         {/* Right Section: GitHub Profile Repositories & Activity */}
         <main className="profile-main">
 
-          {/* README Profile Box */}
-          <section className="markdown-card" style={{ marginBottom: "24px" }}>
-            <div className="markdown-card-header">
-              <svg aria-hidden="true" height="16" viewBox="0 0 16 16" version="1.1" width="16" fill="var(--text-secondary)">
-                <path d="M0 1.75c0-.966.784-1.75 1.75-1.75h12.5c.966 0 1.75.784 1.75 1.75v12.5A1.75 1.75 0 0 1 14.25 16H1.75A1.75 1.75 0 0 1 0 14.25V1.75zm1.75-.25a.25.25 0 0 0-.25.25v12.5c0 .138.112.25.25.25h12.5a.25.25 0 0 0 .25-.25V1.75a.25.25 0 0 0-.25-.25H1.75zM4 4.5a.75.75 0 0 1 .75-.75h6.5a.75.75 0 0 1 0 1.5h-6.5A.75.75 0 0 1 4 4.5zm0 3a.75.75 0 0 1 .75-.75h6.5a.75.75 0 0 1 0 1.5h-6.5A.75.75 0 0 1 4 7.5zm0 3a.75.75 0 0 1 .75-.75h4.5a.75.75 0 0 1 0 1.5h-4.5a.75.75 0 0 1-.75-.75z"></path>
-              </svg>
-              <span>README.md</span>
-            </div>
+          {/* Hero */}
+          <section className="markdown-card" style={{ marginBottom: "16px" }}>
             <div className="markdown-card-body markdown-body">
-              <h2 style={{ marginTop: 0, fontSize: "18px" }}>Thomas Cook — Full Stack Software Engineer</h2>
-              <p>Highly motivated, fast-track Software Engineer specialized in backend systems architecture, Web APIs, SQL database optimization, and modern React/TypeScript/Angular applications.</p>
-              <p><strong>Core Strengths:</strong></p>
-              <ul>
-                <li className={highlightedCategory === "backend" ? "highlight-glow" : ""} style={{ transition: "all 0.3s ease" }}>Developing high-throughput endpoints using ASP.NET Core &amp; C#.</li>
-                <li className={highlightedCategory === "web" ? "highlight-glow" : ""} style={{ transition: "all 0.3s ease" }}>Designing robust web interfaces using React, TypeScript, Angular, and Node.js.</li>
-                <li className={highlightedCategory === "databases" ? "highlight-glow" : ""} style={{ transition: "all 0.3s ease" }}>Designing relational databases, tuning indexes, and resolving query performance issues.</li>
-                <li className={highlightedCategory === "backend" ? "highlight-glow" : ""} style={{ transition: "all 0.3s ease" }}>Integrating third-party APIs (payment processors, global carriers) and cloud services (AWS Lambda, Azure DevOps).</li>
-                <li className={highlightedCategory === "cloud" ? "highlight-glow" : ""} style={{ transition: "all 0.3s ease" }}>Raising quality and delivery speed with k6 performance testing, CI/CD pipelines, and infrastructure as code (Terraform, CloudFormation).</li>
-                <li className={highlightedCategory === "backend" ? "highlight-glow" : ""} style={{ transition: "all 0.3s ease" }}>Implementing business intelligence models and automated LLM-driven automation tasks.</li>
-              </ul>
+              <p style={{ fontSize: "16px", fontWeight: 600, marginTop: 0 }}>
+                Software Engineer: C#/.NET, React, Azure and AWS. Lincoln, UK, remote.
+              </p>
+              <p>
+                I build and ship production backend services, web apps and mobile apps, and I own delivery end to end from design through deployment.
+                Recent work: cutting API response times by 60%, rolling out k6 load testing across a .NET estate, and taking deployments from hours to minutes with CI/CD and infrastructure as code.
+              </p>
+              <div className="hero-actions">
+                <a className="profile-edit-btn" href={mailtoHref} data-goatcounter-click="email-click">Email me</a>
+                <button type="button" className="profile-edit-btn" onClick={copyEmail} data-goatcounter-click="email-copy">{emailCopied ? "Copied" : "Copy email"}</button>
+                <a className="profile-edit-btn" href={LINKEDIN_URL} target="_blank" rel="noopener noreferrer" data-goatcounter-click="linkedin-click">LinkedIn</a>
+                <a className="profile-edit-btn" href={cvPdfPath} download="Thomas_Cook_CV.pdf" data-goatcounter-click="pdf-download">Download CV (PDF)</a>
+              </div>
             </div>
           </section>
 
+          <section className="stat-strip" aria-label="Headline results">
+            <div className="stat-tile"><div className="stat-figure">60%</div><div className="stat-label">faster API response times at HWM Global</div></div>
+            <div className="stat-tile"><div className="stat-figure">18.3%</div><div className="stat-label">further response-time gain after the k6 rollout</div></div>
+            <div className="stat-tile"><div className="stat-figure">30+</div><div className="stat-label">customer integrations delivered at Digital Genius</div></div>
+            <div className="stat-tile"><div className="stat-figure">Hours to minutes</div><div className="stat-label">deployments and environment setup</div></div>
+          </section>
+
+          {/* Professional Work Experience Timeline */}
+          <div id="professional-experience" style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: "12px", borderBottom: "1px solid var(--border-color)", paddingBottom: "8px" }}>
+            <h2 style={{ fontSize: "16px", fontWeight: "600" }}>Professional Experience</h2>
+
+            {/* Hats filtering */}
+            <div className="hats-toggle cv-actions" style={{ display: "flex", gap: "6px" }}>
+              <select
+                value={activeHat}
+                onChange={(e) => setActiveHat(e.target.value)}
+                className="gh-filter-select"
+                aria-label="Filter experience by role"
+                style={{ padding: "2px 8px", fontSize: "12px" }}
+              >
+                <option value="all">All Roles</option>
+                <option value="web">Web &amp; Full Stack</option>
+                <option value="maui">Mobile &amp; MAUI</option>
+                <option value="backend">Backend &amp; DB</option>
+                <option value="cloud">Cloud &amp; DevOps</option>
+                <option value="lead">Team Lead</option>
+              </select>
+            </div>
+          </div>
+
+          <section className="timeline">
+
+            {/* HWM Global */}
+            <article id="timeline-hwm" className="timeline-item active" style={{ boxShadow: highlightedTimelineId === "hwm" ? "0 0 15px rgba(57, 211, 83, 0.4)" : undefined, transition: "box-shadow 0.3s ease" }}>
+              <div className="timeline-item-header">
+                <h3 style={{ fontSize: "inherit", fontWeight: "inherit" }}>
+                  <span className="timeline-title">Software Engineer</span>
+                  <span> at </span>
+                  <span className="timeline-org">HWM Global</span>
+                </h3>
+                <time className="timeline-date" dateTime="2025-06">Jun 2025 — Present</time>
+              </div>
+              <div className="timeline-desc">
+                <ul style={{ listStyleType: "disc" }}>
+                  {(activeHat === "all" || activeHat === "lead" || activeHat === "backend") && (
+                    <li className={`skill-target-lead skill-target-backend ${isBulletHighlighted(["Ruby", "Docker", "Azure DevOps", "MSSQL", "SQL Tuning", "REST APIs", "Git", "Agile / Scrum", "Azure"], "backend") ? "highlight-glow" : ""}`}>
+                      <strong>[Backend &amp; DB]</strong> Designed and delivered a custom proprietary internal product from the ground up, resulting in streamlined business operations and new revenue generation, by architecting the full-stack solution using Ruby, Docker, SQL, and Azure cloud services.{" "}<Link href="/solutions/casestudies/internal-product-suite" className="casestudy-link cv-link" data-goatcounter-click="casestudy-internal-product-suite">Case study →</Link>
+                    </li>
+                  )}
+                  {(activeHat === "all" || activeHat === "backend") && (
+                    <li className={`skill-target-backend skill-target-databases ${isBulletHighlighted(["MSSQL", "SQL Tuning", "Redis Caching", "Datadog"], "backend") ? "highlight-glow" : ""}`}>
+                      <strong>[Backend &amp; DB]</strong> Reduced API response times by 60% across 9 Shape Up cycles, as measured by Datadog latency monitoring, by actively refactoring internal API endpoints, resolving production bugs, tuning MSSQL query paths and database indexes, and introducing caching layers across 50+ merged PRs.{" "}<Link href="/solutions/casestudies/api-optimization" className="casestudy-link cv-link" data-goatcounter-click="casestudy-api-optimization">Case study →</Link>
+                    </li>
+                  )}
+                  {(activeHat === "all" || activeHat === "backend" || activeHat === "cloud" || activeHat === "lead") && (
+                    <li className={`skill-target-backend skill-target-cloud ${isBulletHighlighted(["k6 Load Testing"], "backend") ? "highlight-glow" : ""}`}>
+                      <strong>[Cloud &amp; DevOps]</strong> Owned the adoption of k6 performance and load testing from tool selection through team rollout, exposing major weak points the previous testing approach had missed across the majority of applications; the fixes that followed delivered an 18.3% improvement in response times.{" "}<Link href="/solutions/casestudies/k6-load-testing" className="casestudy-link cv-link" data-goatcounter-click="casestudy-k6-load-testing">Case study →</Link>
+                    </li>
+                  )}
+                  {(activeHat === "all" || activeHat === "maui" || activeHat === "web") && (
+                    <li className={`skill-target-mobile skill-target-web ${isBulletHighlighted([".NET MAUI", "Android SDK", "xUnit Testing"], "mobile") ? "highlight-glow" : ""}`}>
+                      <strong>[Mobile &amp; MAUI]</strong> Ensured continued Android store compliance and platform compatibility, as validated by passing automated test suites, by migrating a cross-platform .NET MAUI mobile application from Android 15 to Android 16 (SDK 36) and writing xUnit test coverage, while delivering features end to end across React web apps and .NET MAUI mobile apps (Android and iOS).{" "}<Link href="/solutions/casestudies/android-upgrade" className="casestudy-link cv-link" data-goatcounter-click="casestudy-android-upgrade">Case study →</Link>{" "}<Link href="/solutions/casestudies/dotnet-10-migration" className="casestudy-link cv-link" data-goatcounter-click="casestudy-dotnet-10-migration">.NET 10 migration →</Link>
+                    </li>
+                  )}
+                  {(activeHat === "all" || activeHat === "backend") && (
+                    <li className={`skill-target-backend ${isBulletHighlighted(["ASP.NET Core", "MSSQL", "SQL Tuning", "REST APIs"], "backend") ? "highlight-glow" : ""}`}>
+                      <strong>[Backend &amp; DB]</strong> Improved production system reliability and data-driven workflow support, as demonstrated by reduced incident rates, by building backend services and web APIs using ASP.NET Core and MSSQL.
+                    </li>
+                  )}
+                  {(activeHat === "all" || activeHat === "backend") && (
+                    <li className={`skill-target-backend ${isBulletHighlighted(["C#", ".NET Core", "MSSQL", "Docker"], "backend") ? "highlight-glow" : ""}`}>
+                      <strong>[Backend &amp; DB]</strong> Made key technical decisions on architecture, database models, and service integration across the HWM Global platform.
+                    </li>
+                  )}
+                  {(activeHat === "all" || activeHat === "cloud") && (
+                    <li className={`skill-target-cloud ${isBulletHighlighted(["Azure DevOps", "CI/CD Pipelines", "Azure", "GitHub Enterprise", "Linux"], "cloud") ? "highlight-glow" : ""}`}>
+                      <strong>[Cloud &amp; DevOps]</strong> Held full deployment responsibility, managing Azure DevOps CI/CD build and release pipelines for active production.
+                    </li>
+                  )}
+                  {(activeHat === "all" || activeHat === "cloud") && (
+                    <li className={`skill-target-cloud ${isBulletHighlighted(["Terraform", "CloudFormation / CDK", "CI/CD Pipelines", "Azure DevOps", "GitHub Enterprise"], "cloud") ? "highlight-glow" : ""}`}>
+                      <strong>[Cloud &amp; DevOps]</strong> Cut deployments and environment setup from hours to minutes by building CI/CD pipelines and Terraform / CloudFormation automation, alongside internal tools and test tooling now used by 16+ engineers across Azure DevOps and GitHub Enterprise.
+                    </li>
+                  )}
+                  {(activeHat === "all" || activeHat === "cloud" || activeHat === "backend") && (
+                    <li className={`skill-target-cloud skill-target-databases ${isBulletHighlighted(["Azure", "Docker", "Kubernetes", "Linux", "MySQL", "DynamoDB", "MSSQL"], "cloud") ? "highlight-glow" : ""}`}>
+                      <strong>[Cloud &amp; DevOps]</strong> Work daily with Azure across Linux and Windows environments, running development environments and internal projects on Docker and Kubernetes, with data held in MSSQL, MySQL, and DynamoDB.
+                    </li>
+                  )}
+                  {(activeHat === "all" || activeHat === "backend") && (
+                    <li className={`skill-target-backend ${isBulletHighlighted(["Generative AI", "Python", "AI Coding Tools"], "backend") ? "highlight-glow" : ""}`}>
+                      <strong>[Backend &amp; DB]</strong> Developed and expanded AI and LLM-driven backend features for automated data processing and user-facing intelligence, reducing manual processing time by approximately 30%, alongside Python services for file conversion.
+                    </li>
+                  )}
+                  {(activeHat === "all" || activeHat === "web") && (
+                    <li className={`skill-target-web ${isBulletHighlighted(["React", "TypeScript", "JavaScript", "REST APIs", "Microsoft Clarity"], "web") ? "highlight-glow" : ""}`}>
+                      <strong>[Web &amp; Full Stack]</strong> Decreased client-facing tickets by 20% and accelerated bug-fixing cycles across 6+ products by implementing custom React UI enhancements, integrating Microsoft Clarity tracking, and developing a compliant cookie consent banner across both frontend and backend architectures.
+                    </li>
+                  )}
+                  {(activeHat === "all" || activeHat === "web") && (
+                    <li className={`skill-target-web ${isBulletHighlighted(["Playwright", "AI Coding Tools", "React", "TypeScript"], "web") ? "highlight-glow" : ""}`}>
+                      <strong>[Web &amp; Full Stack]</strong> Evaluating and prototyping alternatives to Playwright to improve the reliability and maintainability of front-end testing, and used AI coding tools (Claude) to write a front-end testing suite.
+                    </li>
+                  )}
+                  {(activeHat === "all" || activeHat === "lead") && (
+                    <li className={`skill-target-lead ${isBulletHighlighted(["Shape Up", "Agile / Scrum"], "lead") ? "highlight-glow" : ""}`}>
+                      <strong>[Team Lead]</strong> Kept engineering delivery on schedule during a leadership gap, as measured by sprint completion rates, by stepping in as temporary Team Lead to coordinate the backlog and run daily standups.
+                    </li>
+                  )}
+                  {(activeHat === "all" || activeHat === "lead") && (
+                    <li className={`skill-target-lead ${isBulletHighlighted([], "lead") ? "highlight-glow" : ""}`}>
+                      <strong>[Team Lead]</strong> Co-led the technology evaluation for a major new platform, researching language and framework options and presenting recommendations to management.
+                    </li>
+                  )}
+                </ul>
+              </div>
+            </article>
+
+            {/* Digital Genius */}
+            <article id="timeline-dg" className="timeline-item" style={{ boxShadow: highlightedTimelineId === "dg" ? "0 0 15px rgba(57, 211, 83, 0.4)" : undefined, transition: "box-shadow 0.3s ease" }}>
+              <div className="timeline-item-header">
+                <h3 style={{ fontSize: "inherit", fontWeight: "inherit" }}>
+                  <span className="timeline-title">Solutions Engineer</span>
+                  <span> at </span>
+                  <span className="timeline-org">Digital Genius</span>
+                </h3>
+                <time className="timeline-date" dateTime="2024-10/2025-06">Oct 2024 — Jun 2025</time>
+              </div>
+              <div className="timeline-desc">
+                <ul style={{ listStyleType: "disc" }}>
+                  {(activeHat === "all" || activeHat === "web") && (
+                    <li className={`skill-target-web ${isBulletHighlighted(["Node.js", "Angular 17", "TypeScript", "JavaScript"], "web") ? "highlight-glow" : ""}`}>
+                      <strong>[Web &amp; Full Stack]</strong> Delivered more than 30 customer integrations by building interactive frontends and backend connectors using Node.js, Angular 17, TypeScript, and JavaScript.
+                    </li>
+                  )}
+                  {(activeHat === "all" || activeHat === "backend" || activeHat === "web" || activeHat === "cloud") && (
+                    <li className={`skill-target-backend skill-target-web ${isBulletHighlighted(["REST APIs", "AWS Lambda", "Postman", "CI/CD Pipelines", "Git", "AWS API Gateway & S3", "AWS SQS / SNS / EventBridge", "AWS ECS / EC2"], "backend") ? "highlight-glow" : ""}`}>
+                      <strong>[Web &amp; Full Stack]</strong> Automated customer service workflows for enterprise clients, as measured by reduced manual ticket handling, by connecting support platforms (Dixa, Zendesk) with AWS cloud services via REST APIs.
+                    </li>
+                  )}
+                  {(activeHat === "all" || activeHat === "backend") && (
+                    <li className={`skill-target-web ${isBulletHighlighted(["Generative AI", "Python", "Go", "Node.js", "JavaScript"], "web") ? "highlight-glow" : ""}`}>
+                      <strong>[Backend &amp; DB]</strong> Improved AI-driven customer support accuracy, as measured by content routing success rates, by contributing to backend generative AI content routing and support tools.
+                    </li>
+                  )}
+                  {(activeHat === "all" || activeHat === "backend") && (
+                    <li className={`skill-target-backend skill-target-databases ${isBulletHighlighted(["Go", "Python", "PostgreSQL"], "backend") ? "highlight-glow" : ""}`}>
+                      <strong>[Backend &amp; DB]</strong> Worked with customer and internal stakeholders on the SaaS platform, turning their needs into integrations and support tooling, using Go, Python, and PostgreSQL.
+                    </li>
+                  )}
+                  {(activeHat === "all" || activeHat === "cloud") && (
+                    <li className={isBulletHighlighted(["AWS Lambda", "Postman", "Git", "AWS API Gateway & S3", "AWS SQS / SNS / EventBridge", "AWS ECS / EC2"], "cloud") ? "highlight-glow" : ""}>
+                      <strong>[Cloud &amp; DevOps]</strong> Maintained feature delivery quality in production, as measured by zero critical deployment failures, by utilizing AWS services and Postman for testing, monitoring, and deployment.
+                    </li>
+                  )}
+                  {(activeHat === "all" || activeHat === "lead") && (
+                    <li className={`skill-target-lead ${isBulletHighlighted(["Mentoring & Code Review"], "lead") ? "highlight-glow" : ""}`}>
+                      <strong>[Team Lead]</strong> Helped lead and mentor a team of five junior developers alongside hands-on engineering.
+                    </li>
+                  )}
+                </ul>
+              </div>
+            </article>
+
+            {/* Ingenta */}
+            <article id="timeline-ingenta" className="timeline-item" style={{ boxShadow: highlightedTimelineId === "ingenta" ? "0 0 15px rgba(57, 211, 83, 0.4)" : undefined, transition: "box-shadow 0.3s ease" }}>
+              <div className="timeline-item-header">
+                <h3 style={{ fontSize: "inherit", fontWeight: "inherit" }}>
+                  <span className="timeline-title">Software Consultant</span>
+                  <span> at </span>
+                  <span className="timeline-org">Ingenta</span>
+                </h3>
+                <time className="timeline-date" dateTime="2022/2024-10">2022 — Oct 2024</time>
+              </div>
+              <div className="timeline-desc">
+                <ul style={{ listStyleType: "disc" }}>
+                  {(activeHat === "all" || activeHat === "backend" || activeHat === "cloud") && (
+                    <li className={`skill-target-backend skill-target-cloud ${isBulletHighlighted(["C#", ".NET Core", "AWS Lambda", "REST APIs", "AWS API Gateway & S3", "AWS SQS / SNS / EventBridge", "AWS ECS / EC2", "Azure"], "backend") ? "highlight-glow" : ""}`}>
+                      <strong>[Backend &amp; DB]</strong> Improved platform maintainability and reduced technical debt, as measured by modernised service coverage, by refactoring legacy C# .NET platforms and integrating serverless workflows using AWS Lambda.
+                    </li>
+                  )}
+                  {(activeHat === "all" || activeHat === "backend" || activeHat === "cloud") && (
+                    <li className={`skill-target-backend ${isBulletHighlighted(["C#", ".NET Core", "REST APIs"], "backend") ? "highlight-glow" : ""}`}>
+                      <strong>[Backend &amp; DB]</strong> Increased shipping operations reliability for enterprise clients, as measured by carrier API uptime, by connecting system databases with global shipping carrier APIs including UPS, DPD, and Royal Mail.
+                    </li>
+                  )}
+                  {(activeHat === "all" || activeHat === "lead" || activeHat === "backend") && (
+                    <li className={isBulletHighlighted(["Agile / Scrum", "Git", "Jira", "Mentoring & Code Review"], "lead") ? "highlight-glow" : ""}>
+                      <strong>[Team Lead]</strong> Contributed to consistent sprint delivery and code quality, as measured by peer review completion rates, by collaborating in an Agile structure using Jira for task estimates, tracking, and reviews.
+                    </li>
+                  )}
+                  {(activeHat === "all" || activeHat === "lead") && (
+                    <li className={`skill-target-lead ${isBulletHighlighted([], "lead") ? "highlight-glow" : ""}`}>
+                      <strong>[Team Lead]</strong> Engaged regularly with client stakeholders on SaaS products, translating their requirements into delivered work.
+                    </li>
+                  )}
+                </ul>
+              </div>
+            </article>
+          </section>
+
+          {/* Featured case studies */}
+          {caseStudies.length > 0 && (
+            <section style={{ marginTop: "32px" }} aria-labelledby="featured-case-studies">
+              <h2 id="featured-case-studies" style={{ fontSize: "16px", fontWeight: "600", marginBottom: "8px" }}>Featured case studies</h2>
+              <div className="pinned-grid">
+                {caseStudies.map((cs) => (
+                  <Link
+                    key={cs.slug}
+                    href={`/solutions/casestudies/${cs.slug}`}
+                    className="pinned-card"
+                    style={{ textDecoration: "none" }}
+                    data-goatcounter-click={`casestudy-${cs.slug}`}
+                  >
+                    <div>
+                      <div className="pinned-card-title">
+                        <span style={{ color: "var(--accent-secondary)", fontWeight: "600" }}>{cs.title}</span>
+                      </div>
+                      {cs.caseStudyMeta?.milestone && (
+                        <p className="pinned-card-desc" style={{ color: "var(--color-success-fg)", fontWeight: 600 }}>{cs.caseStudyMeta.milestone}</p>
+                      )}
+                    </div>
+                  </Link>
+                ))}
+              </div>
+            </section>
+          )}
+
           {/* Pinned Repositories / Technical Skills Section */}
-          <h2 style={{ fontSize: "16px", fontWeight: "600", marginBottom: "8px" }}>Pinned Skills</h2>
-          <section className="pinned-grid" style={{ marginBottom: "24px" }}>
+          <h2 style={{ fontSize: "16px", fontWeight: "600", marginBottom: "8px" }}>Core skills</h2>
+          <section className="pinned-grid" style={{ marginBottom: "16px" }}>
             {cvSkills.slice(0, 4).map((skill) => {
               let lang = "default";
               let category = "backend";
@@ -346,11 +579,14 @@ export default function CVClient({ solutions, cvSkills }: CVClientProps) {
                   key={skill.name}
                   className="pinned-card"
                   style={{ cursor: "pointer" }}
+                  role="button"
+                  tabIndex={0}
                   onClick={() => triggerHighlight(category)}
+                  onKeyDown={(e) => { if (e.key === "Enter" || e.key === " ") { e.preventDefault(); triggerHighlight(category); } }}
                 >
                   <div>
                     <div className="pinned-card-title">
-                      <span style={{ color: "var(--accent-secondary)", fontWeight: "600" }}>{skill.name.toLowerCase().replace(/\s+/g, "-").replace(/[\(\)\/]/g, "")}</span>
+                      <span style={{ color: "var(--accent-secondary)", fontWeight: "600" }}>{skill.name}</span>
                     </div>
                     <p className="pinned-card-desc">{desc}</p>
                   </div>
@@ -365,226 +601,15 @@ export default function CVClient({ solutions, cvSkills }: CVClientProps) {
             })}
           </section>
 
-          {/* Professional Work Experience Timeline */}
-          <div id="professional-experience" style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: "12px", borderBottom: "1px solid var(--border-color)", paddingBottom: "8px" }}>
-            <h2 style={{ fontSize: "16px", fontWeight: "600" }}>Professional Experience</h2>
-
-            {/* Hats filtering */}
-            <div className="hats-toggle cv-actions" style={{ display: "flex", gap: "6px" }}>
-              <select
-                value={activeHat}
-                onChange={(e) => setActiveHat(e.target.value)}
-                className="gh-filter-select"
-                style={{ padding: "2px 8px", fontSize: "12px" }}
-              >
-                <option value="all">All Roles</option>
-                <option value="web">🌐 Web &amp; Full Stack</option>
-                <option value="maui">📱 Mobile &amp; MAUI</option>
-                <option value="backend">⚙️ Backend &amp; DB</option>
-                <option value="cloud">☁️ Cloud &amp; DevOps</option>
-                <option value="lead">👥 Team Lead</option>
-              </select>
-            </div>
-          </div>
-
-          <section className="timeline">
-
-            {/* HWM Global */}
-            <div id="timeline-hwm" className="timeline-item active" style={{ boxShadow: highlightedTimelineId === "hwm" ? "0 0 15px rgba(57, 211, 83, 0.4)" : undefined, transition: "box-shadow 0.3s ease" }}>
-              <div className="timeline-item-header">
-                <div>
-                  <span className="timeline-title">Software Engineer</span>
-                  <span> at </span>
-                  <span className="timeline-org">HWM Global</span>
-                </div>
-                <span className="timeline-date">Jun 2025 — Present</span>
-              </div>
-              <div className="timeline-desc">
-                <ul style={{ listStyleType: "disc" }}>
-                  {(activeHat === "all" || activeHat === "lead" || activeHat === "backend") && (
-                    <li className={`skill-target-lead skill-target-backend ${isBulletHighlighted(["C#", ".NET Core", "ASP.NET Core", "Docker", "Azure DevOps", "MSSQL", "SQL Tuning", "Entity Framework", "REST APIs", "Git", "Agile / Scrum", "Azure"], "backend") ? "highlight-glow" : ""}`}>
-                      <strong>[Product Development]</strong> Designed and delivered a custom proprietary internal product from the ground up, resulting in streamlined business operations and new revenue generation, by architecting the full-stack solution using C#, Docker, SQL, and Azure cloud services.
-                    </li>
-                  )}
-                  {(activeHat === "all" || activeHat === "backend") && (
-                    <li className={`skill-target-backend skill-target-databases ${isBulletHighlighted(["MSSQL", "SQL Tuning", "Redis Caching", "Datadog"], "backend") ? "highlight-glow" : ""}`}>
-                      <strong>[Backend &amp; DB]</strong> Reduced API response times by 60% across 9 Shape Up cycles, as measured by Datadog latency monitoring, by actively refactoring internal API endpoints, resolving production bugs, tuning MSSQL query paths and database indexes, and introducing caching layers across 50+ merged PRs.
-                    </li>
-                  )}
-                  {(activeHat === "all" || activeHat === "backend" || activeHat === "cloud" || activeHat === "lead") && (
-                    <li className={`skill-target-backend skill-target-cloud ${isBulletHighlighted(["k6 Load Testing", "Datadog"], "backend") ? "highlight-glow" : ""}`}>
-                      <strong>[Performance Testing]</strong> Owned the adoption of k6 performance and load testing from tool selection through team rollout, exposing major weak points the previous testing approach had missed across the majority of HWM&apos;s applications; the fixes that followed delivered an 18.3% improvement in response times, as measured in Datadog.
-                    </li>
-                  )}
-                  {(activeHat === "all" || activeHat === "maui" || activeHat === "web") && (
-                    <li className={`skill-target-mobile skill-target-web ${isBulletHighlighted([".NET MAUI", "Android SDK", "xUnit Testing"], "mobile") ? "highlight-glow" : ""}`}>
-                      <strong>[Mobile &amp; Web]</strong> Ensured continued Android store compliance and platform compatibility, as validated by passing automated test suites, by migrating a cross-platform .NET MAUI mobile application from Android 15 to Android 16 (SDK 36) and writing xUnit test coverage, while delivering features end to end across React web apps and .NET MAUI mobile apps (Android and iOS).
-                    </li>
-                  )}
-                  {(activeHat === "all" || activeHat === "backend") && (
-                    <li className={`skill-target-backend ${isBulletHighlighted(["ASP.NET Core", "MSSQL", "SQL Tuning", "REST APIs"], "backend") ? "highlight-glow" : ""}`}>
-                      <strong>[Backend &amp; DB]</strong> Improved production system reliability and data-driven workflow support, as demonstrated by reduced incident rates, by building backend services and web APIs using ASP.NET Core and MSSQL.
-                    </li>
-                  )}
-                  {(activeHat === "all" || activeHat === "backend") && (
-                    <li className={`skill-target-backend ${isBulletHighlighted(["C#", ".NET Core", "MSSQL", "Docker"], "backend") ? "highlight-glow" : ""}`}>
-                      <strong>[Backend &amp; DB]</strong> Made key technical decisions on architecture, database models, and service integration across the HWM Global platform.
-                    </li>
-                  )}
-                  {(activeHat === "all" || activeHat === "cloud") && (
-                    <li className={`skill-target-cloud ${isBulletHighlighted(["Azure DevOps", "CI/CD Pipelines", "Azure", "GitHub Enterprise", "Linux"], "cloud") ? "highlight-glow" : ""}`}>
-                      <strong>[Cloud &amp; DevOps]</strong> Held full deployment responsibility, managing Azure DevOps CI/CD build and release pipelines for active production.
-                    </li>
-                  )}
-                  {(activeHat === "all" || activeHat === "cloud") && (
-                    <li className={`skill-target-cloud ${isBulletHighlighted(["Terraform", "CloudFormation / CDK", "CI/CD Pipelines", "Azure DevOps", "GitHub Enterprise"], "cloud") ? "highlight-glow" : ""}`}>
-                      <strong>[Cloud &amp; DevOps]</strong> Cut deployments and environment setup from hours to minutes by building CI/CD pipelines and Terraform / CloudFormation automation, alongside internal tools and test tooling now used by 16+ engineers across Azure DevOps and GitHub Enterprise.
-                    </li>
-                  )}
-                  {(activeHat === "all" || activeHat === "cloud" || activeHat === "backend") && (
-                    <li className={`skill-target-cloud skill-target-databases ${isBulletHighlighted(["Azure", "Docker", "Kubernetes", "Linux", "MySQL", "DynamoDB", "MSSQL"], "cloud") ? "highlight-glow" : ""}`}>
-                      <strong>[Cloud &amp; DevOps]</strong> Work daily with Azure across Linux and Windows environments, running development environments and internal projects on Docker and Kubernetes, with data held in MSSQL, MySQL, and DynamoDB.
-                    </li>
-                  )}
-                  {(activeHat === "all" || activeHat === "backend") && (
-                    <li className={`skill-target-backend ${isBulletHighlighted(["Generative AI", "Python", "AI Coding Tools"], "backend") ? "highlight-glow" : ""}`}>
-                      <strong>[Backend &amp; AI]</strong> Developed and expanded AI and LLM-driven backend features for automated data processing and user-facing intelligence, reducing manual processing time by approximately 30%, alongside Python services for file conversion.
-                    </li>
-                  )}
-                  {(activeHat === "all" || activeHat === "web") && (
-                    <li className={`skill-target-web ${isBulletHighlighted(["React", "TypeScript", "JavaScript", "REST APIs", "Microsoft Clarity"], "web") ? "highlight-glow" : ""}`}>
-                      <strong>[Web &amp; Full Stack]</strong> Decreased client-facing tickets by 20% and accelerated bug-fixing cycles across 6+ products by implementing custom React UI enhancements, integrating Microsoft Clarity tracking, and developing a compliant cookie consent banner across both frontend and backend architectures.
-                    </li>
-                  )}
-                  {(activeHat === "all" || activeHat === "web") && (
-                    <li className={`skill-target-web ${isBulletHighlighted(["Playwright", "AI Coding Tools", "React", "TypeScript"], "web") ? "highlight-glow" : ""}`}>
-                      <strong>[Testing &amp; Quality]</strong> Evaluating and prototyping alternatives to Playwright to improve the reliability and maintainability of front-end testing, and used AI coding tools (Claude) to write a front-end testing suite.
-                    </li>
-                  )}
-                  {(activeHat === "all" || activeHat === "lead") && (
-                    <li className={`skill-target-lead ${isBulletHighlighted(["Shape Up", "Agile / Scrum"], "lead") ? "highlight-glow" : ""}`}>
-                      <strong>[Team Lead]</strong> Kept engineering delivery on schedule during a leadership gap, as measured by sprint completion rates, by stepping in as temporary Team Lead to coordinate the backlog and run daily standups.
-                    </li>
-                  )}
-                  {(activeHat === "all" || activeHat === "lead") && (
-                    <li className={`skill-target-lead ${isBulletHighlighted([], "lead") ? "highlight-glow" : ""}`}>
-                      <strong>[Team Lead]</strong> Co-led the technology evaluation for a major new platform, researching language and framework options and presenting recommendations to management.
-                    </li>
-                  )}
-                </ul>
-              </div>
-            </div>
-
-            {/* Digital Genius */}
-            <div id="timeline-dg" className="timeline-item" style={{ boxShadow: highlightedTimelineId === "dg" ? "0 0 15px rgba(57, 211, 83, 0.4)" : undefined, transition: "box-shadow 0.3s ease" }}>
-              <div className="timeline-item-header">
-                <div>
-                  <span className="timeline-title">Solutions Engineer</span>
-                  <span> at </span>
-                  <span className="timeline-org">Digital Genius</span>
-                </div>
-                <span className="timeline-date">Oct 2024 — Jun 2025</span>
-              </div>
-              <div className="timeline-desc">
-                <ul style={{ listStyleType: "disc" }}>
-                  {(activeHat === "all" || activeHat === "web") && (
-                    <li className={`skill-target-web ${isBulletHighlighted(["Node.js", "Angular 17", "TypeScript", "JavaScript"], "web") ? "highlight-glow" : ""}`}>
-                      <strong>[Web &amp; Full Stack]</strong> Delivered more than 30 customer integrations by building interactive frontends and backend connectors using Node.js, Angular 17, TypeScript, and JavaScript.
-                    </li>
-                  )}
-                  {(activeHat === "all" || activeHat === "backend" || activeHat === "web" || activeHat === "cloud") && (
-                    <li className={`skill-target-backend skill-target-web ${isBulletHighlighted(["REST APIs", "AWS Lambda", "Postman", "CI/CD Pipelines", "Git", "AWS API Gateway & S3", "AWS SQS / SNS / EventBridge", "AWS ECS / EC2"], "backend") ? "highlight-glow" : ""}`}>
-                      <strong>[Backend &amp; Web]</strong> Automated customer service workflows for enterprise clients, as measured by reduced manual ticket handling, by connecting support platforms (Dixa, Zendesk) with AWS cloud services via REST APIs.
-                    </li>
-                  )}
-                  {(activeHat === "all" || activeHat === "backend") && (
-                    <li className={`skill-target-web ${isBulletHighlighted(["Generative AI", "Python", "Go", "Node.js", "JavaScript"], "web") ? "highlight-glow" : ""}`}>
-                      <strong>[Backend &amp; DB]</strong> Improved AI-driven customer support accuracy, as measured by content routing success rates, by contributing to backend generative AI content routing and support tools.
-                    </li>
-                  )}
-                  {(activeHat === "all" || activeHat === "backend") && (
-                    <li className={`skill-target-backend skill-target-databases ${isBulletHighlighted(["Go", "Python", "PostgreSQL"], "backend") ? "highlight-glow" : ""}`}>
-                      <strong>[Backend &amp; DB]</strong> Worked with customer and internal stakeholders on the SaaS platform, turning their needs into integrations and support tooling, using Go, Python, and PostgreSQL.
-                    </li>
-                  )}
-                  {(activeHat === "all" || activeHat === "cloud") && (
-                    <li className={isBulletHighlighted(["AWS Lambda", "Postman", "Git", "AWS API Gateway & S3", "AWS SQS / SNS / EventBridge", "AWS ECS / EC2"], "cloud") ? "highlight-glow" : ""}>
-                      <strong>[Cloud &amp; DevOps]</strong> Maintained feature delivery quality in production, as measured by zero critical deployment failures, by utilizing AWS services and Postman for testing, monitoring, and deployment.
-                    </li>
-                  )}
-                  {(activeHat === "all" || activeHat === "lead") && (
-                    <li className={`skill-target-lead ${isBulletHighlighted(["Mentoring & Code Review"], "lead") ? "highlight-glow" : ""}`}>
-                      <strong>[Team Lead]</strong> Helped lead and mentor a team of five junior developers alongside hands-on engineering.
-                    </li>
-                  )}
-                </ul>
-              </div>
-            </div>
-
-            {/* Ingenta */}
-            <div id="timeline-ingenta" className="timeline-item" style={{ boxShadow: highlightedTimelineId === "ingenta" ? "0 0 15px rgba(57, 211, 83, 0.4)" : undefined, transition: "box-shadow 0.3s ease" }}>
-              <div className="timeline-item-header">
-                <div>
-                  <span className="timeline-title">Software Consultant</span>
-                  <span> at </span>
-                  <span className="timeline-org">Ingenta</span>
-                </div>
-                <span className="timeline-date">2022 — Oct 2024</span>
-              </div>
-              <div className="timeline-desc">
-                <ul style={{ listStyleType: "disc" }}>
-                  {(activeHat === "all" || activeHat === "backend" || activeHat === "cloud") && (
-                    <li className={`skill-target-backend skill-target-cloud ${isBulletHighlighted(["C#", ".NET Core", "AWS Lambda", "REST APIs", "AWS API Gateway & S3", "AWS SQS / SNS / EventBridge", "AWS ECS / EC2", "Azure"], "backend") ? "highlight-glow" : ""}`}>
-                      <strong>[Backend &amp; DB]</strong> Improved platform maintainability and reduced technical debt, as measured by modernised service coverage, by refactoring legacy C# .NET platforms and integrating serverless workflows using AWS Lambda.
-                    </li>
-                  )}
-                  {(activeHat === "all" || activeHat === "backend" || activeHat === "cloud") && (
-                    <li className={`skill-target-backend ${isBulletHighlighted(["C#", ".NET Core", "REST APIs"], "backend") ? "highlight-glow" : ""}`}>
-                      <strong>[Backend &amp; DB]</strong> Increased shipping operations reliability for enterprise clients, as measured by carrier API uptime, by connecting system databases with global shipping carrier APIs including UPS, DPD, and Royal Mail.
-                    </li>
-                  )}
-                  {(activeHat === "all" || activeHat === "lead" || activeHat === "backend") && (
-                    <li className={isBulletHighlighted(["Agile / Scrum", "Git", "Jira", "Mentoring & Code Review"], "lead") ? "highlight-glow" : ""}>
-                      <strong>[Team Lead]</strong> Contributed to consistent sprint delivery and code quality, as measured by peer review completion rates, by collaborating in an Agile structure using Jira for task estimates, tracking, and reviews.
-                    </li>
-                  )}
-                  {(activeHat === "all" || activeHat === "lead") && (
-                    <li className={`skill-target-lead ${isBulletHighlighted([], "lead") ? "highlight-glow" : ""}`}>
-                      <strong>[Stakeholders]</strong> Engaged regularly with client stakeholders on SaaS products, translating their requirements into delivered work.
-                    </li>
-                  )}
-                </ul>
-              </div>
-            </div>
-
-            {/* University of Lincoln */}
-            <div id="timeline-personal" className="timeline-item" style={{ boxShadow: highlightedTimelineId === "personal" ? "0 0 15px rgba(57, 211, 83, 0.4)" : undefined, transition: "box-shadow 0.3s ease" }}>
-              <div className="timeline-item-header">
-                <div>
-                  <span className="timeline-title">Education: BSc Games Computing Science (2:1)</span>
-                  <span> at </span>
-                  <span className="timeline-org">University of Lincoln</span>
-                </div>
-                <span className="timeline-date">2019 — 2022</span>
-              </div>
-              <div className="timeline-desc">
-                <p className={isBulletHighlighted(["Python", "Ruby", "C++", "Machine Learning", "Git"], "personal") ? "highlight-glow" : ""} style={{ transition: "all 0.3s ease" }}>
-                  Reduced physical engine testing costs, as validated by dissertation results, by applying machine learning models to optimise engine power output predictions.
-                </p>
-              </div>
-            </div>
-
-          </section>
-
           {/* Technical Contribution Matrix */}
-          <section style={{ marginTop: "32px", borderTop: "1px solid var(--border-color)", paddingTop: "24px" }}>
-            <h2 style={{ fontSize: "16px", fontWeight: "600", marginBottom: "4px" }}>Technical Contribution Matrix</h2>
+          <section style={{ marginTop: "32px", borderTop: "1px solid var(--border-color)", paddingTop: "24px" }} aria-labelledby="matrix-heading">
+            <h2 id="matrix-heading" style={{ fontSize: "16px", fontWeight: "600", marginBottom: "4px" }}>Technical Contribution Matrix</h2>
             <p style={{ fontSize: "12px", color: "var(--text-secondary)", marginBottom: "16px" }}>
-              Color intensity represents <strong>proficiency level / depth of experience</strong> (hover column headers or cells, click row headers to scroll to career cards).
+              Color intensity represents <strong>proficiency level / depth of experience</strong> (hover, focus or tap column headers and cells; click row headers to scroll to career cards).
             </p>
             
             {/* The Grid */}
-            <div style={{
+            <div className="matrix-grid-box" style={{
               backgroundColor: "var(--bg-secondary)",
               border: "1px solid var(--border-color)",
               borderRadius: "6px",
@@ -665,7 +690,13 @@ export default function CVClient({ solutions, cvSkills }: CVClientProps) {
                         const cellColor = isUsed ? item.color : "#161b22";
                         const isHovered = activeSkillHover === item.name;
                         return (
-                          <div
+                          <button
+                            type="button"
+                            className="matrix-cell"
+                            aria-label={isUsed ? `${item.name}, ${item.level}, used at ${role.name}. ${item.desc}` : `${item.name}, not used at ${role.name}`}
+                            disabled={!isUsed}
+                            onFocus={() => setActiveSkillHover(item.name)}
+                            onBlur={() => setActiveSkillHover(null)}
                             key={item.name}
                             style={{
                               width: "11px",
@@ -691,6 +722,9 @@ export default function CVClient({ solutions, cvSkills }: CVClientProps) {
                 ))}
               </div>
 
+              <p className="matrix-readout" aria-live="polite">
+                {activeSkillHover ? (() => { const sk = allMatrixSkills.find((x) => x.name === activeSkillHover); return sk ? `${sk.name} (${sk.level}): ${sk.desc}` : ""; })() : "Hover, focus or tap a cell to see the skill and where it was used."}
+              </p>
               <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginTop: "16px", fontSize: "11px", color: "var(--text-secondary)" }}>
                 <span>{allMatrixSkills.length} skills mapped across roles (hover column headers or cells)</span>
                 <div style={{ display: "flex", alignItems: "center", gap: "4px" }}>
@@ -744,8 +778,49 @@ export default function CVClient({ solutions, cvSkills }: CVClientProps) {
             </div>
           </section>
 
+          {/* Education */}
+          <section style={{ marginTop: "32px" }} aria-labelledby="education-heading">
+            <h2 id="education-heading" style={{ fontSize: "16px", fontWeight: "600", marginBottom: "12px", borderBottom: "1px solid var(--border-color)", paddingBottom: "8px" }}>Education</h2>
+            <div className="timeline">
+            {/* University of Lincoln */}
+            <article id="timeline-personal" className="timeline-item" style={{ boxShadow: highlightedTimelineId === "personal" ? "0 0 15px rgba(57, 211, 83, 0.4)" : undefined, transition: "box-shadow 0.3s ease" }}>
+              <div className="timeline-item-header">
+                <h3 style={{ fontSize: "inherit", fontWeight: "inherit" }}>
+                  <span className="timeline-title">Education: BSc Games Computing Science (2:1)</span>
+                  <span> at </span>
+                  <span className="timeline-org">University of Lincoln</span>
+                </h3>
+                <time className="timeline-date" dateTime="2019/2022">2019 — 2022</time>
+              </div>
+              <div className="timeline-desc">
+                <p className={isBulletHighlighted(["Python", "Ruby", "C++", "Machine Learning", "Git"], "personal") ? "highlight-glow" : ""} style={{ transition: "all 0.3s ease" }}>
+                  <strong>Dissertation:</strong> Reduced physical engine testing costs, as validated by dissertation results, by applying machine learning models to optimise engine power output predictions.
+                </p>
+              </div>
+            </article>
+            </div>
+          </section>
+
+          {/* Closing contact */}
+          <section className="contact-end" aria-labelledby="contact-heading">
+            <h2 id="contact-heading">Get in touch</h2>
+            <p style={{ color: "var(--text-secondary)", fontSize: "13px" }}>Happy to talk about interesting engineering problems.</p>
+            <div className="hero-actions">
+              <a className="profile-edit-btn" href={mailtoHref} data-goatcounter-click="email-click">Email me</a>
+              <button type="button" className="profile-edit-btn" onClick={copyEmail} data-goatcounter-click="email-copy">{emailCopied ? "Copied" : "Copy email"}</button>
+              <a className="profile-edit-btn" href={LINKEDIN_URL} target="_blank" rel="noopener noreferrer" data-goatcounter-click="linkedin-click">LinkedIn</a>
+              <a className="profile-edit-btn" href={cvPdfPath} download="Thomas_Cook_CV.pdf" data-goatcounter-click="pdf-download">Download CV (PDF)</a>
+            </div>
+          </section>
+          <p className="cv-updated">Last updated <time dateTime={CV_LAST_UPDATED}>{CV_LAST_UPDATED}</time></p>
+
         </main>
       </div>
+      <nav className="mobile-contact-bar" aria-label="Contact">
+        <a href={mailtoHref} data-goatcounter-click="mobilebar-email">Email</a>
+        <a href={LINKEDIN_URL} target="_blank" rel="noopener noreferrer" data-goatcounter-click="mobilebar-linkedin">LinkedIn</a>
+        <a href={cvPdfPath} download="Thomas_Cook_CV.pdf" data-goatcounter-click="mobilebar-pdf">PDF</a>
+      </nav>
     </div>
   );
 }

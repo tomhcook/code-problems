@@ -3,6 +3,7 @@ import { Geist, Geist_Mono } from "next/font/google";
 import Link from "next/link";
 import Script from "next/script";
 import "./globals.css";
+import { SITE_URL, EMAIL, LINKEDIN_URL, GITHUB_URL, KNOWS_ABOUT, OG_IMAGE } from "../lib/site";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -15,8 +16,15 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "Thomas Cook | Software Engineer & Full Stack Developer Portfolio",
-  description: "Professional portfolio and technical solutions of Thomas Cook, a Software Engineer specializing in C#, .NET Core, ASP.NET Core, SQL database optimization, React, and TypeScript.",
+  title: "Thomas Cook | Software Engineer (.NET, React, Azure, AWS)",
+  description: "Portfolio, CV and engineering case studies of Thomas Cook, a software engineer in Lincoln, UK working with C#/.NET, React, Azure and AWS.",
+  openGraph: {
+    siteName: "Thomas Cook — Software Engineer",
+    locale: "en_GB",
+    images: [{ url: OG_IMAGE, width: 1200, height: 630, alt: "Thomas Cook, Software Engineer" }],
+  },
+  twitter: { card: "summary_large_image", images: [OG_IMAGE] },
+  alternates: { types: { "application/rss+xml": `${SITE_URL}/feed.xml` } },
 };
 
 export default function RootLayout({
@@ -51,11 +59,14 @@ export default function RootLayout({
             </div>
 
             <nav className="nav-links">
-              <Link href="/" className="nav-link">
-                Dashboard
-              </Link>
               <Link href="/cv" className="nav-link">
                 CV
+              </Link>
+              <Link href="/solutions/casestudies" className="nav-link">
+                Case Studies
+              </Link>
+              <Link href="/" className="nav-link">
+                Solutions
               </Link>
             </nav>
           </div>
@@ -67,30 +78,27 @@ export default function RootLayout({
             __html: JSON.stringify({
               "@context": "https://schema.org",
               "@type": "Person",
+              "@id": `${SITE_URL}/#person`,
               "name": "Thomas Cook",
               "jobTitle": "Software Engineer",
-              "worksFor": {
-                "@type": "Organization",
-                "name": "HWM Global"
+              "email": `mailto:${EMAIL}`,
+              "address": {
+                "@type": "PostalAddress",
+                "addressLocality": "Lincoln",
+                "addressRegion": "England",
+                "addressCountry": "GB",
               },
-              "url": "https://tomhcook.github.io/code-problems/",
-              "sameAs": [
-                "https://www.linkedin.com/in/thomas-cook-se/",
-                "https://github.com/tomhcook"
-              ],
-              "knowsAbout": [
-                "Software Engineering",
-                "C#",
-                ".NET Core",
-                "ASP.NET Core",
-                "SQL Database Optimization",
-                "React",
-                "TypeScript",
-                "Azure DevOps"
-              ]
-            })
+              "worksFor": { "@type": "Organization", "name": "HWM Global" },
+              "alumniOf": { "@type": "CollegeOrUniversity", "name": "University of Lincoln" },
+              "url": `${SITE_URL}/`,
+              "sameAs": [LINKEDIN_URL, GITHUB_URL],
+              "knowsAbout": KNOWS_ABOUT,
+            }).replace(/</g, "\\u003c"),
           }}
         />
+        <Script id="goatcounter-settings" strategy="beforeInteractive">
+          {`window.goatcounter = { referrer: function () { return goatcounter.get_query('ref') || goatcounter.get_query('utm_source') || document.referrer || undefined; } };`}
+        </Script>
         <Script
           data-goatcounter="https://thomashcook.goatcounter.com/count"
           src="//gc.zgo.at/count.js"

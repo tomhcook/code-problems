@@ -2,6 +2,12 @@
 
 An optimization initiative executed at **HWM** that successfully reduced core API response times by 60% across 9 cycles of Shape Up product development, supporting system-wide stability and bug reduction.
 
+## At a glance
+* **Problem**: High latency in core API endpoints was slowing client interfaces.
+* **Approach**: Refactored SQL query paths, tuned MSSQL indexes, and added a Redis caching layer, across 9 Shape Up cycles.
+* **Output**: 50+ merged pull requests.
+* **Outcome**: Core API response times cut by about 60%, measured with Datadog.
+
 ## Technical Showcase
 * **Role**: Full Stack Developer (Core Systems & Integration)
 * **Architecture**: C# Web API & React Services

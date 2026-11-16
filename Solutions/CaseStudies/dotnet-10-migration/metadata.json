@@ -1,0 +1,17 @@
+{
+  "role": "Software Engineer",
+  "company": "Confidential",
+  "projects": ".NET 10 Migration (4 apps)",
+  "milestone": "4 Apps Migrated to .NET 10",
+  "cvHighlight": "backend",
+  "dashboardTime": "Software Engineer",
+  "dashboardSpace": "Platform Upgrade",
+  "dashboardLabel": ".NET 10 Migration",
+  "labels": [
+    { "text": "case-study", "bg": "rgba(163, 113, 247, 0.15)", "color": "#d3b3f7", "border": "rgba(163, 113, 247, 0.4)" },
+    { "text": "c#", "bg": "rgba(23, 134, 0, 0.15)", "color": "#7ef76d", "border": "rgba(23, 134, 0, 0.4)" },
+    { "text": ".net-10", "bg": "rgba(163, 23, 23, 0.15)", "color": "#f78e8e", "border": "rgba(163, 23, 23, 0.4)" },
+    { "text": "azure-devops", "bg": "rgba(56, 139, 253, 0.15)", "color": "#58a6ff", "border": "rgba(56, 139, 253, 0.4)" },
+    { "text": "xunit", "bg": "rgba(46, 160, 67, 0.15)", "color": "#56d364", "border": "rgba(46, 160, 67, 0.4)" }
+  ]
+}

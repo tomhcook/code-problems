@@ -4,6 +4,8 @@
   "private": true,
   "scripts": {
     "dev": "next dev",
+    "generate": "node scripts/generate-feeds.mjs",
+    "prebuild": "node scripts/generate-feeds.mjs",
     "build": "next build",
     "start": "next start",
     "lint": "eslint"

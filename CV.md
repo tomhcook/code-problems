@@ -19,8 +19,8 @@ Software Engineer with commercial experience building production backend service
 ### HWM Global — Software Engineer
 Jun 2025 – Present
 
+* Owned the adoption of k6 performance and load testing from tool selection through team rollout, exposing major weak points the previous testing approach had missed across the majority of applications; the fixes that followed delivered an 18.3% improvement in response times.
 * Reduced API response times by 60% across 9 Shape Up cycles, as measured by Datadog latency monitoring, by diagnosing systematic query plan regressions and resolving them through targeted index restructuring, Redis caching layers, and endpoint refactoring across 50+ merged PRs. [Case Study →](https://tomhcook.github.io/code-problems/solutions/casestudies/api-optimization)
-* Owned the adoption of k6 performance and load testing from tool selection through team rollout, exposing major weak points the previous testing approach had missed across the majority of HWM's applications; the fixes that followed delivered an 18.3% improvement in response times, as measured in Datadog.
 * Cut deployments and environment setup from hours to minutes by building CI/CD pipelines and Terraform / CloudFormation automation, alongside internal tools and test tooling now used by 16+ engineers across Azure DevOps and GitHub Enterprise.
 * Decreased client-facing support tickets by 20% and accelerated bug-fixing cycles across 6+ production web applications, by implementing custom React UI enhancements, integrating Microsoft Clarity session tracking, and developing a compliant cookie consent banner across both frontend and backend architectures to gain deeper usage insights.
 * Kept engineering delivery on schedule during a leadership gap, as measured by sprint completion rates, by stepping in as temporary Team Lead to coordinate the backlog and run daily standups.

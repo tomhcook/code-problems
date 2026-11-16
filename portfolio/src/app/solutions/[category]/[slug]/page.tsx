@@ -1,10 +1,12 @@
 import React from "react";
+import Link from "next/link";
 import { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { marked } from "marked";
 import hljs from "highlight.js";
 import { getAllSolutions, getSolutionBySlug } from "../../../../lib/solutions";
 import SolutionDetailClient from "./SolutionDetailClient";
+import { SITE_URL, OG_IMAGE, EMAIL, LINKEDIN_URL } from "../../../../lib/site";
 
 export async function generateMetadata({ params }: PageProps): Promise<Metadata> {
   const { category, slug } = await params;
@@ -21,13 +23,6 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
   return {
     title: fullTitle,
     description: summary,
-    keywords: [
-      "Thomas Cook software",
-      "Thomas Cook software engineer",
-      solution.title,
-      solution.categoryLabel,
-      "Thomas Cook developer"
-    ],
     authors: [{ name: "Thomas Cook", url: "https://tomhcook.github.io/code-problems/" }],
     alternates: {
       canonical: url,
@@ -38,11 +33,13 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
       url,
       siteName: "Thomas Cook — Software Engineer",
       type: "article",
+      images: [{ url: OG_IMAGE, width: 1200, height: 630, alt: "Thomas Cook, Software Engineer" }],
     },
     twitter: {
-      card: "summary",
+      card: "summary_large_image",
       title: fullTitle,
       description: summary,
+      images: [OG_IMAGE],
     },
   };
 }
@@ -95,14 +92,66 @@ export default async function Page({ params }: PageProps) {
     };
   });
 
+  const isCaseStudy = solution.categoryLabel === "Case Studies";
+  const url = `${SITE_URL}/solutions/${category}/${slug}`;
+  const published = solution.date ? solution.date.slice(0, 10) : undefined;
+  const jsonLd = [
+    {
+      "@context": "https://schema.org",
+      "@type": isCaseStudy ? "TechArticle" : "Article",
+      headline: solution.title,
+      description: solution.summary || undefined,
+      author: { "@type": "Person", "@id": `${SITE_URL}/#person`, name: "Thomas Cook", url: `${SITE_URL}/cv` },
+      datePublished: published,
+      dateModified: published,
+      mainEntityOfPage: url,
+    },
+    {
+      "@context": "https://schema.org",
+      "@type": "BreadcrumbList",
+      itemListElement: [
+        { "@type": "ListItem", position: 1, name: "Thomas Cook", item: `${SITE_URL}/cv` },
+        { "@type": "ListItem", position: 2, name: isCaseStudy ? "Case Studies" : "Solutions", item: isCaseStudy ? `${SITE_URL}/solutions/casestudies` : `${SITE_URL}/` },
+        { "@type": "ListItem", position: 3, name: solution.title, item: url },
+      ],
+    },
+  ];
+
   return (
-    <SolutionDetailClient
-      title={solution.title}
-      categoryLabel={solution.categoryLabel}
-      readmeHtml={readmeHtml}
-      files={highlightedFiles}
-      slug={slug}
-      caseStudyMeta={solution.caseStudyMeta}
-    />
+    <>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd).replace(/</g, "\\u003c") }}
+      />
+      <SolutionDetailClient
+        title={solution.title}
+        categoryLabel={solution.categoryLabel}
+        readmeHtml={readmeHtml}
+        files={highlightedFiles}
+        slug={slug}
+        caseStudyMeta={solution.caseStudyMeta}
+      />
+      {isCaseStudy && (
+        <div className="container" style={{ paddingTop: 0 }}>
+          <aside className="author-box" aria-label="About the author">
+            <div className="author-avatar" aria-hidden="true">TC</div>
+            <div>
+              <p className="author-name">Written by Thomas Cook</p>
+              <p className="author-line">
+                Software engineer in Lincoln, UK, working with C#/.NET, React, Azure and AWS.
+                {published ? ` Published ${published}.` : ""}
+              </p>
+              <p className="author-links">
+                <Link href="/cv" data-goatcounter-click="casestudy-to-cv">See the full CV</Link>
+                {" · "}
+                <a href={LINKEDIN_URL} target="_blank" rel="noopener noreferrer" data-goatcounter-click="casestudy-linkedin">LinkedIn</a>
+                {" · "}
+                <a href={`mailto:${EMAIL}`} data-goatcounter-click="casestudy-email">Email</a>
+              </p>
+            </div>
+          </aside>
+        </div>
+      )}
+    </>
   );
 }
