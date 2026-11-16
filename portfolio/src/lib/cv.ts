@@ -135,6 +135,8 @@ function getDefaultSkills(): CVSkill[] {
     { name: "Mobile Dev (.NET MAUI)", level: "Proficient", percentage: 80 },
     { name: "Cloud & DevOps (Azure / AWS)", level: "Proficient", percentage: 75 },
     { name: "AI & LLM Integrations", level: "Proficient", percentage: 75 },
-    { name: "Python Engineering", level: "Advanced", percentage: 85 }
+    { name: "Python Engineering", level: "Advanced", percentage: 85 },
+    { name: "Infrastructure as Code (Terraform / CDK)", level: "Proficient", percentage: 75 },
+    { name: "Performance Testing (k6)", level: "Advanced", percentage: 85 }
   ];
 }

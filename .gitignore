@@ -9,3 +9,6 @@ obj/
 # Python outputs
 __pycache__/
 *.pyc
+
+# Local dev launcher
+start-site.cmd

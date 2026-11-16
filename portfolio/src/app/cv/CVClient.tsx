@@ -21,6 +21,7 @@ const allMatrixSkills = [
   { name: "ASP.NET Core", short: "ASP.NET", level: "Advanced", desc: "Web APIs & Microservices", color: "#39d353", cat: "Backend & Languages", targetCat: "backend", roles: ["hwm", "personal"] },
   { name: "Python", short: "Python", level: "Advanced", desc: "Data processing and scripts", color: "#26a641", cat: "Backend & Languages", targetCat: "backend", roles: ["hwm", "dg", "personal"] },
   { name: "Ruby", short: "Ruby", level: "Proficient", desc: "API services & scripting", color: "#006d21", cat: "Backend & Languages", targetCat: "backend", roles: ["hwm", "personal"] },
+  { name: "Go", short: "Go", level: "Proficient", desc: "Backend services & integrations", color: "#006d21", cat: "Backend & Languages", targetCat: "backend", roles: ["dg"] },
   { name: "C++", short: "C++", level: "Proficient", desc: "Algorithm execution & systems", color: "#006d21", cat: "Backend & Languages", targetCat: "backend", roles: ["personal"] },
   { name: "REST APIs", short: "APIs", level: "Advanced", desc: "Secure endpoints & serialization", color: "#39d353", cat: "Backend & Languages", targetCat: "backend", roles: ["hwm", "dg", "ingenta", "personal"] },
 
@@ -33,29 +34,47 @@ const allMatrixSkills = [
 
   // Databases & Cache
   { name: "MSSQL", short: "MSSQL", level: "Advanced", desc: "Relational database models", color: "#39d353", cat: "Databases & Storage", targetCat: "databases", roles: ["hwm", "dg", "ingenta", "personal"] },
+  { name: "PostgreSQL", short: "Postgres", level: "Proficient", desc: "Relational schemas & queries", color: "#006d21", cat: "Databases & Storage", targetCat: "databases", roles: ["dg"] },
+  { name: "MySQL", short: "MySQL", level: "Proficient", desc: "Relational application data stores", color: "#006d21", cat: "Databases & Storage", targetCat: "databases", roles: ["hwm"] },
+  { name: "DynamoDB", short: "Dynamo", level: "Proficient", desc: "NoSQL key-value & document storage", color: "#006d21", cat: "Databases & Storage", targetCat: "databases", roles: ["hwm"] },
   { name: "SQL Tuning", short: "SQL", level: "Advanced", desc: "Query paths and index structures", color: "#39d353", cat: "Databases & Storage", targetCat: "databases", roles: ["hwm", "dg", "ingenta", "personal"] },
   { name: "Redis Caching", short: "Redis", level: "Proficient", desc: "High frequency state caching", color: "#006d21", cat: "Databases & Storage", targetCat: "databases", roles: ["hwm", "personal"] },
   { name: "Entity Framework", short: "EF", level: "Advanced", desc: "ORM data access and migration", color: "#39d353", cat: "Databases & Storage", targetCat: "databases", roles: ["hwm", "personal"] },
 
   // Mobile & AI
-  { name: ".NET MAUI", short: "MAUI", level: "Proficient", desc: "Cross-platform mobile systems", color: "#006d21", cat: "Mobile & AI", targetCat: "mobile", roles: ["hwm", "personal"] },
+  { name: ".NET MAUI", short: "MAUI", level: "Proficient", desc: "Cross-platform Android & iOS apps", color: "#006d21", cat: "Mobile & AI", targetCat: "mobile", roles: ["hwm", "personal"] },
   { name: "Android SDK", short: "Android", level: "Proficient", desc: "API migrations & store compliance", color: "#006d21", cat: "Mobile & AI", targetCat: "mobile", roles: ["hwm", "personal"] },
   { name: "Generative AI", short: "GenAI", level: "Proficient", desc: "LLM integration & content routing", color: "#006d21", cat: "Mobile & AI", targetCat: "backend", roles: ["hwm", "dg", "personal"] },
+  { name: "AI Coding Tools", short: "AI Dev", level: "Proficient", desc: "AI-assisted development & test generation", color: "#006d21", cat: "Mobile & AI", targetCat: "backend", roles: ["hwm"] },
   { name: "Machine Learning", short: "ML", level: "Familiar", desc: "Dissertation predictive models", color: "#0e4429", cat: "Mobile & AI", targetCat: "backend", roles: ["hwm", "personal"] },
 
   // DevOps & DevOps Infrastructure
   { name: "Docker", short: "Docker", level: "Proficient", desc: "Containerized environments", color: "#006d21", cat: "DevOps & Tools", targetCat: "cloud", roles: ["hwm", "personal"] },
-  { name: "Azure DevOps", short: "Azure", level: "Proficient", desc: "CI/CD build/release pipelines", color: "#006d21", cat: "DevOps & Tools", targetCat: "cloud", roles: ["hwm", "personal"] },
-  { name: "AWS Lambda", short: "AWS", level: "Proficient", desc: "Serverless integration components", color: "#006d21", cat: "DevOps & Tools", targetCat: "cloud", roles: ["dg", "ingenta", "personal"] },
+  { name: "Kubernetes", short: "K8s", level: "Proficient", desc: "Container orchestration for dev & internal projects", color: "#006d21", cat: "DevOps & Tools", targetCat: "cloud", roles: ["hwm"] },
+  { name: "Azure", short: "Azure", level: "Proficient", desc: "Cloud hosting across Linux & Windows", color: "#006d21", cat: "DevOps & Tools", targetCat: "cloud", roles: ["hwm", "dg", "ingenta"] },
+  { name: "Azure DevOps", short: "AzDO", level: "Proficient", desc: "CI/CD build/release pipelines", color: "#006d21", cat: "DevOps & Tools", targetCat: "cloud", roles: ["hwm", "personal"] },
+  { name: "AWS Lambda", short: "Lambda", level: "Proficient", desc: "Serverless integration components", color: "#006d21", cat: "DevOps & Tools", targetCat: "cloud", roles: ["dg", "ingenta", "personal"] },
+  { name: "AWS API Gateway & S3", short: "API GW", level: "Proficient", desc: "Managed API front doors & object storage", color: "#006d21", cat: "DevOps & Tools", targetCat: "cloud", roles: ["dg", "ingenta"] },
+  { name: "AWS SQS / SNS / EventBridge", short: "Events", level: "Proficient", desc: "Queues, topics & event-driven workflows", color: "#006d21", cat: "DevOps & Tools", targetCat: "cloud", roles: ["dg", "ingenta"] },
+  { name: "AWS ECS / EC2", short: "ECS", level: "Proficient", desc: "Container & compute workloads", color: "#006d21", cat: "DevOps & Tools", targetCat: "cloud", roles: ["dg", "ingenta"] },
+  { name: "Terraform", short: "Terraform", level: "Proficient", desc: "Infrastructure as code & environment automation", color: "#006d21", cat: "DevOps & Tools", targetCat: "cloud", roles: ["hwm"] },
+  { name: "CloudFormation / CDK", short: "CDK", level: "Proficient", desc: "AWS infrastructure as code", color: "#006d21", cat: "DevOps & Tools", targetCat: "cloud", roles: ["hwm"] },
   { name: "CI/CD Pipelines", short: "CI/CD", level: "Proficient", desc: "Continuous integration workflows", color: "#006d21", cat: "DevOps & Tools", targetCat: "cloud", roles: ["hwm", "dg", "ingenta", "personal"] },
   { name: "Datadog", short: "Ddog", level: "Proficient", desc: "APM tracing, metrics, and dashboards", color: "#006d21", cat: "DevOps & Tools", targetCat: "cloud", roles: ["hwm", "personal"] },
   { name: "Git", short: "Git", level: "Advanced", desc: "PR flows and version control", color: "#26a641", cat: "DevOps & Tools", targetCat: "cloud", roles: ["hwm", "dg", "ingenta", "personal"] },
+  { name: "GitHub Enterprise", short: "GitHub", level: "Proficient", desc: "Code integration & deployment workflows", color: "#006d21", cat: "DevOps & Tools", targetCat: "cloud", roles: ["hwm"] },
+  { name: "Linux", short: "Linux", level: "Proficient", desc: "Linux & Windows server environments", color: "#006d21", cat: "DevOps & Tools", targetCat: "cloud", roles: ["hwm"] },
 
   // Methodologies & Testing
   { name: "Shape Up", short: "ShapeUp", level: "Advanced", desc: "Product cycle execution", color: "#39d353", cat: "Methodologies & QA", targetCat: "lead", roles: ["hwm", "personal"] },
   { name: "Agile / Scrum", short: "Agile", level: "Advanced", desc: "Sprint execution & backlogs", color: "#39d353", cat: "Methodologies & QA", targetCat: "lead", roles: ["hwm", "ingenta", "personal"] },
   { name: "xUnit Testing", short: "xUnit", level: "Proficient", desc: "Automated test suite coverage", color: "#006d21", cat: "Methodologies & QA", targetCat: "mobile", roles: ["hwm", "personal"] },
-  { name: "Postman", short: "Postman", level: "Advanced", desc: "API testing & integration checks", color: "#26a641", cat: "Methodologies & QA", targetCat: "web", roles: ["hwm", "dg", "personal"] }
+  { name: "Postman", short: "Postman", level: "Advanced", desc: "API testing & integration checks", color: "#26a641", cat: "Methodologies & QA", targetCat: "web", roles: ["hwm", "dg", "personal"] },
+  { name: "k6 Load Testing", short: "k6", level: "Advanced", desc: "Performance & load testing rollout", color: "#26a641", cat: "Methodologies & QA", targetCat: "backend", roles: ["hwm"] },
+  { name: "Playwright", short: "Playwright", level: "Proficient", desc: "Front-end end-to-end test tooling", color: "#006d21", cat: "Methodologies & QA", targetCat: "web", roles: ["hwm"] },
+  { name: "Microsoft Clarity", short: "Clarity", level: "Proficient", desc: "Session analytics & usability diagnosis", color: "#006d21", cat: "Methodologies & QA", targetCat: "web", roles: ["hwm"] },
+  { name: "Jira", short: "Jira", level: "Advanced", desc: "Estimates, tracking & delivery planning", color: "#26a641", cat: "Methodologies & QA", targetCat: "lead", roles: ["ingenta"] },
+  { name: "Mentoring & Code Review", short: "Mentor", level: "Proficient", desc: "Peer review & mentoring junior developers", color: "#006d21", cat: "Methodologies & QA", targetCat: "lead", roles: ["dg", "ingenta"] }
 ];
 
 export default function CVClient({ solutions, cvSkills }: CVClientProps) {
@@ -382,7 +401,7 @@ export default function CVClient({ solutions, cvSkills }: CVClientProps) {
               <div className="timeline-desc">
                 <ul style={{ listStyleType: "disc" }}>
                   {(activeHat === "all" || activeHat === "lead" || activeHat === "backend") && (
-                    <li className={`skill-target-lead skill-target-backend ${isBulletHighlighted(["C#", ".NET Core", "ASP.NET Core", "Docker", "Azure DevOps", "MSSQL", "SQL Tuning", "Entity Framework", "REST APIs", "Git", "Agile / Scrum"], "backend") ? "highlight-glow" : ""}`}>
+                    <li className={`skill-target-lead skill-target-backend ${isBulletHighlighted(["C#", ".NET Core", "ASP.NET Core", "Docker", "Azure DevOps", "MSSQL", "SQL Tuning", "Entity Framework", "REST APIs", "Git", "Agile / Scrum", "Azure"], "backend") ? "highlight-glow" : ""}`}>
                       <strong>[Product Development]</strong> Designed and delivered a custom proprietary internal product from the ground up, resulting in streamlined business operations and new revenue generation, by architecting the full-stack solution using C#, Docker, SQL, and Azure cloud services.
                     </li>
                   )}
@@ -407,12 +426,12 @@ export default function CVClient({ solutions, cvSkills }: CVClientProps) {
                     </li>
                   )}
                   {(activeHat === "all" || activeHat === "cloud") && (
-                    <li className={`skill-target-cloud ${isBulletHighlighted(["Azure DevOps", "CI/CD Pipelines"], "cloud") ? "highlight-glow" : ""}`}>
+                    <li className={`skill-target-cloud ${isBulletHighlighted(["Azure DevOps", "CI/CD Pipelines", "Azure", "GitHub Enterprise", "Linux"], "cloud") ? "highlight-glow" : ""}`}>
                       <strong>[Cloud &amp; DevOps]</strong> Held full deployment responsibility, managing Azure DevOps CI/CD build and release pipelines for active production.
                     </li>
                   )}
                   {(activeHat === "all" || activeHat === "web") && (
-                    <li className={`skill-target-web ${isBulletHighlighted(["React", "TypeScript", "JavaScript", "REST APIs"], "web") ? "highlight-glow" : ""}`}>
+                    <li className={`skill-target-web ${isBulletHighlighted(["React", "TypeScript", "JavaScript", "REST APIs", "Microsoft Clarity"], "web") ? "highlight-glow" : ""}`}>
                       <strong>[Web &amp; Full Stack]</strong> Decreased client-facing tickets by 20% and accelerated bug-fixing cycles across 6+ products by implementing custom React UI enhancements, integrating Microsoft Clarity tracking, and developing a compliant cookie consent banner across both frontend and backend architectures.
                     </li>
                   )}
@@ -443,17 +462,17 @@ export default function CVClient({ solutions, cvSkills }: CVClientProps) {
                     </li>
                   )}
                   {(activeHat === "all" || activeHat === "backend" || activeHat === "web" || activeHat === "cloud") && (
-                    <li className={`skill-target-backend skill-target-web ${isBulletHighlighted(["REST APIs", "AWS Lambda", "Postman", "CI/CD Pipelines", "Git"], "backend") ? "highlight-glow" : ""}`}>
+                    <li className={`skill-target-backend skill-target-web ${isBulletHighlighted(["REST APIs", "AWS Lambda", "Postman", "CI/CD Pipelines", "Git", "AWS API Gateway & S3", "AWS SQS / SNS / EventBridge", "AWS ECS / EC2"], "backend") ? "highlight-glow" : ""}`}>
                       <strong>[Backend &amp; Web]</strong> Automated customer service workflows for enterprise clients, as measured by reduced manual ticket handling, by connecting support platforms (Dixa, Zendesk) with AWS cloud services via REST APIs.
                     </li>
                   )}
                   {(activeHat === "all" || activeHat === "backend") && (
-                    <li className={`skill-target-web ${isBulletHighlighted(["Generative AI", "Python", "Node.js", "JavaScript"], "web") ? "highlight-glow" : ""}`}>
+                    <li className={`skill-target-web ${isBulletHighlighted(["Generative AI", "Python", "Go", "Node.js", "JavaScript"], "web") ? "highlight-glow" : ""}`}>
                       <strong>[Backend &amp; DB]</strong> Improved AI-driven customer support accuracy, as measured by content routing success rates, by contributing to backend generative AI content routing and support tools.
                     </li>
                   )}
                   {(activeHat === "all" || activeHat === "cloud") && (
-                    <li className={isBulletHighlighted(["AWS Lambda", "Postman", "Git"], "cloud") ? "highlight-glow" : ""}>
+                    <li className={isBulletHighlighted(["AWS Lambda", "Postman", "Git", "AWS API Gateway & S3", "AWS SQS / SNS / EventBridge", "AWS ECS / EC2"], "cloud") ? "highlight-glow" : ""}>
                       <strong>[Cloud &amp; DevOps]</strong> Maintained feature delivery quality in production, as measured by zero critical deployment failures, by utilizing AWS services and Postman for testing, monitoring, and deployment.
                     </li>
                   )}
@@ -474,7 +493,7 @@ export default function CVClient({ solutions, cvSkills }: CVClientProps) {
               <div className="timeline-desc">
                 <ul style={{ listStyleType: "disc" }}>
                   {(activeHat === "all" || activeHat === "backend" || activeHat === "cloud") && (
-                    <li className={`skill-target-backend skill-target-cloud ${isBulletHighlighted(["C#", ".NET Core", "AWS Lambda", "REST APIs"], "backend") ? "highlight-glow" : ""}`}>
+                    <li className={`skill-target-backend skill-target-cloud ${isBulletHighlighted(["C#", ".NET Core", "AWS Lambda", "REST APIs", "AWS API Gateway & S3", "AWS SQS / SNS / EventBridge", "AWS ECS / EC2", "Azure"], "backend") ? "highlight-glow" : ""}`}>
                       <strong>[Backend &amp; DB]</strong> Improved platform maintainability and reduced technical debt, as measured by modernised service coverage, by refactoring legacy C# .NET platforms and integrating serverless workflows using AWS Lambda.
                     </li>
                   )}
@@ -484,7 +503,7 @@ export default function CVClient({ solutions, cvSkills }: CVClientProps) {
                     </li>
                   )}
                   {(activeHat === "all" || activeHat === "lead" || activeHat === "backend") && (
-                    <li className={isBulletHighlighted(["Agile / Scrum", "Git"], "lead") ? "highlight-glow" : ""}>
+                    <li className={isBulletHighlighted(["Agile / Scrum", "Git", "Jira", "Mentoring & Code Review"], "lead") ? "highlight-glow" : ""}>
                       <strong>[Team Lead]</strong> Contributed to consistent sprint delivery and code quality, as measured by peer review completion rates, by collaborating in an Agile structure using Jira for task estimates, tracking, and reviews.
                     </li>
                   )}
@@ -515,7 +534,7 @@ export default function CVClient({ solutions, cvSkills }: CVClientProps) {
           <section style={{ marginTop: "32px", borderTop: "1px solid var(--border-color)", paddingTop: "24px" }}>
             <h2 style={{ fontSize: "16px", fontWeight: "600", marginBottom: "4px" }}>Technical Contribution Matrix</h2>
             <p style={{ fontSize: "12px", color: "var(--text-secondary)", marginBottom: "16px" }}>
-              Color intensity represents **proficiency level / depth of experience** (hover column headers or cells, click row headers to scroll to career cards).
+              Color intensity represents <strong>proficiency level / depth of experience</strong> (hover column headers or cells, click row headers to scroll to career cards).
             </p>
             
             {/* The Grid */}
@@ -531,12 +550,12 @@ export default function CVClient({ solutions, cvSkills }: CVClientProps) {
                 {/* Header labels for columns */}
                 <div style={{ display: "flex", alignItems: "center" }}>
                   <div style={{ width: "140px" }} /> {/* spacer */}
-                  <div style={{ display: "flex", gap: "5px" }}>
+                  <div style={{ display: "flex", gap: "3px" }}>
                     {allMatrixSkills.map((item) => (
                       <div
                         key={item.name}
                         style={{
-                          width: "15px",
+                          width: "11px",
                           height: "50px",
                           position: "relative",
                           cursor: "pointer"
@@ -594,7 +613,7 @@ export default function CVClient({ solutions, cvSkills }: CVClientProps) {
                     </div>
 
                     {/* Columns (Skills) */}
-                    <div style={{ display: "flex", gap: "5px" }}>
+                    <div style={{ display: "flex", gap: "3px" }}>
                       {allMatrixSkills.map((item) => {
                         const isUsed = item.roles.includes(role.id);
                         const cellColor = isUsed ? item.color : "#161b22";
@@ -603,8 +622,8 @@ export default function CVClient({ solutions, cvSkills }: CVClientProps) {
                           <div
                             key={item.name}
                             style={{
-                              width: "15px",
-                              height: "15px",
+                              width: "11px",
+                              height: "11px",
                               backgroundColor: cellColor,
                               borderRadius: "2px",
                               cursor: isUsed ? "pointer" : "default",

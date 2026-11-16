@@ -56,9 +56,12 @@ Applied machine learning models to optimise engine power output predictions, red
 
 | Category | Technologies |
 |---|---|
-| Languages & Backend | C#, .NET Core, ASP.NET Core, Entity Framework, REST APIs, Python, Ruby, C++ |
-| Frontend & Web | React, TypeScript, Angular, Node.js, JavaScript |
-| Databases | MSSQL, Query Optimisation, Index Tuning, Redis Caching |
-| Cloud & DevOps | Azure DevOps, AWS Lambda, Docker, Datadog, CI/CD Pipelines |
-| Mobile & Testing | .NET MAUI, Android SDK 36, xUnit |
-| Methodologies | Shape Up, Agile, Scrum |
+| Languages & Backend | C#, .NET Core, ASP.NET Core, Entity Framework, REST APIs, Python, Go, Ruby, C++ |
+| Frontend & Web | React, TypeScript, Angular 17, Node.js, JavaScript |
+| Databases | MSSQL, PostgreSQL, MySQL, DynamoDB, Relational Database Design, Query Optimisation, Index Tuning, Redis Caching |
+| Cloud | Azure, AWS (Lambda, API Gateway, S3, SQS / SNS / EventBridge, ECS / EC2), Linux and Windows environments |
+| DevOps & Infrastructure as Code | Azure DevOps, GitHub Enterprise, Git, CI/CD Pipelines, Docker, Kubernetes, Terraform, AWS CDK / CloudFormation, Datadog |
+| Mobile | .NET MAUI (Android and iOS), Android SDK 36 |
+| Testing & Quality | k6 Performance and Load Testing, Playwright, xUnit, Postman, Microsoft Clarity |
+| AI | AI and LLM-driven Backend Features, AI Coding Tools |
+| Ways of Working | Shape Up, Agile, Scrum, Jira, Peer Code Review, Mentoring, Technology Evaluation |
