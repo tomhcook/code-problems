@@ -1,0 +1,99 @@
+1:"$Sreact.fragment"
+2:I[22016,["/code-problems/_next/static/chunks/0ob_z_0z7sy-0.js","/code-problems/_next/static/chunks/14mrh2-p_w84d.js","/code-problems/_next/static/chunks/3-jly6ly-1vwu.js"],""]
+3:I[39756,["/code-problems/_next/static/chunks/0ob_z_0z7sy-0.js","/code-problems/_next/static/chunks/14mrh2-p_w84d.js"],"default"]
+4:I[37457,["/code-problems/_next/static/chunks/0ob_z_0z7sy-0.js","/code-problems/_next/static/chunks/14mrh2-p_w84d.js"],"default"]
+d:I[68027,["/code-problems/_next/static/chunks/0ob_z_0z7sy-0.js","/code-problems/_next/static/chunks/14mrh2-p_w84d.js"],"default",1]
+:HL["/code-problems/_next/static/chunks/0jl9vzb8z9173.css","style"]
+:HL["/code-problems/_next/static/media/797e433ab948586e-s.p.0r6juujl39pe6.woff2","font",{"crossOrigin":"","type":"font/woff2"}]
+:HL["/code-problems/_next/static/media/caa3a2e1cccd8315-s.p.0wgildi0cnwt9.woff2","font",{"crossOrigin":"","type":"font/woff2"}]
+0:{"P":null,"c":["","solutions","leetcode","3536-maximumproductoftwodigits"],"q":"","i":false,"f":[[["",{"children":["solutions",{"children":[["category","leetcode","d",null],{"children":[["slug","3536-maximumproductoftwodigits","d",null],{"children":["__PAGE__",{}]}]}]}]},"$undefined","$undefined",16],[["$","$1","c",{"children":[[["$","link","0",{"rel":"stylesheet","href":"/code-problems/_next/static/chunks/0jl9vzb8z9173.css","precedence":"next","crossOrigin":"$undefined","nonce":"$undefined"}],["$","script","script-0",{"src":"/code-problems/_next/static/chunks/0ob_z_0z7sy-0.js","async":true,"nonce":"$undefined"}],["$","script","script-1",{"src":"/code-problems/_next/static/chunks/14mrh2-p_w84d.js","async":true,"nonce":"$undefined"}]],["$","html",null,{"lang":"en","className":"geist_a71539c9-module__T19VSG__variable geist_mono_8d43a2aa-module__8Li5zG__variable","suppressHydrationWarning":true,"children":["$","body",null,{"suppressHydrationWarning":true,"children":[["$","header",null,{"className":"navbar","children":["$","div",null,{"className":"navbar-container","children":[["$","div",null,{"style":{"display":"flex","alignItems":"center","gap":"16px"},"children":["$","$L2",null,{"href":"/cv","className":"nav-logo","children":[["$","svg",null,{"height":"24","viewBox":"0 0 24 24","width":"24","style":{"stroke":"#f0f6fc","fill":"none"},"children":[["$","rect",null,{"x":"2","y":"2","width":"20","height":"20","rx":"4","strokeWidth":"2"}],["$","polyline",null,{"points":"9 16 5 12 9 8","strokeWidth":"2","strokeLinecap":"round","strokeLinejoin":"round"}],["$","polyline",null,{"points":"15 8 19 12 15 16","strokeWidth":"2","strokeLinecap":"round","strokeLinejoin":"round"}],["$","line",null,{"x1":"14","y1":"6","x2":"10","y2":"18","strokeWidth":"2","strokeLinecap":"round"}]]}],["$","span",null,{"className":"logo-text","children":"Thomas_Cook"}]]}]}],["$","nav",null,{"className":"nav-links","children":[["$","$L2",null,{"href":"/cv","className":"nav-link","children":"CV"}],["$","$L2",null,{"href":"/solutions/casestudies","className":"nav-link","children":"Case Studies"}],["$","$L2",null,{"href":"/","className":"nav-link","children":"Solutions"}]]}]]}]}],["$","div",null,{"style":{"flex":1},"children":["$","$L3",null,{"parallelRouterKey":"children","error":"$undefined","errorStyles":"$undefined","errorScripts":"$undefined","template":["$","$L4",null,{}],"templateStyles":"$undefined","templateScripts":"$undefined","notFound":[[["$","title",null,{"children":"404: This page could not be found."}],["$","div",null,{"style":{"fontFamily":"system-ui,\"Segoe UI\",Roboto,Helvetica,Arial,sans-serif,\"Apple Color Emoji\",\"Segoe UI Emoji\"","height":"100vh","textAlign":"center","display":"flex","flexDirection":"column","alignItems":"center","justifyContent":"center"},"children":["$","div",null,{"children":[["$","style",null,{"dangerouslySetInnerHTML":{"__html":"body{color:#000;background:#fff;margin:0}.next-error-h1{border-right:1px solid rgba(0,0,0,.3)}@media (prefers-color-scheme:dark){body{color:#fff;background:#000}.next-error-h1{border-right:1px solid rgba(255,255,255,.3)}}"}}],["$","h1",null,{"className":"next-error-h1","style":{"display":"inline-block","margin":"0 20px 0 0","padding":"0 23px 0 0","fontSize":24,"fontWeight":500,"verticalAlign":"top","lineHeight":"49px"},"children":404}],["$","div",null,{"style":{"display":"inline-block"},"children":["$","h2",null,{"style":{"fontSize":14,"fontWeight":400,"lineHeight":"49px","margin":0},"children":"This page could not be found."}]}]]}]}]],[]],"forbidden":"$undefined","unauthorized":"$undefined"}]}],["$","script",null,{"type":"application/ld+json","dangerouslySetInnerHTML":{"__html":"{\"@context\":\"https://schema.org\",\"@type\":\"Person\",\"@id\":\"https://tomhcook.github.io/code-problems/#person\",\"name\":\"Thomas Cook\",\"jobTitle\":\"Software Engineer\",\"email\":\"mailto:thomascook0404@outlook.com\",\"address\":{\"@type\":\"PostalAddress\",\"addressLocality\":\"Lincoln\",\"addressRegion\":\"England\",\"addressCountry\":\"GB\"},\"worksFor\":{\"@type\":\"Organization\",\"name\":\"HWM Global\"},\"alumniOf\":{\"@type\":\"CollegeOrUniversity\",\"name\":\"University of Lincoln\"},\"url\":\"https://tomhcook.github.io/code-problems/\",\"sameAs\":[\"https://www.linkedin.com/in/thomas-cook-se/\",\"https://github.com/tomhcook\"],\"knowsAbout\":[\"C#\",\".NET Core\",\"ASP.NET Core\",\".NET MAUI\",\"React\",\"Angular\",\"TypeScript\",\"Node.js\",\"Python\",\"Go\",\"SQL Server\",\"PostgreSQL\",\"MySQL\",\"DynamoDB\",\"Azure\",\"Azure DevOps\",\"AWS\",\"Docker\",\"Kubernetes\",\"Terraform\",\"CloudFormation\",\"CI/CD\",\"k6 load testing\",\"Generative AI integrations\"]}"}}],"$L5","$L6"]}]}]]}],{"children":["$L7",{"children":["$L8",{"children":["$L9",{"children":["$La",{},null,false,null]},null,false,"$@b"]},null,false,"$@b"]},null,false,"$@b"]},null,false,null],"$Lc",false]],"m":"$undefined","G":["$d",["$Le"]],"S":true,"h":null,"s":"$undefined","l":"$undefined","p":"$undefined","d":"$undefined","b":"Tpz5XlkP-PME6Bj_hrtOK"}
+f:I[79520,["/code-problems/_next/static/chunks/0ob_z_0z7sy-0.js","/code-problems/_next/static/chunks/14mrh2-p_w84d.js"],""]
+11:I[97367,["/code-problems/_next/static/chunks/0ob_z_0z7sy-0.js","/code-problems/_next/static/chunks/14mrh2-p_w84d.js"],"OutletBoundary"]
+12:"$Sreact.suspense"
+15:I[97367,["/code-problems/_next/static/chunks/0ob_z_0z7sy-0.js","/code-problems/_next/static/chunks/14mrh2-p_w84d.js"],"ViewportBoundary"]
+17:I[97367,["/code-problems/_next/static/chunks/0ob_z_0z7sy-0.js","/code-problems/_next/static/chunks/14mrh2-p_w84d.js"],"MetadataBoundary"]
+5:["$","$Lf",null,{"id":"goatcounter-settings","strategy":"beforeInteractive","children":"window.goatcounter = { referrer: function () { return goatcounter.get_query('ref') || goatcounter.get_query('utm_source') || document.referrer || undefined; } };"}]
+6:["$","$Lf",null,{"data-goatcounter":"https://thomashcook.goatcounter.com/count","src":"//gc.zgo.at/count.js","strategy":"afterInteractive"}]
+7:["$","$1","c",{"children":[null,["$","$L3",null,{"parallelRouterKey":"children","error":"$undefined","errorStyles":"$undefined","errorScripts":"$undefined","template":["$","$L4",null,{}],"templateStyles":"$undefined","templateScripts":"$undefined","notFound":"$undefined","forbidden":"$undefined","unauthorized":"$undefined"}]]}]
+8:["$","$1","c",{"children":[null,["$","$L3",null,{"parallelRouterKey":"children","error":"$undefined","errorStyles":"$undefined","errorScripts":"$undefined","template":["$","$L4",null,{}],"templateStyles":"$undefined","templateScripts":"$undefined","notFound":"$undefined","forbidden":"$undefined","unauthorized":"$undefined"}]]}]
+9:["$","$1","c",{"children":[null,["$","$L3",null,{"parallelRouterKey":"children","error":"$undefined","errorStyles":"$undefined","errorScripts":"$undefined","template":["$","$L4",null,{}],"templateStyles":"$undefined","templateScripts":"$undefined","notFound":"$undefined","forbidden":"$undefined","unauthorized":"$undefined"}]]}]
+a:["$","$1","c",{"children":["$L10",[["$","script","script-0",{"src":"/code-problems/_next/static/chunks/3-jly6ly-1vwu.js","async":true,"nonce":"$undefined"}]],["$","$L11",null,{"children":["$","$12",null,{"name":"Next.MetadataOutlet","children":"$@13"}]}]]}]
+14:[]
+b:"$W14"
+c:["$","$1","h",{"children":[null,["$","$L15",null,{"children":"$L16"}],["$","div",null,{"hidden":true,"children":["$","$L17",null,{"children":["$","$12",null,{"name":"Next.Metadata","children":"$L18"}]}]}],["$","meta",null,{"name":"next-size-adjust","content":""}]]}]
+e:["$","link","0",{"rel":"stylesheet","href":"/code-problems/_next/static/chunks/0jl9vzb8z9173.css","precedence":"next","crossOrigin":"$undefined","nonce":"$undefined"}]
+1a:I[6404,["/code-problems/_next/static/chunks/0ob_z_0z7sy-0.js","/code-problems/_next/static/chunks/14mrh2-p_w84d.js","/code-problems/_next/static/chunks/3-jly6ly-1vwu.js"],"default"]
+19:T400,[{"@context":"https://schema.org","@type":"Article","headline":"Maximum Product of Two Digits","description":"Given a positive integer `n`, return the maximum product that can be obtained by multiplying any two digits found wit...","author":{"@type":"Person","@id":"https://tomhcook.github.io/code-problems/#person","name":"Thomas Cook","url":"https://tomhcook.github.io/code-problems/cv"},"datePublished":"2026-11-16","dateModified":"2026-11-16","mainEntityOfPage":"https://tomhcook.github.io/code-problems/solutions/leetcode/3536-maximumproductoftwodigits"},{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Thomas Cook","item":"https://tomhcook.github.io/code-problems/cv"},{"@type":"ListItem","position":2,"name":"Solutions","item":"https://tomhcook.github.io/code-problems/"},{"@type":"ListItem","position":3,"name":"Maximum Product of Two Digits","item":"https://tomhcook.github.io/code-problems/solutions/leetcode/3536-maximumproductoftwodigits"}]}]1b:T482,<h1>Maximum Product of Two Digits</h1>
+<p>Given a positive integer <code>n</code>, return the maximum product that can be obtained by multiplying any two digits found within <code>n</code>. You are permitted to use the same digit twice if it appears more than once in the number.</p>
+<h2>How the Solution Works</h2>
+<p>To find the maximum product of any two digits in <code>n</code>:</p>
+<ol>
+<li>We extract the digits of <code>n</code> by continuously taking <code>n % 10</code> and dividing <code>n</code> by 10.</li>
+<li>We keep track of the two largest digits (<code>max1</code> and <code>max2</code>) seen during the traversal.</li>
+<li>The maximum product will simply be the product of these two largest digits.</li>
+</ol>
+<h2>Complexity</h2>
+<ul>
+<li><strong>Time Complexity:</strong> $O(\log_{10}(n))$ since we process each digit of <code>n</code> exactly once, which corresponds to the number of digits in <code>n</code>.</li>
+<li><strong>Space Complexity:</strong> $O(1)$ auxiliary space as we only store the two largest digits.</li>
+</ul>
+<p><a href="https://leetcode.com/problems/maximum-product-of-two-digits/">LeetCode Problem Link</a></p>
+1c:Tb75,<span class="hljs-keyword">using</span> System;
+<span class="hljs-keyword">using</span> System.Collections.Generic;
+
+<span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title">Solution</span> {
+    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-built_in">int</span> <span class="hljs-title">MaxProduct</span>(<span class="hljs-params"><span class="hljs-built_in">int</span> n</span>)</span> {
+        <span class="hljs-built_in">int</span> max1 = <span class="hljs-number">0</span>;
+        <span class="hljs-built_in">int</span> max2 = <span class="hljs-number">0</span>;
+        <span class="hljs-keyword">while</span> (n &gt; <span class="hljs-number">0</span>) {
+            <span class="hljs-built_in">int</span> digit = n % <span class="hljs-number">10</span>;
+            <span class="hljs-keyword">if</span> (digit &gt; max1) {
+                max2 = max1;
+                max1 = digit;
+            } <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> (digit &gt; max2) {
+                max2 = digit;
+            }
+            n /= <span class="hljs-number">10</span>;
+        }
+        <span class="hljs-keyword">return</span> max1 * max2;
+    }
+
+    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title">Main</span>(<span class="hljs-params"><span class="hljs-built_in">string</span>[] <span class="hljs-keyword">args</span></span>)</span> {
+        Solution sol = <span class="hljs-keyword">new</span> Solution();
+        <span class="hljs-keyword">var</span> testCases = <span class="hljs-keyword">new</span> (<span class="hljs-built_in">int</span> n, <span class="hljs-built_in">int</span> expected)[] {
+            (<span class="hljs-number">31</span>, <span class="hljs-number">3</span>),
+            (<span class="hljs-number">22</span>, <span class="hljs-number">4</span>),
+            (<span class="hljs-number">124</span>, <span class="hljs-number">8</span>)
+        };
+
+        <span class="hljs-keyword">for</span> (<span class="hljs-built_in">int</span> idx = <span class="hljs-number">0</span>; idx &lt; testCases.Length; idx++) {
+            <span class="hljs-keyword">var</span> tc = testCases[idx];
+            <span class="hljs-built_in">int</span> result = sol.MaxProduct(tc.n);
+            Console.WriteLine(<span class="hljs-string">$&quot;Test <span class="hljs-subst">{idx + <span class="hljs-number">1</span>}</span>: n=<span class="hljs-subst">{tc.n}</span> -&gt; Result=<span class="hljs-subst">{result}</span> | Expected=<span class="hljs-subst">{tc.expected}</span> | <span class="hljs-subst">{(result == tc.expected ? <span class="hljs-string">&quot;PASS&quot;</span> : <span class="hljs-string">&quot;FAIL&quot;</span>)}</span>&quot;</span>);
+        }
+    }
+}
+1d:T765,<span class="hljs-keyword">class</span> <span class="hljs-title class_">Solution</span>:
+    <span class="hljs-keyword">def</span> <span class="hljs-title function_">maxProduct</span>(<span class="hljs-params">self, n: <span class="hljs-built_in">int</span></span>) -&gt; <span class="hljs-built_in">int</span>:
+        digits = []
+        <span class="hljs-keyword">while</span> n &gt; <span class="hljs-number">0</span>:
+            digits.append(n % <span class="hljs-number">10</span>)
+            n //= <span class="hljs-number">10</span>
+        digits.sort(reverse=<span class="hljs-literal">True</span>)
+        <span class="hljs-keyword">return</span> digits[<span class="hljs-number">0</span>] * digits[<span class="hljs-number">1</span>]
+
+<span class="hljs-keyword">if</span> __name__ == <span class="hljs-string">&#x27;__main__&#x27;</span>:
+    sol = Solution()
+    test_cases = [
+        (<span class="hljs-number">31</span>, <span class="hljs-number">3</span>),
+        (<span class="hljs-number">22</span>, <span class="hljs-number">4</span>),
+        (<span class="hljs-number">124</span>, <span class="hljs-number">8</span>)
+    ]
+    <span class="hljs-keyword">for</span> idx, (n, expected) <span class="hljs-keyword">in</span> <span class="hljs-built_in">enumerate</span>(test_cases, <span class="hljs-number">1</span>):
+        result = sol.maxProduct(n)
+        <span class="hljs-built_in">print</span>(<span class="hljs-string">f&quot;Test <span class="hljs-subst">{idx}</span>: n=<span class="hljs-subst">{n}</span> -&gt; Result=<span class="hljs-subst">{result}</span> | Expected=<span class="hljs-subst">{expected}</span> | <span class="hljs-subst">{<span class="hljs-string">&#x27;PASS&#x27;</span> <span class="hljs-keyword">if</span> result == expected <span class="hljs-keyword">else</span> <span class="hljs-string">&#x27;FAIL&#x27;</span>}</span>&quot;</span>)
+10:[["$","script",null,{"type":"application/ld+json","dangerouslySetInnerHTML":{"__html":"$19"}}],["$","$L1a",null,{"title":"Maximum Product of Two Digits","categoryLabel":"LeetCode","readmeHtml":"$1b","files":[{"name":"Solution.cs","language":"csharp","highlightedCode":"$1c"},{"name":"Solution.py","language":"python","highlightedCode":"$1d"}],"slug":"3536-maximumproductoftwodigits","caseStudyMeta":"$undefined"}],false]
+16:[["$","meta","0",{"charSet":"utf-8"}],["$","meta","1",{"name":"viewport","content":"width=device-width, initial-scale=1"}]]
+1e:I[27201,["/code-problems/_next/static/chunks/0ob_z_0z7sy-0.js","/code-problems/_next/static/chunks/14mrh2-p_w84d.js"],"IconMark"]
+13:null
+18:[["$","title","0",{"children":"Maximum Product of Two Digits | Thomas Cook — Software Engineer"}],["$","meta","1",{"name":"description","content":"Given a positive integer `n`, return the maximum product that can be obtained by multiplying any two digits found wit..."}],["$","link","2",{"rel":"author","href":"https://tomhcook.github.io/code-problems/"}],["$","meta","3",{"name":"author","content":"Thomas Cook"}],["$","link","4",{"rel":"canonical","href":"https://tomhcook.github.io/code-problems/solutions/leetcode/3536-maximumproductoftwodigits"}],["$","meta","5",{"property":"og:title","content":"Maximum Product of Two Digits | Thomas Cook — Software Engineer"}],["$","meta","6",{"property":"og:description","content":"Given a positive integer `n`, return the maximum product that can be obtained by multiplying any two digits found wit..."}],["$","meta","7",{"property":"og:url","content":"https://tomhcook.github.io/code-problems/solutions/leetcode/3536-maximumproductoftwodigits"}],["$","meta","8",{"property":"og:site_name","content":"Thomas Cook — Software Engineer"}],["$","meta","9",{"property":"og:image","content":"https://tomhcook.github.io/code-problems/og-image.png"}],["$","meta","10",{"property":"og:image:width","content":"1200"}],["$","meta","11",{"property":"og:image:height","content":"630"}],["$","meta","12",{"property":"og:image:alt","content":"Thomas Cook, Software Engineer"}],["$","meta","13",{"property":"og:type","content":"article"}],["$","meta","14",{"name":"twitter:card","content":"summary_large_image"}],["$","meta","15",{"name":"twitter:title","content":"Maximum Product of Two Digits | Thomas Cook — Software Engineer"}],["$","meta","16",{"name":"twitter:description","content":"Given a positive integer `n`, return the maximum product that can be obtained by multiplying any two digits found wit..."}],["$","meta","17",{"name":"twitter:image","content":"https://tomhcook.github.io/code-problems/og-image.png"}],["$","link","18",{"rel":"icon","href":"/code-problems/favicon.ico?favicon.2vob68tjqpejf.ico","sizes":"256x256","type":"image/x-icon"}],["$","$L1e","19",{}]]

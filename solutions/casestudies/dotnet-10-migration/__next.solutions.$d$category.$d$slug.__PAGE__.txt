@@ -1,0 +1,54 @@
+1:"$Sreact.fragment"
+3:I[6404,["/code-problems/_next/static/chunks/0ob_z_0z7sy-0.js","/code-problems/_next/static/chunks/14mrh2-p_w84d.js","/code-problems/_next/static/chunks/3-jly6ly-1vwu.js"],"default"]
+8:I[22016,["/code-problems/_next/static/chunks/0ob_z_0z7sy-0.js","/code-problems/_next/static/chunks/14mrh2-p_w84d.js","/code-problems/_next/static/chunks/3-jly6ly-1vwu.js"],""]
+9:I[97367,["/code-problems/_next/static/chunks/0ob_z_0z7sy-0.js","/code-problems/_next/static/chunks/14mrh2-p_w84d.js"],"OutletBoundary"]
+a:"$Sreact.suspense"
+2:T488,[{"@context":"https://schema.org","@type":"TechArticle","headline":"Migrating Four Apps from .NET 9 to .NET 10: Package Versions, Pipelines and File Conversion","description":"Migrated four connected applications from .NET 9 to .NET 10. The migration itself was mostly mechanical, but three th...","author":{"@type":"Person","@id":"https://tomhcook.github.io/code-problems/#person","name":"Thomas Cook","url":"https://tomhcook.github.io/code-problems/cv"},"datePublished":"2026-11-16","dateModified":"2026-11-16","mainEntityOfPage":"https://tomhcook.github.io/code-problems/solutions/casestudies/dotnet-10-migration"},{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Thomas Cook","item":"https://tomhcook.github.io/code-problems/cv"},{"@type":"ListItem","position":2,"name":"Case Studies","item":"https://tomhcook.github.io/code-problems/solutions/casestudies"},{"@type":"ListItem","position":3,"name":"Migrating Four Apps from .NET 9 to .NET 10: Package Versions, Pipelines and File Conversion","item":"https://tomhcook.github.io/code-problems/solutions/casestudies/dotnet-10-migration"}]}]4:Tcb8,<h1>Migrating Four Apps from .NET 9 to .NET 10: Package Versions, Pipelines and File Conversion</h1>
+<p>Migrated four connected applications from .NET 9 to .NET 10. The migration itself was mostly mechanical, but three things caused real work: package version conflicts that broke the release pipelines, odd behaviour changes in the backend file conversion code, and starting later than would have been ideal.</p>
+<h2>At a glance</h2>
+<ul>
+<li><strong>Scope</strong>: Four applications moved from .NET 9 to .NET 10.</li>
+<li><strong>What broke</strong>: Package versions that failed CI/CD on release builds, and unexpected backend changes around file conversion.</li>
+<li><strong>Safety net</strong>: Automated xUnit tests and updated Azure DevOps pipelines.</li>
+<li><strong>Outcome</strong>: All four apps migrated and released.</li>
+</ul>
+<h2>Technical Showcase</h2>
+<ul>
+<li><strong>Stack</strong>: C#, .NET 10, ASP.NET Core, background services, xUnit</li>
+<li><strong>CI/CD</strong>: Azure DevOps build and release pipelines</li>
+<li><strong>Role</strong>: Led the migration across the four applications</li>
+</ul>
+<hr>
+<h2>1. The Challenge</h2>
+<p>Four applications shared libraries and depended on each other, so they had to move together. A version mismatch in one place could break the others, and the release pipelines had to keep working throughout.</p>
+<hr>
+<h2>2. What Went Wrong</h2>
+<ul>
+<li><strong>Package versions broke the release pipelines</strong>: Package version conflicts made CI/CD fail on release builds. The failures only appeared when releasing, not during normal development builds, which made them easy to miss until late.</li>
+<li><strong>Backend file conversion behaved differently</strong>: Some backend code that converts files changed behaviour after the upgrade. These changes were odd and needed their own investigation and test coverage.</li>
+</ul>
+<hr>
+<h2>3. What Fixed It</h2>
+<ul>
+<li><strong>Standardised package versions</strong>: Aligned package versions across all four apps so they stopped diverging.</li>
+<li><strong>Updated the pipelines</strong>: Moved the Azure DevOps YAML pipelines to the .NET 10 SDK so that release builds matched what ran locally.</li>
+<li><strong>Tests around the risky parts</strong>: Added xUnit coverage for the file conversion paths and service lifecycles, so behaviour changes showed up as failing tests instead of production surprises.</li>
+</ul>
+<hr>
+<h2>4. Results</h2>
+<ul>
+<li><strong>Four apps migrated</strong> to .NET 10 and released.</li>
+<li><strong>Releases working again</strong>: The pipeline failures were resolved by standardising the package versions and updating the pipelines.</li>
+</ul>
+<hr>
+<h2>Lessons</h2>
+<ol>
+<li><strong>Test the release pipeline early</strong>: Release builds failed in ways that normal builds did not, so run a release build as soon as the first project is upgraded.</li>
+<li><strong>Keep package versions in one place</strong>: Version differences between connected apps cause most of the surprises.</li>
+<li><strong>Start sooner and keep control of the timing</strong>: With more control over when development started, the migration could have begun earlier and left more room for the unexpected file conversion changes.</li>
+</ol>
+0:{"rsc":["$","$1","c",{"children":[[["$","script",null,{"type":"application/ld+json","dangerouslySetInnerHTML":{"__html":"$2"}}],["$","$L3",null,{"title":"Migrating Four Apps from .NET 9 to .NET 10: Package Versions, Pipelines and File Conversion","categoryLabel":"Case Studies","readmeHtml":"$4","files":[],"slug":"dotnet-10-migration","caseStudyMeta":{"role":"Software Engineer","company":"Confidential","projects":".NET 10 Migration (4 apps)","milestone":"4 Apps Migrated to .NET 10","cvHighlight":"backend","dashboardTime":"Software Engineer","dashboardSpace":"Platform Upgrade","dashboardLabel":".NET 10 Migration","labels":[{"text":"case-study","bg":"rgba(163, 113, 247, 0.15)","color":"#d3b3f7","border":"rgba(163, 113, 247, 0.4)"},{"text":"c#","bg":"rgba(23, 134, 0, 0.15)","color":"#7ef76d","border":"rgba(23, 134, 0, 0.4)"},{"text":".net-10","bg":"rgba(163, 23, 23, 0.15)","color":"#f78e8e","border":"rgba(163, 23, 23, 0.4)"},{"text":"azure-devops","bg":"rgba(56, 139, 253, 0.15)","color":"#58a6ff","border":"rgba(56, 139, 253, 0.4)"},{"text":"xunit","bg":"rgba(46, 160, 67, 0.15)","color":"#56d364","border":"rgba(46, 160, 67, 0.4)"}]}}],"$L5"],["$L6"],"$L7"]}],"isPartial":false,"staleTime":300,"varyParams":null,"buildId":"Tpz5XlkP-PME6Bj_hrtOK"}
+5:["$","div",null,{"className":"container","style":{"paddingTop":0},"children":["$","aside",null,{"className":"author-box","aria-label":"About the author","children":[["$","div",null,{"className":"author-avatar","aria-hidden":"true","children":"TC"}],["$","div",null,{"children":[["$","p",null,{"className":"author-name","children":"Written by Thomas Cook"}],["$","p",null,{"className":"author-line","children":["Software engineer in Lincoln, UK, working with C#/.NET, React, Azure and AWS."," Published 2026-11-16."]}],["$","p",null,{"className":"author-links","children":[["$","$L8",null,{"href":"/cv","data-goatcounter-click":"casestudy-to-cv","children":"See the full CV"}]," · ",["$","a",null,{"href":"https://www.linkedin.com/in/thomas-cook-se/","target":"_blank","rel":"noopener noreferrer","data-goatcounter-click":"casestudy-linkedin","children":"LinkedIn"}]," · ",["$","a",null,{"href":"mailto:thomascook0404@outlook.com","data-goatcounter-click":"casestudy-email","children":"Email"}]]}]]}]]}]}]
+6:["$","script","script-0",{"src":"/code-problems/_next/static/chunks/3-jly6ly-1vwu.js","async":true}]
+7:["$","$L9",null,{"children":["$","$a",null,{"name":"Next.MetadataOutlet","children":"$@b"}]}]
+b:null

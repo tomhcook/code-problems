@@ -1,0 +1,40 @@
+1:"$Sreact.fragment"
+3:I[6404,["/code-problems/_next/static/chunks/0ob_z_0z7sy-0.js","/code-problems/_next/static/chunks/14mrh2-p_w84d.js","/code-problems/_next/static/chunks/3-jly6ly-1vwu.js"],"default"]
+8:I[22016,["/code-problems/_next/static/chunks/0ob_z_0z7sy-0.js","/code-problems/_next/static/chunks/14mrh2-p_w84d.js","/code-problems/_next/static/chunks/3-jly6ly-1vwu.js"],""]
+9:I[97367,["/code-problems/_next/static/chunks/0ob_z_0z7sy-0.js","/code-problems/_next/static/chunks/14mrh2-p_w84d.js"],"OutletBoundary"]
+a:"$Sreact.suspense"
+2:T436,[{"@context":"https://schema.org","@type":"TechArticle","headline":"Rolling Out k6 Load Testing and Finding What It Caught","description":"Owned the adoption of **k6** performance and load testing, from choosing the tool through rolling it out to the team....","author":{"@type":"Person","@id":"https://tomhcook.github.io/code-problems/#person","name":"Thomas Cook","url":"https://tomhcook.github.io/code-problems/cv"},"datePublished":"2026-11-16","dateModified":"2026-11-16","mainEntityOfPage":"https://tomhcook.github.io/code-problems/solutions/casestudies/k6-load-testing"},{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Thomas Cook","item":"https://tomhcook.github.io/code-problems/cv"},{"@type":"ListItem","position":2,"name":"Case Studies","item":"https://tomhcook.github.io/code-problems/solutions/casestudies"},{"@type":"ListItem","position":3,"name":"Rolling Out k6 Load Testing and Finding What It Caught","item":"https://tomhcook.github.io/code-problems/solutions/casestudies/k6-load-testing"}]}]4:T894,<h1>Rolling Out k6 Load Testing and Finding What It Caught</h1>
+<p>Owned the adoption of <strong>k6</strong> performance and load testing, from choosing the tool through rolling it out to the team. It exposed major weak points across the majority of the applications tested that the previous testing approach had missed. The fixes that followed improved response times by 18.3%.</p>
+<h2>At a glance</h2>
+<ul>
+<li><strong>Problem</strong>: The existing testing approach was missing performance and reliability problems under load.</li>
+<li><strong>Approach</strong>: Selected k6, then rolled it out to the team and ran it against the applications.</li>
+<li><strong>Example finding</strong>: An API that ran slowly and failed after more than a minute under load.</li>
+<li><strong>Outcome</strong>: Weak points found across most applications; an 18.3% improvement in response times after the fixes.</li>
+</ul>
+<h2>Technical Showcase</h2>
+<ul>
+<li><strong>Role</strong>: Owner of the k6 adoption (tool selection through team rollout)</li>
+<li><strong>Tooling</strong>: k6 load testing</li>
+<li><strong>CI/CD</strong>: Azure DevOps pipelines</li>
+</ul>
+<hr>
+<h2>1. The Challenge</h2>
+<p>The previous testing approach did not show how applications behaved under load. The aim was to find real performance and reliability problems before users did, and to give the team a repeatable way to check for them.</p>
+<hr>
+<h2>2. What k6 Found</h2>
+<ul>
+<li><strong>A slow, failing API</strong>: One API was running slowly and requests were failing after more than a minute. k6 showed that it was not retrying requests properly and was leaving connections open. Under load this caused large numbers of requests to fail.</li>
+<li><strong>Wider weak points</strong>: Similar problems showed up across the majority of the applications tested, which the previous approach had not caught.</li>
+</ul>
+<hr>
+<h2>3. Results</h2>
+<ul>
+<li><strong>18.3% faster responses</strong>: Changes made after the k6 findings improved response times by 18.3% across the applications.</li>
+<li><strong>Team adoption</strong>: k6 was rolled out to the team, so load testing became a repeatable check rather than a one-off.</li>
+</ul>
+0:{"rsc":["$","$1","c",{"children":[[["$","script",null,{"type":"application/ld+json","dangerouslySetInnerHTML":{"__html":"$2"}}],["$","$L3",null,{"title":"Rolling Out k6 Load Testing and Finding What It Caught","categoryLabel":"Case Studies","readmeHtml":"$4","files":[],"slug":"k6-load-testing","caseStudyMeta":{"role":"Software Engineer","company":"Confidential","projects":"k6 Load Testing Rollout","milestone":"18.3% Faster Responses After k6 Findings","cvHighlight":"cloud","dashboardTime":"Software Engineer","dashboardSpace":"Performance & Reliability","dashboardLabel":"Load Testing Rollout","labels":[{"text":"case-study","bg":"rgba(163, 113, 247, 0.15)","color":"#d3b3f7","border":"rgba(163, 113, 247, 0.4)"},{"text":"k6","bg":"rgba(126, 103, 255, 0.15)","color":"#b3a6ff","border":"rgba(126, 103, 255, 0.4)"},{"text":"load-testing","bg":"rgba(56, 139, 253, 0.15)","color":"#58a6ff","border":"rgba(56, 139, 253, 0.4)"}]}}],"$L5"],["$L6"],"$L7"]}],"isPartial":false,"staleTime":300,"varyParams":null,"buildId":"Tpz5XlkP-PME6Bj_hrtOK"}
+5:["$","div",null,{"className":"container","style":{"paddingTop":0},"children":["$","aside",null,{"className":"author-box","aria-label":"About the author","children":[["$","div",null,{"className":"author-avatar","aria-hidden":"true","children":"TC"}],["$","div",null,{"children":[["$","p",null,{"className":"author-name","children":"Written by Thomas Cook"}],["$","p",null,{"className":"author-line","children":["Software engineer in Lincoln, UK, working with C#/.NET, React, Azure and AWS."," Published 2026-11-16."]}],["$","p",null,{"className":"author-links","children":[["$","$L8",null,{"href":"/cv","data-goatcounter-click":"casestudy-to-cv","children":"See the full CV"}]," · ",["$","a",null,{"href":"https://www.linkedin.com/in/thomas-cook-se/","target":"_blank","rel":"noopener noreferrer","data-goatcounter-click":"casestudy-linkedin","children":"LinkedIn"}]," · ",["$","a",null,{"href":"mailto:thomascook0404@outlook.com","data-goatcounter-click":"casestudy-email","children":"Email"}]]}]]}]]}]}]
+6:["$","script","script-0",{"src":"/code-problems/_next/static/chunks/3-jly6ly-1vwu.js","async":true}]
+7:["$","$L9",null,{"children":["$","$a",null,{"name":"Next.MetadataOutlet","children":"$@b"}]}]
+b:null

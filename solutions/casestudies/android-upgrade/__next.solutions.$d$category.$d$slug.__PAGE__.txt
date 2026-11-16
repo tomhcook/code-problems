@@ -1,0 +1,86 @@
+1:"$Sreact.fragment"
+3:I[6404,["/code-problems/_next/static/chunks/0ob_z_0z7sy-0.js","/code-problems/_next/static/chunks/14mrh2-p_w84d.js","/code-problems/_next/static/chunks/3-jly6ly-1vwu.js"],"default"]
+8:I[22016,["/code-problems/_next/static/chunks/0ob_z_0z7sy-0.js","/code-problems/_next/static/chunks/14mrh2-p_w84d.js","/code-problems/_next/static/chunks/3-jly6ly-1vwu.js"],""]
+9:I[97367,["/code-problems/_next/static/chunks/0ob_z_0z7sy-0.js","/code-problems/_next/static/chunks/14mrh2-p_w84d.js"],"OutletBoundary"]
+a:"$Sreact.suspense"
+2:T448,[{"@context":"https://schema.org","@type":"TechArticle","headline":"Android 16 & .NET 10 Migration across Multi-App Ecosystem (HWM)","description":"Migrated multiple enterprise applications at **HWM** from .NET 9 to .NET 10, and upgraded a cross-platform .NET MAUI ...","author":{"@type":"Person","@id":"https://tomhcook.github.io/code-problems/#person","name":"Thomas Cook","url":"https://tomhcook.github.io/code-problems/cv"},"datePublished":"2026-11-16","dateModified":"2026-11-16","mainEntityOfPage":"https://tomhcook.github.io/code-problems/solutions/casestudies/android-upgrade"},{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Thomas Cook","item":"https://tomhcook.github.io/code-problems/cv"},{"@type":"ListItem","position":2,"name":"Case Studies","item":"https://tomhcook.github.io/code-problems/solutions/casestudies"},{"@type":"ListItem","position":3,"name":"Android 16 & .NET 10 Migration across Multi-App Ecosystem (HWM)","item":"https://tomhcook.github.io/code-problems/solutions/casestudies/android-upgrade"}]}]4:T19a8,<h1>Android 16 &amp; .NET 10 Migration across Multi-App Ecosystem (HWM)</h1>
+<p>Migrated multiple enterprise applications at <strong>HWM</strong> from .NET 9 to .NET 10, and upgraded a cross-platform .NET MAUI mobile application to target Android 16 (SDK 36). The upgrade has been merged and released.</p>
+<h2>At a glance</h2>
+<ul>
+<li><strong>Problem</strong>: Keep store compliance and API compatibility across a mobile app, web APIs and worker services as Android 16 and .NET 10 arrived.</li>
+<li><strong>Scope</strong>: .NET 9 to .NET 10 across several connected apps, plus the MAUI app targeting SDK 36.</li>
+<li><strong>Safety net</strong>: xUnit test suites and updated Azure DevOps pipelines.</li>
+<li><strong>Outcome</strong>: Released, with the mobile and backend apps supporting Android 16.</li>
+</ul>
+<h2>Technical Showcase</h2>
+<ul>
+<li><strong>Role</strong>: Mobile &amp; Systems Developer (C# / .NET)</li>
+<li><strong>Architecture</strong>: .NET MAUI Mobile App, ASP.NET Core Web APIs, Background Services</li>
+<li><strong>Backend &amp; Infrastructure</strong>: C#, .NET 10, Android SDK 36, MAUI, xUnit</li>
+<li><strong>Hosting &amp; CI/CD</strong>: Azure DevOps build &amp; release pipelines</li>
+<li><strong>Deployment</strong>: Full responsibility for managing and verifying multi-app releases</li>
+</ul>
+<hr>
+<h2>1. The Challenge</h2>
+<p>With the release of Android 16 (SDK 36) and the availability of .NET 10, HWM required a comprehensive upgrade of its mobile and backend services to maintain store compliance, ensure API compatibility, and leverage performance optimizations.</p>
+<p>Key challenges included:</p>
+<ol>
+<li><strong>Multi-App Orchestration</strong>: Upgrading the shared libraries and dependencies from .NET 9 to .NET 10 across multiple connected applications (Mobile App, Web APIs, and worker services) without causing breaking API mismatches.</li>
+<li><strong>Android 16 Platform Deprecations</strong>: Targeting SDK 36, which introduced stricter background service execution limits, media permission constraints, and updated platform rendering behavior in MAUI.</li>
+<li><strong>MAUI Compatibility</strong>: Troubleshooting runtime rendering differences and dependency conflicts between the new .NET 10 MAUI workload and legacy custom UI handlers.</li>
+<li><strong>Regression Prevention</strong>: Ensuring all business-critical paths continued to function by writing comprehensive automated integration and unit test coverage.</li>
+</ol>
+<hr>
+<h2>What broke when the app targeted Android 16 (SDK 36)</h2>
+<p>The app is made of native .NET MAUI screens. Raising the target to SDK 36 broke three things that all had to be fixed before release.</p>
+<h3>1. Edge-to-edge: stretched screens that were hard to use</h3>
+<p>Apps targeting recent Android versions are drawn edge to edge by default, which means content is laid out behind the system bars. On Android 16 the opt-out is removed for apps that target SDK 36. After the upgrade the screens looked stretched, and controls were hard to tap, because layouts that used to sit inside the safe area were now drawn under the status and navigation bars.</p>
+<h3>2. Top bars: the top of the screen could not be tapped</h3>
+<p>The same change meant the top of the screen overlapped the system status bar, so the settings controls at the top could not be tapped. Layouts needed to take the system-bar insets into account so that the top bar sits below the status bar and stays clickable.</p>
+<h3>3. USB: devices refused to connect</h3>
+<p>The app connects to external devices over USB. On Android 16 those devices refused to connect. The fix was to move the USB connection code on the branch to a newer method for requesting and holding USB permission, instead of the older approach.</p>
+<p>An example of the standard Android USB host permission flow in C# (illustrative, with placeholder names, not code from the project):</p>
+<pre><code class="language-csharp">const string UsbPermissionAction = &quot;com.example.app.USB_PERMISSION&quot;;
+
+var usbManager = (UsbManager)context.GetSystemService(Context.UsbService)!;
+
+foreach (var device in usbManager.DeviceList!.Values)
+{
+    if (usbManager.HasPermission(device))
+    {
+        OpenDevice(usbManager, device);
+        continue;
+    }
+
+    // Explicit intent, mutable PendingIntent: required so the system can add the result extras.
+    var intent = new Intent(UsbPermissionAction).SetPackage(context.PackageName);
+    var pending = PendingIntent.GetBroadcast(context, 0, intent, PendingIntentFlags.Mutable);
+    usbManager.RequestPermission(device, pending);
+}
+
+// Register the receiver as not exported (required on newer Android versions).
+ContextCompat.RegisterReceiver(context, usbReceiver,
+    new IntentFilter(UsbPermissionAction), ContextCompat.ReceiverNotExported);
+</code></pre>
+<p>The receiver then checks <code>UsbManager.ExtraPermissionGranted</code> and only opens the device when permission was granted.</p>
+<h3>Lesson</h3>
+<p>None of these problems showed up as build errors or exception messages. They appeared only on a real device running Android 16, as screens that looked wrong, controls that could not be tapped and devices that would not connect, so testing on Android 16 hardware early matters more than the build passing.</p>
+<hr>
+<h2>2. Technical Implementation &amp; Design Decisions</h2>
+<ul>
+<li><strong>System-Wide .NET 10 Upgrade</strong>: Led the migration of project files, packages, and build environments across multiple microservices and the MAUI app. Standardized package dependencies to eliminate version skew during build time.</li>
+<li><strong>SDK 36 Integration &amp; Service Refactoring</strong>: Configured MSBuild project targets to build against SDK 36, and restructured background worker lifecycle handlers in the mobile app to comply with Android 16 background restrictions.</li>
+<li><strong>Automated Testing Suite</strong>: Implemented xUnit test suites to validate MAUI platform handlers, API serialization, and service lifecycles to detect regressions early in the upgrade cycle.</li>
+<li><strong>DevOps Pipeline Migration</strong>: Updated Azure DevOps YAML pipelines to use the .NET 10 SDK and SDK 36 build tooling, ensuring seamless CI/CD execution.</li>
+</ul>
+<hr>
+<h2>3. Results</h2>
+<ul>
+<li><strong>Released</strong>: The consolidated multi-app upgrade passed CI/CD verification and automated testing, and has been merged and released.</li>
+<li><strong>Compliance</strong>: The mobile and backend ecosystem now supports Android 16 (SDK 36) devices and runs on .NET 10.</li>
+</ul>
+0:{"rsc":["$","$1","c",{"children":[[["$","script",null,{"type":"application/ld+json","dangerouslySetInnerHTML":{"__html":"$2"}}],["$","$L3",null,{"title":"Android 16 & .NET 10 Migration across Multi-App Ecosystem (HWM)","categoryLabel":"Case Studies","readmeHtml":"$4","files":[],"slug":"android-upgrade","caseStudyMeta":{"role":"Mobile Developer","company":"HWM","projects":"Android 16 & .NET 10 Migration","milestone":"Upgrade Merged & Released","cvHighlight":"mobile","dashboardTime":"Mobile & Systems Developer","dashboardSpace":"Android 16 & .NET 10 Upgrade","dashboardLabel":"Completed Upgrade","labels":[{"text":"case-study","bg":"rgba(163, 113, 247, 0.15)","color":"#d3b3f7","border":"rgba(163, 113, 247, 0.4)"},{"text":"c#","bg":"rgba(23, 134, 0, 0.15)","color":"#7ef76d","border":"rgba(23, 134, 0, 0.4)"},{"text":".net-10","bg":"rgba(163, 23, 23, 0.15)","color":"#f78e8e","border":"rgba(163, 23, 23, 0.4)"},{"text":".net-maui","bg":"rgba(49, 120, 198, 0.15)","color":"#7dc3ff","border":"rgba(49, 120, 198, 0.4)"},{"text":"android-sdk-36","bg":"rgba(56, 139, 253, 0.15)","color":"#58a6ff","border":"rgba(56, 139, 253, 0.4)"},{"text":"xunit","bg":"rgba(46, 160, 67, 0.15)","color":"#56d364","border":"rgba(46, 160, 67, 0.4)"}]}}],"$L5"],["$L6"],"$L7"]}],"isPartial":false,"staleTime":300,"varyParams":null,"buildId":"Tpz5XlkP-PME6Bj_hrtOK"}
+5:["$","div",null,{"className":"container","style":{"paddingTop":0},"children":["$","aside",null,{"className":"author-box","aria-label":"About the author","children":[["$","div",null,{"className":"author-avatar","aria-hidden":"true","children":"TC"}],["$","div",null,{"children":[["$","p",null,{"className":"author-name","children":"Written by Thomas Cook"}],["$","p",null,{"className":"author-line","children":["Software engineer in Lincoln, UK, working with C#/.NET, React, Azure and AWS."," Published 2026-11-16."]}],["$","p",null,{"className":"author-links","children":[["$","$L8",null,{"href":"/cv","data-goatcounter-click":"casestudy-to-cv","children":"See the full CV"}]," · ",["$","a",null,{"href":"https://www.linkedin.com/in/thomas-cook-se/","target":"_blank","rel":"noopener noreferrer","data-goatcounter-click":"casestudy-linkedin","children":"LinkedIn"}]," · ",["$","a",null,{"href":"mailto:thomascook0404@outlook.com","data-goatcounter-click":"casestudy-email","children":"Email"}]]}]]}]]}]}]
+6:["$","script","script-0",{"src":"/code-problems/_next/static/chunks/3-jly6ly-1vwu.js","async":true}]
+7:["$","$L9",null,{"children":["$","$a",null,{"name":"Next.MetadataOutlet","children":"$@b"}]}]
+b:null

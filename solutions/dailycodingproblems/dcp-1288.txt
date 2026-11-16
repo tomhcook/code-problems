@@ -1,0 +1,110 @@
+1:"$Sreact.fragment"
+2:I[22016,["/code-problems/_next/static/chunks/0ob_z_0z7sy-0.js","/code-problems/_next/static/chunks/14mrh2-p_w84d.js","/code-problems/_next/static/chunks/3-jly6ly-1vwu.js"],""]
+3:I[39756,["/code-problems/_next/static/chunks/0ob_z_0z7sy-0.js","/code-problems/_next/static/chunks/14mrh2-p_w84d.js"],"default"]
+4:I[37457,["/code-problems/_next/static/chunks/0ob_z_0z7sy-0.js","/code-problems/_next/static/chunks/14mrh2-p_w84d.js"],"default"]
+d:I[68027,["/code-problems/_next/static/chunks/0ob_z_0z7sy-0.js","/code-problems/_next/static/chunks/14mrh2-p_w84d.js"],"default",1]
+:HL["/code-problems/_next/static/chunks/0jl9vzb8z9173.css","style"]
+:HL["/code-problems/_next/static/media/797e433ab948586e-s.p.0r6juujl39pe6.woff2","font",{"crossOrigin":"","type":"font/woff2"}]
+:HL["/code-problems/_next/static/media/caa3a2e1cccd8315-s.p.0wgildi0cnwt9.woff2","font",{"crossOrigin":"","type":"font/woff2"}]
+0:{"P":null,"c":["","solutions","dailycodingproblems","dcp-1288"],"q":"","i":false,"f":[[["",{"children":["solutions",{"children":[["category","dailycodingproblems","d",null],{"children":[["slug","dcp-1288","d",null],{"children":["__PAGE__",{}]}]}]}]},"$undefined","$undefined",16],[["$","$1","c",{"children":[[["$","link","0",{"rel":"stylesheet","href":"/code-problems/_next/static/chunks/0jl9vzb8z9173.css","precedence":"next","crossOrigin":"$undefined","nonce":"$undefined"}],["$","script","script-0",{"src":"/code-problems/_next/static/chunks/0ob_z_0z7sy-0.js","async":true,"nonce":"$undefined"}],["$","script","script-1",{"src":"/code-problems/_next/static/chunks/14mrh2-p_w84d.js","async":true,"nonce":"$undefined"}]],["$","html",null,{"lang":"en","className":"geist_a71539c9-module__T19VSG__variable geist_mono_8d43a2aa-module__8Li5zG__variable","suppressHydrationWarning":true,"children":["$","body",null,{"suppressHydrationWarning":true,"children":[["$","header",null,{"className":"navbar","children":["$","div",null,{"className":"navbar-container","children":[["$","div",null,{"style":{"display":"flex","alignItems":"center","gap":"16px"},"children":["$","$L2",null,{"href":"/cv","className":"nav-logo","children":[["$","svg",null,{"height":"24","viewBox":"0 0 24 24","width":"24","style":{"stroke":"#f0f6fc","fill":"none"},"children":[["$","rect",null,{"x":"2","y":"2","width":"20","height":"20","rx":"4","strokeWidth":"2"}],["$","polyline",null,{"points":"9 16 5 12 9 8","strokeWidth":"2","strokeLinecap":"round","strokeLinejoin":"round"}],["$","polyline",null,{"points":"15 8 19 12 15 16","strokeWidth":"2","strokeLinecap":"round","strokeLinejoin":"round"}],["$","line",null,{"x1":"14","y1":"6","x2":"10","y2":"18","strokeWidth":"2","strokeLinecap":"round"}]]}],["$","span",null,{"className":"logo-text","children":"Thomas_Cook"}]]}]}],["$","nav",null,{"className":"nav-links","children":[["$","$L2",null,{"href":"/cv","className":"nav-link","children":"CV"}],["$","$L2",null,{"href":"/solutions/casestudies","className":"nav-link","children":"Case Studies"}],["$","$L2",null,{"href":"/","className":"nav-link","children":"Solutions"}]]}]]}]}],["$","div",null,{"style":{"flex":1},"children":["$","$L3",null,{"parallelRouterKey":"children","error":"$undefined","errorStyles":"$undefined","errorScripts":"$undefined","template":["$","$L4",null,{}],"templateStyles":"$undefined","templateScripts":"$undefined","notFound":[[["$","title",null,{"children":"404: This page could not be found."}],["$","div",null,{"style":{"fontFamily":"system-ui,\"Segoe UI\",Roboto,Helvetica,Arial,sans-serif,\"Apple Color Emoji\",\"Segoe UI Emoji\"","height":"100vh","textAlign":"center","display":"flex","flexDirection":"column","alignItems":"center","justifyContent":"center"},"children":["$","div",null,{"children":[["$","style",null,{"dangerouslySetInnerHTML":{"__html":"body{color:#000;background:#fff;margin:0}.next-error-h1{border-right:1px solid rgba(0,0,0,.3)}@media (prefers-color-scheme:dark){body{color:#fff;background:#000}.next-error-h1{border-right:1px solid rgba(255,255,255,.3)}}"}}],["$","h1",null,{"className":"next-error-h1","style":{"display":"inline-block","margin":"0 20px 0 0","padding":"0 23px 0 0","fontSize":24,"fontWeight":500,"verticalAlign":"top","lineHeight":"49px"},"children":404}],["$","div",null,{"style":{"display":"inline-block"},"children":["$","h2",null,{"style":{"fontSize":14,"fontWeight":400,"lineHeight":"49px","margin":0},"children":"This page could not be found."}]}]]}]}]],[]],"forbidden":"$undefined","unauthorized":"$undefined"}]}],["$","script",null,{"type":"application/ld+json","dangerouslySetInnerHTML":{"__html":"{\"@context\":\"https://schema.org\",\"@type\":\"Person\",\"@id\":\"https://tomhcook.github.io/code-problems/#person\",\"name\":\"Thomas Cook\",\"jobTitle\":\"Software Engineer\",\"email\":\"mailto:thomascook0404@outlook.com\",\"address\":{\"@type\":\"PostalAddress\",\"addressLocality\":\"Lincoln\",\"addressRegion\":\"England\",\"addressCountry\":\"GB\"},\"worksFor\":{\"@type\":\"Organization\",\"name\":\"HWM Global\"},\"alumniOf\":{\"@type\":\"CollegeOrUniversity\",\"name\":\"University of Lincoln\"},\"url\":\"https://tomhcook.github.io/code-problems/\",\"sameAs\":[\"https://www.linkedin.com/in/thomas-cook-se/\",\"https://github.com/tomhcook\"],\"knowsAbout\":[\"C#\",\".NET Core\",\"ASP.NET Core\",\".NET MAUI\",\"React\",\"Angular\",\"TypeScript\",\"Node.js\",\"Python\",\"Go\",\"SQL Server\",\"PostgreSQL\",\"MySQL\",\"DynamoDB\",\"Azure\",\"Azure DevOps\",\"AWS\",\"Docker\",\"Kubernetes\",\"Terraform\",\"CloudFormation\",\"CI/CD\",\"k6 load testing\",\"Generative AI integrations\"]}"}}],"$L5","$L6"]}]}]]}],{"children":["$L7",{"children":["$L8",{"children":["$L9",{"children":["$La",{},null,false,null]},null,false,"$@b"]},null,false,"$@b"]},null,false,"$@b"]},null,false,null],"$Lc",false]],"m":"$undefined","G":["$d",["$Le"]],"S":true,"h":null,"s":"$undefined","l":"$undefined","p":"$undefined","d":"$undefined","b":"Tpz5XlkP-PME6Bj_hrtOK"}
+f:I[79520,["/code-problems/_next/static/chunks/0ob_z_0z7sy-0.js","/code-problems/_next/static/chunks/14mrh2-p_w84d.js"],""]
+11:I[97367,["/code-problems/_next/static/chunks/0ob_z_0z7sy-0.js","/code-problems/_next/static/chunks/14mrh2-p_w84d.js"],"OutletBoundary"]
+12:"$Sreact.suspense"
+15:I[97367,["/code-problems/_next/static/chunks/0ob_z_0z7sy-0.js","/code-problems/_next/static/chunks/14mrh2-p_w84d.js"],"ViewportBoundary"]
+17:I[97367,["/code-problems/_next/static/chunks/0ob_z_0z7sy-0.js","/code-problems/_next/static/chunks/14mrh2-p_w84d.js"],"MetadataBoundary"]
+5:["$","$Lf",null,{"id":"goatcounter-settings","strategy":"beforeInteractive","children":"window.goatcounter = { referrer: function () { return goatcounter.get_query('ref') || goatcounter.get_query('utm_source') || document.referrer || undefined; } };"}]
+6:["$","$Lf",null,{"data-goatcounter":"https://thomashcook.goatcounter.com/count","src":"//gc.zgo.at/count.js","strategy":"afterInteractive"}]
+7:["$","$1","c",{"children":[null,["$","$L3",null,{"parallelRouterKey":"children","error":"$undefined","errorStyles":"$undefined","errorScripts":"$undefined","template":["$","$L4",null,{}],"templateStyles":"$undefined","templateScripts":"$undefined","notFound":"$undefined","forbidden":"$undefined","unauthorized":"$undefined"}]]}]
+8:["$","$1","c",{"children":[null,["$","$L3",null,{"parallelRouterKey":"children","error":"$undefined","errorStyles":"$undefined","errorScripts":"$undefined","template":["$","$L4",null,{}],"templateStyles":"$undefined","templateScripts":"$undefined","notFound":"$undefined","forbidden":"$undefined","unauthorized":"$undefined"}]]}]
+9:["$","$1","c",{"children":[null,["$","$L3",null,{"parallelRouterKey":"children","error":"$undefined","errorStyles":"$undefined","errorScripts":"$undefined","template":["$","$L4",null,{}],"templateStyles":"$undefined","templateScripts":"$undefined","notFound":"$undefined","forbidden":"$undefined","unauthorized":"$undefined"}]]}]
+a:["$","$1","c",{"children":["$L10",[["$","script","script-0",{"src":"/code-problems/_next/static/chunks/3-jly6ly-1vwu.js","async":true,"nonce":"$undefined"}]],["$","$L11",null,{"children":["$","$12",null,{"name":"Next.MetadataOutlet","children":"$@13"}]}]]}]
+14:[]
+b:"$W14"
+c:["$","$1","h",{"children":[null,["$","$L15",null,{"children":"$L16"}],["$","div",null,{"hidden":true,"children":["$","$L17",null,{"children":["$","$12",null,{"name":"Next.Metadata","children":"$L18"}]}]}],["$","meta",null,{"name":"next-size-adjust","content":""}]]}]
+e:["$","link","0",{"rel":"stylesheet","href":"/code-problems/_next/static/chunks/0jl9vzb8z9173.css","precedence":"next","crossOrigin":"$undefined","nonce":"$undefined"}]
+19:I[6404,["/code-problems/_next/static/chunks/0ob_z_0z7sy-0.js","/code-problems/_next/static/chunks/14mrh2-p_w84d.js","/code-problems/_next/static/chunks/3-jly6ly-1vwu.js"],"default"]
+1a:T592,<h1>Balanced Parentheses with Minimum Edits</h1>
+<p>This problem was asked by Facebook.</p>
+<p>Given a string of parentheses, find the balanced string that can be produced from it using the minimum number of insertions and deletions. If there are multiple solutions, return any of them. </p>
+<p>For example, given <code>&quot;(()&quot;</code>, you could return <code>&quot;(())&quot;</code>. Given <code>&quot;))()(&quot;</code>, you could return <code>&quot;()()()()&quot;</code>.</p>
+<h2>How the Solution Works</h2>
+<p>We can construct a balanced string with the minimum number of edits by tracking unmatched open parentheses:</p>
+<ul>
+<li>We traverse the string from left to right.</li>
+<li>If a closing parenthesis <code>)</code> is encountered and there is no unmatched open parenthesis <code>(</code>, we insert a <code>(</code> directly before it.</li>
+<li>If there is an unmatched <code>(</code>, we match it with the <code>)</code> and decrement our unmatched open counter.</li>
+<li>At the end of the string, if any unmatched open parentheses <code>(</code> remain, we append the corresponding number of closing parentheses <code>)</code> to the end.</li>
+</ul>
+<h2>Complexity</h2>
+<ul>
+<li><strong>Time Complexity:</strong> $O(N)$ where $N$ is the length of the string, as we process each character exactly once.</li>
+<li><strong>Space Complexity:</strong> $O(N)$ to build and return the balanced string.</li>
+</ul>
+1b:T961,<span class="hljs-keyword">using</span> System;
+<span class="hljs-keyword">using</span> System.Text;
+
+<span class="hljs-keyword">class</span> <span class="hljs-title">Program</span>
+{
+    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-built_in">string</span> <span class="hljs-title">Balance</span>(<span class="hljs-params"><span class="hljs-built_in">string</span> s</span>)</span>
+    {
+        <span class="hljs-keyword">var</span> res = <span class="hljs-keyword">new</span> StringBuilder();
+        <span class="hljs-built_in">int</span> openCount = <span class="hljs-number">0</span>;
+
+        <span class="hljs-keyword">foreach</span> (<span class="hljs-built_in">char</span> ch <span class="hljs-keyword">in</span> s)
+        {
+            <span class="hljs-keyword">if</span> (ch == <span class="hljs-string">&#x27;(&#x27;</span>)
+            {
+                openCount++;
+                res.Append(ch);
+            }
+            <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> (ch == <span class="hljs-string">&#x27;)&#x27;</span>)
+            {
+                <span class="hljs-keyword">if</span> (openCount &gt; <span class="hljs-number">0</span>)
+                {
+                    openCount--;
+                }
+                <span class="hljs-keyword">else</span>
+                {
+                    res.Append(<span class="hljs-string">&#x27;(&#x27;</span>);
+                }
+                res.Append(ch);
+            }
+            <span class="hljs-keyword">else</span>
+            {
+                res.Append(ch);
+            }
+        }
+
+        <span class="hljs-comment">// Append remaining closing parentheses for any unmatched opening ones</span>
+        res.Append(<span class="hljs-string">&#x27;)&#x27;</span>, openCount);
+
+        <span class="hljs-keyword">return</span> res.ToString();
+    }
+
+    <span class="hljs-function"><span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title">Main</span>()</span>
+    {
+        Console.WriteLine(Balance(<span class="hljs-string">&quot;(()&quot;</span>));     <span class="hljs-comment">// Output: (())</span>
+        Console.WriteLine(Balance(<span class="hljs-string">&quot;))()(&quot;</span>));   <span class="hljs-comment">// Output: ()()()()</span>
+    }
+}1c:T618,<span class="hljs-keyword">def</span> <span class="hljs-title function_">balance</span>(<span class="hljs-params">s: <span class="hljs-built_in">str</span></span>) -&gt; <span class="hljs-built_in">str</span>:
+    res, open_count = [], <span class="hljs-number">0</span>
+    <span class="hljs-keyword">for</span> char <span class="hljs-keyword">in</span> s:
+        <span class="hljs-keyword">if</span> char == <span class="hljs-string">&#x27;(&#x27;</span>:
+            open_count += <span class="hljs-number">1</span>
+            res.append(char)
+        <span class="hljs-keyword">elif</span> char == <span class="hljs-string">&#x27;)&#x27;</span>:
+            <span class="hljs-keyword">if</span> open_count &gt; <span class="hljs-number">0</span>:
+                open_count -= <span class="hljs-number">1</span>
+            <span class="hljs-keyword">else</span>:
+                res.append(<span class="hljs-string">&#x27;(&#x27;</span>)
+            res.append(char)
+    <span class="hljs-keyword">return</span> <span class="hljs-string">&quot;&quot;</span>.join(res) + <span class="hljs-string">&quot;)&quot;</span> * open_count
+
+<span class="hljs-keyword">if</span> __name__ == <span class="hljs-string">&quot;__main__&quot;</span>:
+    <span class="hljs-built_in">print</span>(balance(<span class="hljs-string">&quot;(()&quot;</span>))     <span class="hljs-comment"># Output: (())</span>
+    <span class="hljs-built_in">print</span>(balance(<span class="hljs-string">&quot;))()(&quot;</span>))   <span class="hljs-comment"># Output: ()()()()</span>
+10:[["$","script",null,{"type":"application/ld+json","dangerouslySetInnerHTML":{"__html":"[{\"@context\":\"https://schema.org\",\"@type\":\"Article\",\"headline\":\"Balanced Parentheses with Minimum Edits\",\"description\":\"This problem was asked by Facebook.\",\"author\":{\"@type\":\"Person\",\"@id\":\"https://tomhcook.github.io/code-problems/#person\",\"name\":\"Thomas Cook\",\"url\":\"https://tomhcook.github.io/code-problems/cv\"},\"datePublished\":\"2026-11-16\",\"dateModified\":\"2026-11-16\",\"mainEntityOfPage\":\"https://tomhcook.github.io/code-problems/solutions/dailycodingproblems/dcp-1288\"},{\"@context\":\"https://schema.org\",\"@type\":\"BreadcrumbList\",\"itemListElement\":[{\"@type\":\"ListItem\",\"position\":1,\"name\":\"Thomas Cook\",\"item\":\"https://tomhcook.github.io/code-problems/cv\"},{\"@type\":\"ListItem\",\"position\":2,\"name\":\"Solutions\",\"item\":\"https://tomhcook.github.io/code-problems/\"},{\"@type\":\"ListItem\",\"position\":3,\"name\":\"Balanced Parentheses with Minimum Edits\",\"item\":\"https://tomhcook.github.io/code-problems/solutions/dailycodingproblems/dcp-1288\"}]}]"}}],["$","$L19",null,{"title":"Balanced Parentheses with Minimum Edits","categoryLabel":"Daily Coding Problems","readmeHtml":"$1a","files":[{"name":"Solution.cs","language":"csharp","highlightedCode":"$1b"},{"name":"Solution.py","language":"python","highlightedCode":"$1c"}],"slug":"dcp-1288","caseStudyMeta":"$undefined"}],false]
+16:[["$","meta","0",{"charSet":"utf-8"}],["$","meta","1",{"name":"viewport","content":"width=device-width, initial-scale=1"}]]
+1d:I[27201,["/code-problems/_next/static/chunks/0ob_z_0z7sy-0.js","/code-problems/_next/static/chunks/14mrh2-p_w84d.js"],"IconMark"]
+13:null
+18:[["$","title","0",{"children":"Balanced Parentheses with Minimum Edits | Thomas Cook — Software Engineer"}],["$","meta","1",{"name":"description","content":"This problem was asked by Facebook."}],["$","link","2",{"rel":"author","href":"https://tomhcook.github.io/code-problems/"}],["$","meta","3",{"name":"author","content":"Thomas Cook"}],["$","link","4",{"rel":"canonical","href":"https://tomhcook.github.io/code-problems/solutions/dailycodingproblems/dcp-1288"}],["$","meta","5",{"property":"og:title","content":"Balanced Parentheses with Minimum Edits | Thomas Cook — Software Engineer"}],["$","meta","6",{"property":"og:description","content":"This problem was asked by Facebook."}],["$","meta","7",{"property":"og:url","content":"https://tomhcook.github.io/code-problems/solutions/dailycodingproblems/dcp-1288"}],["$","meta","8",{"property":"og:site_name","content":"Thomas Cook — Software Engineer"}],["$","meta","9",{"property":"og:image","content":"https://tomhcook.github.io/code-problems/og-image.png"}],["$","meta","10",{"property":"og:image:width","content":"1200"}],["$","meta","11",{"property":"og:image:height","content":"630"}],["$","meta","12",{"property":"og:image:alt","content":"Thomas Cook, Software Engineer"}],["$","meta","13",{"property":"og:type","content":"article"}],["$","meta","14",{"name":"twitter:card","content":"summary_large_image"}],["$","meta","15",{"name":"twitter:title","content":"Balanced Parentheses with Minimum Edits | Thomas Cook — Software Engineer"}],["$","meta","16",{"name":"twitter:description","content":"This problem was asked by Facebook."}],["$","meta","17",{"name":"twitter:image","content":"https://tomhcook.github.io/code-problems/og-image.png"}],["$","link","18",{"rel":"icon","href":"/code-problems/favicon.ico?favicon.2vob68tjqpejf.ico","sizes":"256x256","type":"image/x-icon"}],["$","$L1d","19",{}]]

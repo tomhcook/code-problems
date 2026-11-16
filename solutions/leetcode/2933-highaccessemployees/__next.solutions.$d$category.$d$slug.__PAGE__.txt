@@ -1,0 +1,134 @@
+1:"$Sreact.fragment"
+2:I[6404,["/code-problems/_next/static/chunks/0ob_z_0z7sy-0.js","/code-problems/_next/static/chunks/14mrh2-p_w84d.js","/code-problems/_next/static/chunks/3-jly6ly-1vwu.js"],"default"]
+8:I[97367,["/code-problems/_next/static/chunks/0ob_z_0z7sy-0.js","/code-problems/_next/static/chunks/14mrh2-p_w84d.js"],"OutletBoundary"]
+9:"$Sreact.suspense"
+3:T652,<h1>High-Access Employees</h1>
+<p>You are given a 2D list of strings <code>access_times</code>, where each element is a list <code>[employee_name, access_time]</code>. An employee is classified as a <strong>high-access</strong> employee if they have accessed the system <strong>three or more times</strong> within any <strong>one-hour period</strong> (strictly less than 60 minutes).</p>
+<p>Return a list of the names of high-access employees.</p>
+<h2>How the Solution Works</h2>
+<ol>
+<li><strong>Group Times by Employee</strong>: We group access times for each employee using a hash map.</li>
+<li><strong>Convert to Minutes</strong>: To simplify calculations, we convert the HHMM format strings into minutes since midnight (i.e., <code>HH * 60 + MM</code>).</li>
+<li><strong>Sort Times</strong>: We sort the list of access times chronologically for each employee.</li>
+<li><strong>Sliding Window Check</strong>: For each employee, we check if there exists an access index $i$ such that <code>times[i + 2] - times[i] &lt; 60</code>. If we find such a window, it means the employee had 3 accesses within a 60-minute window, so we add their name to the output list and move on to the next employee.</li>
+</ol>
+<h2>Complexity</h2>
+<ul>
+<li><strong>Time Complexity:</strong> $O(N \log N)$ where $N$ is the total number of accesses in the input array. Sorting the access times per employee dominates the run time.</li>
+<li><strong>Space Complexity:</strong> $O(N)$ to store the grouped access times in the hash map.</li>
+</ul>
+<p><a href="https://leetcode.com/problems/high-access-employees/">LeetCode Problem Link</a></p>
+4:T2106,<span class="hljs-keyword">using</span> System;
+<span class="hljs-keyword">using</span> System.Collections.Generic;
+<span class="hljs-keyword">using</span> System.Linq;
+
+<span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title">Solution</span> {
+    <span class="hljs-function"><span class="hljs-keyword">public</span> IList&lt;<span class="hljs-built_in">string</span>&gt; <span class="hljs-title">FindHighAccessEmployees</span>(<span class="hljs-params">IList&lt;IList&lt;<span class="hljs-built_in">string</span>&gt;&gt; access_times</span>)</span> {
+        <span class="hljs-comment">// Group access times by employee</span>
+        Dictionary&lt;<span class="hljs-built_in">string</span>, List&lt;<span class="hljs-built_in">int</span>&gt;&gt; map = <span class="hljs-keyword">new</span> Dictionary&lt;<span class="hljs-built_in">string</span>, List&lt;<span class="hljs-built_in">int</span>&gt;&gt;();
+        <span class="hljs-keyword">foreach</span> (<span class="hljs-keyword">var</span> access <span class="hljs-keyword">in</span> access_times) {
+            <span class="hljs-built_in">string</span> name = access[<span class="hljs-number">0</span>];
+            <span class="hljs-built_in">string</span> timeStr = access[<span class="hljs-number">1</span>];
+            <span class="hljs-comment">// Convert to minutes: HH * 60 + MM</span>
+            <span class="hljs-built_in">int</span> hours = <span class="hljs-built_in">int</span>.Parse(timeStr.Substring(<span class="hljs-number">0</span>, <span class="hljs-number">2</span>));
+            <span class="hljs-built_in">int</span> minutes = <span class="hljs-built_in">int</span>.Parse(timeStr.Substring(<span class="hljs-number">2</span>, <span class="hljs-number">2</span>));
+            <span class="hljs-built_in">int</span> totalMinutes = hours * <span class="hljs-number">60</span> + minutes;
+            
+            <span class="hljs-keyword">if</span> (!map.ContainsKey(name)) {
+                map[name] = <span class="hljs-keyword">new</span> List&lt;<span class="hljs-built_in">int</span>&gt;();
+            }
+            map[name].Add(totalMinutes);
+        }
+
+        List&lt;<span class="hljs-built_in">string</span>&gt; result = <span class="hljs-keyword">new</span> List&lt;<span class="hljs-built_in">string</span>&gt;();
+        <span class="hljs-keyword">foreach</span> (<span class="hljs-keyword">var</span> pair <span class="hljs-keyword">in</span> map) {
+            <span class="hljs-built_in">string</span> name = pair.Key;
+            List&lt;<span class="hljs-built_in">int</span>&gt; times = pair.Value;
+            <span class="hljs-keyword">if</span> (times.Count &lt; <span class="hljs-number">3</span>) <span class="hljs-keyword">continue</span>;
+
+            times.Sort();
+            
+            <span class="hljs-comment">// Check if any three access times are within a 60-minute window</span>
+            <span class="hljs-keyword">for</span> (<span class="hljs-built_in">int</span> i = <span class="hljs-number">0</span>; i &lt; times.Count - <span class="hljs-number">2</span>; i++) {
+                <span class="hljs-keyword">if</span> (times[i + <span class="hljs-number">2</span>] - times[i] &lt; <span class="hljs-number">60</span>) {
+                    result.Add(name);
+                    <span class="hljs-keyword">break</span>;
+                }
+            }
+        }
+        <span class="hljs-keyword">return</span> result;
+    }
+
+    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title">Main</span>(<span class="hljs-params"><span class="hljs-built_in">string</span>[] <span class="hljs-keyword">args</span></span>)</span> {
+        Solution sol = <span class="hljs-keyword">new</span> Solution();
+        <span class="hljs-keyword">var</span> testCases = <span class="hljs-keyword">new</span> (IList&lt;IList&lt;<span class="hljs-built_in">string</span>&gt;&gt; access_times, IList&lt;<span class="hljs-built_in">string</span>&gt; expected)[] {
+            (
+                <span class="hljs-keyword">new</span> List&lt;IList&lt;<span class="hljs-built_in">string</span>&gt;&gt; {
+                    <span class="hljs-keyword">new</span> List&lt;<span class="hljs-built_in">string</span>&gt; {<span class="hljs-string">&quot;a&quot;</span>, <span class="hljs-string">&quot;0549&quot;</span>},
+                    <span class="hljs-keyword">new</span> List&lt;<span class="hljs-built_in">string</span>&gt; {<span class="hljs-string">&quot;b&quot;</span>, <span class="hljs-string">&quot;0457&quot;</span>},
+                    <span class="hljs-keyword">new</span> List&lt;<span class="hljs-built_in">string</span>&gt; {<span class="hljs-string">&quot;a&quot;</span>, <span class="hljs-string">&quot;0532&quot;</span>},
+                    <span class="hljs-keyword">new</span> List&lt;<span class="hljs-built_in">string</span>&gt; {<span class="hljs-string">&quot;a&quot;</span>, <span class="hljs-string">&quot;0621&quot;</span>},
+                    <span class="hljs-keyword">new</span> List&lt;<span class="hljs-built_in">string</span>&gt; {<span class="hljs-string">&quot;b&quot;</span>, <span class="hljs-string">&quot;0540&quot;</span>}
+                },
+                <span class="hljs-keyword">new</span> List&lt;<span class="hljs-built_in">string</span>&gt; {<span class="hljs-string">&quot;a&quot;</span>}
+            ),
+            (
+                <span class="hljs-keyword">new</span> List&lt;IList&lt;<span class="hljs-built_in">string</span>&gt;&gt; {
+                    <span class="hljs-keyword">new</span> List&lt;<span class="hljs-built_in">string</span>&gt; {<span class="hljs-string">&quot;d&quot;</span>, <span class="hljs-string">&quot;0002&quot;</span>},
+                    <span class="hljs-keyword">new</span> List&lt;<span class="hljs-built_in">string</span>&gt; {<span class="hljs-string">&quot;c&quot;</span>, <span class="hljs-string">&quot;0808&quot;</span>},
+                    <span class="hljs-keyword">new</span> List&lt;<span class="hljs-built_in">string</span>&gt; {<span class="hljs-string">&quot;c&quot;</span>, <span class="hljs-string">&quot;0829&quot;</span>},
+                    <span class="hljs-keyword">new</span> List&lt;<span class="hljs-built_in">string</span>&gt; {<span class="hljs-string">&quot;e&quot;</span>, <span class="hljs-string">&quot;0215&quot;</span>},
+                    <span class="hljs-keyword">new</span> List&lt;<span class="hljs-built_in">string</span>&gt; {<span class="hljs-string">&quot;d&quot;</span>, <span class="hljs-string">&quot;0100&quot;</span>},
+                    <span class="hljs-keyword">new</span> List&lt;<span class="hljs-built_in">string</span>&gt; {<span class="hljs-string">&quot;d&quot;</span>, <span class="hljs-string">&quot;0140&quot;</span>},
+                    <span class="hljs-keyword">new</span> List&lt;<span class="hljs-built_in">string</span>&gt; {<span class="hljs-string">&quot;c&quot;</span>, <span class="hljs-string">&quot;0835&quot;</span>}
+                },
+                <span class="hljs-keyword">new</span> List&lt;<span class="hljs-built_in">string</span>&gt; {<span class="hljs-string">&quot;c&quot;</span>}
+            )
+        };
+
+        <span class="hljs-keyword">for</span> (<span class="hljs-built_in">int</span> i = <span class="hljs-number">0</span>; i &lt; testCases.Length; i++) {
+            <span class="hljs-keyword">var</span> tc = testCases[i];
+            <span class="hljs-keyword">var</span> result = sol.FindHighAccessEmployees(tc.access_times);
+            <span class="hljs-built_in">bool</span> pass = result.OrderBy(x =&gt; x).SequenceEqual(tc.expected.OrderBy(x =&gt; x));
+            Console.WriteLine(<span class="hljs-string">$&quot;Test <span class="hljs-subst">{i + <span class="hljs-number">1</span>}</span>: -&gt; Result=[<span class="hljs-subst">{<span class="hljs-built_in">string</span>.Join(<span class="hljs-string">&quot;, &quot;</span>, result)}</span>] | Expected=[<span class="hljs-subst">{<span class="hljs-built_in">string</span>.Join(<span class="hljs-string">&quot;, &quot;</span>, tc.expected)}</span>] | <span class="hljs-subst">{(pass ? <span class="hljs-string">&quot;PASS&quot;</span> : <span class="hljs-string">&quot;FAIL&quot;</span>)}</span>&quot;</span>);
+        }
+    }
+}
+5:T11a5,<span class="hljs-keyword">class</span> <span class="hljs-title class_">Solution</span>:
+    <span class="hljs-keyword">def</span> <span class="hljs-title function_">findHighAccessEmployees</span>(<span class="hljs-params">self, access_times: <span class="hljs-built_in">list</span>[<span class="hljs-built_in">list</span>[<span class="hljs-built_in">str</span>]]</span>) -&gt; <span class="hljs-built_in">list</span>[<span class="hljs-built_in">str</span>]:
+        <span class="hljs-comment"># Group access times by employee</span>
+        grouped = {}
+        <span class="hljs-keyword">for</span> name, time_str <span class="hljs-keyword">in</span> access_times:
+            <span class="hljs-comment"># Convert HHMM to minutes since midnight</span>
+            total_minutes = <span class="hljs-built_in">int</span>(time_str[:<span class="hljs-number">2</span>]) * <span class="hljs-number">60</span> + <span class="hljs-built_in">int</span>(time_str[<span class="hljs-number">2</span>:])
+            <span class="hljs-keyword">if</span> name <span class="hljs-keyword">not</span> <span class="hljs-keyword">in</span> grouped:
+                grouped[name] = []
+            grouped[name].append(total_minutes)
+        
+        result = []
+        <span class="hljs-keyword">for</span> name, times <span class="hljs-keyword">in</span> grouped.items():
+            <span class="hljs-keyword">if</span> <span class="hljs-built_in">len</span>(times) &lt; <span class="hljs-number">3</span>:
+                <span class="hljs-keyword">continue</span>
+            
+            times.sort()
+            
+            <span class="hljs-comment"># Check sliding window of size 3</span>
+            <span class="hljs-keyword">for</span> i <span class="hljs-keyword">in</span> <span class="hljs-built_in">range</span>(<span class="hljs-built_in">len</span>(times) - <span class="hljs-number">2</span>):
+                <span class="hljs-keyword">if</span> times[i + <span class="hljs-number">2</span>] - times[i] &lt; <span class="hljs-number">60</span>:
+                    result.append(name)
+                    <span class="hljs-keyword">break</span>
+        <span class="hljs-keyword">return</span> result
+
+<span class="hljs-keyword">if</span> __name__ == <span class="hljs-string">&#x27;__main__&#x27;</span>:
+    sol = Solution()
+    test_cases = [
+        ([[<span class="hljs-string">&quot;a&quot;</span>, <span class="hljs-string">&quot;0549&quot;</span>], [<span class="hljs-string">&quot;b&quot;</span>, <span class="hljs-string">&quot;0457&quot;</span>], [<span class="hljs-string">&quot;a&quot;</span>, <span class="hljs-string">&quot;0532&quot;</span>], [<span class="hljs-string">&quot;a&quot;</span>, <span class="hljs-string">&quot;0621&quot;</span>], [<span class="hljs-string">&quot;b&quot;</span>, <span class="hljs-string">&quot;0540&quot;</span>]], [<span class="hljs-string">&quot;a&quot;</span>]),
+        ([[<span class="hljs-string">&quot;d&quot;</span>, <span class="hljs-string">&quot;0002&quot;</span>], [<span class="hljs-string">&quot;c&quot;</span>, <span class="hljs-string">&quot;0808&quot;</span>], [<span class="hljs-string">&quot;c&quot;</span>, <span class="hljs-string">&quot;0829&quot;</span>], [<span class="hljs-string">&quot;e&quot;</span>, <span class="hljs-string">&quot;0215&quot;</span>], [<span class="hljs-string">&quot;d&quot;</span>, <span class="hljs-string">&quot;0100&quot;</span>], [<span class="hljs-string">&quot;d&quot;</span>, <span class="hljs-string">&quot;0140&quot;</span>], [<span class="hljs-string">&quot;c&quot;</span>, <span class="hljs-string">&quot;0835&quot;</span>]], [<span class="hljs-string">&quot;c&quot;</span>])
+    ]
+    <span class="hljs-keyword">for</span> idx, (access_times, expected) <span class="hljs-keyword">in</span> <span class="hljs-built_in">enumerate</span>(test_cases, <span class="hljs-number">1</span>):
+        result = sol.findHighAccessEmployees(access_times)
+        <span class="hljs-built_in">print</span>(<span class="hljs-string">f&quot;Test <span class="hljs-subst">{idx}</span>: -&gt; Result=<span class="hljs-subst">{result}</span> | Expected=<span class="hljs-subst">{expected}</span> | <span class="hljs-subst">{<span class="hljs-string">&#x27;PASS&#x27;</span> <span class="hljs-keyword">if</span> <span class="hljs-built_in">sorted</span>(result) == <span class="hljs-built_in">sorted</span>(expected) <span class="hljs-keyword">else</span> <span class="hljs-string">&#x27;FAIL&#x27;</span>}</span>&quot;</span>)
+0:{"rsc":["$","$1","c",{"children":[[["$","script",null,{"type":"application/ld+json","dangerouslySetInnerHTML":{"__html":"[{\"@context\":\"https://schema.org\",\"@type\":\"Article\",\"headline\":\"High-Access Employees\",\"description\":\"You are given a 2D list of strings `access_times`, where each element is a list `[employee_name, access_time]`. An em...\",\"author\":{\"@type\":\"Person\",\"@id\":\"https://tomhcook.github.io/code-problems/#person\",\"name\":\"Thomas Cook\",\"url\":\"https://tomhcook.github.io/code-problems/cv\"},\"datePublished\":\"2026-11-16\",\"dateModified\":\"2026-11-16\",\"mainEntityOfPage\":\"https://tomhcook.github.io/code-problems/solutions/leetcode/2933-highaccessemployees\"},{\"@context\":\"https://schema.org\",\"@type\":\"BreadcrumbList\",\"itemListElement\":[{\"@type\":\"ListItem\",\"position\":1,\"name\":\"Thomas Cook\",\"item\":\"https://tomhcook.github.io/code-problems/cv\"},{\"@type\":\"ListItem\",\"position\":2,\"name\":\"Solutions\",\"item\":\"https://tomhcook.github.io/code-problems/\"},{\"@type\":\"ListItem\",\"position\":3,\"name\":\"High-Access Employees\",\"item\":\"https://tomhcook.github.io/code-problems/solutions/leetcode/2933-highaccessemployees\"}]}]"}}],["$","$L2",null,{"title":"High-Access Employees","categoryLabel":"LeetCode","readmeHtml":"$3","files":[{"name":"Solution.cs","language":"csharp","highlightedCode":"$4"},{"name":"Solution.py","language":"python","highlightedCode":"$5"}],"slug":"2933-highaccessemployees"}],false],["$L6"],"$L7"]}],"isPartial":false,"staleTime":300,"varyParams":null,"buildId":"Tpz5XlkP-PME6Bj_hrtOK"}
+6:["$","script","script-0",{"src":"/code-problems/_next/static/chunks/3-jly6ly-1vwu.js","async":true}]
+7:["$","$L8",null,{"children":["$","$9",null,{"name":"Next.MetadataOutlet","children":"$@a"}]}]
+a:null
